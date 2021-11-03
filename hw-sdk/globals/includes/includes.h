@@ -1,5 +1,5 @@
-#ifndef INCLUDES_HPP
-#define INCLUDES_HPP
+#ifndef INCLUDES_H
+#define INCLUDES_H
 
 // libs
 #include <Windows.h>

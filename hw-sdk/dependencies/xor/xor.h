@@ -47,44 +47,43 @@ namespace __xor
 
 			return cache;
 		}
-
-		template< class t, const size_t len, const t key >
-		class Gen
-		{
-		private:
-			std::array< t, len > m_buffer;
-
-		private:
-			constexpr t enc( const t c ) const noexcept
-			{
-				return c ^ key;
-			}
-			__forceinline t dec( const t c ) const noexcept
-			{
-				return c ^ key;
-			}
-
-		public:
-			__forceinline auto data( ) noexcept
-			{
-				for ( size_t i{ 0u }; i < len; ++i )
-					m_buffer[ i ] = dec( m_buffer[ i ] );
-
-				return m_buffer.data( );
-			}
-
-			template< size_t... seq >
-			constexpr __forceinline Gen( const t ( &s )[ len ], std::index_sequence< seq... > ) noexcept : m_buffer{ enc( s[ seq ] )... }
-			{
-			}
-		};
 	} // namespace xor_float
+	template< class t, const size_t len, const t key >
+	class gen
+	{
+	private:
+		std::array< t, len > m_buffer;
+
+	private:
+		constexpr t enc( const t c ) const noexcept
+		{
+			return c ^ key;
+		}
+		__forceinline t dec( const t c ) const noexcept
+		{
+			return c ^ key;
+		}
+
+	public:
+		__forceinline auto data( ) noexcept
+		{
+			for ( size_t i{ 0u }; i < len; ++i )
+				m_buffer[ i ] = dec( m_buffer[ i ] );
+
+			return m_buffer.data( );
+		}
+
+		template< size_t... seq >
+		constexpr __forceinline gen( const t ( &s )[ len ], std::index_sequence< seq... > ) noexcept : m_buffer{ enc( s[ seq ] )... }
+		{
+		}
+	};
 } // namespace __xor
 
 template< class t, const size_t len >
 constexpr __forceinline auto __xor_string( const t ( &s )[ len ] )
 {
-	return __xor::Gen< t, len, GET_XOR_KEYUI8 >( s, std::make_index_sequence< len >( ) ).data( );
+	return __xor::gen< t, len, GET_XOR_KEYUI8 >( s, std::make_index_sequence< len >( ) ).data( );
 }
 
 #ifdef _DEBUG
