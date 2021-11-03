@@ -5,13 +5,11 @@
 
 // cheat initialization method
 
-class c_hotwheels
+namespace hotwheels
 {
-public:
-	HMODULE handle{ };
-	HWND window{ };
+	inline HMODULE handle{ };
+	inline HWND window{ };
 
 	DWORD WINAPI init( void* module_handle );
-};
-inline c_hotwheels hotwheels{ };
+}; // namespace hotwheels
 #endif

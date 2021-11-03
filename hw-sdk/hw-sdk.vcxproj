@@ -89,7 +89,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NOMINMAX</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NOMINMAX;CONSOLE_ENABLED</PreprocessorDefinitions>
       <ConformanceMode>Default</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -173,6 +173,7 @@
   <ItemGroup>
     <ClInclude Include="dependencies\hash\hash.h" />
     <ClInclude Include="dependencies\lazy_importer\lazy_importer.h" />
+    <ClInclude Include="dependencies\mocking_bird\mocking_bird.h" />
     <ClInclude Include="dependencies\tinyformat.h" />
     <ClInclude Include="dependencies\xor\xor.h" />
     <ClInclude Include="game\sdk\enums\class_ids.h" />
@@ -188,6 +189,7 @@
     <ClInclude Include="globals\hotwheels\hotwheels.h" />
     <ClInclude Include="globals\includes\includes.h" />
     <ClInclude Include="globals\macros\macros.h" />
+    <ClInclude Include="utils\console\log_level\log_level.h" />
     <ClInclude Include="utils\modules\modules.h" />
     <ClInclude Include="utils\console\console.h" />
     <ClInclude Include="utils\helpers\bit_flag.h" />

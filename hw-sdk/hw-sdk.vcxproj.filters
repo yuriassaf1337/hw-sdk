@@ -101,5 +101,11 @@
     <ClInclude Include="dependencies\lazy_importer\lazy_importer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="dependencies\mocking_bird\mocking_bird.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\console\log_level\log_level.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

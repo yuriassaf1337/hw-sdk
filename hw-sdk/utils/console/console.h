@@ -5,6 +5,8 @@
 #include "../../dependencies/tinyformat.h"
 #include "../../dependencies/xor/xor.h"
 
+#include "log_level/log_level.h"
+
 #include <Windows.h>
 #include <consoleapi.h>
 #include <consoleapi2.h>
@@ -17,6 +19,32 @@ namespace console
 	bool init( );
 
 	void unload( );
+
+	template< console::log_level lev >
+	void print( std::string_view print, std::string_view prefix = x( ">> " ) )
+	{
+#ifdef CONSOLE_ENABLED
+
+		const char* type{ };
+		switch ( lev ) {
+		case console::log_level::NORMAL:
+			type = x( " " );
+			break;
+		case console::log_level::WARNING:
+			type = x( " # warning -> " );
+			break;
+		case console::log_level::FATAL:
+			type = x( " # fatal -> " );
+			break;
+		}
+		// have to do this otherwise we get a dangling pointer -> (ss.str().c_str())
+		std::stringstream ss{ };
+		ss << prefix << type << print;
+		const std::string temp_str = std::string{ ss.str( ) };
+
+		tfm::printf( temp_str.c_str( ) );
+#endif
+	}
 } // namespace console
 
 #endif

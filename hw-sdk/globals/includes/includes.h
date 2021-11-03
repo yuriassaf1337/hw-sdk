@@ -38,4 +38,7 @@
 // g_csgo global
 #include "../../globals/csgo.h"
 
+// hotwheels global
+#include "../../globals/hotwheels/hotwheels.h"
+
 #endif

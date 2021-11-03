@@ -8,8 +8,9 @@ BOOL APIENTRY DllMain( HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReser
 {
 	switch ( ul_reason_for_call ) {
 	case DLL_PROCESS_ATTACH:
+		LI_FN( DisableThreadLibraryCalls )( hModule );
 
-		// return hotwheels.cheat_init( hotwheels.init );
+		return utils::cheat_create_thread( hotwheels::init, hModule );
 	case DLL_PROCESS_DETACH:
 		break;
 	}
