@@ -165,12 +165,14 @@
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="globals\csgo.cpp" />
+    <ClCompile Include="globals\hotwheels\hotwheels.cpp" />
     <ClCompile Include="utils\modules\modules.cpp" />
     <ClCompile Include="utils\console\console.cpp" />
     <ClCompile Include="utils\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dependencies\hash\hash.h" />
+    <ClInclude Include="dependencies\lazy_importer\lazy_importer.h" />
     <ClInclude Include="dependencies\tinyformat.h" />
     <ClInclude Include="dependencies\xor\xor.h" />
     <ClInclude Include="game\sdk\enums\class_ids.h" />

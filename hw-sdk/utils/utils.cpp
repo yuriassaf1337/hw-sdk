@@ -7,11 +7,11 @@ void utils::sleep( std::uint32_t time )
 
 BOOL utils::cheat_create_thread( DWORD WINAPI function( void* ), void* param )
 {
-	HANDLE handle = CreateThread( nullptr, 0, function, param, 0, nullptr );
+	HANDLE handle = LI_FN( CreateThread )( nullptr, 0, function, param, 0, nullptr );
 	if ( !handle )
 		return FALSE;
 
-	CloseHandle( handle );
+	LI_FN( CloseHandle )( handle );
 
 	return TRUE;
 }

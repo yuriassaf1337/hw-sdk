@@ -24,6 +24,9 @@
 #include "../../dependencies/hash/hash.h"
 #include "../../dependencies/xor/xor.h"
 
+// deps
+#include "../../dependencies/lazy_importer/lazy_importer.h"
+
 // helpers
 #include "../../utils/helpers/bit_flag.h"
 #include "../../utils/helpers/primitive_definitions/primitives.h"

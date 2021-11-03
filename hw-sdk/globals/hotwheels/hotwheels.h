@@ -1,6 +1,7 @@
+#include "../includes/includes.h"
+
 #ifndef HOTWHEELS_H
-#define HOTWHEELS_H
-#include <Windows.h>
+#	define HOTWHEELS_H
 
 // cheat initialization method
 
@@ -10,7 +11,7 @@ public:
 	HMODULE handle{ };
 	HWND window{ };
 
-	DWORD WINAPI init( void* module_handle ) { }
+	DWORD WINAPI init( void* module_handle );
 };
 inline c_hotwheels hotwheels{ };
 #endif

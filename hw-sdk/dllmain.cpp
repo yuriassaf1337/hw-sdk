@@ -1,16 +1,11 @@
 #include "globals/includes/includes.h"
 
-// info; all sdk stuff must be placed in sdk:: namespace.
+// info:
+//		all sdk stuff must be placed in sdk namespace.
+//		enums used in interfaces and other stuff is in sdk::enums.
 
-unsigned long WINAPI cheat_init( void* args )
-{
-	while ( !GetModuleHandle( x( "serverbrowser.dll" ) ) )
-		utils::sleep( 30 );
-
-	console::init( );
-
-	return 0;
-};
+// initial todo's:
+//		add lazy importer.
 
 BOOL APIENTRY DllMain( HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved )
 {
