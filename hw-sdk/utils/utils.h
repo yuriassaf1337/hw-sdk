@@ -1,14 +1,13 @@
 #include "helpers/primitive_definitions/primitives.h"
+#include <Windows.h>
 #include <cstdint>
 #include <thread>
-
 #ifndef UTILS_H
 #	define UTILS_H
+
 namespace utils
 {
-	void sleep( std::uint32_t time )
-	{
-		std::this_thread::sleep_for( chr::milliseconds( time ) );
-	}
+	void sleep( std::uint32_t time );
+	BOOL cheat_create_thread( DWORD WINAPI function( void* ), void* param );
 } // namespace utils
 #endif // ! UTILS_HPP

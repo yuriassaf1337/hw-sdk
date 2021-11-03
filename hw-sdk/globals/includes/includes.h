@@ -25,9 +25,14 @@
 #include "../../dependencies/xor/xor.h"
 
 // helpers
+#include "../../utils/helpers/bit_flag.h"
 #include "../../utils/helpers/primitive_definitions/primitives.h"
 
 // utils
+#include "../../utils/console/console.h"
 #include "../../utils/utils.h"
+
+// g_csgo global
+#include "../../globals/csgo.h"
 
 #endif

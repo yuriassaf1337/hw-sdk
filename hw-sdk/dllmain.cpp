@@ -1,5 +1,4 @@
 #include "globals/includes/includes.h"
-#include "utils/console/console.h"
 
 // info; all sdk stuff must be placed in sdk:: namespace.
 
@@ -18,7 +17,7 @@ BOOL APIENTRY DllMain( HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReser
 	switch ( ul_reason_for_call ) {
 	case DLL_PROCESS_ATTACH:
 
-		break;
+		// return hotwheels.cheat_init( hotwheels.init );
 	case DLL_PROCESS_DETACH:
 		break;
 	}
