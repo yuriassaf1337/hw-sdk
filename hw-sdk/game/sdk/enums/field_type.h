@@ -1,0 +1,43 @@
+#ifndef FIELD_TYPE_H
+#define FIELD_TYPE_H
+
+namespace sdk::enums
+{
+	enum class field_type
+	{
+		UNKNOWN = 0,
+		FLOAT,
+		STRING,
+		VECTOR,
+		QUATERNION,
+		INTEGER,
+		BOOLEAN,
+		SHORT,
+		CHARACTER,
+		COLOR32,
+		EMBEDDED,
+		CUSTOM,
+		CLASSPTR,
+		EHANDLE,
+		EDICT,
+		POSITION_VECTOR,
+		TIME,
+		TICK,
+		MODELNAME,
+		SOUNDNAME,
+		INPUT,
+		FUNCTION,
+		VMATRIX,
+		VMATRIX_WORLDSPACE,
+		MATRIX3X4_WORLDSPACE,
+		INTERVAL,
+		MODELINDEX,
+		MATERIALINDEX,
+		VECTOR2D,
+		INTEGER64,
+		VECTOR4D,
+		TYPECOUNT
+	};
+} // namespace sdk::enums
+
+#endif
