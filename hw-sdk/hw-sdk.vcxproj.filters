@@ -18,6 +18,9 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="utils\console\console.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals\includes\includes.h">
@@ -48,6 +51,27 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game\sdk\enums\data_update_type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="globals\macros\macros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\hash\hash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\xor\xor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\helpers\primitive_definitions\primitives.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\console\console.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\tinyformat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

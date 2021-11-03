@@ -20,4 +20,14 @@
 #include <tchar.h>
 #include <thread>
 
+// string enc/xor float
+#include "../../dependencies/hash/hash.h"
+#include "../../dependencies/xor/xor.h"
+
+// helpers
+#include "../../utils/helpers/primitive_definitions/primitives.h"
+
+// utils
+#include "../../utils/utils.h"
+
 #endif

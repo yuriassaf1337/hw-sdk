@@ -2,12 +2,10 @@
 
 // info; all sdk stuff must be placed in sdk:: namespace.
 
-unsigned long cheat_init( void* args )
+unsigned long WINAPI cheat_init( void* args )
 {
-	while ( !GetModuleHandleA( "serverbrowser.dll" ) )
-		std::this_thread::sleep_for( std::chrono::milliseconds( 30 ) );
-
-	return 0;
+	while ( !GetModuleHandle( x( "serverbrowser.dll" ) ) )
+		utils::sleep( 30 );
 };
 
 BOOL APIENTRY DllMain( HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved )
