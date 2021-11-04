@@ -22,7 +22,6 @@
 // string enc/xor float
 #include "../../dependencies/hash/hash.h"
 #include "../../dependencies/xor/xor.h"
-
 // deps
 #include "../../dependencies/lazy_importer/lazy_importer.h"
 
@@ -39,3 +38,5 @@
 
 // hotwheels global
 #include "../../globals/hotwheels/hotwheels.h"
+
+#include "../../globals/macros/macros.h"

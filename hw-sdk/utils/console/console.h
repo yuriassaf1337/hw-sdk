@@ -2,7 +2,7 @@
 
 // deps
 #include "../../dependencies/tinyformat.h"
-#include "../../dependencies/xor/xor.h"
+#include "../../globals/macros/macros.h"
 
 #include "log_level/log_level.h"
 
