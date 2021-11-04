@@ -16,9 +16,12 @@ namespace function_enforce
 #endif
 
 			if constexpr ( abort )
-				hotwheels::unload( EXIT_FAILURE )
+				hotwheels::unload( EXIT_FAILURE );
 		}
 
 		return what;
 	}
 }; // namespace function_enforce
+
+#define ENFORCE_WARNING( exp, msg, ... ) function_enforce::enforcer< false >( exp, x( #exp ), x( msg ), __VA_ARGS__ )
+#define ENFORCE_FAILURE( exp, msg, ... ) function_enforce::enforcer< true >( exp, x( #exp ), x( msg ), __VA_ARGS__ )
