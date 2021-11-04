@@ -2,7 +2,7 @@
 
 void utils::sleep( std::uint32_t time )
 {
-	std::this_thread::sleep_for( chr::milliseconds( time ) );
+	::std::this_thread::sleep_for( ::chr::milliseconds( time ) );
 }
 
 BOOL utils::cheat_create_thread( DWORD WINAPI function( void* ), void* param )
