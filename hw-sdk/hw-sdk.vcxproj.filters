@@ -110,5 +110,8 @@
     <ClInclude Include="utils\modules\address\address.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="utils\helpers\function_enforce\function_enforce.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

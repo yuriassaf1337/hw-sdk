@@ -10,4 +10,6 @@ namespace hotwheels
 	inline HWND window{ };
 
 	DWORD WINAPI init( void* module_handle );
+	DWORD WINAPI unload( DWORD exit_code = EXIT_FAILURE );
+
 }; // namespace hotwheels
