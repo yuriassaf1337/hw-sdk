@@ -107,5 +107,8 @@
     <ClInclude Include="utils\console\log_level\log_level.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="utils\modules\address\address.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

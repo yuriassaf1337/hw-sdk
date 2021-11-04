@@ -190,6 +190,7 @@
     <ClInclude Include="globals\includes\includes.h" />
     <ClInclude Include="globals\macros\macros.h" />
     <ClInclude Include="utils\console\log_level\log_level.h" />
+    <ClInclude Include="utils\modules\address\address.h" />
     <ClInclude Include="utils\modules\modules.h" />
     <ClInclude Include="utils\console\console.h" />
     <ClInclude Include="utils\helpers\bit_flag.h" />
