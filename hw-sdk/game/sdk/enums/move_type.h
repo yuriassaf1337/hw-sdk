@@ -1,5 +1,4 @@
-#ifndef MOVE_TYPE_H
-#define MOVE_TYPE_H
+#pragma once
 
 namespace sdk::enums
 {
@@ -21,5 +20,3 @@ namespace sdk::enums
 		MAX_BITS = 4
 	};
 } // namespace sdk::enums
-
-#endif

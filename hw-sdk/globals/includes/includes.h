@@ -1,5 +1,4 @@
-#ifndef INCLUDES_H
-#define INCLUDES_H
+#pragma once
 
 // libs
 #include <Windows.h>
@@ -40,5 +39,3 @@
 
 // hotwheels global
 #include "../../globals/hotwheels/hotwheels.h"
-
-#endif

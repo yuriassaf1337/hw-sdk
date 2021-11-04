@@ -1,7 +1,6 @@
-#ifndef MODULES_H
-#define MODULES_H
+#pragma once
+
 class modules
 {
 	// TODO
 };
-#endif

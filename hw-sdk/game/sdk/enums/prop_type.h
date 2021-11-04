@@ -1,6 +1,6 @@
+#pragma once
+
 #include <cstdint>
-#ifndef PROP_TYPE_H
-#	define PROP_TYPE_H
 
 namespace sdk::enums
 {
@@ -17,5 +17,3 @@ namespace sdk::enums
 		SENDPROPTYPEMAX
 	};
 } // namespace sdk::enums
-
-#endif

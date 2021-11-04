@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../dependencies/lazy_importer/lazy_importer.h"
 #include "helpers/primitive_definitions/primitives.h"
 #include "modules/address/address.h"
@@ -5,9 +7,6 @@
 #include <Windows.h>
 #include <cstdint>
 #include <thread>
-
-#ifndef UTILS_H
-#	define UTILS_H
 
 namespace utils
 {
@@ -30,4 +29,3 @@ namespace utils
 	}
 
 } // namespace utils
-#endif // ! UTILS_HPP

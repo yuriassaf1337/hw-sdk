@@ -1,5 +1,4 @@
-#ifndef FIELD_TYPE_H
-#define FIELD_TYPE_H
+#pragma once
 
 namespace sdk::enums
 {
@@ -39,5 +38,3 @@ namespace sdk::enums
 		TYPECOUNT
 	};
 } // namespace sdk::enums
-
-#endif

@@ -1,8 +1,7 @@
+#pragma once
+
 #include <cstddef>
 #include <cstdint>
-
-#ifndef ADDRESS_H
-#	define ADDRESS_H
 
 struct address {
 protected:
@@ -94,4 +93,3 @@ public:
 		return ( T )( new_address + sizeof( std::int32_t ) + relative_offset );
 	}
 };
-#endif

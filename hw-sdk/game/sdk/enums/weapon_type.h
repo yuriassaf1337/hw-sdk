@@ -1,6 +1,6 @@
+#pragma once
+
 #include <cstdint>
-#ifndef WEAPON_TYPE_H
-#	define WEAPON_TYPE_H
 
 namespace sdk::enums
 {
@@ -24,4 +24,3 @@ namespace sdk::enums
 		MELEE         = 16
 	};
 } // namespace sdk::enums
-#endif

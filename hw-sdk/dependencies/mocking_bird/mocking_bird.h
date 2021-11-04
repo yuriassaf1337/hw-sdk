@@ -1,5 +1,5 @@
-#ifndef MOCKING_BIRD_HPP
-#define MOCKING_BIRD_HPP
+#pragma once
+
 #include "../tinyformat.h"
 #include <mutex>
 #include <source_location>
@@ -89,5 +89,3 @@ namespace mocking_bird
 				.c_str( ) );                                                                                                                         \
 		__VA_ARGS__;                                                                                                                                 \
 	}
-
-#endif /* MOCKING_BIRD_HPP */

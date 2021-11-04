@@ -1,5 +1,5 @@
-#ifndef BIT_FLAG_H
-#define BIT_FLAG_H
+#pragma once
+
 #include <limits>
 
 template< typename t >
@@ -64,4 +64,3 @@ struct bit_flag_t {
 };
 
 using int_flag = bit_flag_t< int >;
-#endif

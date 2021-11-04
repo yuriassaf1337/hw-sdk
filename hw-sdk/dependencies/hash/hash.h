@@ -1,5 +1,4 @@
-#ifndef HASH_H
-#define HASH_H
+#pragma once
 
 // build-time hashing.
 
@@ -36,5 +35,3 @@ namespace fnv_hashing
 }; // namespace fnv_hashing
 
 using fnv = fnv_hashing::fnv1a< std::uint32_t >;
-
-#endif

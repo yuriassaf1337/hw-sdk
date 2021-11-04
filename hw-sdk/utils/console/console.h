@@ -1,5 +1,4 @@
-#ifndef CONSOLE_H
-#define CONSOLE_H
+#pragma once
 
 // deps
 #include "../../dependencies/tinyformat.h"
@@ -46,5 +45,3 @@ namespace console
 #endif
 	}
 } // namespace console
-
-#endif

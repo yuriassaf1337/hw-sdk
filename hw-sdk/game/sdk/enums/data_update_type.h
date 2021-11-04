@@ -1,5 +1,4 @@
-#ifndef DATA_UPDATE_TYPE_HPP
-#define DATA_UPDATE_TYPE_HPP
+#pragma once
 
 namespace sdk::enums
 {
@@ -10,5 +9,3 @@ namespace sdk::enums
 		POST_UPDATE
 	};
 } // namespace sdk::enums
-
-#endif

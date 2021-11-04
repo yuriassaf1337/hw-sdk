@@ -1,8 +1,7 @@
+#pragma once
 #include <chrono>
-#ifndef PRIMITIVES_H
-#	define PRIMITIVES_H
+
+// primitive declaration usefull for reading and faster overall typing of long functions.
 
 namespace chr = std::chrono;
 using unk     = void*;
-
-#endif

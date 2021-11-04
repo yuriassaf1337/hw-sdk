@@ -1,7 +1,6 @@
-#include "../includes/includes.h"
+#pragma once
 
-#ifndef HOTWHEELS_H
-#	define HOTWHEELS_H
+#include "../includes/includes.h"
 
 // cheat initialization method
 
@@ -12,4 +11,3 @@ namespace hotwheels
 
 	DWORD WINAPI init( void* module_handle );
 }; // namespace hotwheels
-#endif

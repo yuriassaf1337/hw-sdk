@@ -1,7 +1,7 @@
+#pragma once
+
 // this will very likely change alot.
 #include <cstdint>
-#ifndef DEF_IDX_H
-#	define DEF_IDX_H
 
 namespace sdk::enums
 {
@@ -144,5 +144,3 @@ namespace sdk::enums
 		AGENT_B_SQUADRON_OFFICER = 5601
 	};
 } // namespace sdk::enums
-
-#endif

@@ -1,5 +1,5 @@
-#ifndef XOR_H
-#define XOR_H
+#pragma once
+
 #include "../hash/hash.h"
 #include <immintrin.h>
 // build-time string xoring.
@@ -85,13 +85,3 @@ constexpr __forceinline auto __xor_string( const t ( &s )[ len ] )
 {
 	return __xor::gen< t, len, GET_XOR_KEYUI8 >( s, std::make_index_sequence< len >( ) ).data( );
 }
-
-#ifdef _DEBUG
-#	define x( s ) ( s )
-#else
-#	define x( s ) ( __xor_string( s ) )
-#endif
-
-#define xf( n ) ::__xor::xor_float::convert( n )
-
-#endif

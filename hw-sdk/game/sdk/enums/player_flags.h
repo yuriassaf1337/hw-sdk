@@ -1,5 +1,4 @@
-#ifndef PLAYER_FLAGS_H
-#define PLAYER_FLAGS_H
+#pragma once
 
 namespace sdk::enums
 {
@@ -39,5 +38,3 @@ namespace sdk::enums
 		UNBLOCKABLE_BY_PLAYER = ( 1 << 31 )
 	};
 } // namespace sdk::enums
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef FRAME_STAGE_H
-#define FRAME_STAGE_H
+#pragma once
 
 namespace sdk::enums
 {
@@ -15,5 +14,3 @@ namespace sdk::enums
 		RENDER_END
 	};
 } // namespace sdk::enums
-
-#endif

@@ -1,6 +1,6 @@
+#pragma once
+
 #include <cstdint>
-#ifndef CLASS_IDS_H
-#	define CLASS_IDS_H
 
 namespace sdk::enums
 {
@@ -291,6 +291,4 @@ namespace sdk::enums
 		SPORE_EXPLOSION,
 		SPORE_TRAIL
 	};
-}
-
-#endif
+} // namespace sdk::enums

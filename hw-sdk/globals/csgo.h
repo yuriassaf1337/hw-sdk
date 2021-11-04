@@ -1,5 +1,4 @@
-#ifndef CSGO_H
-#define CSGO_H
+#pragma once
 
 class csgo
 {
@@ -7,4 +6,3 @@ public:
 };
 
 inline csgo g_csgo{ };
-#endif
