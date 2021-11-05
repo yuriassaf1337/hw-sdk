@@ -8,7 +8,7 @@ bool csgo::init( )
 
 	MOCK console::init( );
 
-	console::print< console::log_level::NORMAL >( x( "csgo initialized" ) );
+	console::print< console::log_level::NORMAL >( _( "csgo initialized" ) );
 
 	MOCKING_CATCH( return false );
 

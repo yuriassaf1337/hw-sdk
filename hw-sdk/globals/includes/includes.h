@@ -40,3 +40,5 @@
 #include "../../globals/hotwheels/hotwheels.h"
 
 #include "../../globals/macros/macros.h"
+
+#include "../../utils/math/types/vector.h"

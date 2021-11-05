@@ -5,7 +5,7 @@
 DWORD WINAPI hotwheels::init( void* module_handle )
 {
 	handle = static_cast< HMODULE >( module_handle );
-	window = LI_FN( FindWindowA )( x( "Valve001" ), nullptr );
+	window = LI_FN( FindWindowA )( _( "Valve001" ), nullptr );
 
 	ENFORCE_FAILURE( g_csgo.init( ), "failed to init csgo" );
 

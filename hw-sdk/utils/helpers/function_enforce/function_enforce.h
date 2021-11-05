@@ -8,11 +8,11 @@ namespace function_enforce
 	inline bool enforcer( bool what, std::string_view id, std::string_view msg, args&&... arg )
 	{
 		if ( !what ) {
-			const static auto message = tfm::format( x( "function enforcer failed: id = \"%s\", msg = \"%s\"" ), id, msg );
+			const static auto message = tfm::format( _( "function enforcer failed: id = \"%s\", msg = \"%s\"" ), id, msg );
 			console::print< console::log_level::FATAL >( message );
 
 #ifdef _DEBUG
-			MessageBox( hotwheels::window, message.data( ), x( "exit failure - function enforcer" ), MB_OK );
+			MessageBox( hotwheels::window, message.data( ), _( "exit failure - function enforcer" ), MB_OK );
 #endif
 
 			if constexpr ( abort )
@@ -23,5 +23,5 @@ namespace function_enforce
 	}
 }; // namespace function_enforce
 
-#define ENFORCE_WARNING( exp, msg, ... ) function_enforce::enforcer< false >( exp, x( #exp ), x( msg ), __VA_ARGS__ )
-#define ENFORCE_FAILURE( exp, msg, ... ) function_enforce::enforcer< true >( exp, x( #exp ), x( msg ), __VA_ARGS__ )
+#define ENFORCE_WARNING( exp, msg, ... ) function_enforce::enforcer< false >( exp, _( #exp ), _( msg ), __VA_ARGS__ )
+#define ENFORCE_FAILURE( exp, msg, ... ) function_enforce::enforcer< true >( exp, _( #exp ), _( msg ), __VA_ARGS__ )

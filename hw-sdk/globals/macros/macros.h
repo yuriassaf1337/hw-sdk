@@ -6,9 +6,9 @@
 #define HASH( s ) fnv::hash( s )
 
 #ifdef _DEBUG
-#	define x( s ) ( s )
+#	define _( s ) ( s )
 #else
-#	define x( s ) ( __xor_string( s ) )
+#	define _( s ) ( __xor_string( s ) )
 #endif
 
 #define xf( n ) ::__xor::xor_float::convert( n )

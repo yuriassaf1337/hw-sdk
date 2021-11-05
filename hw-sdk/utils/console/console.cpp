@@ -11,10 +11,10 @@ bool console::init( )
 
 	AttachConsole( ATTACH_PARENT_PROCESS );
 
-	if ( freopen_s( reinterpret_cast< _iobuf** >( stdout ), x( "CONOUT$" ), x( "w" ), stdout ) != 0 )
+	if ( freopen_s( reinterpret_cast< _iobuf** >( stdout ), _( "CONOUT$" ), _( "w" ), stdout ) != 0 )
 		return false;
 
-	if ( !SetConsoleTitleA( x( "[console] hotwheels-v3" ) ) )
+	if ( !SetConsoleTitleA( _( "[console] hotwheels-v3" ) ) )
 		return false;
 
 	HANDLE handle = GetStdHandle( STD_OUTPUT_HANDLE );

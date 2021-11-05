@@ -20,20 +20,20 @@ namespace console
 	void unload( );
 
 	template< console::log_level lev >
-	void print( std::string_view print, std::string_view prefix = x( ">> " ) )
+	void print( std::string_view print, std::string_view prefix = _( ">> " ) )
 	{
 #ifdef CONSOLE_ENABLED
 
 		const char* type{ };
 		switch ( lev ) {
 		case console::log_level::NORMAL:
-			type = x( " " );
+			type = _( " " );
 			break;
 		case console::log_level::WARNING:
-			type = x( " # warning -> " );
+			type = _( " # warning -> " );
 			break;
 		case console::log_level::FATAL:
-			type = x( " # fatal -> " );
+			type = _( " # fatal -> " );
 			break;
 		}
 		// have to do this otherwise we get a dangling pointer -> (ss.str().c_str())
