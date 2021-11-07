@@ -172,10 +172,22 @@
     <ClCompile Include="utils\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dependencies\formatting\fmt\chrono.h" />
+    <ClInclude Include="dependencies\formatting\fmt\color.h" />
+    <ClInclude Include="dependencies\formatting\fmt\compile.h" />
+    <ClInclude Include="dependencies\formatting\fmt\core.h" />
+    <ClInclude Include="dependencies\formatting\fmt\format-inl.h" />
+    <ClInclude Include="dependencies\formatting\fmt\format.h" />
+    <ClInclude Include="dependencies\formatting\fmt\locale.h" />
+    <ClInclude Include="dependencies\formatting\fmt\os.h" />
+    <ClInclude Include="dependencies\formatting\fmt\ostream.h" />
+    <ClInclude Include="dependencies\formatting\fmt\posix.h" />
+    <ClInclude Include="dependencies\formatting\fmt\printf.h" />
+    <ClInclude Include="dependencies\formatting\fmt\ranges.h" />
     <ClInclude Include="dependencies\hash\hash.h" />
     <ClInclude Include="dependencies\lazy_importer\lazy_importer.h" />
     <ClInclude Include="dependencies\mocking_bird\mocking_bird.h" />
-    <ClInclude Include="dependencies\tinyformat.h" />
+    <ClInclude Include="dependencies\formatting\tinyformat.h" />
     <ClInclude Include="dependencies\xor\xor.h" />
     <ClInclude Include="game\sdk\enums\class_ids.h" />
     <ClInclude Include="game\sdk\enums\data_update_type.h" />
@@ -202,6 +214,10 @@
     <ClInclude Include="utils\helpers\bit_flag.h" />
     <ClInclude Include="utils\helpers\primitive_definitions\primitives.h" />
     <ClInclude Include="utils\utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="utils\console\console.inl" />
+    <None Include="utils\math\math.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

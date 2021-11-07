@@ -22,8 +22,15 @@
 // string enc/xor float
 #include "../../dependencies/hash/hash.h"
 #include "../../dependencies/xor/xor.h"
+
 // deps
 #include "../../dependencies/lazy_importer/lazy_importer.h"
+
+// formatting
+#include "../../dependencies/formatting/tinyformat.h"
+#define FMT_HEADER_ONLY
+#include "../../dependencies/formatting/fmt/chrono.h"
+#include "../../dependencies/formatting/fmt/format.h"
 
 // helpers
 #include "../../utils/helpers/bit_flag.h"
@@ -39,6 +46,8 @@
 // hotwheels global
 #include "../../globals/hotwheels/hotwheels.h"
 
+// used macros
 #include "../../globals/macros/macros.h"
 
-#include "../../utils/math/types/vector.h"
+// math
+#include "../../utils/math/math.h"

@@ -1,6 +1,8 @@
 #pragma once
 
-#include "../tinyformat.h"
+#include "../formatting/fmt/format.h"
+#include "../formatting/tinyformat.h"
+
 #include <mutex>
 #include <source_location>
 
@@ -84,8 +86,7 @@ namespace mocking_bird
 	}                                                                                                                                                \
 	catch ( const mocking_bird::exception& err )                                                                                                     \
 	{                                                                                                                                                \
-		console::print< console::log_level::WARNING >(                                                                                               \
-			tfm::format( "MOCK failed, line: %s | file: %s | fn: %s", err.what( ).line( ), err.what( ).file_name( ), err.what( ).function_name( ) )  \
-				.c_str( ) );                                                                                                                         \
+		console::format_log< console::log_level::WARNING >( "MOCK failed, line: {} | file: {} | fn: {}", err.what( ).line( ),                        \
+		                                                    err.what( ).file_name( ), err.what( ).function_name( ) );                                \
 		__VA_ARGS__;                                                                                                                                 \
 	}
