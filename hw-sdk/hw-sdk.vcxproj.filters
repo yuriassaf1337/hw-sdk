@@ -57,6 +57,9 @@
     <ClCompile Include="globals\hooks\present\present.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="globals\hooks\hooking.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals\includes\includes.h">
@@ -245,7 +248,7 @@
     <ClInclude Include="dependencies\minhook\include\MinHook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="utils\hooking\hooking.h">
+    <ClInclude Include="globals\hooks\hooking.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dependencies\minhook\src\hde\hde32.h">

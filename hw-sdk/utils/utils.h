@@ -1,8 +1,5 @@
 #pragma once
 
-#include "console/console.h"
-#include "modules/address/address.h"
-#include "../globals/macros/macros.h"
 #include "../dependencies/lazy_importer/lazy_importer.h"
 #include "helpers/primitive_definitions/primitives.h"
 
@@ -14,7 +11,4 @@ namespace utils
 {
 	void sleep( std::uint32_t time );
 	BOOL cheat_create_thread( DWORD WINAPI function( void* ), void* param );
-
-	//TODO (Dream) - inline template definition
-	DWORD find_signature(const char* module_name, const char* signature);
 } // namespace utils

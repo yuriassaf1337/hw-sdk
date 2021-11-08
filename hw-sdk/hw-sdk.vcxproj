@@ -172,6 +172,7 @@
     <ClCompile Include="dependencies\minhook\src\trampoline.c" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="globals\csgo.cpp" />
+    <ClCompile Include="globals\hooks\hooking.cpp" />
     <ClCompile Include="globals\hooks\present\present.cpp" />
     <ClCompile Include="globals\hotwheels\hotwheels.cpp" />
     <ClCompile Include="globals\intefaces\interfaces.cpp" />
@@ -242,7 +243,7 @@
     <ClInclude Include="globals\macros\macros.h" />
     <ClInclude Include="utils\console\log_level\log_level.h" />
     <ClInclude Include="utils\helpers\function_enforce\function_enforce.h" />
-    <ClInclude Include="utils\hooking\hooking.h" />
+    <ClInclude Include="globals\hooks\hooking.h" />
     <ClInclude Include="utils\math\math.h" />
     <ClInclude Include="utils\math\types\matrix_3x4.h" />
     <ClInclude Include="utils\math\types\vector.h" />

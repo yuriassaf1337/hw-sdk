@@ -9,16 +9,16 @@ namespace sdk
 	{
 		enum e_td_type
 		{
-			td_offset_normal = 0,
-			td_offset_packet = 1,
-			td_offset_count
+			TD_OFFSET_NORMAL = 0,
+			TD_OFFSET_PACKET = 1,
+			TD_OFFSET_COUNT
 		};
 	} // namespace enums
 
 	struct type_description_t {
 		std::int32_t field_type;
 		char* field_name;
-		int field_offset[ sdk::enums::e_td_type::td_offset_count ];
+		int field_offset[ sdk::enums::e_td_type::TD_OFFSET_COUNT ];
 		std::int16_t field_size;
 		std::int16_t flags;
 		PAD( 12 );
