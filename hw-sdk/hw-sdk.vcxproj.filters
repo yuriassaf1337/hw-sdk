@@ -176,6 +176,9 @@
     <ClInclude Include="utils\vfunc\vfunc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="game\sdk\classes\i_global_vars.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="utils\math\math.inl">

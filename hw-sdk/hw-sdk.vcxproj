@@ -189,6 +189,7 @@
     <ClInclude Include="dependencies\mocking_bird\mocking_bird.h" />
     <ClInclude Include="dependencies\formatting\tinyformat.h" />
     <ClInclude Include="dependencies\xor\xor.h" />
+    <ClInclude Include="game\sdk\classes\i_global_vars.h" />
     <ClInclude Include="game\sdk\classes\i_net_channel_info.h" />
     <ClInclude Include="game\sdk\enums\class_ids.h" />
     <ClInclude Include="game\sdk\enums\data_update_type.h" />
