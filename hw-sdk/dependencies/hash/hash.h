@@ -22,10 +22,12 @@ namespace fnv_hashing
 			return ( string[ 0 ] == '\0' ) ? val : hash( &string[ 1 ], ( val ^ std::uint32_t( string[ 0 ] ) ) * prime );
 		}
 
-		static std::string to_string( std::uint32_t hash )
-		{
-			return std::to_string( hash );
-		}
+		// FUCKKKKK YOUUUUUUUUUUU
+
+		//static std::string to_string( std::uint32_t hash )
+		//{
+		//	return std::to_string( hash );
+		//}
 
 		constexpr static std::uint32_t hash( wchar_t const* string, const std::uint32_t val = default_offset_basis )
 		{

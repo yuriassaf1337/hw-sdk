@@ -51,6 +51,12 @@
     <ClCompile Include="dependencies\minhook\src\trampoline.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="globals\intefaces\interfaces.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="globals\hooks\present\present.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals\includes\includes.h">
@@ -261,6 +267,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dependencies\minhook\src\trampoline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="globals\intefaces\interfaces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="globals\hooks\present\present.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

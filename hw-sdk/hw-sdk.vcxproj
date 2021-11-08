@@ -76,6 +76,8 @@
     <OutDir>.\debug\</OutDir>
     <TargetName>zipudhe2</TargetName>
     <IntDir>.\debug\intermediate\</IntDir>
+    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath);$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -170,7 +172,9 @@
     <ClCompile Include="dependencies\minhook\src\trampoline.c" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="globals\csgo.cpp" />
+    <ClCompile Include="globals\hooks\present\present.cpp" />
     <ClCompile Include="globals\hotwheels\hotwheels.cpp" />
+    <ClCompile Include="globals\intefaces\interfaces.cpp" />
     <ClCompile Include="utils\math\math.cpp" />
     <ClCompile Include="utils\modules\modules.cpp" />
     <ClCompile Include="utils\console\console.cpp" />
@@ -231,8 +235,10 @@
     <ClInclude Include="game\sdk\structs\player_info_t.h" />
     <ClInclude Include="game\sdk\structs\weapon_data_t.h" />
     <ClInclude Include="globals\csgo.h" />
+    <ClInclude Include="globals\hooks\present\present.h" />
     <ClInclude Include="globals\hotwheels\hotwheels.h" />
     <ClInclude Include="globals\includes\includes.h" />
+    <ClInclude Include="globals\intefaces\interfaces.h" />
     <ClInclude Include="globals\macros\macros.h" />
     <ClInclude Include="utils\console\log_level\log_level.h" />
     <ClInclude Include="utils\helpers\function_enforce\function_enforce.h" />

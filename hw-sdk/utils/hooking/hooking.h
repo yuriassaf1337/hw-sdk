@@ -10,8 +10,8 @@ template <class T>
 class hook_helper
 {
 private:
-	std::uintptr_t source = nullptr;
-	std::uintptr_t original = nullptr;
+	void* source;
+	void* original;
 
 public:
 	template <typename S, typename D>
@@ -27,7 +27,7 @@ public:
 
 	void disable() 
 	{
-		MH_DisableHook(source);
+		MH_DisableHook(reinterpret_cast<void*>(source));
 	}
 
 	T* get_original() 
