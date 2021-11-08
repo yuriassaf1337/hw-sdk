@@ -9,7 +9,7 @@
 
 namespace present_hook
 {
-	hook_helper<HRESULT(__stdcall)(const RECT*, const RECT*, HWND, const RGNDATA*)> helper;
+	inline hook_helper<HRESULT(__stdcall)(const RECT*, const RECT*, HWND, const RGNDATA*)> helper;
 
 	void init();
 	void unload();
