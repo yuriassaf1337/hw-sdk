@@ -189,16 +189,19 @@
     <ClInclude Include="dependencies\mocking_bird\mocking_bird.h" />
     <ClInclude Include="dependencies\formatting\tinyformat.h" />
     <ClInclude Include="dependencies\xor\xor.h" />
+    <ClInclude Include="game\sdk\classes\i_net_channel_info.h" />
     <ClInclude Include="game\sdk\enums\class_ids.h" />
     <ClInclude Include="game\sdk\enums\data_update_type.h" />
     <ClInclude Include="game\sdk\enums\def_idx.h" />
     <ClInclude Include="game\sdk\enums\field_type.h" />
     <ClInclude Include="game\sdk\enums\frame_stage.h" />
     <ClInclude Include="game\sdk\enums\move_type.h" />
+    <ClInclude Include="game\sdk\enums\net_channel_type.h" />
     <ClInclude Include="game\sdk\enums\player_flags.h" />
     <ClInclude Include="game\sdk\enums\prop_type.h" />
     <ClInclude Include="game\sdk\enums\weapon_type.h" />
-    <ClInclude Include="game\sdk\interfaces\iv_engine_client.h" />
+    <ClInclude Include="game\sdk\classes\iv_engine_client.h" />
+    <ClInclude Include="game\sdk\structs\player_info_t.h" />
     <ClInclude Include="globals\csgo.h" />
     <ClInclude Include="globals\hotwheels\hotwheels.h" />
     <ClInclude Include="globals\includes\includes.h" />
@@ -214,6 +217,7 @@
     <ClInclude Include="utils\helpers\bit_flag.h" />
     <ClInclude Include="utils\helpers\primitive_definitions\primitives.h" />
     <ClInclude Include="utils\utils.h" />
+    <ClInclude Include="utils\vfunc\vfunc.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="utils\console\console.inl" />

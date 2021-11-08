@@ -116,7 +116,7 @@
     <ClInclude Include="utils\helpers\function_enforce\function_enforce.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="game\sdk\interfaces\iv_engine_client.h">
+    <ClInclude Include="game\sdk\classes\iv_engine_client.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="utils\math\types\vector.h">
@@ -162,6 +162,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dependencies\formatting\fmt\printf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\sdk\structs\player_info_t.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\sdk\enums\net_channel_type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\sdk\classes\i_net_channel_info.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\vfunc\vfunc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

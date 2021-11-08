@@ -13,6 +13,8 @@
 
 #define xf( n ) ::__xor::xor_float::convert( n )
 
+// [#] game-dlls
+
 #define CLIENT_DLL              _( "client.dll" )
 #define ENGINE_DLL              _( "engine.dll" )
 #define LOCALIZE_DLL            _( "localize.dll" )
@@ -31,3 +33,7 @@
 #define MATCHMAKING_DLL         _( "matchmaking.dll" )
 #define SERVER_DLL              _( "server.dll" )
 #define SERVERBROWSER_DLL       _( "serverbrowser.dll" )
+
+// [#] interface-versions
+
+#define VENGINE_CLIENT_INTERFACE_VERSION _( "VEngineClient014" )

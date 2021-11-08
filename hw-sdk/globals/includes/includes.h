@@ -39,6 +39,7 @@
 // utils
 #include "../../utils/console/console.h"
 #include "../../utils/utils.h"
+#include "../../utils/vfunc/vfunc.h"
 
 // g_csgo global
 #include "../../globals/csgo.h"
