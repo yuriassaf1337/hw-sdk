@@ -12,7 +12,7 @@ namespace sdk
 		{
 			virtual_func::call< void, int&, int& >( this, 5, w, h );
 		}
-		bool get_player_info( int index, sdk::structs::player_info_t* info )
+		bool get_player_info( int index, sdk::player_info_t* info )
 		{
 			return virtual_func::call< bool >( this, 8, index, info );
 		}
