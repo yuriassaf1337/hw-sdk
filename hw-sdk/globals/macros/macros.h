@@ -37,3 +37,13 @@
 // [#] interface-versions
 
 #define VENGINE_CLIENT_INTERFACE_VERSION _( "VEngineClient014" )
+
+// [#] utils
+
+#define COMBINE( lhs, rhs ) lhs##rhs
+#define CONCAT( lhs, rhs )  COMBINE( lhs, rhs )
+#define PAD( size )                                                                                                                                  \
+private:                                                                                                                                             \
+	std::uint8_t CONCAT( pad, __COUNTER__ )[ size ];                                                                                                 \
+                                                                                                                                                     \
+public:
