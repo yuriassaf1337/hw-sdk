@@ -86,6 +86,14 @@ namespace sdk
 		{
 			return virtual_func::call< bool >( this, 83 );
 		}
+		bool is_paused( )
+		{
+			return virtual_func::call< bool >( this, 90 );
+		}
+		float get_timescale( )
+		{
+			return virtual_func::call< float >( this, 91 );
+		}
 		bool is_playing_time_demo( )
 		{
 			return virtual_func::call< bool >( this, 84 );
