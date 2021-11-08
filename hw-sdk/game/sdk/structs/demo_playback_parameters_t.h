@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 
-namespace sdk::structs
+namespace sdk
 {
 	struct demo_playback_parameters_t {
 		std::uint64_t case_id;
@@ -14,4 +14,4 @@ namespace sdk::structs
 		bool playing_live_remote_broadcast;
 		std::uint64_t live_match_id;
 	};
-} // namespace sdk::structs
+} // namespace sdk

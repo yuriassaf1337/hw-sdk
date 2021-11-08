@@ -2,7 +2,7 @@
 #include "../../../globals/macros/macros.h"
 #include <cstdint>
 
-namespace sdk::structs
+namespace sdk
 {
 	struct weapon_data_t {
 		PAD( 0x14 );
@@ -67,4 +67,4 @@ namespace sdk::structs
 		float recoil_magnitudeVariance[ 2 ];
 		int spread_seed;
 	};
-} // namespace sdk::structs
+} // namespace sdk

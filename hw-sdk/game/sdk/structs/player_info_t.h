@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 
-namespace sdk::structs
+namespace sdk
 {
 	struct player_info_t {
 	private:
@@ -27,4 +27,4 @@ namespace sdk::structs
 		unsigned int custom_files[ 4 ];
 		unsigned char files_downloaded;
 	};
-} // namespace sdk::structs
+} // namespace sdk
