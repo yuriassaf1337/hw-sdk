@@ -2,9 +2,8 @@
 #include "../../utils/helpers/function_enforce/function_enforce.h"
 #include "../csgo.h"
 
-
-//remove later
-#include "../hooks/present/present.h"
+#include "../../utils/keybinds/keybinds.h"
+#include "../hooks/hooking.h"
 #include "../intefaces/interfaces.h"
 
 DWORD WINAPI hotwheels::init( void* module_handle )
@@ -14,18 +13,25 @@ DWORD WINAPI hotwheels::init( void* module_handle )
 
 	ENFORCE_FAILURE( g_csgo.init( ), "failed to init csgo" );
 
-	interfaces::init();
-	
-	MH_Initialize();
+	interfaces::init( );
 
-	present_hook::init();
+	hooks::init( );
+
+	keybinds::add_keybind( VK_DELETE, []( bool down ) -> void 
+	{
+		CreateThread( nullptr, 0, reinterpret_cast< LPTHREAD_START_ROUTINE >( unload ), nullptr, 0, nullptr );
+	} );
 
 	return 0;
 }
 
 DWORD WINAPI hotwheels::unload( DWORD exit_code )
 {
-	MH_Uninitialize();
+	interfaces::unload( );
+
+	hooks::unload( );
+
+	console::unload( );
 
 	LI_FN( FreeLibraryAndExitThread )( handle, exit_code );
 

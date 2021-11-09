@@ -174,8 +174,10 @@
     <ClCompile Include="globals\csgo.cpp" />
     <ClCompile Include="globals\hooks\hooking.cpp" />
     <ClCompile Include="globals\hooks\present\present.cpp" />
+    <ClCompile Include="globals\hooks\wndproc\wndproc.cpp" />
     <ClCompile Include="globals\hotwheels\hotwheels.cpp" />
     <ClCompile Include="globals\intefaces\interfaces.cpp" />
+    <ClCompile Include="utils\keybinds\keybinds.cpp" />
     <ClCompile Include="utils\math\math.cpp" />
     <ClCompile Include="utils\modules\modules.cpp" />
     <ClCompile Include="utils\console\console.cpp" />
@@ -237,6 +239,7 @@
     <ClInclude Include="game\sdk\structs\weapon_data_t.h" />
     <ClInclude Include="globals\csgo.h" />
     <ClInclude Include="globals\hooks\present\present.h" />
+    <ClInclude Include="globals\hooks\wndproc\wndproc.h" />
     <ClInclude Include="globals\hotwheels\hotwheels.h" />
     <ClInclude Include="globals\includes\includes.h" />
     <ClInclude Include="globals\intefaces\interfaces.h" />
@@ -244,6 +247,7 @@
     <ClInclude Include="utils\console\log_level\log_level.h" />
     <ClInclude Include="utils\helpers\function_enforce\function_enforce.h" />
     <ClInclude Include="globals\hooks\hooking.h" />
+    <ClInclude Include="utils\keybinds\keybinds.h" />
     <ClInclude Include="utils\math\math.h" />
     <ClInclude Include="utils\math\types\matrix_3x4.h" />
     <ClInclude Include="utils\math\types\vector.h" />
