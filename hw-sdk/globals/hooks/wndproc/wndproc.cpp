@@ -4,7 +4,7 @@ HRESULT __stdcall wndproc_hook::wndproc_detour( HWND window, UINT message, WPARA
 {
 	keybinds::handle_input( message, parameter );
 
-	static auto lazy_callwndproc = LI_FN( CallWindowProcA ).get();
+	static auto lazy_callwndproc = LI_FN( CallWindowProcA ).get( );
 
 	return lazy_callwndproc( original, window, message, parameter, long_parameter );
 }
