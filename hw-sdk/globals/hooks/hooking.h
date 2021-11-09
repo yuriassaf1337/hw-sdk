@@ -17,11 +17,11 @@ public:
 	void create( S source, D destination, const char* name = _( "undefined" ) )
 	{
 		if ( MH_CreateHook( reinterpret_cast< void* >( source ), reinterpret_cast< void* >( destination ), &original ) != MH_OK )
-			console::format_log< console::log_level::FATAL >( _( "failed to hook %s [%x => %x]" ), name, source, destination );
+			console::format_log< console::log_level::FATAL >( _( "failed to hook {} [{} -> {}]" ), name, reinterpret_cast< void* >( source), reinterpret_cast< void* >( destination ) );
 
 		MH_EnableHook( reinterpret_cast< void* >( source ) );
 
-		console::format_log< console::log_level::NORMAL >( _( "hooked %s [%x => %x]" ), name, source, destination );
+		console::format_log< console::log_level::NORMAL >( _( "hooked {} [{} -> {}]" ), name, reinterpret_cast< void* >( source ), reinterpret_cast< void* >( destination ) );
 	}
 
 	template< typename R, typename... A >

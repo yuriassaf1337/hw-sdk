@@ -34,7 +34,7 @@ void console::print( std::string_view print, std::string_view prefix )
 	}
 	// have to do this otherwise we get a dangling pointer -> (ss.str().c_str())
 	std::stringstream ss{ };
-	ss << prefix << type << print;
+	ss << prefix << type << print << "\n";
 	const std::string temp_str = std::string{ ss.str( ) };
 
 	tfm::printf( temp_str.c_str( ) );

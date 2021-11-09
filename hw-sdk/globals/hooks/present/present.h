@@ -9,10 +9,10 @@
 
 namespace present_hook
 {
-	inline hook_helper< HRESULT( __stdcall )( const RECT*, const RECT*, HWND, const RGNDATA* ) > helper;
+	HRESULT __stdcall present_detour( IDirect3DDevice9* device, const RECT* source, const RECT* dest, HWND dest_window, const RGNDATA* dirty );
 
 	void init( );
 	void unload( );
 
-	HRESULT __stdcall present_detour( const RECT* pSourceRect, const RECT* pDestRect, HWND hDestWindowOverride, const RGNDATA* pDirtyRegion );
+	inline hook_helper< HRESULT( __stdcall )( IDirect3DDevice9*, const RECT*, const RECT*, HWND, const RGNDATA* ) > helper;
 } // namespace present_hook

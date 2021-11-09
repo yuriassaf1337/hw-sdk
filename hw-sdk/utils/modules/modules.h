@@ -77,8 +77,8 @@ namespace modules
 		{
 			HMODULE return_module{ };
 
-			while ( return_module ) {
-				return_module = LI_FN( GetModuleHandle )( name );
+			while ( !return_module ) {
+				return_module = LI_FN( GetModuleHandleA )( name );
 				utils::sleep( 1 );
 			}
 

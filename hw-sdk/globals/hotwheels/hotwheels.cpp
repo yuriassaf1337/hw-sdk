@@ -16,6 +16,8 @@ DWORD WINAPI hotwheels::init( void* module_handle )
 
 	interfaces::init();
 	
+	MH_Initialize();
+
 	present_hook::init();
 
 	return 0;
@@ -23,6 +25,8 @@ DWORD WINAPI hotwheels::init( void* module_handle )
 
 DWORD WINAPI hotwheels::unload( DWORD exit_code )
 {
+	MH_Uninitialize();
+
 	LI_FN( FreeLibraryAndExitThread )( handle, exit_code );
 
 	return exit_code;
