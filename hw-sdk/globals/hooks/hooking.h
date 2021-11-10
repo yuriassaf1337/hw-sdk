@@ -17,15 +17,15 @@ public:
 	void create( S source, D destination, const char* name = _( "undefined" ) )
 	{
 		if ( MH_CreateHook( reinterpret_cast< void* >( source ), reinterpret_cast< void* >( destination ), &original ) != MH_OK )
-			console::format_log< console::log_level::FATAL >( _( "failed to hook {} [{} -> {}]" ), name, reinterpret_cast< void* >( source ),
-			                                                  reinterpret_cast< void* >( destination ) );
+			console::print< console::log_level::FATAL >( _( "failed to hook {} [{} -> {}]" ), name, reinterpret_cast< void* >( source ),
+			                                             reinterpret_cast< void* >( destination ) );
 
 		MH_EnableHook( reinterpret_cast< void* >( source ) );
 
 		this->source = source;
 
-		console::format_log< console::log_level::NORMAL >( _( "hooked {} [{} -> {}]" ), name, reinterpret_cast< void* >( source ),
-		                                                   reinterpret_cast< void* >( destination ) );
+		console::print< console::log_level::NORMAL >( _( "Hooked {} [{} -> {}]" ), name, reinterpret_cast< void* >( source ),
+		                                              reinterpret_cast< void* >( destination ) );
 	}
 
 	void disable( )

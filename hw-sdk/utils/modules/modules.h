@@ -17,14 +17,14 @@ namespace modules
 		address pattern_scan( const char* sig )
 		{
 			if ( !module_handle )
-				console::format_log< console::log_level::WARNING >( _( "failed to get handle for: {}" ), module_name );
+				console::print< console::log_level::WARNING >( _( "Failed to get handle - [ {} ]" ), module_name );
 
 			const auto module_address   = reinterpret_cast< std::uint8_t* >( module_handle );
 			const auto dos_header       = reinterpret_cast< PIMAGE_DOS_HEADER >( module_handle );
 			const auto nt_headers       = reinterpret_cast< PIMAGE_NT_HEADERS >( module_address + dos_header->e_lfanew );
 			const std::uintptr_t offset = find_pattern( module_address, nt_headers->OptionalHeader.SizeOfImage, sig );
 			if ( offset )
-				console::format_log< console::log_level::WARNING >( _( "found sig {}, [{} -> {}]" ), offset, module_name, sig );
+				console::print< console::log_level::DEBUG >( _( "Found signature - [ {} -> {} ]" ), module_name, sig );
 
 			return offset;
 		};
@@ -49,7 +49,7 @@ namespace modules
 				if ( byte_found )
 					return reinterpret_cast< std::uintptr_t >( &region_start[ i ] );
 			}
-			console::format_log< console::log_level::FATAL >( _( "find_pattern failed -> pattern: {}" ), pattern );
+			console::print< console::log_level::FATAL >( _( "Find pattern failed - [ {} ]" ), pattern );
 			return 0U;
 		}
 		std::vector< int > pattern_to_bytes( const char* pattern )

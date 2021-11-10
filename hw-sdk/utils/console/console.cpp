@@ -14,17 +14,17 @@ bool console::init( )
 	if ( freopen_s( reinterpret_cast< _iobuf** >( stdout ), _( "CONOUT$" ), _( "w" ), stdout ) != 0 )
 		return false;
 
-	if ( !SetConsoleTitleA( _( "[console] hotwheels-v3" ) ) )
+	if ( !SetConsoleTitleA( _( "> hotwheels" ) ) )
 		return false;
 
-	HANDLE handle = GetStdHandle( STD_OUTPUT_HANDLE );
-	MOCK handle;
+	console::console_handle = GetStdHandle( STD_OUTPUT_HANDLE );
+	MOCK console::console_handle;
 
 	DWORD mode = 0;
-	GetConsoleMode( handle, &mode );
+	GetConsoleMode( console::console_handle, &mode );
 
 	mode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
-	return SetConsoleMode( handle, mode );
+	return SetConsoleMode( console::console_handle, mode );
 
 	MOCKING_CATCH( return false );
 #endif

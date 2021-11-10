@@ -4,13 +4,13 @@
 #include <iostream>
 #include <string.h>
 
-#include "../macros/macros.h"
 #include "../../utils/utils.h"
+#include "../macros/macros.h"
 
 namespace interfaces
 {
 	inline IDirect3DDevice9* device;
 
-	void init();
-	void unload(); //unused...
-}
+	bool init( );
+	void unload( ); // unused...
+} // namespace interfaces

@@ -17,15 +17,15 @@ namespace console
 	bool init( );
 
 	void unload( );
+	inline HANDLE console_handle;
 
-	template< console::log_level lev >
-	void print( std::string_view print, std::string_view prefix = ">> " );
+	template< console::log_level lev, typename... VA >
+	void print( std::string_view print, VA&&... args );
 
 	template< typename... VA >
 	inline std::string format( std::string_view fmt, VA&&... args );
 
-	template< console::log_level level, typename... VA >
-	void format_log( std::string_view str, VA&&... args );
+	inline void set_console_color( const console::log_level level );
 } // namespace console
 
 #include "console.inl"
