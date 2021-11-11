@@ -7,8 +7,9 @@ bool interfaces::init( )
 {
 	MOCKING_TRY
 	device = **reinterpret_cast< IDirect3DDevice9*** >( g_shaderapidx9_dll.pattern_scan( _( "A1 ? ? ? ? 50 8B 08 FF 51 0C" ) ) + 0x1 );
-	if ( !device )
-		return false;
+
+	// TODO: change this into a better template based scanner!!!
+	engine = reinterpret_cast< sdk::iv_engine_client* >( utils::find_interface( _( "VEngineClient014" ), _( "engine.dll" ) ) );
 
 	MOCKING_CATCH( return false );
 
