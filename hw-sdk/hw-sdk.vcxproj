@@ -215,10 +215,9 @@
     <ClInclude Include="game\sdk\classes\c_hud_chat.h" />
     <ClInclude Include="game\sdk\classes\c_usercmd.h" />
     <ClInclude Include="game\sdk\classes\c_view_setup.h" />
+    <ClInclude Include="game\sdk\classes\i_client_dll.h" />
     <ClInclude Include="game\sdk\classes\i_prediction.h" />
-    <ClInclude Include="game\sdk\props\props.h" />
     <ClInclude Include="game\sdk\structs\color.h" />
-    <ClInclude Include="game\sdk\structs\datamap.h" />
     <ClInclude Include="game\sdk\classes\i_app_system.h" />
     <ClInclude Include="game\sdk\classes\i_global_vars.h" />
     <ClInclude Include="game\sdk\classes\i_handle_entity.h" />
@@ -235,6 +234,9 @@
     <ClInclude Include="game\sdk\enums\weapon_type.h" />
     <ClInclude Include="game\sdk\classes\iv_engine_client.h" />
     <ClInclude Include="game\sdk\structs\demo_playback_parameters_t.h" />
+    <ClInclude Include="game\sdk\structs\dt_common.h" />
+    <ClInclude Include="game\sdk\structs\dt_recv.h" />
+    <ClInclude Include="game\sdk\structs\i_client_class.h" />
     <ClInclude Include="game\sdk\structs\player_info_t.h" />
     <ClInclude Include="game\sdk\structs\weapon_data_t.h" />
     <ClInclude Include="globals\csgo.h" />

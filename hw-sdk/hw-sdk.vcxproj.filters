@@ -230,9 +230,6 @@
     <ClInclude Include="game\sdk\classes\c_handle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="game\sdk\structs\datamap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="game\sdk\classes\c_view_setup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -243,9 +240,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game\sdk\classes\c_base_entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game\sdk\props\props.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game\sdk\structs\color.h">
@@ -288,6 +282,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="globals\hooks\wndproc\wndproc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\sdk\classes\i_client_dll.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\sdk\structs\dt_common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\sdk\structs\dt_recv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\sdk\structs\i_client_class.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
