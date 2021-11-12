@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <iostream>
 
 #include "../../dependencies/hash/hash.h"
@@ -5,8 +6,6 @@
 #include "../../globals/macros/macros.h"
 
 #include "renderer.h"
-
-#include <assert.h>
 
 #define DEVICE_SAFETY                                                                                                                                \
 	if ( !device )                                                                                                                                   \
