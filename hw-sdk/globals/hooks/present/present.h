@@ -7,12 +7,20 @@
 #include "../../intefaces/interfaces.h"
 #include "../hooking.h"
 
-namespace present_hook
+namespace hooks
 {
-	HRESULT __stdcall present_detour( IDirect3DDevice9* device, const RECT* source, const RECT* dest, HWND dest_window, const RGNDATA* dirty );
+	CREATE_HOOK_HELPER( present_hook, HRESULT( __stdcall )( IDirect3DDevice9*, const RECT*, const RECT*, HWND, const RGNDATA* ) );
+	struct present {
+		static HRESULT __stdcall present_detour( IDirect3DDevice9* device, const RECT* source, const RECT* dest, HWND dest_window,
+		                                         const RGNDATA* dirty );
 
-	void init( );
-	void unload( );
-
-	inline hook_helper< HRESULT( __stdcall )( IDirect3DDevice9*, const RECT*, const RECT*, HWND, const RGNDATA* ) > helper;
-} // namespace present_hook
+		static void init( )
+		{
+			present_hook.create( virtual_func::get( interfaces::device, 17 ), present_detour, _( "present_detour" ) );
+		}
+		static void unload( )
+		{
+			present_hook.disable( );
+		}
+	};
+} // namespace hooks

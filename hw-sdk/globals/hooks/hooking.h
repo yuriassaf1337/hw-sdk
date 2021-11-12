@@ -16,11 +16,15 @@ public:
 	template< typename S, typename D >
 	void create( S source, D destination, const char* name = _( "undefined" ) )
 	{
+		// this is pretty messy
+
 		if ( MH_CreateHook( reinterpret_cast< void* >( source ), reinterpret_cast< void* >( destination ), &original ) != MH_OK )
-			console::print< console::log_level::FATAL >( _( "Failed to hook {} - [ {} -> {} ]" ), name, reinterpret_cast< void* >( source ),
+			console::print< console::log_level::FATAL >( _( "Failed to create hook {} - [ {} -> {} ]" ), name, reinterpret_cast< void* >( source ),
 			                                             reinterpret_cast< void* >( destination ) );
 
-		MH_EnableHook( reinterpret_cast< void* >( source ) );
+		if ( MH_EnableHook( reinterpret_cast< void* >( source ) ) != MH_OK )
+			console::print< console::log_level::FATAL >( _( "Failed to enable hook {} - [ {} -> {} ]" ), name, reinterpret_cast< void* >( source ),
+			                                             reinterpret_cast< void* >( destination ) );
 
 		this->source = source;
 

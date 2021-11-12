@@ -63,3 +63,7 @@ public:
 #define FAIL_CHECK( return_code )                                                                                                                    \
 	if ( FAILED( return_code ) )                                                                                                                     \
 		assert( _( "Operation failed." ) );
+
+// [#] hooking utils
+
+#define CREATE_HOOK_HELPER( name, args ) inline hook_helper< args > name;

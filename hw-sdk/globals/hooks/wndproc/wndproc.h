@@ -3,17 +3,26 @@
 #include <d3dx9.h>
 #include <iostream>
 
-#include "../hooking.h"
+#include "../../../utils/keybinds/keybinds.h"
 #include "../../../utils/vfunc/vfunc.h"
 #include "../../intefaces/interfaces.h"
-#include "../../../utils/keybinds/keybinds.h"
+#include "../hooking.h"
 
-namespace wndproc_hook
+namespace hooks
 {
-	inline WNDPROC original;
+	inline WNDPROC wndproc_hook;
+	struct wndproc {
+		static LONG WINAPI wndproc_detour( HWND window, UINT message, WPARAM parameter, LPARAM long_parameter );
 
-	LONG WINAPI wndproc_detour( HWND window, UINT message, WPARAM parameter, LPARAM long_parameter );
+		static void init( )
+		{
+			hooks::wndproc_hook = reinterpret_cast< WNDPROC >(
+				LI_FN( SetWindowLongA )( hotwheels::window, GWL_WNDPROC, reinterpret_cast< LONG_PTR >( wndproc_detour ) ) );
+		}
 
-	void init( );
-	void unload( );
-} // namespace present_hook
+		static void unload( )
+		{
+			LI_FN( SetWindowLongA )( hotwheels::window, GWL_WNDPROC, reinterpret_cast< LONG_PTR >( hooks::wndproc_hook ) );
+		}
+	};
+} // namespace hooks

@@ -6,7 +6,7 @@
 
 namespace sdk
 {
-	class c_usercmd
+	class c_user_cmd
 	{
 	public:
 		PAD( 4 );
