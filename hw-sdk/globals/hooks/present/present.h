@@ -16,7 +16,7 @@ namespace hooks
 
 		static void init( )
 		{
-			present_hook.create( virtual_func::get( interfaces::device, 17 ), present_detour, _( "present_detour" ) );
+			present_hook.create( virtual_func::get( g_interfaces.device, 17 ), present_detour, _( "present_detour" ) );
 		}
 		static void unload( )
 		{

@@ -9,12 +9,15 @@
 #include "../../utils/utils.h"
 #include "../macros/macros.h"
 
-namespace interfaces
+namespace sdk
 {
-	inline IDirect3DDevice9* device;
-	inline sdk::iv_engine_client* engine;
-	inline sdk::i_client_dll* client;
+	struct interfaces {
+		IDirect3DDevice9* device;
+		sdk::iv_engine_client* engine;
+		sdk::i_client_dll* client;
 
-	bool init( );
-	void unload( ); // unused... // You're unused usendskid.
-} // namespace interfaces
+		bool init( );
+	};
+} // namespace sdk
+
+inline sdk::interfaces g_interfaces;

@@ -3,7 +3,7 @@
 #include "../../utils/modules/modules.h"
 #include "interfaces.h"
 
-bool interfaces::init( )
+bool sdk::interfaces::init( )
 {
 	MOCKING_TRY
 
@@ -15,7 +15,7 @@ bool interfaces::init( )
 
 	MOCKING_CATCH( return false );
 
+	console::print< console::log_level::SUCCESS >( _( "initialized interfaces" ) );
+
 	return true;
 }
-
-void interfaces::unload( ) { }

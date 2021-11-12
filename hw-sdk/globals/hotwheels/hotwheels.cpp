@@ -14,7 +14,7 @@ DWORD WINAPI hotwheels::init( void* module_handle )
 
 	ENFORCE_FAILURE( g_csgo.init( ), "Failed to init csgo" );
 
-	ENFORCE_FAILURE( interfaces::init( ), "Failed to init interfaces" );
+	ENFORCE_FAILURE( g_interfaces.init( ), "Failed to init interfaces" );
 
 	ENFORCE_FAILURE( hooks::init( ), "Failed to init hooks" );
 
@@ -27,8 +27,6 @@ DWORD WINAPI hotwheels::init( void* module_handle )
 
 DWORD WINAPI hotwheels::unload( DWORD exit_code )
 {
-	interfaces::unload( );
-
 	hooks::unload( );
 
 	console::unload( );

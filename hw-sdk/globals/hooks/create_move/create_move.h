@@ -18,7 +18,7 @@ namespace hooks
 
 		static void init( )
 		{
-			hooks::create_move_hook.create( virtual_func::get( interfaces::client, 22 ), create_move_detour, _( "create_move_detour" ) );
+			hooks::create_move_hook.create( virtual_func::get( g_interfaces.client, 22 ), create_move_detour, _( "create_move_detour" ) );
 		}
 
 		static void unload( )
