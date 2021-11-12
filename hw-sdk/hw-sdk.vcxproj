@@ -172,6 +172,7 @@
     <ClCompile Include="dependencies\minhook\src\trampoline.c" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="globals\csgo.cpp" />
+    <ClCompile Include="globals\hooks\create_move\create_move.cpp" />
     <ClCompile Include="globals\hooks\hooking.cpp" />
     <ClCompile Include="globals\hooks\present\present.cpp" />
     <ClCompile Include="globals\hooks\wndproc\wndproc.cpp" />
@@ -240,6 +241,7 @@
     <ClInclude Include="game\sdk\structs\player_info_t.h" />
     <ClInclude Include="game\sdk\structs\weapon_data_t.h" />
     <ClInclude Include="globals\csgo.h" />
+    <ClInclude Include="globals\hooks\create_move\create_move.h" />
     <ClInclude Include="globals\hooks\present\present.h" />
     <ClInclude Include="globals\hooks\wndproc\wndproc.h" />
     <ClInclude Include="globals\hotwheels\hotwheels.h" />
