@@ -47,6 +47,6 @@ public:
 
 namespace hooks
 {
-	void init( );
+	bool init( );
 	void unload( );
 } // namespace hooks

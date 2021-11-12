@@ -3,12 +3,15 @@
 #include "present/present.h"
 #include "wndproc/wndproc.h"
 
-void hooks::init( )
+bool hooks::init( )
 {
-	MH_Initialize( );
+	if ( MH_Initialize( ) != MH_OK )
+		return false;
 
 	wndproc_hook::init( );
 	present_hook::init( );
+
+	return true;
 }
 
 void hooks::unload( )
