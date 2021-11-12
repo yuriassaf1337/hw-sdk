@@ -11,10 +11,10 @@
 
 namespace hooks
 {
-	CREATE_HOOK_HELPER( create_move_hook, bool( __fastcall )( void*, float, bool ) );
+	CREATE_HOOK_HELPER( create_move_hook, void( __fastcall )( sdk::i_client_dll*, int, float, bool ) );
 
 	struct create_move {
-		static bool __fastcall create_move_detour( sdk::c_base_entity* edx, void*, float input_sample_frametime, sdk::c_user_cmd* active );
+		static void __fastcall create_move_detour( sdk::i_client_dll* _this, void* edx, int sequence_number, float input_sample_frametime, bool active );
 
 		static void init( )
 		{
