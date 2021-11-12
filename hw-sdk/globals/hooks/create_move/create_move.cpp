@@ -5,10 +5,6 @@
 void __fastcall create_move::create_move_detour( void* edx, void* ecx, int sequence_number, float input_sample_frametime, bool active )
 {
 	helper.call_original< void >( edx, ecx, sequence_number, input_sample_frametime, active );
-
-	math::vec3 view_angles{ 12, 12, 12 };
-
-	interfaces::engine->set_view_angles( view_angles );
 }
 
 void create_move::init( )

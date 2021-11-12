@@ -182,6 +182,7 @@
     <ClCompile Include="utils\math\math.cpp" />
     <ClCompile Include="utils\modules\modules.cpp" />
     <ClCompile Include="utils\console\console.cpp" />
+    <ClCompile Include="utils\renderer\renderer.cpp" />
     <ClCompile Include="utils\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -262,6 +263,7 @@
     <ClInclude Include="utils\console\console.h" />
     <ClInclude Include="utils\helpers\bit_flag.h" />
     <ClInclude Include="utils\helpers\primitive_definitions\primitives.h" />
+    <ClInclude Include="utils\renderer\renderer.h" />
     <ClInclude Include="utils\utils.h" />
     <ClInclude Include="utils\vfunc\vfunc.h" />
   </ItemGroup>
