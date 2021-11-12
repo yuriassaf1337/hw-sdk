@@ -6,8 +6,8 @@
 
 #include "../../game/sdk/structs/color.h"
 
-#pragma comment(lib, "d3d9.lib")
-#pragma comment(lib, "d3dx9.lib")
+#pragma comment( lib, "d3d9.lib" )
+#pragma comment( lib, "d3dx9.lib" )
 
 namespace render
 {
@@ -23,6 +23,12 @@ namespace render
 
 namespace fonts
 {
+	// TODO @ liga - this is cancer, we dont want have to create a pointer to every font we create
+	// takes way more work. we could just do a hashed string vector and push back font names, ex:
+	//
+	// inline std::vector<std::uint32_t> fonts;
+	// fonts.push_back(HASH("main_font"));
+
 	inline LPD3DXFONT main_font;
 	inline LPD3DXFONT main_bold_font;
 } // namespace fonts
