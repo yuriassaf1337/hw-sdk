@@ -302,6 +302,12 @@
     <ClInclude Include="globals\hooks\create_move\create_move.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="game\sdk\classes\chl_client.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\sdk\classes\i_base_client_dll.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="utils\math\math.inl">
