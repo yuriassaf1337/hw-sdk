@@ -13,7 +13,7 @@ void __fastcall create_move::create_move_detour( void* edx, void* ecx, int seque
 
 void create_move::init( )
 {
-	helper.create( virtual_func::get( interfaces::client, 22 ), create_move_detour, _( "create_move" ) );
+	helper.create( virtual_func::get( interfaces::client, 22 ), create_move_detour, _( "create_move_detour" ) );
 }
 
 void create_move::unload( )
