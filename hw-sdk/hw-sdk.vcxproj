@@ -211,14 +211,12 @@
     <ClInclude Include="dependencies\mocking_bird\mocking_bird.h" />
     <ClInclude Include="dependencies\formatting\tinyformat.h" />
     <ClInclude Include="dependencies\xor\xor.h" />
-    <ClInclude Include="game\sdk\classes\chl_client.h" />
     <ClInclude Include="game\sdk\classes\c_base_entity.h" />
     <ClInclude Include="game\sdk\classes\c_client_state.h" />
     <ClInclude Include="game\sdk\classes\c_handle.h" />
     <ClInclude Include="game\sdk\classes\c_hud_chat.h" />
     <ClInclude Include="game\sdk\classes\c_usercmd.h" />
     <ClInclude Include="game\sdk\classes\c_view_setup.h" />
-    <ClInclude Include="game\sdk\classes\i_base_client_dll.h" />
     <ClInclude Include="game\sdk\classes\i_client_dll.h" />
     <ClInclude Include="game\sdk\classes\i_prediction.h" />
     <ClInclude Include="game\sdk\structs\color.h" />

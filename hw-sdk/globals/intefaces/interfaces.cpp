@@ -9,9 +9,9 @@ bool interfaces::init( )
 
 	device = **g_shaderapidx9_dll.pattern_scan( _( "A1 ? ? ? ? 50 8B 08 FF 51 0C" ) ).add( 0x1 ).as< IDirect3DDevice9*** >( );
 
-	engine = g_engine_dll.find_interface< sdk::iv_engine_client* >( _( "VEngineClient014" ) );
+	engine = g_engine_dll.find_interface< sdk::iv_engine_client* >( VENGINE_CLIENT_INTERFACE_VERSION );
 
-	client = g_client_dll.find_interface< sdk::chl_client* >( _("VClient018"));
+	client = g_client_dll.find_interface< sdk::i_client_dll* >( VCLIENT_INTERFACE_VERSION );
 
 	MOCKING_CATCH( return false );
 
