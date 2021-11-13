@@ -3,6 +3,7 @@
 #include <d3dx9.h>
 #include <iostream>
 
+#include "../../../utils/renderer/renderer.h"
 #include "../../../utils/vfunc/vfunc.h"
 #include "../../intefaces/interfaces.h"
 #include "../hooking.h"
@@ -16,6 +17,8 @@ namespace hooks
 
 		static void init( )
 		{
+			render::init( g_interfaces.device );
+
 			present_hook.create( virtual_func::get( g_interfaces.device, 17 ), present_detour, _( "present_detour" ) );
 		}
 		static void unload( )
