@@ -63,7 +63,7 @@ public:
 
 #define FAIL_CHECK( return_code )                                                                                                                    \
 	if ( FAILED( return_code ) )                                                                                                                     \
-		assert( _( "Operation failed." ) );
+		console::print< console::log_level::FATAL >( _( "function '{}' failed." ), __func__ );
 
 // [#] hooking utils
 

@@ -7,6 +7,21 @@
 
 namespace math
 {
+	template< class T = float >
+	class vec2
+	{
+	public:
+		T x{ }, y{ };
+		constexpr vec2( const T _X = 0, const T _Y = 0 ) : x{ _X }, y{ _Y } { };
+
+		bool valid( ) const
+		{
+			return std::isfinite< T >( x ) && std::isfinite< T >( y );
+		};
+
+	private:
+	};
+
 	class vec3
 	{
 	public:
