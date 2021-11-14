@@ -308,6 +308,15 @@
     <ClInclude Include="utils\renderer\renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="hacks\gui\gui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\gui\window\window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\gui\includes\includes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="utils\math\math.inl">

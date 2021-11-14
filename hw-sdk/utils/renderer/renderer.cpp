@@ -1,6 +1,7 @@
 #include <assert.h>
 #include <iostream>
 
+#include "../console/console.h"
 #include "renderer.h"
 
 void render::init( IDirect3DDevice9* buffer_device )
