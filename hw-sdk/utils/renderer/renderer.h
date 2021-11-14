@@ -14,6 +14,22 @@
 #pragma comment( lib, "d3d9.lib" )
 #pragma comment( lib, "d3dx9.lib" )
 
+enum font_flags
+{
+	font_flag_none,
+	font_flag_dropshadow,
+	font_flag_outline
+};
+
+enum font_alignment
+{
+	font_alignment_default,
+	font_alignment_vertical_top,
+	font_alignment_vertical_center,
+	font_alignment_horizontal_left,
+	font_alignment_horizontal_center,
+};
+
 class vertex
 {
 public:
@@ -68,6 +84,9 @@ namespace render
 
 	void render_rectangle( int x, int y, int width, int height, color color );
 	void render_filled_rectangle( int x, int y, int width, int height, color color );
+
+	D3DXVECTOR2 render_text_size(const char* string, LPD3DXFONT font);
+	void render_text(int x, int y, unsigned int alignment, unsigned int flags, const char* string, LPD3DXFONT font, color color);
 } // namespace render
 
 namespace fonts

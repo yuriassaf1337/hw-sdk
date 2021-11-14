@@ -53,6 +53,42 @@ void render::render_filled_rectangle( int x, int y, int width, int height, color
 	FAIL_CHECK( device->DrawPrimitiveUP( D3DPT_TRIANGLESTRIP, 2, segments, sizeof( vertex ) ) );
 }
 
+D3DXVECTOR2 render::render_text_size( const char* string, LPD3DXFONT font )
+{
+	RECT rect{ };
+
+	font->DrawTextA( nullptr, string, -1, &rect, DT_CALCRECT, color( 0, 0, 0, 0 ).to_u32( ) );
+
+	return D3DXVECTOR2( rect.left - rect.right, rect.bottom - rect.top );
+}
+
+void render::render_text( int x, int y, unsigned int alignment, unsigned int flags, const char* string, LPD3DXFONT font, color _color )
+{
+	RECT rect{ };
+
+	D3DXVECTOR2 text_size = render_text_size( string, font );
+
+	auto set_rect = []( RECT* rect, int x, int y ) { SetRect( rect, x, y, x, y ); };
+
+	if ( flags & font_flag_none ) 
+	{
+		set_rect( &rect, x, y );
+		font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, _color.to_u32( ) );
+	} 
+	else 
+	{
+		if ( flags & font_flag_dropshadow ) {
+			set_rect( &rect, ++x, ++y );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_u32( ) );
+
+			set_rect( &rect, --x, --y );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, _color.to_u32( ) );
+		}
+
+		if ( flags & font_flag_outline ) { }
+	}
+}
+
 void fonts::create_font( const char* name, std::size_t size, std::size_t weight, bool anti_aliased, const char* font_name )
 {
 	LPD3DXFONT buffer_font;
