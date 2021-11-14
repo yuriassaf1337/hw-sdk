@@ -7,27 +7,17 @@
 
 namespace math
 {
-	template< typename T >
+	template< class T = float >
 	class vec2
 	{
 	public:
 		T x{ }, y{ };
-		constexpr math::vec2( const T _X = 0, const T _Y = 0 ) : x{ _X }, y{ _Y } { };
+		constexpr vec2( const T _X = 0, const T _Y = 0 ) : x{ _X }, y{ _Y } { };
 
 		bool valid( ) const
 		{
-			return std::isfinite( x ) && std::isfinite( y );
-		}
-
-		bool is_zero( ) const
-		{
-			return ( std::fpclassify( x ) == FP_ZERO && std::fpclassify( y ) == FP_ZERO;
-		}
-
-		bool is_equal( const math::vec2& to_this, const float error_margin = std::numeric_limits< float >::epsilon( ) ) const
-		{
-			return ( std::fabsf( x - to_this.x ) < error_margin && std::fabsf( y - to_this.y ) < error_margin );
-		}
+			return std::isfinite< T >( x ) && std::isfinite< T >( y );
+		};
 
 	private:
 	};
