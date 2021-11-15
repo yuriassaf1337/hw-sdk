@@ -61,7 +61,7 @@ namespace input
 				return key.m_state == state;
 		}
 
-		BOOL think( UINT msg, WPARAM w_param, LPARAM l_param );
+		void think( UINT msg, WPARAM w_param, LPARAM l_param );
 	};
 } // namespace input
 

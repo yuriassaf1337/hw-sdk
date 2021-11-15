@@ -2,7 +2,7 @@
 #include "../../dependencies/lazy_importer/lazy_importer.h"
 #include "../../globals/hooks/wndproc/wndproc.h"
 
-BOOL input::impl::think( UINT msg, WPARAM w_param, LPARAM l_param )
+void input::impl::think( UINT msg, WPARAM w_param, LPARAM l_param )
 {
 	std::uint8_t key_id        = 0;
 	input::key_state key_state = key_state::UP;
@@ -89,6 +89,4 @@ BOOL input::impl::think( UINT msg, WPARAM w_param, LPARAM l_param )
 		else
 			m_keys[ key_id ] = { key_state, time };
 	}
-
-	return LI_FN( CallWindowProcA )( hooks::wndproc_hook, hotwheels::window, msg, w_param, l_param );
 }

@@ -2,8 +2,6 @@
 
 HRESULT __stdcall hooks::wndproc::wndproc_detour( HWND window, UINT message, WPARAM parameter, LPARAM long_parameter )
 {
-	// keybinds::handle_input( message, parameter );
-
 	g_input.think( message, parameter, long_parameter );
 
 	static auto lazy_callwndproc = LI_FN( CallWindowProcA ).get( );
