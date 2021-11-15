@@ -251,6 +251,7 @@
     <ClInclude Include="globals\macros\macros.h" />
     <ClInclude Include="hacks\gui\gui.h" />
     <ClInclude Include="hacks\gui\includes\includes.h" />
+    <ClInclude Include="hacks\gui\utils\utils.h" />
     <ClInclude Include="hacks\gui\window\window.h" />
     <ClInclude Include="utils\console\log_level\log_level.h" />
     <ClInclude Include="utils\helpers\function_enforce\function_enforce.h" />

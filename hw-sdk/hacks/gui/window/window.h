@@ -1,21 +1,27 @@
 #pragma once
 #include "../includes/includes.h"
+#include <stack>
 
 namespace gui
 {
-	class window
-	{
-	public:
-		gui::window( ) = default;
-		gui::window( std::string_view window_name, math::vec2< int >& window_position, math::vec2< int >& window_size,
-		             std::deque< std::string_view > window_tabs, int& window_selected_tab ){
+	struct window {
+		// todo on position, calculate middle of screen to spawn menu in(menu width / 2 - screen width / 2)
+		math::vec2< int > position = { 250, 250 };
+		math::vec2< int > size     = { 537, 621 };
 
-		};
+		// cursors / focus
+		std::stack< math::vec2< int > > cursor_pos_stack;
+		std::size_t focused_id;
 
-		void think( );
+		// tabs
+		std::vector< std::pair< std::string_view, std::string_view > > tabs;
+		int active_tab = 0;
 
-	private:
-		std::vector< gui::window > m_windows;
+		// util(couldnt think of a better name lol)
+		struct {
+			bool open     = false;
+			bool dragging = false;
+		} util;
 	};
 } // namespace gui
 
