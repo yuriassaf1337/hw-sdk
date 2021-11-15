@@ -2,10 +2,10 @@
 #include "../../dependencies/lazy_importer/lazy_importer.h"
 #include "../../globals/hooks/wndproc/wndproc.h"
 
-void input::impl::think( UINT msg, WPARAM w_param, LPARAM l_param )
+void keybinds::impl::think( UINT msg, WPARAM w_param, LPARAM l_param )
 {
-	std::uint8_t key_id        = 0;
-	input::key_state key_state = key_state::UP;
+	std::uint8_t key_id           = 0;
+	keybinds::key_state key_state = key_state::UP;
 
 	mouse.scroll_amt = 0;
 

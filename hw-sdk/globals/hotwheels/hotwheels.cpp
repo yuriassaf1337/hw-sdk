@@ -18,7 +18,7 @@ DWORD WINAPI hotwheels::init( void* module_handle )
 
 	ENFORCE_FAILURE( hooks::init( ), "Failed to init hooks" );
 
-	if ( g_input.key_state< input::RELEASED >( VK_DELETE ) )
+	if ( g_input.key_state< keybinds::RELEASED >( VK_DELETE ) )
 		LI_FN( CreateThread )( nullptr, 0, reinterpret_cast< LPTHREAD_START_ROUTINE >( unload ), nullptr, 0, nullptr );
 
 	return 0;
