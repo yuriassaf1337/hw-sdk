@@ -24,8 +24,9 @@ namespace modules
 			const auto dos_header       = reinterpret_cast< PIMAGE_DOS_HEADER >( module_handle );
 			const auto nt_headers       = reinterpret_cast< PIMAGE_NT_HEADERS >( module_address + dos_header->e_lfanew );
 			const std::uintptr_t offset = find_pattern( module_address, nt_headers->OptionalHeader.SizeOfImage, sig );
+
 			if ( offset )
-				console::print< console::log_level::DEBUG >( _( "Found signature - [ {} -> {} ]" ), module_name, sig );
+				console::print< console::log_level::NORMAL >( _( "Found signature - [ {} -> {} ]" ), module_name, sig );
 
 			return offset;
 		};

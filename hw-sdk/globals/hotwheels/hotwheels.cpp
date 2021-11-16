@@ -18,11 +18,11 @@ DWORD WINAPI hotwheels::init( void* module_handle )
 
 	ENFORCE_FAILURE( hooks::init( ), "Failed to init hooks" );
 
-	while ( !g_input.is_key_pressed( VK_INSERT ) ) {
+	while ( !g_input.key_state< input::key_state_t::KEY_RELEASED >( VK_INSERT ) ) {
 		utils::sleep( 10 );
 	}
 
-	unload();
+	unload( );
 
 	return 0;
 }

@@ -7,56 +7,55 @@
 
 namespace input
 {
-	struct impl {
-	public:
-		explicit impl( ) = default;
+	enum key_state_t
+	{
+		KEY_NONE,
+		KEY_UP,
+		KEY_DOWN,
+		KEY_RELEASED
+	};
 
-		enum key_state_t
-		{
-			key_none = -1,
-			key_up,
-			key_down,
+	constexpr static inline std::uint64_t MAX_RELEASED_TIME = 100;
+
+	struct impl {
+	private:
+		struct key_info_t {
+			input::key_state_t state;
+			std::uint64_t time;
+
+			constexpr key_info_t( ) : state{ input::key_state_t::KEY_NONE }, time{ 0 } { }
+
+			constexpr key_info_t( input::key_state_t state, std::uint64_t time ) : state{ state }, time{ time } { }
 		};
 
-		std::array< key_state_t, 256U > key_states     = { key_up };
-		std::array< key_state_t, 256U > old_key_states = { key_up };
+	public:
+		std::array< key_info_t, 255U > key_states = { };
 
 		struct {
 			math::vec2< int > pos;
-			math::vec2< int > old_pos;
 			int scroll_amt;
 		} mouse;
 
-		inline bool is_key_pressed( std::uint32_t vk )
-		{
-			return key_states[ vk ] == key_state_t::key_down && old_key_states[ vk ] == key_state_t::key_up;
-		}
+		void think( UINT msg, WPARAM wparam, LPARAM lparam );
 
-		inline bool is_key_released( std::uint32_t vk )
+		template< auto state >
+		bool key_state( std::uint8_t key_id )
 		{
-			return key_states[ vk ] == key_state_t::key_up && old_key_states[ vk ] == key_state_t::key_down;
-		}
+			auto& key = key_states[ key_id ];
 
-		inline bool is_key_down( std::uint32_t vk )
-		{
-			return key_states[ vk ] == key_state_t::key_down;
-		}
+			std::uint64_t time = LI_FN( GetTickCount64 )( );
 
-		inline bool is_key_up( std::uint32_t vk )
-		{
-			return key_states[ vk ] == key_state_t::key_up;
-		}
+			if constexpr ( state == key_state_t::KEY_RELEASED ) {
+				if ( key.state == state )
+					if ( time - key.time <= input::MAX_RELEASED_TIME )
+						return key.state = key_state_t::KEY_UP;
+					else
+						key.state = key_state_t::KEY_UP;
 
-		bool mouse_in_area( int x, int y, int w, int h )
-		{
-			return mouse.pos.x >= x && mouse.pos.y >= y && mouse.pos.x <= ( x + w ) && mouse.pos.y <= ( y + h );
+				return false;
+			} else
+				return key.state == state;
 		}
-		inline bool mouse_in_area( const math::vec2< int > pos, const math::vec2< int > size )
-		{
-			return mouse_in_area( pos.x, pos.y, size.x, size.y );
-		}
-
-		void think( HWND window, UINT msg, WPARAM wparam, LPARAM lparam );
 	};
 } // namespace input
 
