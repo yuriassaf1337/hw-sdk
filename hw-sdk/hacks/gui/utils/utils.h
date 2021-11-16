@@ -1,8 +1,10 @@
 #pragma once
-#include "../window/window.h"
 #include "../../../utils/console/console.h"
+#include "../gui.h"
 
 // sory for naespace spam
+
+math::vec2< int > last_cursor_position{ };
 
 namespace gui::easing
 {
@@ -29,7 +31,7 @@ namespace gui::easing
 
 namespace gui::helpers
 {
-	constexpr std::size_t hash( const std::string_view& name )
+	const std::size_t hash( const std::string_view& name )
 	{
 		return std::hash< std::string_view >( )( name );
 	};
@@ -53,18 +55,19 @@ namespace gui::helpers
 	// cursors
 	void push_cursor( const math::vec2< int >& to_pos )
 	{
-		g_window.cursor_pos_stack.push( to_pos );
+		g_gui.cursor_pos_stack.push( to_pos );
 	}
+
 	math::vec2< int > pop_cursor( )
 	{
 		// return empty vector if we dont have cursor pos
-		if ( g_window.cursor_pos_stack.empty( ) ) {
-			console::print< console::log_level::WARNING >( _( "{} returned 0 - g_window.cursor_pos_stack was empty." ), __func__ );
+		if ( g_gui.cursor_pos_stack.empty( ) ) {
+			console::print< console::log_level::WARNING >( _( "{} returned 0 - g_gui.cursor_pos_stack was empty." ), __func__ );
 			return { };
 		}
 
-		math::vec2< int > top{ g_window.cursor_pos_stack.top( ) };
-		g_window.cursor_pos_stack.pop( );
+		math::vec2< int > top{ g_gui.cursor_pos_stack.top( ) };
+		g_gui.cursor_pos_stack.pop( );
 		last_cursor_position = top;
 		return top;
 	}
@@ -72,5 +75,4 @@ namespace gui::helpers
 	{
 		return last_cursor_position;
 	}
-	inline math::vec2< int > last_cursor_position{ };
 } // namespace gui::helpers

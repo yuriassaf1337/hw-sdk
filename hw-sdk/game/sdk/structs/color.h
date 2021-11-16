@@ -5,8 +5,7 @@
 // https://docs.microsoft.com/en-us/cpp/error-messages/compiler-warnings/compiler-warning-levels-3-and-4-c4244?view=msvc-160
 #pragma warning( disable : 4244 )
 
-struct color 
-{
+struct color {
 	unsigned char r, g, b, a;
 
 	// ctors
@@ -15,6 +14,8 @@ struct color
 	color( unsigned char re, unsigned char gr, unsigned char bl, unsigned char al = 255 ) : r{ re }, g{ gr }, b{ bl }, a{ al } { };
 
 	color( std::uint32_t hex ) : r( ( hex >> 24 ) & 0xFF ), g( ( hex >> 16 ) & 0xFF ), b( ( hex >> 8 ) & 0xFF ), a( hex & 0xFF ){ };
+
+	constexpr static auto MAX_ALPHA = ( unsigned char )255;
 
 	std::uint32_t to_u32( ) const
 	{

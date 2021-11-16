@@ -18,6 +18,18 @@ namespace math
 		{
 			return std::isfinite< T >( x ) && std::isfinite< T >( y );
 		};
+		// operators:
+		vec2 operator-( const vec2& sub ) const
+		{
+			return vec2( x - sub.x, y - sub.y );
+		}
+
+		constexpr vec2& operator-=( const vec2& sub )
+		{
+			x -= sub.x;
+			y -= sub.y;
+			return *this;
+		}
 
 	private:
 	};

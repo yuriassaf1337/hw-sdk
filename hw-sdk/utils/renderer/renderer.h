@@ -7,9 +7,9 @@
 
 #include "../../dependencies/hash/hash.h"
 #include "../../dependencies/xor/xor.h"
-#include "../../globals/macros/macros.h"
-
 #include "../../game/sdk/structs/color.h"
+#include "../../globals/macros/macros.h"
+#include "../../utils/math/math.h"
 
 #pragma comment( lib, "d3d9.lib" )
 #pragma comment( lib, "d3dx9.lib" )
@@ -84,9 +84,14 @@ namespace render
 
 	void render_rectangle( int x, int y, int width, int height, color color );
 	void render_filled_rectangle( int x, int y, int width, int height, color color );
+	template< class T = int >
+	void render_filled_rectangle( const math::vec2< T >& pos, const math::vec2< T >& size, color color )
+	{
+		render_filled_rectangle( pos.x, pos.y, size.x, size.y, color );
+	}
 
-	D3DXVECTOR2 render_text_size(const char* string, LPD3DXFONT font);
-	void render_text(int x, int y, unsigned int alignment, unsigned int flags, const char* string, LPD3DXFONT font, color color);
+	D3DXVECTOR2 render_text_size( const char* string, LPD3DXFONT font );
+	void render_text( int x, int y, unsigned int alignment, unsigned int flags, const char* string, LPD3DXFONT font, color color );
 } // namespace render
 
 namespace fonts

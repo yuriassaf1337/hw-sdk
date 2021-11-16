@@ -34,6 +34,15 @@ namespace input
 		struct {
 			math::vec2< int > pos;
 			int scroll_amt;
+
+			bool in_params( int x, int y, int w, int h )
+			{
+				return pos.x >= x && pos.y >= y && pos.x <= ( x + w ) && pos.y <= ( y + h );
+			};
+			inline bool in_params( const math::vec2< int >& m_pos, const math::vec2< int >& m_size )
+			{
+				return in_params( m_pos.x, m_pos.y, m_size.x, m_size.y );
+			}
 		} mouse;
 
 		void think( UINT msg, WPARAM wparam, LPARAM lparam );

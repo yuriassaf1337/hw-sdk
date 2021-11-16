@@ -13,6 +13,8 @@ bool sdk::interfaces::init( )
 
 	client = g_client_dll.find_interface< sdk::i_client_dll* >( VCLIENT_INTERFACE_VERSION );
 
+	globals = virtual_func::get< address >( client, 11 ).add( 0xA ).get< sdk::i_global_vars* >( 2 );
+
 	MOCKING_CATCH( return false );
 
 	console::print< console::log_level::SUCCESS >( _( "Initialized interfaces" ) );
