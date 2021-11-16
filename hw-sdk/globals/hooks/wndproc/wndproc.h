@@ -17,7 +17,7 @@ namespace hooks
 		static void init( )
 		{
 			hooks::wndproc_hook = reinterpret_cast< WNDPROC >(
-				LI_FN( SetWindowLongA )( hotwheels::window, GWL_WNDPROC, reinterpret_cast< LONG_PTR >( wndproc_detour ) ) );
+				LI_FN( SetWindowLongA )( FindWindowA( "Valve001", nullptr ), GWL_WNDPROC, reinterpret_cast< LONG_PTR >( wndproc_detour ) ) );
 		}
 
 		static void unload( )

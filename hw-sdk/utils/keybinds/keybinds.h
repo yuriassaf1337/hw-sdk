@@ -4,67 +4,59 @@
 #include "../math/types/vector.h"
 #include <Windows.h>
 #include <deque>
-#include <functional>
-
-namespace keybinds
-{
-	enum key_state
-	{
-		NONE,
-		UP,
-		DOWN,
-		RELEASED
-	};
-
-	constexpr static inline std::uint64_t MAX_RELEASED_TIME = 100;
-
-	struct impl {
-	private:
-		struct key_info_t {
-			keybinds::key_state m_state;
-			std::uint64_t m_time;
-
-			constexpr key_info_t( ) : m_state{ keybinds::key_state::NONE }, m_time{ 0 } { }
-
-			constexpr key_info_t( keybinds::key_state state, std::uint64_t time ) : m_state{ state }, m_time{ time } { }
-		};
-
-	public:
-		struct {
-			math::vec2< float > pos{ };
-			std::int32_t scroll_amt{ };
-		} mouse;
-
-		std::array< key_info_t, 255 > m_keys{ };
-
-		void think( UINT msg, WPARAM w_param, LPARAM l_param );
-	};
-} // namespace keybinds
-
-inline keybinds::impl g_keybind_module;
 
 namespace input
 {
 	struct impl {
 	public:
-		template< auto state >
-		bool key_state( std::uint8_t key_id )
+		explicit impl( ) = default;
+
+		enum key_state_t
 		{
-			auto& key = g_keybind_module.m_keys[ key_id ];
+			key_none = -1,
+			key_up,
+			key_down,
+		};
 
-			std::uint64_t time = LI_FN( GetTickCount64 )( );
+		std::array< key_state_t, 256U > key_states     = { key_up };
+		std::array< key_state_t, 256U > old_key_states = { key_up };
 
-			if constexpr ( state == keybinds::key_state::RELEASED ) {
-				if ( key.m_state == state )
-					if ( time - key.m_time <= keybinds::MAX_RELEASED_TIME )
-						return key.m_state = keybinds::key_state::UP;
-					else
-						key.m_state = keybinds::key_state::UP;
+		struct {
+			math::vec2< int > pos;
+			math::vec2< int > old_pos;
+			int scroll_amt;
+		} mouse;
 
-				return false;
-			} else
-				return key.m_state == state;
+		inline bool is_key_pressed( std::uint32_t vk )
+		{
+			return key_states[ vk ] == key_state_t::key_down && old_key_states[ vk ] == key_state_t::key_up;
 		}
+
+		inline bool is_key_released( std::uint32_t vk )
+		{
+			return key_states[ vk ] == key_state_t::key_up && old_key_states[ vk ] == key_state_t::key_down;
+		}
+
+		inline bool is_key_down( std::uint32_t vk )
+		{
+			return key_states[ vk ] == key_state_t::key_down;
+		}
+
+		inline bool is_key_up( std::uint32_t vk )
+		{
+			return key_states[ vk ] == key_state_t::key_up;
+		}
+
+		bool mouse_in_area( int x, int y, int w, int h )
+		{
+			return mouse.pos.x >= x && mouse.pos.y >= y && mouse.pos.x <= ( x + w ) && mouse.pos.y <= ( y + h );
+		}
+		inline bool mouse_in_area( const math::vec2< int > pos, const math::vec2< int > size )
+		{
+			return mouse_in_area( pos.x, pos.y, size.x, size.y );
+		}
+
+		void think( HWND window, UINT msg, WPARAM wparam, LPARAM lparam );
 	};
 } // namespace input
 

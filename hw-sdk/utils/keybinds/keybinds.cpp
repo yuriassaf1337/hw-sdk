@@ -2,91 +2,64 @@
 #include "../../dependencies/lazy_importer/lazy_importer.h"
 #include "../../globals/hooks/wndproc/wndproc.h"
 
-void keybinds::impl::think( UINT msg, WPARAM w_param, LPARAM l_param )
+void input::impl::think( HWND window, UINT msg, WPARAM wparam, LPARAM lparam )
 {
-	std::uint8_t key_id           = 0;
-	keybinds::key_state key_state = key_state::UP;
+	old_key_states = key_states;
+	mouse.old_pos  = mouse.pos;
 
-	mouse.scroll_amt = 0;
+	std::uint32_t key       = 0u;
+	impl::key_state_t state = key_none;
 
 	switch ( msg ) {
 	case WM_KEYDOWN:
-		key_id    = w_param;
-		key_state = key_state::DOWN;
+	case WM_SYSKEYDOWN:
+		if ( wparam < 256u ) {
+			key   = wparam;
+			state = key_down;
+		}
 		break;
 	case WM_KEYUP:
-		key_id    = w_param;
-		key_state = key_state::UP;
+	case WM_SYSKEYUP:
+		if ( wparam < 256u ) {
+			key   = wparam;
+			state = key_up;
+		}
 		break;
 	case WM_LBUTTONDOWN:
-		key_id    = VK_LBUTTON;
-		key_state = key_state::DOWN;
-		break;
 	case WM_LBUTTONUP:
-		key_id    = VK_LBUTTON;
-		key_state = key_state::UP;
-		break;
-	case WM_LBUTTONDBLCLK:
-		key_id    = VK_LBUTTON;
-		key_state = key_state::DOWN;
+		key   = VK_LBUTTON;
+		state = msg == WM_LBUTTONUP ? key_up : key_down;
 		break;
 	case WM_RBUTTONDOWN:
-		key_id    = VK_RBUTTON;
-		key_state = key_state::DOWN;
-		break;
 	case WM_RBUTTONUP:
-		key_id    = VK_RBUTTON;
-		key_state = key_state::UP;
-		break;
-	case WM_RBUTTONDBLCLK:
-		key_id    = VK_RBUTTON;
-		key_state = key_state::DOWN;
+		key   = VK_RBUTTON;
+		state = msg == WM_RBUTTONUP ? key_up : key_down;
 		break;
 	case WM_MBUTTONDOWN:
-		key_id    = VK_MBUTTON;
-		key_state = key_state::DOWN;
-		break;
 	case WM_MBUTTONUP:
-		key_id    = VK_MBUTTON;
-		key_state = key_state::UP;
-		break;
-	case WM_MBUTTONDBLCLK:
-		key_id    = VK_MBUTTON;
-		key_state = key_state::DOWN;
+		key   = VK_MBUTTON;
+		state = msg == WM_MBUTTONUP ? key_up : key_down;
 		break;
 	case WM_XBUTTONDOWN:
-		key_id    = GET_XBUTTON_WPARAM( w_param ) == XBUTTON1 ? VK_XBUTTON1 : VK_XBUTTON2;
-		key_state = key_state::DOWN;
-		break;
 	case WM_XBUTTONUP:
-		key_id    = GET_XBUTTON_WPARAM( w_param ) == XBUTTON1 ? VK_XBUTTON1 : VK_XBUTTON2;
-		key_state = key_state::UP;
-		break;
-	case WM_XBUTTONDBLCLK:
-		key_id    = GET_XBUTTON_WPARAM( w_param ) == XBUTTON1 ? VK_XBUTTON1 : VK_XBUTTON2;
-		key_state = key_state::DOWN;
-		break;
-	case WM_MOUSEMOVE:
-		mouse.pos = math::vec2< float >( ( int )( short )LOWORD( l_param ), ( int )( short )HIWORD( l_param ) );
+		key   = ( GET_XBUTTON_WPARAM( wparam ) == XBUTTON1 ? VK_XBUTTON1 : VK_XBUTTON2 );
+		state = msg == WM_XBUTTONUP ? key_up : key_down;
 		break;
 	case WM_MOUSEWHEEL:
-		mouse.scroll_amt = -( GET_WHEEL_DELTA_WPARAM( w_param ) / ( WHEEL_DELTA / 4 ) );
+	case WM_MOUSEHWHEEL:
+		mouse.scroll_amt = GET_WHEEL_DELTA_WPARAM( wparam ) / WHEEL_DELTA;
 		break;
-	case WM_KILLFOCUS:
-	case WM_SETFOCUS:
-		for ( auto& key : m_keys )
-			key.m_state = key_state::UP;
+	case WM_CHAR:
 		break;
 	default:
+		if ( msg >= WM_MOUSEFIRST && msg <= WM_MOUSELAST ) {
+			mouse.pos = math::vec2< int >( ( int )( LOWORD( lparam ) ), ( int )( HIWORD( lparam ) ) );
+		}
 		break;
 	}
 
-	std::uint64_t time = LI_FN( GetTickCount64 )( );
+	if ( state == key_none )
+		return;
 
-	if ( key_id ) {
-		if ( key_state == key_state::UP && m_keys[ key_id ].m_state == key_state::DOWN )
-			m_keys[ key_id ] = { key_state::RELEASED, time };
-		else
-			m_keys[ key_id ] = { key_state, time };
-	}
+	key_states[ key ] = state;
 }
