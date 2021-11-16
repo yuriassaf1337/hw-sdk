@@ -14,20 +14,20 @@
 #pragma comment( lib, "d3d9.lib" )
 #pragma comment( lib, "d3dx9.lib" )
 
-enum font_flags
+enum font_flags_t : unsigned
 {
-	font_flag_none,
-	font_flag_dropshadow,
-	font_flag_outline
+	FLAG_NONE,
+	FLAG_DROPSHADOW,
+	FLAG_OUTLINE
 };
 
-enum font_alignment
+enum font_alignment : unsigned
 {
-	font_alignment_default,
-	font_alignment_vertical_top,
-	font_alignment_vertical_center,
-	font_alignment_horizontal_left,
-	font_alignment_horizontal_center,
+	AL_DEFAULT,
+	AL_VERTICAL_TOP,
+	AL_VERTICAL_CENTER,
+	AL_HORIZONTAL_LEFT,
+	AL_HORIZONTAL_CENTER,
 };
 
 class vertex
@@ -92,6 +92,11 @@ namespace render
 
 	D3DXVECTOR2 render_text_size( const char* string, LPD3DXFONT font );
 	void render_text( int x, int y, unsigned int alignment, unsigned int flags, const char* string, LPD3DXFONT font, color color );
+	template< class T = int >
+	void render_text( const math::vec2< T >& pos, unsigned int alignment, unsigned int flags, const char* string, LPD3DXFONT font, color color )
+	{
+		render_text( pos.x, pos.y, alignment, flags, string, font, color );
+	}
 } // namespace render
 
 namespace fonts

@@ -23,7 +23,10 @@ namespace math
 		{
 			return vec2( x - sub.x, y - sub.y );
 		}
-
+		vec2 operator+( const vec2& sub ) const
+		{
+			return vec2( x + sub.x, y + sub.y );
+		}
 		constexpr vec2& operator-=( const vec2& sub )
 		{
 			x -= sub.x;

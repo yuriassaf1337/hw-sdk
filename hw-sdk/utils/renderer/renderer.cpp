@@ -71,14 +71,11 @@ void render::render_text( int x, int y, unsigned int alignment, unsigned int fla
 
 	auto set_rect = []( RECT* rect, int x, int y ) { SetRect( rect, x, y, x, y ); };
 
-	if ( flags & font_flag_none ) 
-	{
+	if ( flags & font_flags_t::FLAG_NONE ) {
 		set_rect( &rect, x, y );
 		font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, _color.to_u32( ) );
-	} 
-	else 
-	{
-		if ( flags & font_flag_dropshadow ) {
+	} else {
+		if ( flags & font_flags_t::FLAG_DROPSHADOW ) {
 			set_rect( &rect, ++x, ++y );
 			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_u32( ) );
 
@@ -86,7 +83,7 @@ void render::render_text( int x, int y, unsigned int alignment, unsigned int fla
 			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, _color.to_u32( ) );
 		}
 
-		if ( flags & font_flag_outline ) { }
+		if ( flags & font_flags_t::FLAG_OUTLINE ) { }
 	}
 }
 
