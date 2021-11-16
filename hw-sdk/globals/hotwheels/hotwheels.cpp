@@ -22,7 +22,7 @@ DWORD WINAPI hotwheels::init( void* module_handle )
 		utils::sleep( 10 );
 	}
 
-	LI_FN( CreateThread )( nullptr, 0, reinterpret_cast< LPTHREAD_START_ROUTINE >( unload ), nullptr, 0, nullptr );
+	unload();
 
 	return 0;
 }
