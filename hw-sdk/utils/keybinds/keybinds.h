@@ -52,7 +52,9 @@ namespace input
 		{
 			auto& key = key_states[ key_id ];
 
-			std::uint64_t time = LI_FN( GetTickCount64 )( );
+			static auto lazy_get_tickcount = LI_FN( GetTickCount64 ).get( );
+
+			std::uint64_t time = lazy_get_tickcount( );
 
 			if constexpr ( state == key_state_t::KEY_RELEASED ) {
 				if ( key.state == state )

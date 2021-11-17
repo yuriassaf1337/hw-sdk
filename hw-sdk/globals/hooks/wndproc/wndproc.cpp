@@ -1,4 +1,6 @@
 #include "wndproc.h"
+#include "../../../game/sdk/structs/cnetmsg_signonstate_t.h"
+#include "../../../utils/modules/modules.h"
 
 HRESULT WINAPI hooks::wndproc::wndproc_detour( HWND window, UINT message, WPARAM parameter, LPARAM long_parameter )
 {

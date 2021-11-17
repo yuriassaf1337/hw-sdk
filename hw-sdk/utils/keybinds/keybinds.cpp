@@ -81,7 +81,9 @@ void input::impl::think( UINT msg, WPARAM wparam, LPARAM lparam )
 		break;
 	}
 
-	std::uint64_t time = LI_FN( GetTickCount64 )( );
+	static auto lazy_get_tickcount = LI_FN( GetTickCount64 ).get( );
+
+	std::uint64_t time = lazy_get_tickcount( );
 
 	if ( key_id ) {
 		if ( key_state == key_state_t::KEY_UP && key_states[ key_id ].state == key_state_t::KEY_DOWN )
