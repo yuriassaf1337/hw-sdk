@@ -59,3 +59,5 @@ bool gui::forms::window_impl::begin_window( const std::string_view name )
 
 	return true;
 }
+
+void gui::forms::window_impl::end_window( ) { }
