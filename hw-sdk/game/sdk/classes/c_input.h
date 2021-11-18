@@ -48,12 +48,12 @@ namespace sdk
 } // namespace sdk
 
 sdk::c_user_cmd* sdk::c_input::get_user_cmd( int sequence_number ){
-	reinterpret_cast< sdk::c_user_cmd*( __thiscall* )( void*, int, int ) >( virtual_func::get(this, 8) )(this, 0, sequence_number);
+	return reinterpret_cast< sdk::c_user_cmd*( __thiscall* )( void*, int, int ) >( virtual_func::get(this, 8) )(this, 0, sequence_number);
 }
 
 sdk::c_user_cmd* sdk::c_input::get_user_cmd( int slot, int sequence_number )
 {
-	reinterpret_cast< sdk::c_user_cmd*( __thiscall* )( void*, int, int ) >( virtual_func::get(this, 8) )(this, slot, sequence_number);
+	return reinterpret_cast< sdk::c_user_cmd*( __thiscall* )( void*, int, int ) >( virtual_func::get(this, 8) )(this, slot, sequence_number);
 }
 
 sdk::c_verified_cmd* sdk::c_input::get_verified_cmd( int sequence_number ) 
