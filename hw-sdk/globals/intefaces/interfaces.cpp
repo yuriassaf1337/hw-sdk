@@ -15,6 +15,8 @@ bool sdk::interfaces::init( )
 
 	globals = virtual_func::get< address >( client, 11 ).add( 0xA ).get< sdk::i_global_vars* >( 2 );
 
+	input = *g_client_dll.pattern_scan( _( "B9 ? ? ? ? F3 0F 11 04 24 FF 50 10" ) ).add( 0x1 ).as< sdk::c_input** >( );
+
 	MOCKING_CATCH( return false );
 
 	console::print< console::log_level::SUCCESS >( _( "Initialized interfaces" ) );

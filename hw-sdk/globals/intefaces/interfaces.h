@@ -7,6 +7,7 @@
 #include "../../game/sdk/classes/i_client_dll.h"
 #include "../../game/sdk/classes/i_global_vars.h"
 #include "../../game/sdk/classes/iv_engine_client.h"
+#include "../../game/sdk/classes/c_input.h"
 #include "../../utils/utils.h"
 #include "../../utils/vfunc/vfunc.h"
 #include "../macros/macros.h"
@@ -18,6 +19,7 @@ namespace sdk
 		sdk::iv_engine_client* engine;
 		sdk::i_client_dll* client;
 		sdk::i_global_vars* globals;
+		sdk::c_input* input;
 		bool init( );
 	};
 } // namespace sdk

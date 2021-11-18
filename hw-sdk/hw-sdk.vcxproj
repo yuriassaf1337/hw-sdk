@@ -165,6 +165,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="dependencies\checksum\checksum.cpp" />
     <ClCompile Include="dependencies\minhook\src\buffer.c" />
     <ClCompile Include="dependencies\minhook\src\hde\hde32.c" />
     <ClCompile Include="dependencies\minhook\src\hde\hde64.c" />
@@ -188,6 +189,7 @@
     <ClCompile Include="utils\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dependencies\checksum\checksum.hpp" />
     <ClInclude Include="dependencies\formatting\fmt\chrono.h" />
     <ClInclude Include="dependencies\formatting\fmt\color.h" />
     <ClInclude Include="dependencies\formatting\fmt\compile.h" />
@@ -213,11 +215,13 @@
     <ClInclude Include="dependencies\mocking_bird\mocking_bird.h" />
     <ClInclude Include="dependencies\formatting\tinyformat.h" />
     <ClInclude Include="dependencies\xor\xor.h" />
+    <ClInclude Include="game\sdk\classes\c_input.h" />
     <ClInclude Include="game\sdk\classes\c_base_entity.h" />
     <ClInclude Include="game\sdk\classes\c_client_state.h" />
     <ClInclude Include="game\sdk\classes\c_handle.h" />
     <ClInclude Include="game\sdk\classes\c_hud_chat.h" />
     <ClInclude Include="game\sdk\classes\c_usercmd.h" />
+    <ClInclude Include="game\sdk\classes\c_verified_cmd.h" />
     <ClInclude Include="game\sdk\classes\c_view_setup.h" />
     <ClInclude Include="game\sdk\classes\i_client_dll.h" />
     <ClInclude Include="game\sdk\classes\i_prediction.h" />

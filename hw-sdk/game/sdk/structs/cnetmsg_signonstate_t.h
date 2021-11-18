@@ -1,11 +1,13 @@
 #pragma once
 #include <iostream>
 
+#include "../../../globals/macros/macros.h"
+
 namespace sdk
 {
 	struct cnetmsg_signonstate_t {
 	public:
-		char pad_0000[ 12 ];
+		PAD( 12 );
 		std::int32_t signon_state;
 		std::int32_t spawn_count;
 		std::int32_t num_server_players;
