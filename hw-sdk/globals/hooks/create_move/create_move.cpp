@@ -1,8 +1,31 @@
 #include <string.h>
 
+#include "../../../utils/keybinds/keybinds.h"
 #include "create_move.h"
 
-void __fastcall hooks::create_move::create_move_detour( sdk::i_client_dll* _this, void* edx, int sequence_number, float input_sample_frametime, bool active )
+void __stdcall create_move_detour_( int sequence_number, float input_sample_frametime, bool active, bool& send_packet )
 {
-	hooks::create_move_hook.call_original< void >( _this, edx, sequence_number, input_sample_frametime, active );
+	hooks::create_move_hook.call_original< void >( g_interfaces.client, nullptr, sequence_number, input_sample_frametime, active );
+
+	if ( g_input.key_state< input::key_state_t::KEY_DOWN >( VK_END ) )
+		send_packet = false;
+}
+
+__declspec( naked ) void __fastcall hooks::create_move::create_move_detour( sdk::i_client_dll* _this, void* edx, int sequence_number,
+                                                                            float input_sample_frametime, bool active )
+{
+	__asm
+	{
+		push ebp
+		mov  ebp, esp
+		push ebx
+		push esp
+		push dword ptr[active]
+		push dword ptr[input_sample_frametime]
+		push dword ptr[sequence_number]
+		call create_move_detour_
+		pop  ebx
+		pop  ebp
+		retn 0Ch
+	}
 }
