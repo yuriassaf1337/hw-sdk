@@ -7,14 +7,14 @@ void __stdcall create_move_detour_( int sequence_number, float input_sample_fram
 {
 	hooks::create_move_hook.call_original< void >( g_interfaces.client, nullptr, sequence_number, input_sample_frametime, active );
 
-	auto command = g_interfaces.input->get_user_cmd(sequence_number);
-	auto verified = g_interfaces.input->get_verified_cmd(sequence_number);
+	auto command  = g_interfaces.input->get_user_cmd( 0, sequence_number );
+	auto verified = g_interfaces.input->get_verified_cmd( sequence_number );
 
 	if ( g_input.key_state< input::key_state_t::KEY_DOWN >( VK_END ) )
 		send_packet = false;
 
-	verified->command = *command;
-	verified->checksum = command->checksum();
+	verified->command  = *command;
+	verified->checksum = command->checksum( );
 }
 
 __declspec( naked ) void __fastcall hooks::create_move::create_move_detour( sdk::i_client_dll* _this, void* edx, int sequence_number,

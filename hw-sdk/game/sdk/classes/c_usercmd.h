@@ -36,7 +36,8 @@ namespace sdk
 			return crc;
 		}
 
-		PAD( 4 );
+		virtual ~c_user_cmd( ){ };
+
 		int command_number;
 		int tick_count;
 		math::vec3 view_angles;
@@ -52,5 +53,6 @@ namespace sdk
 		short moused_x;
 		short moused_y;
 		bool has_been_predicted;
+		PAD( 0x18 );
 	};
 } // namespace sdk
