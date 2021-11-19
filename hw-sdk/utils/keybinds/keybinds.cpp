@@ -90,5 +90,23 @@ void input::impl::think( UINT msg, WPARAM wparam, LPARAM lparam )
 			key_states[ key_id ] = { key_state_t::KEY_RELEASED, time };
 		else
 			key_states[ key_id ] = { key_state, time };
+
+		for ( auto iterator = key_binds.begin( ); iterator != key_binds.end( ); iterator++ ) {
+			if ( iterator->virtual_key == key_id )
+				iterator->callback( key_state == key_state_t::KEY_UP ? false : true );
+		}
+	}
+}
+
+void input::impl::add_keybind( std::uint8_t virtual_key, std::function< void( bool ) > callback )
+{
+	key_binds.push_back( { virtual_key, callback } );
+}
+
+void input::impl::remove_keybind( std::uint8_t virtual_key )
+{
+	for ( auto iterator = key_binds.begin( ); iterator != key_binds.end( ); iterator++ ) {
+		if ( iterator->virtual_key == virtual_key )
+			key_binds.erase( iterator );
 	}
 }

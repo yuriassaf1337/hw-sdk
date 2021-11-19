@@ -4,6 +4,7 @@
 #include "../math/types/vector.h"
 #include <Windows.h>
 #include <deque>
+#include <functional>
 
 namespace input
 {
@@ -16,6 +17,11 @@ namespace input
 	};
 
 	constexpr static inline std::uint64_t MAX_RELEASED_TIME = 100;
+
+	struct keybind {
+		std::uint8_t virtual_key;
+		std::function< void( bool pressed ) > callback;
+	};
 
 	struct impl {
 	private:
@@ -30,6 +36,7 @@ namespace input
 
 	public:
 		std::array< key_info_t, 255U > key_states = { };
+		std::deque< keybind > key_binds           = { };
 
 		struct {
 			math::vec2< int > pos;
@@ -67,6 +74,9 @@ namespace input
 			} else
 				return key.state == state;
 		}
+
+		void add_keybind( std::uint8_t virtual_key, std::function< void( bool ) > callback );
+		void remove_keybind( std::uint8_t virtual_key );
 	};
 } // namespace input
 
