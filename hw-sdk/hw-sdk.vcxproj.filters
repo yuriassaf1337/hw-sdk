@@ -347,6 +347,9 @@
     <ClInclude Include="dependencies\checksum\checksum.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="game\sdk\enums\buttons.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="utils\math\math.inl">
