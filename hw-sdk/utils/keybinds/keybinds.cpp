@@ -93,7 +93,7 @@ void input::impl::think( UINT msg, WPARAM wparam, LPARAM lparam )
 
 		for ( auto iterator = key_binds.begin( ); iterator != key_binds.end( ); iterator++ ) {
 			if ( iterator->virtual_key == key_id )
-				iterator->callback( key_state == key_state_t::KEY_UP ? false : true );
+				iterator->callback( key_state == key_state_t::KEY_UP ? false : key_state == key_state_t::KEY_DOWN );
 		}
 	}
 }
