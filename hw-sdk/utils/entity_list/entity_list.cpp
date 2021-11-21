@@ -10,7 +10,7 @@ void entity_list::update( )
 		if ( !entity )
 			continue;
 
-		auto client_class = entity->get_client_networkable()->get_client_class( );
+		auto client_class = entity->get_client_class( );
 
 		if ( client_class->class_id == sdk::enums::class_ids::CS_PLAYER )
 			entities.push_back( entity );
