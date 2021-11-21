@@ -33,8 +33,10 @@ namespace sdk
 		virtual void pre_data_update( int update_type )     = 0;
 		virtual void post_data_update( int update_type )    = 0;
 
-		PAD( 0x4 );
+	private:
+		virtual void padding( ) = 0;
 
+	public:
 		virtual void is_dormant( )                                     = 0;
 		virtual int entity_index( )                                    = 0;
 		virtual void receive_message( int class_id, bf_read& message ) = 0;
