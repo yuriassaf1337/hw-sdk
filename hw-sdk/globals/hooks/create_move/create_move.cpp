@@ -6,9 +6,9 @@
 
 void __stdcall create_move_function( int sequence_number, float input_sample_frametime, bool active, bool& send_packet )
 {
-	entity_list::update();
-
 	hooks::create_move_hook.call_original< void >( g_interfaces.client, nullptr, sequence_number, input_sample_frametime, active );
+
+	entity_list::update();
 
 	auto command  = g_interfaces.input->get_user_cmd( 0, sequence_number );
 	auto verified = g_interfaces.input->get_verified_cmd( sequence_number );
