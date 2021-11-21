@@ -1,7 +1,8 @@
 #pragma once
 
+#include "../../../game/sdk/structs/color.h"
 #include "../../../utils/math/types/vector.h"
-#include "../utils/utils.h"
+#include "../ctx/ctx.h"
 #include <algorithm>
 #include <array>
 #include <cmath>

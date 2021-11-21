@@ -180,6 +180,7 @@
     <ClCompile Include="globals\hotwheels\hotwheels.cpp" />
     <ClCompile Include="globals\intefaces\interfaces.cpp" />
     <ClCompile Include="hacks\gui\cfg\cfg.cpp" />
+    <ClCompile Include="hacks\gui\ctx\ctx.cpp" />
     <ClCompile Include="hacks\gui\gui.cpp" />
     <ClCompile Include="hacks\gui\window\window.cpp" />
     <ClCompile Include="hacks\prediction\prediction.cpp" />
@@ -264,6 +265,7 @@
     <ClInclude Include="globals\macros\macros.h" />
     <ClInclude Include="hacks\gui\anims\anims.h" />
     <ClInclude Include="hacks\gui\cfg\cfg.h" />
+    <ClInclude Include="hacks\gui\ctx\ctx.h" />
     <ClInclude Include="hacks\gui\gui.h" />
     <ClInclude Include="hacks\gui\includes\includes.h" />
     <ClInclude Include="hacks\gui\utils\utils.h" />

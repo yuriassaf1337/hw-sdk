@@ -1,4 +1,6 @@
 #include "window.h"
+#include "../utils/utils.h"
+#include "tabs/tabs.h"
 
 bool gui::forms::window_impl::begin_window( const std::string_view name )
 {
@@ -60,4 +62,10 @@ bool gui::forms::window_impl::begin_window( const std::string_view name )
 	return true;
 }
 
-void gui::forms::window_impl::end_window( ) { }
+void gui::forms::window_impl::end_window( )
+{
+	// do tabs here
+	if ( !g_gui.tabs.empty( ) ) {
+		g_tabs.think( g_gui.tabs );
+	}
+}
