@@ -4,7 +4,7 @@
 #include "../../../utils/keybinds/keybinds.h"
 #include "create_move.h"
 
-void __stdcall create_move_detour_( int sequence_number, float input_sample_frametime, bool active, bool& send_packet )
+void __stdcall create_move_function( int sequence_number, float input_sample_frametime, bool active, bool& send_packet )
 {
 	entity_list::update();
 
@@ -32,7 +32,7 @@ __declspec( naked ) void __fastcall hooks::create_move::create_move_detour( sdk:
 		push dword ptr[active]
 		push dword ptr[input_sample_frametime]
 		push dword ptr[sequence_number]
-		call create_move_detour_
+		call create_move_function
 		pop  ebx
 		pop  ebp
 		retn 0Ch
