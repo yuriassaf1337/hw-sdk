@@ -6,6 +6,11 @@
 
 namespace gui
 {
+	// main implementation
+	struct impl {
+		void draw( );
+	};
+	// window
 	struct window_ctx {
 		// TODO: on position, calculate middle of screen to spawn menu in(menu width / 2 - screen width / 2)
 		math::vec2< int > position = { 250, 250 };
@@ -27,4 +32,5 @@ namespace gui
 	};
 } // namespace gui
 
+inline gui::impl g_menu;
 inline gui::window_ctx g_gui;

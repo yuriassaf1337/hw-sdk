@@ -87,6 +87,9 @@
     <ClCompile Include="hacks\prediction\prediction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="hacks\gui\gui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals\includes\includes.h">
