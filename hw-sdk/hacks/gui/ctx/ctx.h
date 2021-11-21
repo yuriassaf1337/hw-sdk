@@ -19,7 +19,7 @@ namespace gui
 		std::size_t focused_id;
 
 		// tabs
-		std::vector< std::pair< std::string_view, std::string_view > > tabs;
+		std::vector< std::string_view > tabs;
 		int active_tab = 0;
 
 		struct {

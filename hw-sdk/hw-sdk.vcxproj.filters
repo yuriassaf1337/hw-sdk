@@ -93,6 +93,9 @@
     <ClCompile Include="hacks\gui\ctx\ctx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="hacks\gui\window\tabs\tabs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals\includes\includes.h">
@@ -375,6 +378,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="hacks\gui\ctx\ctx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\gui\window\tabs\tabs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
