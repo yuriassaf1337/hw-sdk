@@ -84,6 +84,9 @@
     <ClCompile Include="utils\entity_list\entity_list.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="hacks\prediction\prediction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals\includes\includes.h">
@@ -360,6 +363,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="utils\entity_list\entity_list.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\prediction\prediction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

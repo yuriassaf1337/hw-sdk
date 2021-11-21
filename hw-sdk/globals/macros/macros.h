@@ -36,9 +36,11 @@
 
 // [#] interface-versions
 
-#define VENGINE_CLIENT_INTERFACE_VERSION    _( "VEngineClient014" )
-#define VCLIENT_INTERFACE_VERSION           _( "VClient018" )
-#define VCLIENTENTITYLIST_INTERFACE_VERSION _( "VClientEntityList003" )
+#define VENGINE_CLIENT_INTERFACE_VERSION      _( "VEngineClient014" )
+#define VCLIENT_INTERFACE_VERSION             _( "VClient018" )
+#define VCLIENTENTITYLIST_INTERFACE_VERSION   _( "VClientEntityList003" )
+#define VCLIENTPREDICTION_INTERFACE_VERSION   _( "VClientPrediction001" )
+#define VCLIENTGAMEMOVEMENT_INTERFACE_VERSION _( "GameMovement001" )
 
 // [#] utils
 

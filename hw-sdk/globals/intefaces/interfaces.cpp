@@ -19,6 +19,12 @@ bool sdk::interfaces::init( )
 
 	entity_list = g_client_dll.find_interface< sdk::i_client_entity_list* >( VCLIENTENTITYLIST_INTERFACE_VERSION );
 
+	prediction = g_client_dll.find_interface< sdk::i_prediction* >( VCLIENTPREDICTION_INTERFACE_VERSION );
+
+	game_movement = g_client_dll.find_interface< sdk::i_game_movement* >( VCLIENTGAMEMOVEMENT_INTERFACE_VERSION );
+
+	move_helper = **g_client_dll.pattern_scan( _( "8B 0D ? ? ? ? 8B 45 ? 51 8B D4 89 02 8B 01" ) ).add( 0x2 ).as< sdk::i_move_helper*** >( );
+
 	MOCKING_CATCH( return false );
 
 	console::print< console::log_level::SUCCESS >( _( "Initialized interfaces" ) );
