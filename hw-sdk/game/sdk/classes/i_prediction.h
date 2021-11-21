@@ -118,10 +118,10 @@ namespace sdk
 
 	public:
 		PAD( 8 );
-		bool in_prediction;
+		bool in_prediction_var;
 		bool old_cl_predict_value;
 		bool engine_paused;
 		PAD( 13 );
-		bool is_first_time_predicted;
+		bool is_first_time_predicted_var;
 	};
 } // namespace sdk
