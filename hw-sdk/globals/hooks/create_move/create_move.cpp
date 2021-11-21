@@ -1,10 +1,13 @@
 #include <string.h>
 
+#include "../../../utils/entity_list/entity_list.h"
 #include "../../../utils/keybinds/keybinds.h"
 #include "create_move.h"
 
 void __stdcall create_move_detour_( int sequence_number, float input_sample_frametime, bool active, bool& send_packet )
 {
+	entity_list::update();
+
 	hooks::create_move_hook.call_original< void >( g_interfaces.client, nullptr, sequence_number, input_sample_frametime, active );
 
 	auto command  = g_interfaces.input->get_user_cmd( 0, sequence_number );

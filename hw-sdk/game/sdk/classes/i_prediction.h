@@ -96,10 +96,10 @@ namespace sdk
 		virtual bool is_first_time_predicted( void ) const;
 		virtual int get_last_ack_command_number( void ) const;
 		virtual int get_incoming_packet_number( void ) const;
-		virtual void check_moving_ground( sdk::c_base_entity* player, double frame_time )                                                   = 0;
-		virtual void run_command( sdk::c_base_entity* player, sdk::c_usercmd* cmd, sdk::i_move_helper* move_helper )                        = 0;
-		virtual void setup_move( sdk::c_base_entity* player, sdk::c_usercmd* cmd, sdk::i_move_helper* move_helper, sdk::move_data_t* data ) = 0;
-		virtual void finish_move( sdk::c_base_entity* player, sdk::c_usercmd* cmd, sdk::move_data_t* data )                                 = 0;
+		virtual void check_moving_ground( sdk::c_base_entity* player, double frame_time )                                                    = 0;
+		virtual void run_command( sdk::c_base_entity* player, sdk::c_user_cmd* cmd, sdk::i_move_helper* move_helper )                        = 0;
+		virtual void setup_move( sdk::c_base_entity* player, sdk::c_user_cmd* cmd, sdk::i_move_helper* move_helper, sdk::move_data_t* data ) = 0;
+		virtual void finish_move( sdk::c_base_entity* player, sdk::c_user_cmd* cmd, sdk::move_data_t* data )                                 = 0;
 
 		int32_t& predicted_commands( )
 		{

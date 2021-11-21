@@ -10,7 +10,7 @@
 
 namespace sdk
 {
-	template< class t >
+	template< class T >
 	class c_handle
 	{
 	public:

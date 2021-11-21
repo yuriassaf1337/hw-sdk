@@ -36,8 +36,9 @@
 
 // [#] interface-versions
 
-#define VENGINE_CLIENT_INTERFACE_VERSION _( "VEngineClient014" )
-#define VCLIENT_INTERFACE_VERSION        _( "VClient018" )
+#define VENGINE_CLIENT_INTERFACE_VERSION    _( "VEngineClient014" )
+#define VCLIENT_INTERFACE_VERSION           _( "VClient018" )
+#define VCLIENTENTITYLIST_INTERFACE_VERSION _( "VClientEntityList003" )
 
 // [#] utils
 

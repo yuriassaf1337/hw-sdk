@@ -4,10 +4,11 @@
 #include <iostream>
 #include <string.h>
 
+#include "../../game/sdk/classes/c_input.h"
 #include "../../game/sdk/classes/i_client_dll.h"
+#include "../../game/sdk/classes/i_client_entity_list.h"
 #include "../../game/sdk/classes/i_global_vars.h"
 #include "../../game/sdk/classes/iv_engine_client.h"
-#include "../../game/sdk/classes/c_input.h"
 #include "../../utils/utils.h"
 #include "../../utils/vfunc/vfunc.h"
 #include "../macros/macros.h"
@@ -20,6 +21,8 @@ namespace sdk
 		sdk::i_client_dll* client;
 		sdk::i_global_vars* globals;
 		sdk::c_input* input;
+		sdk::i_client_entity_list* entity_list;
+
 		bool init( );
 	};
 } // namespace sdk

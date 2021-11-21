@@ -181,6 +181,7 @@
     <ClCompile Include="globals\intefaces\interfaces.cpp" />
     <ClCompile Include="hacks\gui\cfg\cfg.cpp" />
     <ClCompile Include="hacks\gui\window\window.cpp" />
+    <ClCompile Include="utils\entity_list\entity_list.cpp" />
     <ClCompile Include="utils\keybinds\keybinds.cpp" />
     <ClCompile Include="utils\math\math.cpp" />
     <ClCompile Include="utils\modules\modules.cpp" />
@@ -224,6 +225,8 @@
     <ClInclude Include="game\sdk\classes\c_verified_cmd.h" />
     <ClInclude Include="game\sdk\classes\c_view_setup.h" />
     <ClInclude Include="game\sdk\classes\i_client_dll.h" />
+    <ClInclude Include="game\sdk\classes\i_client_entity.h" />
+    <ClInclude Include="game\sdk\classes\i_client_entity_list.h" />
     <ClInclude Include="game\sdk\classes\i_prediction.h" />
     <ClInclude Include="game\sdk\enums\buttons.h" />
     <ClInclude Include="game\sdk\structs\cnetmsg_signonstate_t.h" />
@@ -264,6 +267,7 @@
     <ClInclude Include="hacks\gui\utils\utils.h" />
     <ClInclude Include="hacks\gui\window\window.h" />
     <ClInclude Include="utils\console\log_level\log_level.h" />
+    <ClInclude Include="utils\entity_list\entity_list.h" />
     <ClInclude Include="utils\helpers\function_enforce\function_enforce.h" />
     <ClInclude Include="globals\hooks\hooking.h" />
     <ClInclude Include="utils\keybinds\keybinds.h" />

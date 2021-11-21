@@ -17,6 +17,8 @@ bool sdk::interfaces::init( )
 
 	input = *g_client_dll.pattern_scan( _( "B9 ? ? ? ? F3 0F 11 04 24 FF 50 10" ) ).add( 0x1 ).as< sdk::c_input** >( );
 
+	entity_list = g_client_dll.find_interface< sdk::i_client_entity_list* >( VCLIENTENTITYLIST_INTERFACE_VERSION );
+
 	MOCKING_CATCH( return false );
 
 	console::print< console::log_level::SUCCESS >( _( "Initialized interfaces" ) );
