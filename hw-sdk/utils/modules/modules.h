@@ -150,3 +150,4 @@ inline modules::impl g_client_dll       = modules::impl( CLIENT_DLL );
 inline modules::impl g_engine_dll       = modules::impl( ENGINE_DLL );
 inline modules::impl g_localize_dll     = modules::impl( LOCALIZE_DLL );
 inline modules::impl g_shaderapidx9_dll = modules::impl( SHADERAPIDX9_DLL );
+inline modules::impl g_vstdlib_dll      = modules::impl( VSTDLIB_DLL );

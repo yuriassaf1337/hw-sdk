@@ -6,8 +6,8 @@
 struct i_client_networkable;
 struct i_client_renderable;
 struct i_client_entity;
-struct c_base_entity;
 struct i_client_thinkable;
+struct c_base_entity;
 
 namespace sdk
 {

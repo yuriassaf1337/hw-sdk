@@ -221,6 +221,11 @@
     <ClInclude Include="dependencies\mocking_bird\mocking_bird.h" />
     <ClInclude Include="dependencies\formatting\tinyformat.h" />
     <ClInclude Include="dependencies\xor\xor.h" />
+    <ClInclude Include="game\sdk\classes\c_base_animating.h" />
+    <ClInclude Include="game\sdk\classes\c_base_combat_character.h" />
+    <ClInclude Include="game\sdk\classes\c_base_combat_weapon.h" />
+    <ClInclude Include="game\sdk\classes\c_base_player.h" />
+    <ClInclude Include="game\sdk\classes\c_cs_player.h" />
     <ClInclude Include="game\sdk\classes\c_input.h" />
     <ClInclude Include="game\sdk\classes\c_base_entity.h" />
     <ClInclude Include="game\sdk\classes\c_client_state.h" />
@@ -229,6 +234,7 @@
     <ClInclude Include="game\sdk\classes\c_usercmd.h" />
     <ClInclude Include="game\sdk\classes\c_verified_cmd.h" />
     <ClInclude Include="game\sdk\classes\c_view_setup.h" />
+    <ClInclude Include="game\sdk\classes\i_cvar.h" />
     <ClInclude Include="game\sdk\classes\i_client_networkable.h" />
     <ClInclude Include="game\sdk\classes\i_client_renderable.h" />
     <ClInclude Include="game\sdk\classes\i_client_thinkable.h" />

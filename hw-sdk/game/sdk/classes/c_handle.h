@@ -1,4 +1,5 @@
 #pragma once
+#include "../../../globals/includes/includes.h"
 #include "i_handle_entity.h"
 
 #define NUM_ENT_ENTRY_BITS        ( 11 + 2 )
@@ -25,6 +26,7 @@ namespace sdk
 			else
 				index = INVALID_EHANDLE_INDEX;
 		}
+
 		constexpr bool is_valid( ) const
 		{
 			return index != INVALID_EHANDLE_INDEX;

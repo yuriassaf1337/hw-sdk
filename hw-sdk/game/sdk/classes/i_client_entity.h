@@ -11,5 +11,11 @@ namespace sdk
 {
 	struct i_client_entity : public i_client_unknown, public i_client_renderable, public i_client_networkable, public i_client_thinkable {
 		virtual void release( ) = 0;
+
+		template< typename T >
+		T as( )
+		{
+			return reinterpret_cast< T >( this );
+		}
 	};
 } // namespace sdk

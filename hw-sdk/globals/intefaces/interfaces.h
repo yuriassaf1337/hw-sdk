@@ -7,9 +7,10 @@
 #include "../../game/sdk/classes/c_input.h"
 #include "../../game/sdk/classes/i_client_dll.h"
 #include "../../game/sdk/classes/i_client_entity_list.h"
+#include "../../game/sdk/classes/i_cvar.h"
 #include "../../game/sdk/classes/i_global_vars.h"
-#include "../../game/sdk/classes/iv_engine_client.h"
 #include "../../game/sdk/classes/i_prediction.h"
+#include "../../game/sdk/classes/iv_engine_client.h"
 #include "../../utils/utils.h"
 #include "../../utils/vfunc/vfunc.h"
 #include "../macros/macros.h"
@@ -26,6 +27,7 @@ namespace sdk
 		sdk::i_game_movement* game_movement;
 		sdk::i_prediction* prediction;
 		sdk::i_move_helper* move_helper;
+		sdk::i_c_var* convar;
 
 		bool init( );
 	};

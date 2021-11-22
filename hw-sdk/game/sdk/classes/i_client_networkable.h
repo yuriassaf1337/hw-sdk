@@ -21,7 +21,7 @@ namespace sdk
 		virtual void padding( ) = 0;
 
 	public:
-		virtual void is_dormant( )                                     = 0;
+		virtual bool is_dormant( )                                     = 0;
 		virtual int entity_index( )                                    = 0;
 		virtual void receive_message( int class_id, bf_read& message ) = 0;
 		virtual void* get_data_table_base_pointer( )                   = 0;

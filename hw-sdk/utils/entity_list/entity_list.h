@@ -1,5 +1,6 @@
 #pragma once
-#include "../../game/sdk/classes/c_base_entity.h"
+#include "../../game/sdk/classes/c_cs_player.h"
+#include "../../game/sdk/classes/c_base_player.h"
 #include "../../game/sdk/classes/i_client_entity.h"
 #include "../../globals/intefaces/interfaces.h"
 
