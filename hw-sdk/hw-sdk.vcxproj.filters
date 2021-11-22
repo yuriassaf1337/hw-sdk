@@ -401,6 +401,9 @@
     <ClInclude Include="game\sdk\classes\i_client_networkable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="game\sdk\enums\teams.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="utils\math\math.inl">

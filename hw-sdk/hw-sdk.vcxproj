@@ -260,6 +260,7 @@
     <ClInclude Include="game\sdk\structs\dt_recv.h" />
     <ClInclude Include="game\sdk\structs\i_client_class.h" />
     <ClInclude Include="game\sdk\structs\player_info_t.h" />
+    <ClInclude Include="game\sdk\enums\teams.h" />
     <ClInclude Include="game\sdk\structs\weapon_data_t.h" />
     <ClInclude Include="globals\csgo.h" />
     <ClInclude Include="globals\hooks\create_move\create_move.h" />
