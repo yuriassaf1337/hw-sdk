@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 #include "../../../globals/includes/includes.h"
 #include "c_base_entity.h"
@@ -7,6 +8,14 @@ namespace sdk
 {
 	struct c_base_combat_weapon : public c_base_entity {
 	public:
-		NETVAR(clip_mag, std::int32_t, "CBaseCombatWeapon", "m_iClip1");
+		NETVAR( next_primary_attack, float, "CBaseCombatWeapon", "m_flNextPrimaryAttack" );
+		NETVAR( next_secondary_attack, float, "CBaseCombatWeapon", "m_flNextSecondaryAttack" );
+		NETVAR( clip_mag, std::int32_t, "CBaseCombatWeapon", "m_iClip1" );
+		NETVAR( clip_reserve, std::int32_t, "CBaseCombatWeapon", "m_iClip2" );
+		NETVAR( view_model_index, std::int32_t, "CBaseCombatWeapon", "m_iViewModelIndex" );
+		NETVAR( world_model_index, std::int32_t, "CBaseCombatWeapon", "m_iWorldModelIndex" );
+		NETVAR( world_dropped_model_index, std::int32_t, "CBaseCombatWeapon", "m_iWorldDroppedModelIndex" );
+		NETVAR( postpone_fire_ready_time, float, "CBaseCombatWeapon", "m_flPostponeFireReadyTime" );
+		NETVAR( world_view_model, std::uintptr_t, "CBaseCombatWeapon", "m_hWeaponWorldModel" );
 	};
 } // namespace sdk
