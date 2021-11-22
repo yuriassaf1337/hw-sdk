@@ -83,6 +83,11 @@ namespace render
 	void render_line( int x, int y, int width, int height, color color );
 
 	void render_rectangle( int x, int y, int width, int height, color color );
+	template< class T = int >
+	void render_rectangle( const math::vec2< T >& pos, const math::vec2< T >& size, color color )
+	{
+		render_rectangle( pos.x, pos.y, size.x, size.y, color );
+	}
 	void render_filled_rectangle( int x, int y, int width, int height, color color );
 	template< class T = int >
 	void render_filled_rectangle( const math::vec2< T >& pos, const math::vec2< T >& size, color color )

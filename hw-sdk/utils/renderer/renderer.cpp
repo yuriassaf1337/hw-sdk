@@ -11,9 +11,7 @@ void render::init( IDirect3DDevice9* buffer_device )
 	fonts::create_font( _( "main_font" ), 14, FW_NORMAL, true, _( "Tahoma" ) );
 	fonts::create_font( _( "main_font_bold" ), 14, FW_BOLD, true, _( "Tahoma" ) );
 
-	auto Test = fonts::find( _( "main_font" ) );
-
-	auto* Test2 = &fonts::font_list;
+	console::print< console::log_level::DEBUG >( _( "Created {} fonts." ), fonts::font_list.size( ) );
 }
 
 void render::create_font( std::size_t size, std::size_t weight, bool anti_aliased, const char* name, LPD3DXFONT& font )
