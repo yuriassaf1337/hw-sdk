@@ -11,6 +11,17 @@ T& math::normalize_yaw( T& yaw )
 }
 
 template< typename T >
+T& math::get_fov(const math::vec3& view_angles, const math::vec3& start, const math::vec3& end)
+{
+	math::vec3 fw{ },
+		dir = ( end - start ).normalized( );
+
+	math::angle_vectors( view_angles, &fw );
+
+	return math::max< float >( math::rad2deg( std::acos( fw.dot_product( dir ) ) ), 0.f );
+}
+
+template< typename T >
 constexpr T math::min( const T& t1, const T& t2 )
 {
 	return t1 < t2 ? t1 : t2;
