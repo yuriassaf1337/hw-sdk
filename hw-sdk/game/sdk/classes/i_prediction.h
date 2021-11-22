@@ -1,7 +1,7 @@
 #pragma once
 #include "../../../utils/math/types/vector.h"
+#include "../../../utils/modules/modules.h"
 #include "c_usercmd.h"
-
 #include <minwindef.h>
 
 struct c_base_entity;
@@ -103,22 +103,28 @@ namespace sdk
 		virtual void setup_move( c_base_entity* player, c_user_cmd* cmd, i_move_helper* move_helper, move_data_t* data ) = 0;
 		virtual void finish_move( c_base_entity* player, c_user_cmd* cmd, move_data_t* data )                            = 0;
 
-		int32_t& predicted_commands( )
+		std::int32_t& predicted_commands( )
 		{
-			return *reinterpret_cast< int32_t* >( reinterpret_cast< uintptr_t >( this ) + 0x1C );
+			return *reinterpret_cast< std::int32_t* >( reinterpret_cast< std::uintptr_t >( this ) + 0x1C );
 		}
 
-		int32_t& previous_start_frame( )
+		std::int32_t& previous_start_frame( )
 		{
-			return *reinterpret_cast< int32_t* >( reinterpret_cast< uintptr_t >( this ) + 0xC );
+			return *reinterpret_cast< std::int32_t* >( reinterpret_cast< std::uintptr_t >( this ) + 0xC );
 		}
 
-		int32_t& server_commands_acknowledged( )
+		std::int32_t& server_commands_acknowledged( )
 		{
-			return *reinterpret_cast< int32_t* >( reinterpret_cast< uintptr_t >( this ) + 0x20 );
+			return *reinterpret_cast< std::int32_t* >( reinterpret_cast< std::uintptr_t >( this ) + 0x20 );
 		}
 
-	public:
+		void restore_entity_to_predicted_frame( std::int32_t frame )
+		{
+			static auto pattern = g_client_dll.pattern_scan( _( "55 8B EC A1 ? ? ? ? 56 8B 75 08 83" ) ).as< void( __stdcall* )( int, int ) >( );
+
+			pattern( 0, frame );
+		}
+
 		PAD( 8 );
 		bool in_prediction_var;
 		bool old_cl_predict_value;

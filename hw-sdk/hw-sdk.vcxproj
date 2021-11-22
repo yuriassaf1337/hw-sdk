@@ -304,6 +304,7 @@
     <ClInclude Include="utils\vfunc\vfunc.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="hacks\gui\cfg\cfg.inl" />
     <None Include="utils\console\console.inl" />
     <None Include="utils\math\math.inl" />
   </ItemGroup>

@@ -1,5 +1,6 @@
 #include <string.h>
 
+#include "../../../hacks/prediction/prediction.h"
 #include "../../../utils/entity_list/entity_list.h"
 #include "../../../utils/keybinds/keybinds.h"
 #include "create_move.h"
@@ -8,10 +9,16 @@ void __stdcall create_move_function( int sequence_number, float input_sample_fra
 {
 	hooks::create_move_hook.call_original< void >( g_interfaces.client, nullptr, sequence_number, input_sample_frametime, active );
 
-	entity_list::update();
+	entity_list::update( );
 
 	auto command  = g_interfaces.input->get_user_cmd( 0, sequence_number );
 	auto verified = g_interfaces.input->get_verified_cmd( sequence_number );
+
+	g_prediction.update( );
+	g_prediction.start( );
+	{
+	}
+	g_prediction.end( );
 
 	if ( g_input.key_state< input::key_state_t::KEY_DOWN >( VK_END ) )
 		send_packet = false;

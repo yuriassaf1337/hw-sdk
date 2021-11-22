@@ -12,7 +12,7 @@
 
 std::uintptr_t netvar::get_offset( sdk::recv_table* table, const char* var )
 {
-	for ( std::size_t i = 0; i < table->props; i++ ) {
+	for ( std::int32_t i = 0; i < table->props; i++ ) {
 		auto current_prop = table->props_ptr[ i ];
 
 		if ( HASH( var ) == HASH( current_prop.var_name ) )
@@ -26,6 +26,8 @@ std::uintptr_t netvar::get_offset( sdk::recv_table* table, const char* var )
 		}
 	}
 
+	console::print< console::log_level::FATAL >( _( "NETVAR get_offset failed - [ var: {} ]" ), var );
+
 	return std::uintptr_t( );
 }
 
@@ -37,6 +39,8 @@ std::uintptr_t netvar::get_table( const char* table, const char* var )
 		if ( HASH( table ) == HASH( current_table->network_name ) )
 			return get_offset( current_table->recv_table, var );
 	}
+
+	console::print< console::log_level::FATAL >( _( "NETVAR get_table failed - [ table: {} | var: {} ]" ), table, var );
 
 	return std::uintptr_t( );
 }
