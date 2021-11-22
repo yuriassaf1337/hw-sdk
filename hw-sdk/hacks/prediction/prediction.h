@@ -1,7 +1,8 @@
 #pragma once
 
+#include "../../globals/includes/includes.h"
+
 #include "../../game/sdk/classes/i_prediction.h"
-#include "../../globals/intefaces/interfaces.h"
 
 namespace prediction
 {

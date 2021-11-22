@@ -190,6 +190,7 @@
     <ClCompile Include="utils\math\math.cpp" />
     <ClCompile Include="utils\modules\modules.cpp" />
     <ClCompile Include="utils\console\console.cpp" />
+    <ClCompile Include="utils\netvar\netvar.cpp" />
     <ClCompile Include="utils\renderer\renderer.cpp" />
     <ClCompile Include="utils\utils.cpp" />
   </ItemGroup>
@@ -228,6 +229,10 @@
     <ClInclude Include="game\sdk\classes\c_usercmd.h" />
     <ClInclude Include="game\sdk\classes\c_verified_cmd.h" />
     <ClInclude Include="game\sdk\classes\c_view_setup.h" />
+    <ClInclude Include="game\sdk\classes\i_client_networkable.h" />
+    <ClInclude Include="game\sdk\classes\i_client_renderable.h" />
+    <ClInclude Include="game\sdk\classes\i_client_thinkable.h" />
+    <ClInclude Include="game\sdk\classes\i_client_unknown.h" />
     <ClInclude Include="game\sdk\classes\i_client_dll.h" />
     <ClInclude Include="game\sdk\classes\i_client_entity.h" />
     <ClInclude Include="game\sdk\classes\i_client_entity_list.h" />
@@ -286,6 +291,7 @@
     <ClInclude Include="utils\console\console.h" />
     <ClInclude Include="utils\helpers\bit_flag.h" />
     <ClInclude Include="utils\helpers\primitive_definitions\primitives.h" />
+    <ClInclude Include="utils\netvar\netvar.h" />
     <ClInclude Include="utils\renderer\renderer.h" />
     <ClInclude Include="utils\utils.h" />
     <ClInclude Include="utils\vfunc\vfunc.h" />

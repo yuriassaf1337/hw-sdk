@@ -12,7 +12,10 @@ void entity_list::update( )
 
 		auto client_class = entity->get_client_class( );
 
-		if ( client_class->class_id == sdk::enums::class_ids::CS_PLAYER )
+		if ( client_class->class_id == sdk::enums::class_ids::CS_PLAYER ) {
+			auto team_number = reinterpret_cast< sdk::c_base_entity* >( entity )->team_number( );
+
 			entities.push_back( entity );
+		}
 	}
 }

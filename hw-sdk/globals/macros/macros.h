@@ -71,3 +71,10 @@ public:
 // [#] hooking utils
 
 #define CREATE_HOOK_HELPER( name, args ) inline hook_helper< args > name;
+
+#define NETVAR( name, type, table, var )                                                                                                             \
+	[[nodiscard]] type& name( )                                                                                                                      \
+	{                                                                                                                                                \
+		static std::uintptr_t offset = netvar::get_table( _( table ), _( var ) );                                                                    \
+		return *reinterpret_cast< type* >( reinterpret_cast< std::uintptr_t >( this ) + offset );                                                    \
+	}
