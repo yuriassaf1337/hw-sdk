@@ -11,3 +11,13 @@ math::vec3 math::angle_vector( const math::vec3& angle )
 
 	return math::vec3( cp * cy, cp * sy, -sp );
 }
+
+float math::rad2deg( const float x )
+{
+	return static_cast< float >( x * ( 180.f / math::util::pi_f ) );
+}
+
+float math::deg2rad( const float x )
+{
+	return static_cast< float >( x * ( math::util::pi_f / 180.f ) );
+}
