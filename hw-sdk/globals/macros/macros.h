@@ -59,14 +59,14 @@ public:
 // [#] rendering utils
 
 #define DEVICE_SAFETY( )                                                                                                                             \
-	if ( !device ) {                                                                                                                                 \
+	if ( !render::device ) {                                                                                                                         \
 		assert( _( "Forgot to initialize device?" ) );                                                                                               \
 		return;                                                                                                                                      \
 	}
 
 #define FAIL_CHECK( return_code )                                                                                                                    \
 	if ( FAILED( return_code ) )                                                                                                                     \
-		console::print< console::log_level::FATAL >( _( "function '{}' failed." ), __func__ );
+		console::print< console::log_level::FATAL >( _( "Function '{}' failed." ), __func__ );
 
 // [#] hooking utils
 

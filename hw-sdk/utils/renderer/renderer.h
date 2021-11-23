@@ -76,34 +76,36 @@ namespace render
 {
 	inline IDirect3DDevice9* device;
 
-	void init( IDirect3DDevice9* buffer_device );
+	struct impl {
+		void init( IDirect3DDevice9* buffer_device );
 
-	void create_font( std::size_t size, std::size_t weight, bool anti_aliased, const char* name, LPD3DXFONT& font );
+		void create_font( std::size_t size, std::size_t weight, bool anti_aliased, const char* name, LPD3DXFONT& font );
 
-	void render_line( int x, int y, int width, int height, color color );
+		void render_line( int x, int y, int width, int height, color color );
 
-	void render_rectangle( int x, int y, int width, int height, color color );
-	template< class T = int >
-	void render_rectangle( const math::vec2< T >& pos, const math::vec2< T >& size, color color )
-	{
-		render_rectangle( pos.x, pos.y, size.x, size.y, color );
-	}
-	void render_filled_rectangle( int x, int y, int width, int height, color color );
-	template< class T = int >
-	void render_filled_rectangle( const math::vec2< T >& pos, const math::vec2< T >& size, color color )
-	{
-		render_filled_rectangle( pos.x, pos.y, size.x, size.y, color );
-	}
+		void render_rectangle( int x, int y, int width, int height, color color );
+		template< class T = int >
+		void render_rectangle( const math::vec2< T >& pos, const math::vec2< T >& size, color color )
+		{
+			render_rectangle( pos.x, pos.y, size.x, size.y, color );
+		}
+		void render_filled_rectangle( int x, int y, int width, int height, color color );
+		template< class T = int >
+		void render_filled_rectangle( const math::vec2< T >& pos, const math::vec2< T >& size, color color )
+		{
+			render_filled_rectangle( pos.x, pos.y, size.x, size.y, color );
+		}
 
-	D3DXVECTOR2 render_text_size( const char* string, LPD3DXFONT font );
-	void render_text( int x, int y, unsigned int alignment, unsigned int flags, const char* string, LPD3DXFONT font, color color );
-	template< class T = int >
-	void render_text( const math::vec2< T >& pos, unsigned int alignment, unsigned int flags, const char* string, LPD3DXFONT font, color color )
-	{
-		render_text( pos.x, pos.y, alignment, flags, string, font, color );
-	}
+		D3DXVECTOR2 render_text_size( const char* string, LPD3DXFONT font );
+		void render_text( int x, int y, unsigned int alignment, unsigned int flags, const char* string, LPD3DXFONT font, color color );
+		template< class T = int >
+		void render_text( const math::vec2< T >& pos, unsigned int alignment, unsigned int flags, const char* string, LPD3DXFONT font, color color )
+		{
+			render_text( pos.x, pos.y, alignment, flags, string, font, color );
+		}
+	};
 } // namespace render
-
+inline render::impl g_render;
 namespace fonts
 {
 	// TODO @ liga - this is cancer, we dont want have to create a pointer to every font we create

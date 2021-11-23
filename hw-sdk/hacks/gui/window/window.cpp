@@ -48,13 +48,13 @@ bool gui::forms::window_impl::begin_window( const std::string_view name )
 	}
 
 	// outer outline (TODO: change this to an outline so we dont draw useless black background under menu)
-	render::render_rectangle< int >( g_gui.position, g_gui.size, gui::pallete::first_outline( ) );
-	render::render_rectangle< int >( g_gui.position + 1, g_gui.size - 2, gui::pallete::second_outline( ) );
-	render::render_rectangle< int >( g_gui.position + 2, g_gui.size - 4, gui::pallete::third_outline( ) );
+	g_render.render_rectangle< int >( g_gui.position, g_gui.size, gui::pallete::first_outline( ) );
+	g_render.render_rectangle< int >( g_gui.position + 1, g_gui.size - 2, gui::pallete::second_outline( ) );
+	g_render.render_rectangle< int >( g_gui.position + 2, g_gui.size - 4, gui::pallete::third_outline( ) );
 	// TODO @ LIGA - add gradient dumb f
-	render::render_filled_rectangle< int >( g_gui.position + 3, g_gui.size - 6, gui::pallete::first_outline( ) );
-	render::render_text( g_gui.position + math::vec2< int >( 20, 20 ), font_alignment::AL_VERTICAL_TOP, font_flags_t::FLAG_DROPSHADOW, name.data( ),
-	                     fonts::find( _( "main_font" ) ), color( 255, 255, 255, 255 ) );
+	g_render.render_filled_rectangle< int >( g_gui.position + 3, g_gui.size - 6, gui::pallete::first_outline( ) );
+	g_render.render_text( g_gui.position + math::vec2< int >( 20, 20 ), font_alignment::AL_VERTICAL_TOP, font_flags_t::FLAG_DROPSHADOW, name.data( ),
+	                      fonts::find( _( "main_font" ) ), color( 255, 255, 255, 255 ) );
 	// swap stack
 	std::stack< math::vec2< int > >( ).swap( g_gui.cursor_pos_stack );
 
