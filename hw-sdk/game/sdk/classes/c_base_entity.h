@@ -20,7 +20,7 @@ namespace sdk
 		NETVAR( vector_angles, math::vec3, "CBaseEntity", "m_vecAngles" );
 		NETVAR( owner_entity, std::uintptr_t, "CBaseEntity", "m_hOwnerEntity" );
 		NETVAR( spotted, bool, "CBaseEntity", "m_bSpotted" );
-		NETVAR( simulation_time, bool, "CBaseEntity", "m_flSimulationTime" );
+		NETVAR( simulation_time, float, "CBaseEntity", "m_flSimulationTime" );
 		NETVAR( absolute_origin, bool, "CBaseEntity", "m_angAbsAngles" );
 		NETVAR( absoulte_angles, bool, "CBaseEntity", "m_angAbsOrigin" );
 

@@ -28,18 +28,6 @@ void entity_list::update( )
 			if ( player->health( ) < 1 )
 				continue;
 
-			auto active_weapon_handle = player->active_weapon( );
-
-			if ( active_weapon_handle ) {
-				auto active_weapon =
-					g_interfaces.entity_list->get_client_entity_from_handle( active_weapon_handle )->as< sdk::c_base_combat_weapon* >( );
-
-				if ( active_weapon ) {
-					auto mag_ammo = active_weapon->clip_mag( );
-					auto aaaaaaaa = 1;
-				}
-			}
-
 			entities.push_back( entity );
 		}
 	}
