@@ -62,9 +62,9 @@ namespace sdk
 		float innacuracy_reload;
 		int recoil_seed;
 		float recoil_angle[ 2 ];
-		float recoil_angleVariance[ 2 ];
+		float recoil_angle_variance[ 2 ];
 		float recoil_magnitude[ 2 ];
-		float recoil_magnitudeVariance[ 2 ];
+		float recoil_magnitude_variance[ 2 ];
 		int spread_seed;
 	};
 } // namespace sdk
