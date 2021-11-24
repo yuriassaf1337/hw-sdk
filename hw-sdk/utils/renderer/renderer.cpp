@@ -10,6 +10,8 @@ void render::impl::init( IDirect3DDevice9* buffer_device )
 
 	fonts::create_font( _( "main_font" ), 14, FW_NORMAL, true, _( "Tahoma" ) );
 	fonts::create_font( _( "main_font_bold" ), 14, FW_BOLD, true, _( "Tahoma" ) );
+	fonts::create_font( _( "main_verdana_font" ), 13, FW_NORMAL, true, _( "Verdana" ) );
+	fonts::create_font( _( "main_verdana_bold_font" ), 13, FW_BOLD, true, _( "Verdana" ) );
 
 	console::print< console::log_level::DEBUG >( _( "Created {} fonts." ), fonts::font_list.size( ) );
 }
