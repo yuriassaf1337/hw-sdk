@@ -3,6 +3,7 @@
 #include <d3dx9.h>
 #include <iostream>
 
+#include "../../../hacks/gui/gui.h"
 #include "../../../utils/renderer/renderer.h"
 #include "../../../utils/vfunc/vfunc.h"
 #include "../../intefaces/interfaces.h"

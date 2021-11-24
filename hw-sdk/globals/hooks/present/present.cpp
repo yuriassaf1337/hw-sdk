@@ -1,6 +1,5 @@
 #include <string.h>
 
-#include "../../../hacks/gui/gui.h"
 #include "present.h"
 
 HRESULT __stdcall hooks::present::present_detour( IDirect3DDevice9* device, const RECT* source, const RECT* dest, HWND dest_window,

@@ -15,7 +15,7 @@ namespace function_enforce
 			console::print< lev >( _( "Enforce failed - [ id = {} -> msg = {} ]" ), id, fmted_msg );
 
 #ifdef _DEBUG
-			MessageBox( hotwheels::window, fmted_msg.c_str( ), _( "exit failure - function enforcer" ), MB_OK );
+			MessageBox( hotwheels::window, fmted_msg.c_str( ), _( "Exit failure - function enforcer" ), MB_OK );
 #endif
 
 			if constexpr ( uninject )
