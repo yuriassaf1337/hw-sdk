@@ -25,5 +25,32 @@ namespace sdk
 		NETVAR( duck_speed, float, "CBasePlayer", "m_flDuckSpeed" );
 		NETVAR( duck_amount, float, "CBasePlayer", "m_flDuckAmount" );
 		NETVAR( last_place_name, char, "CBasePlayer", "m_szLastPlaceName" );
+
+		c_user_cmd*& current_command( )
+		{
+			return reinterpret_cast< c_user_cmd*& >( this[ 0xCD2 ] );
+		}
+
+		void set_prediction_random_seed( c_user_cmd* command )
+		{
+			static float* random_seed = *g_client_dll.pattern_scan( _( "A3 ? ? ? ? 66 0F 6E 86 " ) ).add( 0x1 ).as< float** >( );
+			*random_seed               = command ? command->random_seed : -1;
+		}
+
+		void set_prediction_player( c_base_entity* entity )
+		{
+			static c_base_entity** predicted_player = *g_client_dll.pattern_scan( _( "89 35 ? ? ? ? F3 0F 10 48" ) ).add( 0x2 ).as< c_base_entity*** >( );
+			*predicted_player = entity;
+		}
+
+		int_flag& button_forced() 
+		{
+			return reinterpret_cast< int_flag& >( this[ 0xCD1 ] );
+		}
+
+		int_flag& button_disabled() 
+		{
+			return reinterpret_cast< int_flag& >( this[ 0xCD0 ] );
+		}
 	};
 } // namespace sdk
