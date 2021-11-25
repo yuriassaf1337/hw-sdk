@@ -4,10 +4,10 @@
 #include "c_usercmd.h"
 #include <minwindef.h>
 
-struct c_base_entity;
-
 namespace sdk
 {
+	struct c_base_player;
+
 	struct move_data_t {
 	public:
 		bool first_run_of_functions : 1;
@@ -48,7 +48,7 @@ namespace sdk
 		virtual void unk1( ) = 0;
 
 	public:
-		virtual void set_host( c_base_entity* host_player );
+		virtual void set_host( sdk::c_base_player* host_player ) = 0;
 
 	private:
 		virtual void unk2( ) = 0;
@@ -62,18 +62,18 @@ namespace sdk
 	{
 	public:
 		virtual ~i_game_movement( ){ };
-		virtual void process_movement( c_base_entity* player, move_data_t* movement ) = 0;
-		virtual void reset( )                                                         = 0;
-		virtual void start_track_prediction_errors( c_base_entity* player )           = 0;
-		virtual void finish_track_prediction_errors( c_base_entity* player )          = 0;
-		virtual void difference_print( char const* fmt, ... )                         = 0;
-		virtual math::vec3 const& player_mins( bool ducked ) const                    = 0;
-		virtual math::vec3 const& player_maxs( bool ducked ) const                    = 0;
-		virtual math::vec3 const& player_view_offset( bool ducked ) const             = 0;
-		virtual bool is_moving_player_stuck( ) const                                  = 0;
-		virtual c_base_entity* get_moving_player( ) const                             = 0;
-		virtual void unblock_pusher( c_base_entity* player, c_base_entity* pusher )   = 0;
-		virtual void setup_movement_bounds( move_data_t* movement )                   = 0;
+		virtual void process_movement( sdk::c_base_player* player, move_data_t* movement )    = 0;
+		virtual void reset( )                                                                 = 0;
+		virtual void start_track_prediction_errors( sdk::c_base_player* player )              = 0;
+		virtual void finish_track_prediction_errors( sdk::c_base_player* player )             = 0;
+		virtual void difference_print( char const* fmt, ... )                                 = 0;
+		virtual math::vec3 const& player_mins( bool ducked ) const                            = 0;
+		virtual math::vec3 const& player_maxs( bool ducked ) const                            = 0;
+		virtual math::vec3 const& player_view_offset( bool ducked ) const                     = 0;
+		virtual bool is_moving_player_stuck( ) const                                          = 0;
+		virtual sdk::c_base_player* get_moving_player( ) const                                = 0;
+		virtual void unblock_pusher( sdk::c_base_player* player, sdk::c_base_player* pusher ) = 0;
+		virtual void setup_movement_bounds( move_data_t* movement )                           = 0;
 	};
 
 	class i_prediction
@@ -98,10 +98,10 @@ namespace sdk
 		virtual bool is_first_time_predicted( void ) const;
 		virtual int get_last_ack_command_number( void ) const;
 		virtual int get_incoming_packet_number( void ) const;
-		virtual void check_moving_ground( c_base_entity* player, double frame_time )                                     = 0;
-		virtual void run_command( c_base_entity* player, c_user_cmd* cmd, i_move_helper* move_helper )                   = 0;
-		virtual void setup_move( c_base_entity* player, c_user_cmd* cmd, i_move_helper* move_helper, move_data_t* data ) = 0;
-		virtual void finish_move( c_base_entity* player, c_user_cmd* cmd, move_data_t* data )                            = 0;
+		virtual void check_moving_ground( sdk::c_base_player* player, double frame_time )                                     = 0;
+		virtual void run_command( sdk::c_base_player* player, c_user_cmd* cmd, i_move_helper* move_helper )                   = 0;
+		virtual void setup_move( sdk::c_base_player* player, c_user_cmd* cmd, i_move_helper* move_helper, move_data_t* data ) = 0;
+		virtual void finish_move( sdk::c_base_player* player, c_user_cmd* cmd, move_data_t* data )                            = 0;
 
 		std::int32_t& predicted_commands( )
 		{
