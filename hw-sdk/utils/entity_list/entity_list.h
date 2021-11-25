@@ -8,7 +8,7 @@
 
 namespace entity_list
 {
-	inline std::deque< sdk::i_client_entity* > entities;
+	inline std::deque< sdk::i_client_entity* > players;
 	inline sdk::c_cs_player* local_player;
 
 	void update( );

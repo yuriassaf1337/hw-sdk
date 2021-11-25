@@ -27,7 +27,7 @@ void __stdcall create_move_function( int sequence_number, float input_sample_fra
 		send_packet = false;
 
 	verified->command  = *command;
-	verified->checksum = command->checksum( ); 
+	verified->checksum = command->checksum( );
 }
 
 __declspec( naked ) void __fastcall hooks::create_move::create_move_detour( sdk::i_client_dll* _this, void* edx, int sequence_number,

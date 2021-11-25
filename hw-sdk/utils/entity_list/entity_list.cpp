@@ -3,7 +3,7 @@
 
 void entity_list::update( )
 {
-	entities.clear( );
+	players.clear( );
 
 	auto local_player_index = g_interfaces.engine->get_local_player( );
 
@@ -40,7 +40,7 @@ void entity_list::update( )
 			if ( player->health( ) < 1 )
 				continue;
 
-			entities.push_back( entity );
+			players.push_back( entity );
 		}
 	}
 }
