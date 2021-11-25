@@ -23,8 +23,8 @@ namespace sdk
 		virtual const char* get_command_line_value( const char* name )                                = 0;
 		virtual con_command_base* find_command_base( const char* name )                               = 0;
 		virtual const con_command_base* find_command_base( const char* name ) const                   = 0;
-		virtual con_var* FindVar( const char* var_name )                                              = 0;
-		virtual const con_var* FindVar( const char* var_name ) const                                  = 0;
+		virtual con_var* find_var( const char* var_name )                                             = 0;
+		virtual const con_var* find_var( const char* var_name ) const                                 = 0;
 		virtual con_command* find_command( const char* name )                                         = 0;
 		virtual const con_command* find_command( const char* name ) const                             = 0;
 		virtual void install_global_change_callback( fn_change_callback callback )                    = 0;

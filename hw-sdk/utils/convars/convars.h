@@ -1,0 +1,38 @@
+#pragma once
+#include "../../game/sdk/classes/i_cvar.h"
+#include "../../globals/intefaces/interfaces.h"
+
+namespace convars
+{
+	struct convar_t {
+		// convar's hash id
+		std::uint32_t hash{ };
+		// convar's pointer
+		sdk::con_var* cvar;
+
+		explicit convar_t( std::uint32_t cvar_hash, const char* cvar_name )
+		{
+			// set our convar hash
+			hash = cvar_hash;
+			// get convar pointer off of its name
+			cvar = g_interfaces.convar->find_var( cvar_name );
+		}
+	};
+
+	struct impl {
+	public:
+		static std::unordered_map< std::uint32_t, convars::convar_t > convar_map;
+
+		void init( );
+
+		// ex of usage(atleast i think its possible to do it)
+		// returns convar pointer:
+		//	g_convars[_("sv_autobunnyhopping")]
+		// will set value of cvar:
+		//  g_convars[_("sv_autobunnyhopping")]->set_bool(true);
+
+		constexpr sdk::con_var* operator[]( const char* convar_name ) { }
+	};
+} // namespace convars
+
+inline convars::impl g_convars;
