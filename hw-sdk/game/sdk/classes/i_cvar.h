@@ -1,4 +1,6 @@
 #pragma once
+#include "../../../globals/macros/macros.h"
+#include "../enums/cvar_ids.h"
 #include "../structs/color.h"
 #include "i_app_system.h"
 
@@ -13,7 +15,61 @@ using fn_change_callback = void ( * )( i_con_var* var, const char* pOldValue, fl
 
 namespace sdk
 {
-	struct con_var;
+	class con_var
+	{
+	public:
+		void set_value( const char* value )
+		{
+			return virtual_func::call< void, const char* >( this, 14, value );
+		}
+		void set_value( float value )
+		{
+			return virtual_func::call< void, float >( this, 15, value );
+		}
+		void set_value( int value )
+		{
+			return virtual_func::call< void, int >( this, 16, value );
+		}
+		void set_value( bool value )
+		{
+			return virtual_func::call< void, int >( this, 16, static_cast< int >( value ) );
+		}
+		float get_float( )
+		{
+			return virtual_func::call< float >( this, 12 );
+		}
+		int get_int( )
+		{
+			return virtual_func::call< int >( this, 13 );
+		}
+		bool get_bool( )
+		{
+			return !!this->get_int( );
+		}
+		color get_color( )
+		{
+			return virtual_func::call< color >( this, 14 );
+		}
+
+		PAD( 0x4 );
+		con_var* next;
+		std::int32_t is_registered;
+		char* name;
+		char* help_string;
+		std::int32_t flags;
+		PAD( 0x4 );
+		con_var* parent;
+		char* default_value;
+		char* string;
+		std::int32_t string_length;
+		float float_value;
+		std::int32_t numerical_value;
+		std::int32_t has_min;
+		float min;
+		std::int32_t has_max;
+		float max;
+		// utl_vector< unsigned int* > callbacks;
+	};
 	struct i_cvar : public i_app_system {
 	public:
 		virtual c_var_dll_identifier allocate_dll_indentifier( )                                           = 0;
