@@ -14,7 +14,7 @@
 #pragma comment( lib, "d3d9.lib" )
 #pragma comment( lib, "d3dx9.lib" )
 
-enum font_flags_t : unsigned
+enum font_flags : unsigned
 {
 	FLAG_NONE,
 	FLAG_DROPSHADOW,
@@ -108,12 +108,6 @@ namespace render
 inline render::impl g_render;
 namespace fonts
 {
-	// TODO @ liga - this is cancer, we dont want have to create a pointer to every font we create
-	// takes way more work. we could just do a hashed string vector and push back font names, ex:
-	//
-	// inline std::vector<std::uint32_t> fonts;
-	// fonts.push_back(HASH("main_font"));
-
 	inline std::deque< font > font_list;
 
 	void create_font( const char* name, std::size_t size, std::size_t weight, bool anti_aliased, const char* font_name );

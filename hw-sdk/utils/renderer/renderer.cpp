@@ -12,6 +12,7 @@ void render::impl::init( IDirect3DDevice9* buffer_device )
 	fonts::create_font( _( "main_font_bold" ), 14, FW_BOLD, true, _( "Tahoma" ) );
 	fonts::create_font( _( "main_verdana_font" ), 13, FW_NORMAL, true, _( "Verdana" ) );
 	fonts::create_font( _( "main_verdana_bold_font" ), 13, FW_BOLD, true, _( "Verdana" ) );
+	fonts::create_font( _( "indicator_verdana_font" ), 30, FW_BOLD, true, _( "Verdana" ) );
 
 	console::print< console::log_level::DEBUG >( _( "Created {} fonts." ), fonts::font_list.size( ) );
 }
@@ -71,19 +72,60 @@ void render::impl::render_text( int x, int y, unsigned int alignment, unsigned i
 
 	auto set_rect = []( RECT* rect, int x, int y ) { SetRect( rect, x, y, x, y ); };
 
-	if ( flags & font_flags_t::FLAG_NONE ) {
+	if ( !( alignment & font_alignment::AL_DEFAULT ) ) {
+		if ( alignment & font_alignment::AL_VERTICAL_TOP )
+			y -= text_size.y;
+		if ( alignment & font_alignment::AL_VERTICAL_CENTER )
+			y -= text_size.y / 2;
+		if ( alignment & font_alignment::AL_HORIZONTAL_LEFT )
+			x -= text_size.x;
+		if ( alignment & font_alignment::AL_HORIZONTAL_CENTER )
+			x -= text_size.x;
+	}
+
+	if ( flags & font_flags::FLAG_NONE ) {
 		set_rect( &rect, x, y );
 		font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, _color.to_u32( ) );
 	} else {
-		if ( flags & font_flags_t::FLAG_DROPSHADOW ) {
-			set_rect( &rect, ++x, ++y );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_u32( ) );
+		if ( flags & font_flags::FLAG_DROPSHADOW ) {
+			set_rect( &rect, x + 1 , y + 1 );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( _color.r, 0, 0, 0 ).to_u32( ) );
 
-			set_rect( &rect, --x, --y );
+			set_rect( &rect, x, y );
 			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, _color.to_u32( ) );
 		}
 
-		if ( flags & font_flags_t::FLAG_OUTLINE ) { }
+		if ( flags & font_flags::FLAG_OUTLINE ) {
+			set_rect( &rect, x, y + 1 );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+			set_rect( &rect, x + 1, y );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+			set_rect( &rect, x, y - 1 );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+			set_rect( &rect, x - 1, y );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+
+			set_rect( &rect, x + 1, y );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+			set_rect( &rect, x, y + 1 );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+			set_rect( &rect, x - 1, y );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+			set_rect( &rect, x, y - 1 );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+
+			set_rect( &rect, x + 1, y + 1 );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+			set_rect( &rect, x - 1, y - 1 );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+			set_rect( &rect, x + 1, y - 1 );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+			set_rect( &rect, x - 1, y + 1 );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+
+			set_rect( &rect, x, y );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, _color.to_u32( ) );
+		}
 	}
 }
 

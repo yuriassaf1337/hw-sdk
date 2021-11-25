@@ -53,7 +53,7 @@ bool gui::forms::window_impl::begin_window( const std::string_view name )
 	g_render.render_rectangle< int >( g_gui.position + 2, g_gui.size - 4, gui::pallete::third_outline( ) );
 	// TODO @ LIGA - add gradient dumb f
 	g_render.render_filled_rectangle< int >( g_gui.position + 3, g_gui.size - 6, gui::pallete::first_outline( ) );
-	g_render.render_text( g_gui.position + math::vec2< int >( 20, 20 ), font_alignment::AL_VERTICAL_TOP, font_flags_t::FLAG_DROPSHADOW, name.data( ),
+	g_render.render_text( g_gui.position + math::vec2< int >( 20, 20 ), font_alignment::AL_VERTICAL_TOP, font_flags::FLAG_DROPSHADOW, name.data( ),
 	                      fonts::find( _( "main_font" ) ), color( 255, 255, 255, 255 ) );
 	// swap stack
 	std::stack< math::vec2< int > >( ).swap( g_gui.cursor_pos_stack );
