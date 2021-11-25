@@ -25,7 +25,7 @@ namespace convars
 
 	struct impl {
 	public:
-		static std::unordered_map< std::uint32_t, convars::convar_t > convar_map;
+		std::unordered_map< std::uint32_t, convars::convar_t > convar_map;
 
 		void init( );
 
@@ -38,7 +38,10 @@ namespace convars
 		// will set value of cvar:
 		//  g_convars[_("sv_autobunnyhopping")]->set_bool(true);
 
-		constexpr sdk::con_var* operator[]( const char* convar_name ) { }
+		sdk::con_var* operator[]( std::uint32_t convar_hash )
+		{
+			return get_pointer( convar_hash );
+		}
 	};
 } // namespace convars
 

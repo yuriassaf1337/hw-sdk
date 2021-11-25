@@ -14,9 +14,9 @@ sdk::con_var* convars::impl::get_pointer( std::uint32_t hash )
 
 void convars::impl::init( )
 {
-	constexpr auto emplace_cvar = []( const char* convar_name ) {
-		convar_map.emplace( fnv::hash( convar_name ), convars::convar_t( fnv::hash( convar_name ), _( convar_name ) ) );
-	};
+#define EMPLACE_CVAR( str ) convar_map.emplace( HASH( str ), convars::convar_t( HASH( str ), _( str ) ) )
 
-	emplace_cvar( "sv_autobunnyhopping" );
+	EMPLACE_CVAR( "sv_autobunnyhopping" );
+
+#undef EMPLACE_CVAR
 }
