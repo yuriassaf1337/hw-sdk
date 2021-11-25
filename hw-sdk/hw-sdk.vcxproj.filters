@@ -422,6 +422,15 @@
     <ClInclude Include="game\sdk\classes\i_cvar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="dependencies\audio\peter_griffin\loaded.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\audio\soilder\loaded.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\audio\kyu\loaded.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="utils\math\math.inl">

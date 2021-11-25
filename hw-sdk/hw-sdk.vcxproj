@@ -195,6 +195,9 @@
     <ClCompile Include="utils\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dependencies\audio\kyu\loaded.h" />
+    <ClInclude Include="dependencies\audio\peter_griffin\loaded.h" />
+    <ClInclude Include="dependencies\audio\soilder\loaded.h" />
     <ClInclude Include="dependencies\checksum\checksum.hpp" />
     <ClInclude Include="dependencies\formatting\fmt\chrono.h" />
     <ClInclude Include="dependencies\formatting\fmt\color.h" />

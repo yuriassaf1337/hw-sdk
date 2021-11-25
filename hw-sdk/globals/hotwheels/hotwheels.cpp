@@ -1,6 +1,12 @@
-#include "hotwheels.h"
+#include "../../dependencies/audio/kyu/loaded.h"
+#include "../../dependencies/audio/peter_griffin/loaded.h"
+#include "../../dependencies/audio/soilder/loaded.h"
+
+#include <sapi.h>
+
 #include "../../utils/helpers/function_enforce/function_enforce.h"
 #include "../csgo.h"
+#include "hotwheels.h"
 
 #include "../../utils/keybinds/keybinds.h"
 #include "../hooks/hooking.h"
@@ -17,6 +23,8 @@ DWORD WINAPI hotwheels::init( void* module_handle )
 	ENFORCE_FAILURE( g_interfaces.init( ), "Failed to init interfaces" );
 
 	ENFORCE_FAILURE( hooks::init( ), "Failed to init hooks" );
+
+	LI_FN( PlaySoundA )( reinterpret_cast< LPCSTR >( soilder::loaded ), nullptr, SND_MEMORY | SND_ASYNC );
 
 	g_input.add_keybind( VK_DELETE, []( bool pressed ) -> void {
 		HANDLE thread = LI_FN( CreateThread )( nullptr, 0, reinterpret_cast< LPTHREAD_START_ROUTINE >( unload ), nullptr, 0, nullptr );
