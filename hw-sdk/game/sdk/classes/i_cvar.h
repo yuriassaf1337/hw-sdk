@@ -1,5 +1,4 @@
 #pragma once
-#include "../../../globals/macros/macros.h"
 #include "../enums/cvar_ids.h"
 #include "../structs/color.h"
 #include "i_app_system.h"
@@ -50,14 +49,21 @@ namespace sdk
 		{
 			return virtual_func::call< color >( this, 14 );
 		}
+		// cant have pad function here cause of build errors. RIP
+	private:
+		char pad_0x0000[ 0x4 ];
 
-		PAD( 0x4 );
+	public:
 		con_var* next;
 		std::int32_t is_registered;
 		char* name;
 		char* help_string;
 		std::int32_t flags;
-		PAD( 0x4 );
+
+	private:
+		char pad_0x0018[ 0x4 ];
+
+	public:
 		con_var* parent;
 		char* default_value;
 		char* string;
