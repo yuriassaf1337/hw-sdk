@@ -27,7 +27,7 @@ namespace sdk
 		sdk::i_game_movement* game_movement;
 		sdk::i_prediction* prediction;
 		sdk::i_move_helper* move_helper;
-		sdk::i_c_var* convar;
+		sdk::i_cvar* convar;
 
 		bool init( );
 	};

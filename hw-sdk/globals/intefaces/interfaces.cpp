@@ -25,7 +25,7 @@ bool sdk::interfaces::init( )
 
 	move_helper = **g_client_dll.pattern_scan( _( "8B 0D ? ? ? ? 8B 45 ? 51 8B D4 89 02 8B 01" ) ).add( 0x2 ).as< sdk::i_move_helper*** >( );
 
-	convar = g_vstdlib_dll.find_interface< sdk::i_c_var* >( _( "VEngineCvar007" ) );
+	convar = g_vstdlib_dll.find_interface< sdk::i_cvar* >( _( "VEngineCvar007" ) );
 
 	MOCKING_CATCH( return false );
 

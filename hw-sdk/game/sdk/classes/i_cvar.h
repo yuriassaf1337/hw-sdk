@@ -14,8 +14,7 @@ using fn_change_callback = void ( * )( i_con_var* var, const char* pOldValue, fl
 
 namespace sdk
 {
-	struct i_c_var : public i_app_system
-	{
+	struct i_cvar : public i_app_system {
 	public:
 		virtual c_var_dll_identifier allocate_dll_indentifier( )                                      = 0;
 		virtual void register_con_command( con_command_base* base )                                   = 0;
