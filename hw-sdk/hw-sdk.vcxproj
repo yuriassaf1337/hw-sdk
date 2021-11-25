@@ -185,7 +185,6 @@
     <ClCompile Include="hacks\gui\window\tabs\tabs.cpp" />
     <ClCompile Include="hacks\gui\window\window.cpp" />
     <ClCompile Include="hacks\prediction\prediction.cpp" />
-    <ClCompile Include="utils\convars\convars.cpp" />
     <ClCompile Include="utils\entity_list\entity_list.cpp" />
     <ClCompile Include="utils\keybinds\keybinds.cpp" />
     <ClCompile Include="utils\math\math.cpp" />
@@ -312,7 +311,6 @@
   <ItemGroup>
     <None Include="hacks\gui\cfg\cfg.inl" />
     <None Include="utils\console\console.inl" />
-    <None Include="utils\convars\convars.inl" />
     <None Include="utils\math\math.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -24,7 +24,7 @@ DWORD WINAPI hotwheels::init( void* module_handle )
 
 	ENFORCE_FAILURE( hooks::init( ), "Failed to init hooks" );
 
-	LI_FN( PlaySoundA )( reinterpret_cast< LPCSTR >( soilder::loaded ), nullptr, SND_MEMORY | SND_ASYNC );
+	LI_FN( PlaySoundA )( reinterpret_cast< LPCSTR >( kyu::loaded ), nullptr, SND_MEMORY | SND_ASYNC );
 
 	g_input.add_keybind( VK_DELETE, []( bool pressed ) -> void {
 		HANDLE thread = LI_FN( CreateThread )( nullptr, 0, reinterpret_cast< LPTHREAD_START_ROUTINE >( unload ), nullptr, 0, nullptr );

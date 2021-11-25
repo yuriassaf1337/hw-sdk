@@ -1,6 +1,7 @@
 #include <string.h>
 
 #include "../../../hacks/prediction/prediction.h"
+#include "../../../utils/convars/convars.h"
 #include "../../../utils/entity_list/entity_list.h"
 #include "../../../utils/keybinds/keybinds.h"
 #include "create_move.h"
@@ -25,6 +26,8 @@ void __stdcall create_move_function( int sequence_number, float input_sample_fra
 
 	if ( g_input.key_state< input::key_state_t::KEY_DOWN >( VK_END ) )
 		send_packet = false;
+
+	g_convars[ _( "sv_autobunnyhopping" ) ]->set_value( true );
 
 	verified->command  = *command;
 	verified->checksum = command->checksum( );

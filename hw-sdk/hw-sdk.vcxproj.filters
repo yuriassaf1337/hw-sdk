@@ -99,9 +99,6 @@
     <ClCompile Include="utils\netvar\netvar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utils\convars\convars.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals\includes\includes.h">
@@ -449,9 +446,6 @@
       <Filter>Header Files</Filter>
     </None>
     <None Include="hacks\gui\cfg\cfg.inl">
-      <Filter>Header Files</Filter>
-    </None>
-    <None Include="utils\convars\convars.inl">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>
