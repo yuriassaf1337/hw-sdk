@@ -13,6 +13,8 @@ namespace hooks
 {
 	CREATE_HOOK_HELPER( create_move_hook, __declspec( naked ) void( __fastcall )( sdk::i_client_dll*, void*, int, float, bool ) );
 
+	inline bool can_shoot;
+
 	struct create_move {
 		static void __fastcall create_move_detour( sdk::i_client_dll* _this, void* edx, int sequence_number, float input_sample_frametime,
 		                                           bool active );

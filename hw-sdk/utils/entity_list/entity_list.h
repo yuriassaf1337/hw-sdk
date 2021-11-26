@@ -9,7 +9,9 @@
 namespace entity_list
 {
 	inline std::deque< sdk::i_client_entity* > players;
+
 	inline sdk::c_cs_player* local_player;
+	inline sdk::c_base_combat_weapon* local_weapon;
 
 	void update( );
 } // namespace entity_list
