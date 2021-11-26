@@ -75,9 +75,15 @@ struct font {
 namespace render
 {
 	inline IDirect3DDevice9* device;
+	inline IDirect3DStateBlock9* state;
+	inline IDirect3DVertexDeclaration9* vertex_declaration;
+	inline IDirect3DVertexShader9* vertex_shader;
 
 	struct impl {
 		void init( IDirect3DDevice9* buffer_device );
+
+		void setup_state( );
+		void finish_state( );
 
 		void create_font( std::size_t size, std::size_t weight, bool anti_aliased, const char* name, LPD3DXFONT& font );
 
@@ -102,6 +108,13 @@ namespace render
 		void render_text( const math::vec2< T >& pos, unsigned int alignment, unsigned int flags, const char* string, LPD3DXFONT font, color color )
 		{
 			render_text( pos.x, pos.y, alignment, flags, string, font, color );
+		}
+
+		void render_vertical_gradient( int x, int y, int width, int height, color from, color to, bool is_horizontal );
+		template< class T = int >
+		void render_vertical_gradient( const math::vec2< T >& pos, int width, int height, color from, color to, bool is_horizontal )
+		{
+			render_vertical_gradient( pos.x, pos.y, width, height, from, to, is_horizontal );
 		}
 	};
 } // namespace render

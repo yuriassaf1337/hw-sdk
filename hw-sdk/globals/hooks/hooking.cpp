@@ -2,7 +2,7 @@
 
 #include "../../dependencies/mocking_bird/mocking_bird.h"
 #include "create_move/create_move.h"
-#include "present/present.h"
+#include "end_scene/end_scene.h"
 #include "wndproc/wndproc.h"
 
 bool hooks::init( )
@@ -13,7 +13,7 @@ bool hooks::init( )
 		return false;
 
 	hooks::wndproc::init( );
-	hooks::present::init( );
+	hooks::end_scene::init( );
 	hooks::create_move::init( );
 
 	MOCKING_CATCH( return false );
@@ -24,7 +24,7 @@ bool hooks::init( )
 void hooks::unload( )
 {
 	hooks::wndproc::unload( );
-	hooks::present::unload( );
+	hooks::end_scene::unload( );
 	hooks::create_move::unload( );
 
 	MH_Uninitialize( );

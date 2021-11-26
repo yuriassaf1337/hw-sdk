@@ -54,7 +54,7 @@
     <ClCompile Include="globals\intefaces\interfaces.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="globals\hooks\present\present.cpp">
+    <ClCompile Include="globals\hooks\end_scene\end_scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="globals\hooks\hooking.cpp">
@@ -308,7 +308,7 @@
     <ClInclude Include="globals\intefaces\interfaces.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="globals\hooks\present\present.h">
+    <ClInclude Include="globals\hooks\end_scene\end_scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="utils\keybinds\keybinds.h">
