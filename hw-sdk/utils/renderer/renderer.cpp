@@ -8,13 +8,13 @@ void render::impl::init( IDirect3DDevice9* buffer_device )
 {
 	render::device = buffer_device;
 
-	fonts::create_font( _( "main_font" ), 14, FW_NORMAL, true, _( "Tahoma" ) );
-	fonts::create_font( _( "main_font_bold" ), 14, FW_BOLD, true, _( "Tahoma" ) );
-	fonts::create_font( _( "main_verdana_font" ), 13, FW_NORMAL, true, _( "Verdana" ) );
-	fonts::create_font( _( "main_verdana_bold_font" ), 13, FW_BOLD, true, _( "Verdana" ) );
-	fonts::create_font( _( "indicator_verdana_font" ), 30, FW_BOLD, true, _( "Verdana" ) );
+	g_fonts.create_font( _( "main_font" ), 14, FW_NORMAL, true, _( "Tahoma" ) );
+	g_fonts.create_font( _( "main_font_bold" ), 14, FW_BOLD, true, _( "Tahoma" ) );
+	g_fonts.create_font( _( "main_verdana_font" ), 13, FW_NORMAL, true, _( "Verdana" ) );
+	g_fonts.create_font( _( "main_verdana_bold_font" ), 13, FW_BOLD, true, _( "Verdana" ) );
+	g_fonts.create_font( _( "indicator_verdana_font" ), 30, FW_BOLD, true, _( "Verdana" ) );
 
-	console::print< console::log_level::DEBUG >( _( "Created {} fonts." ), fonts::font_list.size( ) );
+	console::print< console::log_level::DEBUG >( _( "Created {} fonts." ), g_fonts.font_list.size( ) );
 }
 
 void render::impl::setup_state( )
@@ -208,7 +208,7 @@ void render::impl::render_vertical_gradient( int x, int y, int width, int height
 	device->DrawPrimitiveUP( D3DPT_TRIANGLESTRIP, 2, &vertices, 20 );
 }
 
-void fonts::create_font( const char* name, std::size_t size, std::size_t weight, bool anti_aliased, const char* font_name )
+void fonts::impl::create_font( const char* name, std::size_t size, std::size_t weight, bool anti_aliased, const char* font_name )
 {
 	LPD3DXFONT buffer_font;
 

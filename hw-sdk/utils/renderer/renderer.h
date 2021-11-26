@@ -69,7 +69,7 @@ public:
 
 struct font {
 	LPD3DXFONT _font;
-	unsigned int name;
+	std::uint32_t name;
 };
 
 namespace render
@@ -103,9 +103,9 @@ namespace render
 		}
 
 		D3DXVECTOR2 render_text_size( const char* string, LPD3DXFONT font );
-		void render_text( int x, int y, unsigned int alignment, unsigned int flags, const char* string, LPD3DXFONT font, color color );
+		void render_text( int x, int y, std::uint32_t alignment, std::uint32_t flags, const char* string, LPD3DXFONT font, color color );
 		template< class T = int >
-		void render_text( const math::vec2< T >& pos, unsigned int alignment, unsigned int flags, const char* string, LPD3DXFONT font, color color )
+		void render_text( const math::vec2< T >& pos, std::uint32_t alignment, std::uint32_t flags, const char* string, LPD3DXFONT font, color color )
 		{
 			render_text( pos.x, pos.y, alignment, flags, string, font, color );
 		}
@@ -119,28 +119,43 @@ namespace render
 	};
 } // namespace render
 inline render::impl g_render;
+
 namespace fonts
 {
-	inline std::deque< font > font_list;
+	struct impl {
+		std::deque< font > font_list;
 
-	void create_font( const char* name, std::size_t size, std::size_t weight, bool anti_aliased, const char* font_name );
+		void create_font( const char* name, std::size_t size, std::size_t weight, bool anti_aliased, const char* font_name );
 
-	inline LPD3DXFONT find( const char* name )
-	{
-		for ( auto iterator = font_list.begin( ); iterator != font_list.end( ); iterator++ ) {
-			if ( iterator->name == HASH( name ) )
-				return iterator->_font;
+		inline LPD3DXFONT find( const char* name )
+		{
+			for ( auto iterator = font_list.begin( ); iterator != font_list.end( ); iterator++ ) {
+				if ( iterator->name == HASH( name ) )
+					return iterator->_font;
+			}
+
+			return nullptr;
+		}
+		inline LPD3DXFONT find( std::uint32_t name )
+		{
+			for ( auto iterator = font_list.begin( ); iterator != font_list.end( ); iterator++ ) {
+				if ( iterator->name == name )
+					return iterator->_font;
+			}
+
+			return nullptr;
 		}
 
-		return nullptr;
-	}
-	inline LPD3DXFONT find( unsigned int name )
-	{
-		for ( auto iterator = font_list.begin( ); iterator != font_list.end( ); iterator++ ) {
-			if ( iterator->name == name )
-				return iterator->_font;
+		LPD3DXFONT operator[]( const char* name ) 
+		{
+			return find(name);
 		}
 
-		return nullptr;
-	}
+		LPD3DXFONT operator[]( std::uint32_t hash ) 
+		{
+			return find(hash);
+		}
+	};
 } // namespace fonts
+
+inline fonts::impl g_fonts;
