@@ -121,6 +121,10 @@ namespace render
 
 		template< auto gradient_type = gradient_type_t::HORIZONTAL, class T = int >
 		void render_gradient( const math::vec2< T >& pos, const math::vec2< T >& size, color from, color to );
+
+		// ty aiden
+		template< class T = int >
+		void quadratic_curve( const math::vec2< T >& start, const math::vec2< T >& control, const math::vec2< T >& end, color color );
 	};
 } // namespace render
 inline render::impl g_render;
