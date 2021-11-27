@@ -3,6 +3,10 @@
 #include "../../globals/hooks/cl_move/cl_move.h"
 #include "../../globals/intefaces/interfaces.h"
 
+// NOTE: There is no reason to rebuild these functions!! Rebuilding would waste CPU and time.
+//       These functions inside of the game are the exact same as if we were to rebuild them.
+//       Valve may be stupid but they know how to optimize a game (sometimes).
+
 void prediction::impl::pre_think( sdk::c_base_player* player )
 {
 	static auto pre_think_signature = g_client_dll.pattern_scan( _( "55 8B EC 83 E4 ? 51 56 8B F1 8B 06" ) ).as< std::uintptr_t >( );
@@ -27,8 +31,8 @@ void prediction::impl::update( ) { }
 void prediction::impl::start( sdk::c_base_player* player, sdk::c_user_cmd* command )
 {
 	player->current_command( ) = command;
-	player->set_prediction_random_seed( command );
-	player->set_prediction_player( player );
+	sdk::c_base_player::set_prediction_random_seed( command );
+	sdk::c_base_player::set_prediction_player( player );
 
 	backup_vars.tick_base    = get_tick_base( player, command );
 	backup_vars.current_time = g_interfaces.globals->current_time;
@@ -78,8 +82,8 @@ void prediction::impl::end( sdk::c_base_player* player, sdk::c_user_cmd* command
 	g_interfaces.globals->frame_time   = backup_vars.frame_time;
 
 	player->current_command( ) = nullptr;
-	player->set_prediction_random_seed( nullptr );
-	player->set_prediction_player( nullptr );
+	sdk::c_base_player::set_prediction_random_seed( nullptr );
+	sdk::c_base_player::set_prediction_player( nullptr );
 
 	g_interfaces.game_movement->reset( );
 }

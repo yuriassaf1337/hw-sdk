@@ -21,11 +21,10 @@ void __stdcall create_move_function( int sequence_number, float input_sample_fra
 	g_prediction.update( );
 	g_prediction.start( entity_list::local_player, command );
 	{
+		if ( g_input.key_state< input::key_state_t::KEY_DOWN >( VK_END ) )
+			send_packet = false;
 	}
 	g_prediction.end( entity_list::local_player, command );
-
-	if ( g_input.key_state< input::key_state_t::KEY_DOWN >( VK_END ) )
-		send_packet = false;
 
 	verified->command  = *command;
 	verified->checksum = command->checksum( );
