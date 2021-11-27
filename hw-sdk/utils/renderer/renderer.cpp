@@ -94,10 +94,21 @@ void render::impl::render_rectangle( int x, int y, int width, int height, color 
 {
 	DEVICE_SAFETY( );
 
-	g_render.render_line( x, y, x + width, y, color );
-	g_render.render_line( x, y, x, y + height, color );
-	g_render.render_line( x, y + height, x + width, y + height, color );
-	g_render.render_line( x + width, y, x + width, y + height, color );
+	const int temp_size_x = width - 1, temp_size_y = height - 1;
+
+	vertex segments[] = { { static_cast< float >( x ), static_cast< float >( y ), 0.01f, 0.01f, color.to_d3d( ) },
+		                  { static_cast< float >( x + temp_size_x ), static_cast< float >( temp_size_x ), 0.01f, 0.01f, color.to_d3d( ) },
+		                  { static_cast< float >( x + temp_size_x ), float( temp_size_x + temp_size_y ), 0.01f, 0.01f, color.to_d3d( ) },
+		                  { static_cast< float >( x ), static_cast< float >( y + temp_size_y ), 0.01f, 0.01f, color.to_d3d( ) },
+		                  { static_cast< float >( x ), static_cast< float >( temp_size_x ), 0.01f, 0.01f, color.to_d3d( ) } };
+
+	render::device->SetTexture( 0, nullptr );
+	FAIL_CHECK( render::device->DrawPrimitiveUP( D3DPT_LINESTRIP, 4, &segments, 20 ) );
+
+	// g_render.render_line( x, y, x + width, y, color );
+	// g_render.render_line( x, y, x, y + height, color );
+	// g_render.render_line( x, y + height, x + width, y + height, color );
+	// g_render.render_line( x + width, y, x + width, y + height, color );
 }
 
 void render::impl::render_filled_rectangle( int x, int y, int width, int height, color color )
@@ -114,7 +125,7 @@ D3DXVECTOR2 render::impl::render_text_size( const char* string, LPD3DXFONT font 
 {
 	RECT rect{ };
 
-	font->DrawTextA( nullptr, string, -1, &rect, DT_CALCRECT, color( 0, 0, 0, 0 ).to_u32( ) );
+	font->DrawTextA( nullptr, string, -1, &rect, DT_CALCRECT, color( 0, 0, 0, 0 ).to_d3d( ) );
 
 	return D3DXVECTOR2( rect.left - rect.right, rect.bottom - rect.top );
 }
@@ -142,70 +153,48 @@ void render::impl::render_text( int x, int y, unsigned int alignment, unsigned i
 
 	if ( flags & font_flags::FLAG_NONE ) {
 		set_rect( &rect, x, y );
-		font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, _color.to_u32( ) );
+		font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, _color.to_d3d( ) );
 	} else {
 		if ( flags & font_flags::FLAG_DROPSHADOW ) {
 			set_rect( &rect, x + 1, y + 1 );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( _color.r, 0, 0, 0 ).to_u32( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( _color.r, 0, 0, 0 ).to_d3d( ) );
 
 			set_rect( &rect, x, y );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, _color.to_u32( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, _color.to_d3d( ) );
 		}
 
 		if ( flags & font_flags::FLAG_OUTLINE ) {
 			set_rect( &rect, x, y + 1 );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
 			set_rect( &rect, x + 1, y );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
 			set_rect( &rect, x, y - 1 );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
 			set_rect( &rect, x - 1, y );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
 
 			set_rect( &rect, x + 1, y );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
 			set_rect( &rect, x, y + 1 );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
 			set_rect( &rect, x - 1, y );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
 			set_rect( &rect, x, y - 1 );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
 
 			set_rect( &rect, x + 1, y + 1 );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
 			set_rect( &rect, x - 1, y - 1 );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
 			set_rect( &rect, x + 1, y - 1 );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
 			set_rect( &rect, x - 1, y + 1 );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_u32( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
 
 			set_rect( &rect, x, y );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, _color.to_u32( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, _color.to_d3d( ) );
 		}
 	}
-}
-
-void render::impl::render_vertical_gradient( int x, int y, int width, int height, color from, color to, bool is_horizontal )
-{
-	DEVICE_SAFETY( );
-
-	math::vec2< float > a{ static_cast< float >( x ), static_cast< float >( y ) }, b{ static_cast< float >( width ), static_cast< float >( height ) };
-
-	struct vertex_mod {
-		float x, y, z, rhw;
-		std::uint32_t c;
-	};
-
-	vertex_mod vertices[ 4 ]{
-		{ a.x, a.y, 0.01f, 0.01f, from.to_u32( ) },
-		{ b.x, a.y, 0.01f, 0.01f, is_horizontal ? to.to_u32( ) : from.to_u32( ) },
-		{ a.x, b.y, 0.01f, 0.01f, is_horizontal ? from.to_u32( ) : to.to_u32( ) },
-		{ b.x, b.y, 0.01f, 0.01f, to.to_u32( ) },
-	};
-
-	device->SetTexture( 0x0, nullptr );
-	device->DrawPrimitiveUP( D3DPT_TRIANGLESTRIP, 2, &vertices, 20 );
 }
 
 void fonts::impl::create_font( const char* name, std::size_t size, std::size_t weight, bool anti_aliased, const char* font_name )

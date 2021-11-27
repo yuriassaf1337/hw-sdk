@@ -448,5 +448,8 @@
     <None Include="hacks\gui\cfg\cfg.inl">
       <Filter>Header Files</Filter>
     </None>
+    <None Include="utils\renderer\renderer.inl">
+      <Filter>Header Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

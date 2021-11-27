@@ -1,5 +1,7 @@
 #pragma once
 #include <algorithm>
+#include <d3d9.h>
+#include <d3dx9.h>
 #include <iostream>
 
 // https://docs.microsoft.com/en-us/cpp/error-messages/compiler-warnings/compiler-warning-levels-3-and-4-c4244?view=msvc-160
@@ -30,9 +32,13 @@ struct color {
 	{
 		return color( r, g, b, std::clamp< std::uint8_t >( new_alpha, ( std::uint8_t )0, ( std::uint8_t )255 ) );
 	}
+	D3DCOLOR to_d3d( ) const
+	{
+		return D3DCOLOR_ARGB( a, r, g, b );
+	}
 	color lerp( const color col, const float t )
 	{
-		const auto lerp = []( const unsigned char from, const unsigned char to, const float t ) {
+		constexpr auto lerp = []( const unsigned char from, const unsigned char to, const float t ) {
 			return ( unsigned char )( ( 1.f - t ) * from + t * to );
 		};
 

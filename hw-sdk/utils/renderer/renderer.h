@@ -21,6 +21,12 @@ enum font_flags : unsigned
 	FLAG_OUTLINE
 };
 
+enum class gradient_type_t
+{
+	HORIZONTAL = 0,
+	VERTICAL
+};
+
 enum font_alignment : unsigned
 {
 	AL_DEFAULT,
@@ -43,21 +49,27 @@ public:
 	{
 		this->x      = x;
 		this->y      = y;
-		this->_color = D3DCOLOR_ARGB( c.a, c.r, c.g, c.b );
+		this->_color = c.to_d3d( );
 	}
 
 	vertex( int x, int y, color c )
 	{
 		this->x      = static_cast< float >( x );
 		this->y      = static_cast< float >( y );
-		this->_color = D3DCOLOR_ARGB( c.a, c.r, c.g, c.b );
+		this->_color = c.to_d3d( );
 	}
 
 	vertex( float x, float y, float w, float h, color c )
 	{
 		this->position  = { x, y };
 		this->tex_coord = { w, h };
-		this->_color    = D3DCOLOR_ARGB( c.a, c.r, c.g, c.b );
+		this->_color    = c.to_d3d( );
+	}
+	vertex( int x, int y, int w, int h, color c )
+	{
+		this->position  = { static_cast< float >( x ), static_cast< float >( y ) };
+		this->tex_coord = { static_cast< float >( w ), static_cast< float >( h ) };
+		this->_color    = c.to_d3d( );
 	}
 
 	vertex( const D3DXVECTOR2& pos, const D3DXVECTOR2& coord = D3DXVECTOR2( 0, 0 ) )
@@ -91,31 +103,24 @@ namespace render
 
 		void render_rectangle( int x, int y, int width, int height, color color );
 		template< class T = int >
-		void render_rectangle( const math::vec2< T >& pos, const math::vec2< T >& size, color color )
-		{
-			render_rectangle( pos.x, pos.y, size.x, size.y, color );
-		}
+		void render_rectangle( const math::vec2< T >& pos, const math::vec2< T >& size, color color );
+
 		void render_filled_rectangle( int x, int y, int width, int height, color color );
-		template< class T = int >
-		void render_filled_rectangle( const math::vec2< T >& pos, const math::vec2< T >& size, color color )
-		{
-			render_filled_rectangle( pos.x, pos.y, size.x, size.y, color );
-		}
+		template< class T >
+		void render_filled_rectangle( const math::vec2< T >& pos, const math::vec2< T >& size, color color );
 
 		D3DXVECTOR2 render_text_size( const char* string, LPD3DXFONT font );
+
 		void render_text( int x, int y, std::uint32_t alignment, std::uint32_t flags, const char* string, LPD3DXFONT font, color color );
 		template< class T = int >
-		void render_text( const math::vec2< T >& pos, std::uint32_t alignment, std::uint32_t flags, const char* string, LPD3DXFONT font, color color )
-		{
-			render_text( pos.x, pos.y, alignment, flags, string, font, color );
-		}
+		void render_text( const math::vec2< T >& pos, std::uint32_t alignment, std::uint32_t flags, const char* string, LPD3DXFONT font,
+		                  color color );
 
-		void render_vertical_gradient( int x, int y, int width, int height, color from, color to, bool is_horizontal );
-		template< class T = int >
-		void render_vertical_gradient( const math::vec2< T >& pos, int width, int height, color from, color to, bool is_horizontal )
-		{
-			render_vertical_gradient( pos.x, pos.y, width, height, from, to, is_horizontal );
-		}
+		template< auto gradient_type = gradient_type_t::HORIZONTAL >
+		void render_gradient( int x, int y, int width, int height, color from, color to );
+
+		template< auto gradient_type = gradient_type_t::HORIZONTAL, class T = int >
+		void render_gradient( const math::vec2< T >& pos, const math::vec2< T >& size, color from, color to );
 	};
 } // namespace render
 inline render::impl g_render;
@@ -146,16 +151,18 @@ namespace fonts
 			return nullptr;
 		}
 
-		LPD3DXFONT operator[]( const char* name ) 
+		LPD3DXFONT operator[]( const char* name )
 		{
-			return find(name);
+			return find( name );
 		}
 
-		LPD3DXFONT operator[]( std::uint32_t hash ) 
+		LPD3DXFONT operator[]( std::uint32_t hash )
 		{
-			return find(hash);
+			return find( hash );
 		}
 	};
 } // namespace fonts
 
 inline fonts::impl g_fonts;
+
+#include "renderer.inl"
