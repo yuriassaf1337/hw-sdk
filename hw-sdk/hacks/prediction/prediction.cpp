@@ -1,5 +1,6 @@
 #include "prediction.h"
 
+#include "../../globals/hooks/cl_move/cl_move.h"
 #include "../../globals/intefaces/interfaces.h"
 
 void prediction::impl::pre_think( sdk::c_base_player* player )
@@ -54,7 +55,17 @@ void prediction::impl::start( sdk::c_base_player* player, sdk::c_user_cmd* comma
 
 	post_think( player );
 
-	player->tick_base() = backup_vars.tick_base;
+	player->tick_base( ) = backup_vars.tick_base;
+
+	if ( hooks::adjust != 0 ) {
+		if ( hooks::adjust < 0 ) {
+			player->tick_base( )--;
+			hooks::adjust++;
+		} else {
+			player->tick_base( )++;
+			hooks::adjust--;
+		}
+	}
 }
 
 void prediction::impl::end( sdk::c_base_player* player, sdk::c_user_cmd* command )
