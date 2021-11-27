@@ -4,10 +4,16 @@ void render::impl::render_gradient( int x, int y, int width, int height, color f
 {
 	DEVICE_SAFETY( );
 	
-	vertex verts[ 4 ] = {
+	struct vertex_mod
+	{
+		float x, y, z, rhw;
+		D3DCOLOR c;
+	};
+
+	vertex_mod verts[ 4 ] = {
 		{ static_cast< float >( x ), static_cast< float >( y ), 0.01f, 0.01f, from.to_d3d( ) },
-		{ static_cast< float >( x + width ), static_cast< float >( height ), 0.01f, 0.01f, gradient_type == gradient_type_t::HORIZONTAL ? to.to_d3d( ) : from.to_d3d( ) },
-		{ static_cast< float >( x ), static_cast< float > ( y + width ), 0.01f, 0.01f, gradient_type == gradient_type_t::HORIZONTAL ? from.to_d3d( ) : to.to_d3d( ) },
+		{ static_cast< float >( x + width ), static_cast< float >( y ), 0.01f, 0.01f, gradient_type == gradient_type_t::HORIZONTAL ? to.to_d3d( ) : from.to_d3d( ) },
+		{ static_cast< float >( x ), static_cast< float > ( y + height ), 0.01f, 0.01f, gradient_type == gradient_type_t::HORIZONTAL ? from.to_d3d( ) : to.to_d3d( ) },
 		{ static_cast< float >( x + width ), static_cast< float >( y + height ), 0.01f, 0.01f, to.to_d3d( ) } 
 	};
 
