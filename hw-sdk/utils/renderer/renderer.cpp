@@ -94,21 +94,10 @@ void render::impl::render_rectangle( int x, int y, int width, int height, color 
 {
 	DEVICE_SAFETY( );
 
-	const int temp_size_x = width - 1, temp_size_y = height - 1;
-
-	vertex segments[] = { { static_cast< float >( x ), static_cast< float >( y ), 0.01f, 0.01f, color.to_d3d( ) },
-		                  { static_cast< float >( x + temp_size_x ), static_cast< float >( temp_size_x ), 0.01f, 0.01f, color.to_d3d( ) },
-		                  { static_cast< float >( x + temp_size_x ), float( temp_size_x + temp_size_y ), 0.01f, 0.01f, color.to_d3d( ) },
-		                  { static_cast< float >( x ), static_cast< float >( y + temp_size_y ), 0.01f, 0.01f, color.to_d3d( ) },
-		                  { static_cast< float >( x ), static_cast< float >( temp_size_x ), 0.01f, 0.01f, color.to_d3d( ) } };
-
-	render::device->SetTexture( 0, nullptr );
-	FAIL_CHECK( render::device->DrawPrimitiveUP( D3DPT_LINESTRIP, 4, &segments, 20 ) );
-
-	// g_render.render_line( x, y, x + width, y, color );
-	// g_render.render_line( x, y, x, y + height, color );
-	// g_render.render_line( x, y + height, x + width, y + height, color );
-	// g_render.render_line( x + width, y, x + width, y + height, color );
+	g_render.render_line( x, y, x + width, y, color );
+	g_render.render_line( x, y, x, y + height, color );
+	g_render.render_line( x, y + height, x + width, y + height, color );
+	g_render.render_line( x + width, y, x + width, y + height, color );
 }
 
 void render::impl::render_filled_rectangle( int x, int y, int width, int height, color color )
