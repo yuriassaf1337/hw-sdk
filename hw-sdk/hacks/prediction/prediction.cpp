@@ -23,12 +23,16 @@ void prediction::impl::pre_think( sdk::c_base_player* player )
 
 void prediction::impl::post_think( sdk::c_base_player* player )
 {
+	g_ctx.running_post_think = true;
+
 	static auto post_think_signature =
 		g_client_dll.pattern_scan( _( "56 8B 35 ? ? ? ? 57 8B F9 8B CE 8B 06 FF 90 ? ? ? ? 8B 07" ) ).as< std::uintptr_t >( );
 
 	using post_think_type = void( __thiscall* )( sdk::c_base_player* );
 
 	reinterpret_cast< post_think_type >( post_think_signature )( player );
+
+	g_ctx.running_post_think = false;
 }
 
 void prediction::impl::update( ) { }

@@ -35,7 +35,7 @@ void entity_list::update( )
 			continue;
 
 		if ( base_entity->is_player( ) ) {
-			auto player = reinterpret_cast< sdk::c_cs_player* >( entity );
+			auto player = entity->as< sdk::c_cs_player* >( );
 
 			if ( !player )
 				continue;

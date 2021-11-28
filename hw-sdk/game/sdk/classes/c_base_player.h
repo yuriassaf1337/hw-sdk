@@ -26,6 +26,7 @@ namespace sdk
 		NETVAR( duck_speed, float, "CBasePlayer", "m_flDuckSpeed" );
 		NETVAR( duck_amount, float, "CBasePlayer", "m_flDuckAmount" );
 		NETVAR( last_place_name, char, "CBasePlayer", "m_szLastPlaceName" );
+		NETVAR( fall_velocity, float, "CBasePlayer", "m_flFallVelocity" );
 
 		// TODO @ liga, im not sure but i think these 3 can be grabbed by prediction datamap
 		// so in future we can add datamap shit for netvars

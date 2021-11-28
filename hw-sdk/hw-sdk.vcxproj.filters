@@ -105,6 +105,9 @@
     <ClCompile Include="hacks\features\movement\movement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="globals\hooks\item_post_frame\item_post_frame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals\includes\includes.h">
@@ -450,6 +453,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="globals\ctx\ctx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="globals\hooks\item_post_frame\item_post_frame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

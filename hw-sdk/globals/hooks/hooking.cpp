@@ -4,6 +4,7 @@
 #include "cl_move/cl_move.h"
 #include "create_move/create_move.h"
 #include "end_scene/end_scene.h"
+#include "item_post_frame/item_post_frame.h"
 #include "wndproc/wndproc.h"
 
 bool hooks::init( )
@@ -17,6 +18,7 @@ bool hooks::init( )
 	hooks::end_scene::init( );
 	hooks::create_move::init( );
 	hooks::cl_move::init( );
+	hooks::item_post_frame::init( );
 
 	MOCKING_CATCH( return false );
 
@@ -29,6 +31,7 @@ void hooks::unload( )
 	hooks::end_scene::unload( );
 	hooks::create_move::unload( );
 	hooks::cl_move::unload( );
+	hooks::item_post_frame::unload( );
 
 	MH_Uninitialize( );
 }
