@@ -180,6 +180,7 @@
     <ClCompile Include="globals\hooks\wndproc\wndproc.cpp" />
     <ClCompile Include="globals\hotwheels\hotwheels.cpp" />
     <ClCompile Include="globals\intefaces\interfaces.cpp" />
+    <ClCompile Include="hacks\features\movement\movement.cpp" />
     <ClCompile Include="hacks\gui\cfg\cfg.cpp" />
     <ClCompile Include="hacks\gui\ctx\ctx.cpp" />
     <ClCompile Include="hacks\gui\gui.cpp" />
@@ -274,6 +275,7 @@
     <ClInclude Include="game\sdk\enums\teams.h" />
     <ClInclude Include="game\sdk\structs\weapon_data_t.h" />
     <ClInclude Include="globals\csgo.h" />
+    <ClInclude Include="globals\ctx\ctx.h" />
     <ClInclude Include="globals\hooks\cl_move\cl_move.h" />
     <ClInclude Include="globals\hooks\create_move\create_move.h" />
     <ClInclude Include="globals\hooks\end_scene\end_scene.h" />
@@ -282,6 +284,7 @@
     <ClInclude Include="globals\includes\includes.h" />
     <ClInclude Include="globals\intefaces\interfaces.h" />
     <ClInclude Include="globals\macros\macros.h" />
+    <ClInclude Include="hacks\features\movement\movement.h" />
     <ClInclude Include="hacks\gui\anims\anims.h" />
     <ClInclude Include="hacks\gui\cfg\cfg.h" />
     <ClInclude Include="hacks\gui\ctx\ctx.h" />

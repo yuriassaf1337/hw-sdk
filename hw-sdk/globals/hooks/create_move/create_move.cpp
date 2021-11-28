@@ -4,6 +4,7 @@
 #include "../../../utils/convars/convars.h"
 #include "../../../utils/entity_list/entity_list.h"
 #include "../../../utils/keybinds/keybinds.h"
+#include "../../ctx/ctx.h"
 #include "create_move.h"
 
 void __stdcall create_move_function( int sequence_number, float input_sample_frametime, bool active, bool& send_packet )
@@ -13,18 +14,21 @@ void __stdcall create_move_function( int sequence_number, float input_sample_fra
 	auto command  = g_interfaces.input->get_user_cmd( 0, sequence_number );
 	auto verified = g_interfaces.input->get_verified_cmd( sequence_number );
 
+	// grab global cmd
+	g_ctx.cmd = command;
+
 	entity_list::update( );
 
-	if ( !entity_list::local_player || !command || !verified )
+	if ( !g_ctx.local || !command || !verified )
 		return;
 
 	g_prediction.update( );
-	g_prediction.start( entity_list::local_player, command );
+	g_prediction.start( g_ctx.local );
 	{
 		if ( g_input.key_state< input::key_state_t::KEY_DOWN >( VK_END ) )
 			send_packet = false;
 	}
-	g_prediction.end( entity_list::local_player, command );
+	g_prediction.end( g_ctx.local );
 
 	verified->command  = *command;
 	verified->checksum = command->checksum( );

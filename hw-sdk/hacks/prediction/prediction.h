@@ -18,11 +18,11 @@ namespace prediction
 		backup_vars_impl backup_vars;
 
 		// gets players tickbase correctly
-		int get_tick_base( sdk::c_base_player* player, sdk::c_user_cmd* command );
+		int get_tick_base( sdk::c_base_player* player );
 		// starts prediction and sets all global variables to predict next tick
-		void start( sdk::c_base_player* player, sdk::c_user_cmd* command );
+		void start( sdk::c_base_player* player );
 		// resets all global variables to current tick, doesnt restore predicted values
-		void end( sdk::c_base_player* player, sdk::c_user_cmd* command );
+		void end( sdk::c_base_player* player );
 		// updates prediction incase of fps lower then tickrate
 		void update( );
 		// resets everything and returns to non predicted tick

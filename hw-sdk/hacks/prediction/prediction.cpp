@@ -1,5 +1,6 @@
 #include "prediction.h"
 
+#include "../../globals/ctx/ctx.h"
 #include "../../globals/hooks/cl_move/cl_move.h"
 #include "../../globals/intefaces/interfaces.h"
 
@@ -28,13 +29,14 @@ void prediction::impl::post_think( sdk::c_base_player* player )
 
 void prediction::impl::update( ) { }
 
-void prediction::impl::start( sdk::c_base_player* player, sdk::c_user_cmd* command )
+void prediction::impl::start( sdk::c_base_player* player )
 {
-	player->current_command( ) = command;
-	sdk::c_base_player::set_prediction_random_seed( command );
+	player->current_command( ) = g_ctx.cmd;
+
+	sdk::c_base_player::set_prediction_random_seed( g_ctx.cmd );
 	sdk::c_base_player::set_prediction_player( player );
 
-	backup_vars.tick_base    = get_tick_base( player, command );
+	backup_vars.tick_base    = get_tick_base( player );
 	backup_vars.current_time = g_interfaces.globals->current_time;
 	backup_vars.frame_time   = g_interfaces.globals->frame_time;
 
@@ -43,17 +45,17 @@ void prediction::impl::start( sdk::c_base_player* player, sdk::c_user_cmd* comma
 
 	g_interfaces.game_movement->start_track_prediction_errors( player );
 
-	g_interfaces.prediction->set_local_view_angles( command->view_angles );
+	g_interfaces.prediction->set_local_view_angles( g_ctx.cmd->view_angles );
 
 	pre_think( player );
 
 	g_interfaces.move_helper->set_host( player );
 
-	g_interfaces.prediction->setup_move( player, command, g_interfaces.move_helper, &backup_vars.move_data );
+	g_interfaces.prediction->setup_move( player, g_ctx.cmd, g_interfaces.move_helper, &backup_vars.move_data );
 
 	g_interfaces.game_movement->process_movement( player, &backup_vars.move_data );
 
-	g_interfaces.prediction->finish_move( player, command, &backup_vars.move_data );
+	g_interfaces.prediction->finish_move( player, g_ctx.cmd, &backup_vars.move_data );
 
 	g_interfaces.move_helper->process_impacts( );
 
@@ -72,7 +74,7 @@ void prediction::impl::start( sdk::c_base_player* player, sdk::c_user_cmd* comma
 	}
 }
 
-void prediction::impl::end( sdk::c_base_player* player, sdk::c_user_cmd* command )
+void prediction::impl::end( sdk::c_base_player* player )
 {
 	g_interfaces.game_movement->finish_track_prediction_errors( player );
 
@@ -82,6 +84,7 @@ void prediction::impl::end( sdk::c_base_player* player, sdk::c_user_cmd* command
 	g_interfaces.globals->frame_time   = backup_vars.frame_time;
 
 	player->current_command( ) = nullptr;
+
 	sdk::c_base_player::set_prediction_random_seed( nullptr );
 	sdk::c_base_player::set_prediction_player( nullptr );
 
@@ -95,11 +98,11 @@ void prediction::impl::reset( )
 	g_interfaces.prediction->predicted_commands( )   = 0;
 }
 
-int prediction::impl::get_tick_base( sdk::c_base_player* player, sdk::c_user_cmd* command )
+int prediction::impl::get_tick_base( sdk::c_base_player* player )
 {
 	static int tick = 0;
 
-	if ( command ) {
+	if ( g_ctx.cmd ) {
 		static sdk::c_user_cmd* last_command{ };
 
 		if ( !last_command || last_command->has_been_predicted )
@@ -107,7 +110,7 @@ int prediction::impl::get_tick_base( sdk::c_base_player* player, sdk::c_user_cmd
 		else
 			tick++;
 
-		last_command = command;
+		last_command = g_ctx.cmd;
 	}
 
 	return tick;

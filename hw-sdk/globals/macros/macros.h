@@ -72,9 +72,27 @@ public:
 
 #define CREATE_HOOK_HELPER( name, args ) inline hook_helper< args > name;
 
+// [#] netvar helper
+
 #define NETVAR( name, type, table, var )                                                                                                             \
 	[[nodiscard]] type& name( )                                                                                                                      \
 	{                                                                                                                                                \
 		static std::uintptr_t offset = netvar::get_table( _( table ), _( var ) );                                                                    \
 		return *reinterpret_cast< type* >( reinterpret_cast< std::uintptr_t >( this ) + offset );                                                    \
+	}
+
+// [#] offsets
+
+// grab variable value
+#define OFFSET( type, name, value )                                                                                                                  \
+	[[nodiscard]] std::add_lvalue_reference_t< type > name( )                                                                                        \
+	{                                                                                                                                                \
+		return *( std::add_pointer_t< type > )( reinterpret_cast< std::uintptr_t >( this ) + value );                                                \
+	}
+
+// grab variable pointer
+#define PTR_OFFSET( type, name, value )                                                                                                              \
+	[[nodiscard]] std::add_pointer_t< type > name( )                                                                                                 \
+	{                                                                                                                                                \
+		return ( std::add_pointer_t< type > )( reinterpret_cast< std::uintptr_t >( this ) + value );                                                 \
 	}

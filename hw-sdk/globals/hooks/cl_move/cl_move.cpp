@@ -1,5 +1,6 @@
 #include <string.h>
 
+#include "../../../globals/ctx/ctx.h"
 #include "../../../utils/entity_list/entity_list.h"
 #include "../../../utils/keybinds/keybinds.h"
 #include "cl_move.h"
@@ -11,7 +12,7 @@ void __cdecl hooks::cl_move::cl_move_detour( float accumulated_extra_samples, bo
 	auto can_charge = []( ) -> bool {
 		bool sure = false;
 
-		if ( entity_list::local_player )
+		if ( g_ctx.local )
 			sure = true;
 
 		return sure;
