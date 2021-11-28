@@ -1,3 +1,4 @@
+#include "renderer.h"
 
 template< auto gradient_type >
 void render::impl::render_gradient( int x, int y, int width, int height, color from, color to )
