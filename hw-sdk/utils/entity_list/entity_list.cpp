@@ -9,14 +9,9 @@ void entity_list::update( )
 	g_ctx.local  = nullptr;
 	g_ctx.weapon = nullptr;
 
-	auto local_player_index = g_interfaces.engine->get_local_player( );
+	auto local_player_entity = g_interfaces.entity_list->get_client_entity( g_interfaces.engine->get_local_player( ) );
 
-	if ( !local_player_index )
-		return;
-
-	auto local_player_entity = g_interfaces.entity_list->get_client_entity( local_player_index );
-
-	if ( !local_player_index )
+	if ( !local_player_entity )
 		return;
 
 	g_ctx.local = local_player_entity->as< sdk::c_cs_player* >( );

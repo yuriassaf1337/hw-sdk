@@ -8,6 +8,10 @@
 //       These functions inside of the game are the exact same as if we were to rebuild them.
 //       Valve may be stupid but they know how to optimize a game (sometimes).
 
+// NOTE @ liga: we dont need to rebuild pre think, but the point of rebuilding postthink is
+//  not to call itempostframe as it runs in another thread and therefore weapon data gets corrupted
+//  as there's no gathering for the current predicted data but the last game called one(ill rebuild post think u dont need to)
+
 void prediction::impl::pre_think( sdk::c_base_player* player )
 {
 	static auto pre_think_signature = g_client_dll.pattern_scan( _( "55 8B EC 83 E4 ? 51 56 8B F1 8B 06" ) ).as< std::uintptr_t >( );

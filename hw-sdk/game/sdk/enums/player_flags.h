@@ -2,6 +2,15 @@
 
 namespace sdk::enums
 {
+	enum life_state
+	{
+		LIFE_ALIVE = 0,
+		LIFE_DYING,
+		LIFE_DEAD,
+		LIFE_RESPAWNABLE,
+		LIFE_DISCARDBODY
+	};
+
 	enum flags
 	{
 		ONGROUND              = ( 1 << 0 ),

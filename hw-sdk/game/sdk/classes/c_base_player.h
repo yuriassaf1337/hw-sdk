@@ -2,6 +2,7 @@
 
 #include "../../../globals/includes/includes.h"
 
+#include "../enums/player_flags.h"
 #include "c_base_combat_character.h"
 #include "c_handle.h"
 
@@ -26,7 +27,11 @@ namespace sdk
 		NETVAR( duck_amount, float, "CBasePlayer", "m_flDuckAmount" );
 		NETVAR( last_place_name, char, "CBasePlayer", "m_szLastPlaceName" );
 
+		// TODO @ liga, im not sure but i think these 3 can be grabbed by prediction datamap
+		// so in future we can add datamap shit for netvars
 		OFFSET( c_user_cmd*&, current_command, 0xCD2 );
+		OFFSET( int_flag&, button_forced, 0xCD1 );
+		OFFSET( int_flag&, button_disabled, 0xCD0 );
 
 		static void set_prediction_random_seed( c_user_cmd* command )
 		{
@@ -41,14 +46,9 @@ namespace sdk
 			*predicted_player = entity;
 		}
 
-		int_flag& button_forced( )
+		bool is_alive( )
 		{
-			return reinterpret_cast< int_flag& >( this[ 0xCD1 ] );
-		}
-
-		int_flag& button_disabled( )
-		{
-			return reinterpret_cast< int_flag& >( this[ 0xCD0 ] );
+			return ( this->life_state( ) == sdk::enums::life_state::LIFE_ALIVE && this->health( ) > 0 );
 		}
 	};
 } // namespace sdk
