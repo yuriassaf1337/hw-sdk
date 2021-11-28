@@ -15,7 +15,7 @@ namespace sdk
 	struct c_base_entity : public i_client_entity {
 	public:
 		NETVAR( model_index, std::int32_t, "CBaseEntity", "m_nModelIndex" );
-		NETVAR( team_number, sdk::enums::teams, "CBaseEntity", "m_iTeamNum" );
+		NETVAR( team_number, sdk::teams, "CBaseEntity", "m_iTeamNum" );
 		NETVAR( vector_origin, math::vec3, "CBaseEntity", "m_vecOrigin" );
 		NETVAR( vector_angles, math::vec3, "CBaseEntity", "m_vecAngles" );
 		NETVAR( owner_entity, std::uintptr_t, "CBaseEntity", "m_hOwnerEntity" );

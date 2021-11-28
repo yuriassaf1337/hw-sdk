@@ -8,7 +8,11 @@
 
 namespace entity_list
 {
-	inline std::deque< sdk::i_client_entity* > players;
+	struct impl {
+		std::deque< sdk::c_cs_player* > players;
 
-	void update( );
+		void update( );
+	};
 } // namespace entity_list
+
+inline entity_list::impl g_entity_list;

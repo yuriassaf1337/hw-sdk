@@ -1,6 +1,6 @@
 #pragma once
 
-namespace sdk::enums
+namespace sdk
 {
 	enum life_state
 	{
@@ -46,4 +46,4 @@ namespace sdk::enums
 		TRANSRAGDOLL          = ( 1 << 30 ),
 		UNBLOCKABLE_BY_PLAYER = ( 1 << 31 )
 	};
-} // namespace sdk::enums
+} // namespace sdk

@@ -3,6 +3,9 @@
 #include "../enums/cvar_ids.h"
 #include "../structs/color.h"
 #include "i_app_system.h"
+
+#define CCONVAR_INTERFACE_VERSION _( "VEngineCvar007" )
+
 struct c_var_dll_identifier;
 struct con_command_base;
 struct con_command;

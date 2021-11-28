@@ -2,20 +2,18 @@
 
 #include "../../globals/includes/includes.h"
 
-#include "../../game/sdk/classes/c_cs_player.h"
+#include "../../game/sdk/classes/c_base_entity.h"
+#include "../../game/sdk/classes/c_client_state.h"
 #include "../../game/sdk/classes/i_prediction.h"
 
 namespace prediction
 {
 	struct impl {
 		struct backup_vars_impl {
-		public:
 			int tick_base;
 			float current_time, frame_time;
 			sdk::move_data_t move_data;
-		};
-
-		backup_vars_impl backup_vars;
+		} backup_vars;
 
 		// gets players tickbase correctly
 		int get_tick_base( sdk::c_base_player* player );

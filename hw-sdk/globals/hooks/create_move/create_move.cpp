@@ -1,5 +1,6 @@
 #include <string.h>
 
+#include "../../../hacks/features/movement/movement.h"
 #include "../../../hacks/prediction/prediction.h"
 #include "../../../utils/convars/convars.h"
 #include "../../../utils/entity_list/entity_list.h"
@@ -17,10 +18,12 @@ void __stdcall create_move_function( int sequence_number, float input_sample_fra
 	// grab global cmd
 	g_ctx.cmd = command;
 
-	entity_list::update( );
+	g_entity_list.update( );
 
 	if ( !g_ctx.local || !command || !verified )
 		return;
+
+	g_movement.bhop( );
 
 	g_prediction.update( );
 	g_prediction.start( g_ctx.local );

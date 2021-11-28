@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-namespace sdk::enums
+namespace sdk
 {
 	enum class weapon_type
 	{
@@ -23,4 +23,4 @@ namespace sdk::enums
 		TABLET        = 15,
 		MELEE         = 16
 	};
-} // namespace sdk::enums
+} // namespace sdk

@@ -14,6 +14,6 @@ namespace sdk
 			std::int64_t i64;
 		};
 
-		sdk::enums::prop_type m_type;
+		sdk::prop_type m_type;
 	};
 } // namespace sdk

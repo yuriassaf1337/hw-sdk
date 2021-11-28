@@ -14,6 +14,6 @@ namespace sdk
 		char* network_name;
 		sdk::recv_table* recv_table;
 		client_class* next;
-		sdk::enums::class_ids class_id;
+		sdk::class_ids class_id;
 	};
 } // namespace sdk

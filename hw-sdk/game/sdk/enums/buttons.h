@@ -2,9 +2,9 @@
 
 #include <iostream>
 
-namespace sdk::enums
+namespace sdk
 {
-	enum class buttons : std::size_t
+	enum buttons : std::int32_t
 	{
 		IN_ATTACK    = ( 1 << 0 ),
 		IN_JUMP      = ( 1 << 1 ),
@@ -33,4 +33,4 @@ namespace sdk::enums
 		IN_GRENADE2  = ( 1 << 24 ),
 		IN_LOOKSPIN  = ( 1 << 25 )
 	};
-} // namespace sdk::enums
+} // namespace sdk

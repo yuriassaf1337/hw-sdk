@@ -7,25 +7,34 @@ bool sdk::interfaces::init( )
 {
 	MOCKING_TRY
 
-	device = **g_shaderapidx9_dll.pattern_scan( _( "A1 ? ? ? ? 50 8B 08 FF 51 0C" ) ).add( 0x1 ).as< IDirect3DDevice9*** >( );
+	// find interfaces
+	{
+		engine = g_engine_dll.find_interface< sdk::iv_engine_client* >( VENGINE_CLIENT_INTERFACE_VERSION );
 
-	engine = g_engine_dll.find_interface< sdk::iv_engine_client* >( VENGINE_CLIENT_INTERFACE_VERSION );
+		client = g_client_dll.find_interface< sdk::i_client_dll* >( VCLIENT_INTERFACE_VERSION );
 
-	client = g_client_dll.find_interface< sdk::i_client_dll* >( VCLIENT_INTERFACE_VERSION );
+		entity_list = g_client_dll.find_interface< sdk::i_client_entity_list* >( VCLIENTENTITYLIST_INTERFACE_VERSION );
+
+		prediction = g_client_dll.find_interface< sdk::i_prediction* >( VCLIENTPREDICTION_INTERFACE_VERSION );
+
+		game_movement = g_client_dll.find_interface< sdk::i_game_movement* >( VCLIENTGAMEMOVEMENT_INTERFACE_VERSION );
+
+		convar = g_vstdlib_dll.find_interface< sdk::i_cvar* >( CCONVAR_INTERFACE_VERSION );
+	}
+
+	// virtuals
 
 	globals = virtual_func::get< address >( client, 11 ).add( 0xA ).get< sdk::i_global_vars* >( 2 );
 
+	// patterns
+
+	device = **g_shaderapidx9_dll.pattern_scan( _( "A1 ? ? ? ? 50 8B 08 FF 51 0C" ) ).add( 0x1 ).as< IDirect3DDevice9*** >( );
+
 	input = *g_client_dll.pattern_scan( _( "B9 ? ? ? ? F3 0F 11 04 24 FF 50 10" ) ).add( 0x1 ).as< sdk::c_input** >( );
-
-	entity_list = g_client_dll.find_interface< sdk::i_client_entity_list* >( VCLIENTENTITYLIST_INTERFACE_VERSION );
-
-	prediction = g_client_dll.find_interface< sdk::i_prediction* >( VCLIENTPREDICTION_INTERFACE_VERSION );
-
-	game_movement = g_client_dll.find_interface< sdk::i_game_movement* >( VCLIENTGAMEMOVEMENT_INTERFACE_VERSION );
 
 	move_helper = **g_client_dll.pattern_scan( _( "8B 0D ? ? ? ? 8B 45 ? 51 8B D4 89 02 8B 01" ) ).add( 0x2 ).as< sdk::i_move_helper*** >( );
 
-	convar = g_vstdlib_dll.find_interface< sdk::i_cvar* >( _( "VEngineCvar007" ) );
+	client_state = **g_engine_dll.pattern_scan( _( "A1 ? ? ? ? 8B 88 ? ? ? ? 85 C9 75 07" ) ).add( 0x1 ).as< sdk::c_client_state*** >( );
 
 	MOCKING_CATCH( return false );
 

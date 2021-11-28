@@ -1,6 +1,6 @@
 #pragma once
 
-namespace sdk::enums
+namespace sdk
 {
 	enum cvar_ids : int
 	{
@@ -35,4 +35,4 @@ namespace sdk::enums
 		FCVAR_CLIENTCMD_CAN_EXECUTE   = ( 1 << 30 ),
 		FCVAR_MATERIAL_THREAD_MASK    = ( FCVAR_RELOAD_MATERIALS | FCVAR_RELOAD_TEXTURES | FCVAR_MATERIAL_SYSTEM_THREAD )
 	};
-} // namespace sdk::enums
+} // namespace sdk

@@ -3,7 +3,7 @@
 // this will very likely change alot.
 #include <cstdint>
 
-namespace sdk::enums
+namespace sdk
 {
 	enum class def_idx : std::uint16_t
 	{
@@ -143,4 +143,4 @@ namespace sdk::enums
 		AGENT_DRAGOMIR_FOOTSOLDIERS,
 		AGENT_B_SQUADRON_OFFICER = 5601
 	};
-} // namespace sdk::enums
+} // namespace sdk

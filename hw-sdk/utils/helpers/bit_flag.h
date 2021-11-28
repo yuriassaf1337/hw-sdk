@@ -1,6 +1,7 @@
 #pragma once
 
 #include <limits>
+#include <xutility>
 
 template< typename t >
 struct bit_flag_t {
@@ -11,6 +12,11 @@ struct bit_flag_t {
 	constexpr bool has( const t& value ) const
 	{
 		return m_value & value;
+	};
+
+	constexpr bool has_any_of( std::initializer_list< t > lst )
+	{
+		return std::find( std::begin( lst ), std::end( lst ), m_value ) != std::end( lst );
 	};
 
 	// add to this flag a value

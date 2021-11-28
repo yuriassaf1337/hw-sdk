@@ -2,6 +2,8 @@
 #include "../../game/sdk/classes/c_base_combat_weapon.h"
 #include "../../game/sdk/classes/c_cs_player.h"
 #include "../../game/sdk/classes/c_usercmd.h"
+#include "../../game/sdk/enums/buttons.h"
+#include "../../game/sdk/enums/move_type.h"
 
 namespace ctx
 {

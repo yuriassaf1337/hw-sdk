@@ -1,6 +1,6 @@
 #pragma once
 
-namespace sdk::enums
+namespace sdk
 {
 	enum class net_channel_type
 	{
@@ -19,4 +19,4 @@ namespace sdk::enums
 		SIGNON,
 		TOTAL,
 	};
-} // namespace sdk::enums
+} // namespace sdk

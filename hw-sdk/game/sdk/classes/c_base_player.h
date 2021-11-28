@@ -14,7 +14,7 @@ namespace sdk
 	public:
 		NETVAR( health, std::int32_t, "CBasePlayer", "m_iHealth" );
 		NETVAR( life_state, std::int32_t, "CBasePlayer", "m_lifeState" );
-		NETVAR( flags, std::int32_t, "CBasePlayer", "m_fFlags" );
+		NETVAR( flags, bit_flag_t< std::int32_t >, "CBasePlayer", "m_fFlags" );
 		NETVAR( tick_base, std::int32_t, "CBasePlayer", "m_nTickBase" );
 		NETVAR( view_offset, math::vec3, "CBasePlayer", "m_vecViewOffset[0]" );
 		NETVAR( view_punch_angle, math::vec3, "CBasePlayer", "m_viewPunchAngle" );
@@ -34,6 +34,12 @@ namespace sdk
 		OFFSET( int_flag&, button_forced, 0xCD1 );
 		OFFSET( int_flag&, button_disabled, 0xCD0 );
 
+		[[nodiscard]] int_flag& move_type( )
+		{
+			static std::uintptr_t offset = netvar::get_table( _( "CBaseEntity" ), _( "m_nRenderMode" ) ) + 0x1;
+			return *reinterpret_cast< int_flag* >( reinterpret_cast< std::uintptr_t >( this ) + offset );
+		}
+
 		static void set_prediction_random_seed( c_user_cmd* command )
 		{
 			static float* random_seed = *g_client_dll.pattern_scan( _( "A3 ? ? ? ? 66 0F 6E 86 " ) ).add( 0x1 ).as< float** >( );
@@ -49,7 +55,7 @@ namespace sdk
 
 		bool is_alive( )
 		{
-			return ( this->life_state( ) == sdk::enums::life_state::LIFE_ALIVE && this->health( ) > 0 );
+			return ( this->life_state( ) == sdk::life_state::LIFE_ALIVE && this->health( ) > 0 );
 		}
 	};
 } // namespace sdk

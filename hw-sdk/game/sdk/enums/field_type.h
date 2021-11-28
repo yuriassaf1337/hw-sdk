@@ -1,6 +1,6 @@
 #pragma once
 
-namespace sdk::enums
+namespace sdk
 {
 	enum class field_type
 	{
@@ -37,4 +37,4 @@ namespace sdk::enums
 		VECTOR4D,
 		TYPECOUNT
 	};
-} // namespace sdk::enums
+} // namespace sdk

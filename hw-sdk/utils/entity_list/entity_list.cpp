@@ -2,7 +2,7 @@
 #include "../../game/sdk/classes/c_base_entity.h"
 #include "../../globals/ctx/ctx.h"
 
-void entity_list::update( )
+void entity_list::impl::update( )
 {
 	players.clear( );
 
@@ -24,26 +24,16 @@ void entity_list::update( )
 	}
 
 	for ( int i = 0; i < g_interfaces.entity_list->get_highest_entity_index( ); i++ ) {
-		auto entity = g_interfaces.entity_list->get_client_entity( i );
+		auto entity = g_interfaces.entity_list->get_client_entity( i )->as< sdk::c_cs_player* >( );
 
 		if ( !entity )
 			continue;
 
-		auto base_entity = entity->as< sdk::c_base_entity* >( );
-
-		if ( !base_entity )
-			continue;
-
-		if ( base_entity->is_player( ) ) {
-			auto player = entity->as< sdk::c_cs_player* >( );
-
-			if ( !player )
+		if ( entity->is_player( ) ) {
+			if ( entity->is_dormant( ) )
 				continue;
 
-			if ( player->is_dormant( ) )
-				continue;
-
-			if ( player->health( ) < 1 )
+			if ( entity->health( ) < 1 )
 				continue;
 
 			players.push_back( entity );

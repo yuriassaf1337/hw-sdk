@@ -1,6 +1,6 @@
 #pragma once
 
-namespace sdk::enums
+namespace sdk
 {
 	enum class data_update_type
 	{
@@ -8,4 +8,4 @@ namespace sdk::enums
 		DATATABLE_CHANGED,
 		POST_UPDATE
 	};
-} // namespace sdk::enums
+} // namespace sdk

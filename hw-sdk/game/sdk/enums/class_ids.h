@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-namespace sdk::enums
+namespace sdk
 {
 	enum class class_ids : std::uint16_t
 	{
@@ -291,4 +291,4 @@ namespace sdk::enums
 		SPORE_EXPLOSION,
 		SPORE_TRAIL
 	};
-} // namespace sdk::enums
+} // namespace sdk

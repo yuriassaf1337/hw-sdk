@@ -35,7 +35,13 @@ void prediction::impl::post_think( sdk::c_base_player* player )
 	g_ctx.running_post_think = false;
 }
 
-void prediction::impl::update( ) { }
+void prediction::impl::update( )
+{
+	if ( g_interfaces.client_state->delta_tick > 0 )
+		g_interfaces.prediction->update( g_interfaces.client_state->delta_tick, g_interfaces.client_state->delta_tick > 0,
+		                                 g_interfaces.client_state->last_command_ack,
+		                                 g_interfaces.client_state->last_outgoing_command + g_interfaces.client_state->choked_commands );
+}
 
 void prediction::impl::start( sdk::c_base_player* player )
 {

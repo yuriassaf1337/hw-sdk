@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-namespace sdk::enums
+namespace sdk
 {
 	enum class prop_type : std::uint32_t
 	{
@@ -16,4 +16,4 @@ namespace sdk::enums
 		INT64,
 		SENDPROPTYPEMAX
 	};
-} // namespace sdk::enums
+} // namespace sdk

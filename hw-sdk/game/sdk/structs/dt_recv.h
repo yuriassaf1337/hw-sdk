@@ -29,7 +29,7 @@ namespace sdk
 
 	struct recv_prop {
 		char* var_name;
-		sdk::enums::prop_type recv_type;
+		sdk::prop_type recv_type;
 		std::int32_t flags;
 		std::int32_t string_buffer_size;
 		bool inside_array;

@@ -1,22 +1,22 @@
 #pragma once
 
-namespace sdk::enums
+namespace sdk
 {
-	enum class move_type
+	enum move_type : std::int32_t
 	{
-		NONE = 0,
-		ISOMETRIC,
-		WALK,
-		STEP,
-		FLY,
-		FLYGRAVITY,
-		VPHYSICS,
-		PUSH,
-		NOCLIP,
-		LADDER,
-		OBSERVER,
-		CUSTOM,
-		LAST     = CUSTOM,
-		MAX_BITS = 4
+		MOVE_NONE = 0,
+		MOVE_ISOMETRIC,
+		MOVE_WALK,
+		MOVE_STEP,
+		MOVE_FLY,
+		MOVE_FLYGRAVITY,
+		MOVE_VPHYSICS,
+		MOVE_PUSH,
+		MOVE_NOCLIP,
+		MOVE_LADDER,
+		MOVE_OBSERVER,
+		MOVE_CUSTOM,
+		MOVE_LAST     = MOVE_CUSTOM,
+		MOVE_MAX_BITS = 4
 	};
-} // namespace sdk::enums
+} // namespace sdk

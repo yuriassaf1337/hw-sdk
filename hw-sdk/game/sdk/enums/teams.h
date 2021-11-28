@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 
-namespace sdk::enums
+namespace sdk
 {
 	enum teams : std::int32_t
 	{
@@ -10,4 +10,4 @@ namespace sdk::enums
 		TEAM_TERRORIST,
 		TEAM_COUNTER_TERRORIST,
 	};
-}
+} // namespace sdk

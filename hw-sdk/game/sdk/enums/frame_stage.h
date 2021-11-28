@@ -1,6 +1,6 @@
 #pragma once
 
-namespace sdk::enums
+namespace sdk
 {
 	enum class frame_stage
 	{
@@ -13,4 +13,4 @@ namespace sdk::enums
 		RENDER_START,
 		RENDER_END
 	};
-} // namespace sdk::enums
+} // namespace sdk
