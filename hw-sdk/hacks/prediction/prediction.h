@@ -9,10 +9,21 @@
 namespace prediction
 {
 	struct impl {
-		struct backup_vars_impl {
+		// NOTE @ liga: since we're gonna run prediction alot of times(edgebug, jumpbug and other movement features) we need to have 2 types of
+		// 'backup' vars, one being curtime, frametime, tick shit and one being stuff like flags, velocity since we want to use original values for
+		// them and not one that has been restored 1 bajillion times.
+
+		struct {
 			int tick_base;
 			float current_time, frame_time;
 			sdk::move_data_t move_data;
+		} reset_vars;
+
+		struct {
+			math::vec3 velocity;
+			float fall_velocity;
+			int_flag flags;
+			int_flag move_type;
 		} backup_vars;
 
 		// gets players tickbase correctly
@@ -25,6 +36,8 @@ namespace prediction
 		void update( );
 		// resets everything and returns to non predicted tick
 		void reset( );
+		// store all backup vars
+		void store_backup( );
 
 	private:
 		void pre_think( sdk::c_base_player* player );

@@ -20,12 +20,13 @@ void __stdcall create_move_function( int sequence_number, float input_sample_fra
 
 	g_entity_list.update( );
 
-	if ( !g_ctx.local || !command || !verified )
+	if ( !g_ctx.local || !command || !verified || !command->command_number )
 		return;
 
 	g_movement.pre_prediction.think( );
 
 	g_prediction.update( );
+	g_prediction.store_backup( );
 	g_prediction.start( g_ctx.local );
 	{
 		if ( g_input.key_state< input::key_state_t::KEY_DOWN >( VK_END ) )

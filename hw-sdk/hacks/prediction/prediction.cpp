@@ -12,6 +12,8 @@
 //  not to call itempostframe as it runs in another thread and therefore weapon data gets corrupted
 //  as there's no gathering for the current predicted data but the last game called one(ill rebuild post think u dont need to)
 
+// TODO: replace pre think and post think functions with vfunc for simplicity(and put the functions in ccsplayer class)
+
 void prediction::impl::pre_think( sdk::c_base_player* player )
 {
 	static auto pre_think_signature = g_client_dll.pattern_scan( _( "55 8B EC 83 E4 ? 51 56 8B F1 8B 06" ) ).as< std::uintptr_t >( );
@@ -35,6 +37,14 @@ void prediction::impl::post_think( sdk::c_base_player* player )
 	g_ctx.running_post_think = false;
 }
 
+void prediction::impl::store_backup( )
+{
+	g_prediction.backup_vars.flags         = g_ctx.local->flags( );
+	g_prediction.backup_vars.velocity      = g_ctx.local->velocity( );
+	g_prediction.backup_vars.fall_velocity = g_ctx.local->fall_velocity( );
+	g_prediction.backup_vars.move_type     = g_ctx.local->move_type( );
+}
+
 void prediction::impl::update( )
 {
 	if ( g_interfaces.client_state->delta_tick > 0 )
@@ -50,9 +60,9 @@ void prediction::impl::start( sdk::c_base_player* player )
 	sdk::c_base_player::set_prediction_random_seed( g_ctx.cmd );
 	sdk::c_base_player::set_prediction_player( player );
 
-	backup_vars.tick_base    = get_tick_base( player );
-	backup_vars.current_time = g_interfaces.globals->current_time;
-	backup_vars.frame_time   = g_interfaces.globals->frame_time;
+	reset_vars.tick_base    = get_tick_base( player );
+	reset_vars.current_time = g_interfaces.globals->current_time;
+	reset_vars.frame_time   = g_interfaces.globals->frame_time;
 
 	g_interfaces.globals->current_time = player->tick_base( ) * g_interfaces.globals->interval_per_tick;
 	g_interfaces.globals->frame_time   = g_interfaces.prediction->engine_paused ? 0 : g_interfaces.globals->interval_per_tick;
@@ -65,17 +75,17 @@ void prediction::impl::start( sdk::c_base_player* player )
 
 	g_interfaces.move_helper->set_host( player );
 
-	g_interfaces.prediction->setup_move( player, g_ctx.cmd, g_interfaces.move_helper, &backup_vars.move_data );
+	g_interfaces.prediction->setup_move( player, g_ctx.cmd, g_interfaces.move_helper, &reset_vars.move_data );
 
-	g_interfaces.game_movement->process_movement( player, &backup_vars.move_data );
+	g_interfaces.game_movement->process_movement( player, &reset_vars.move_data );
 
-	g_interfaces.prediction->finish_move( player, g_ctx.cmd, &backup_vars.move_data );
+	g_interfaces.prediction->finish_move( player, g_ctx.cmd, &reset_vars.move_data );
 
 	g_interfaces.move_helper->process_impacts( );
 
 	post_think( player );
 
-	player->tick_base( ) = backup_vars.tick_base;
+	player->tick_base( ) = reset_vars.tick_base;
 
 	if ( hooks::adjust != 0 ) {
 		if ( hooks::adjust < 0 ) {
@@ -94,8 +104,8 @@ void prediction::impl::end( sdk::c_base_player* player )
 
 	g_interfaces.move_helper->set_host( nullptr );
 
-	g_interfaces.globals->current_time = backup_vars.current_time;
-	g_interfaces.globals->frame_time   = backup_vars.frame_time;
+	g_interfaces.globals->current_time = reset_vars.current_time;
+	g_interfaces.globals->frame_time   = reset_vars.frame_time;
 
 	player->current_command( ) = nullptr;
 
