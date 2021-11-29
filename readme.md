@@ -11,7 +11,7 @@ hotwheels-sdk - made for hotwheels v3
 
 > if you have issues using clang-format, download `Clang Power Tools` and `Clang Format` in the VS2019 extension manager.
 
-### general TO-DO's
+## general TO-DO's
 ###### 
 **- implement all necessary interfaces into the g_interface global**
 #
