@@ -13,6 +13,14 @@ namespace math
 	{
 		constexpr static long double pi = std::numbers::pi_v< long double >;
 		constexpr static float pi_f     = static_cast< float >( pi );
+
+		// functions below might be unused, but why not have them.
+		void fast_sqrt( float* __restrict p_out, float* __restrict p_in );
+
+		float fast_asin( float x );
+
+		float fast_sin( float x );
+		float fast_cos( const float x );
 	} // namespace util
 
 	math::vec3 angle_vector( const math::vec3& angle );

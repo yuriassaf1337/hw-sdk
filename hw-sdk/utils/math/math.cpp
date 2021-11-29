@@ -176,3 +176,42 @@ void math::clamp_angle( math::vec3& angle )
 
 	angle.z = 0.f;
 }
+
+void math::util::fast_sqrt( float* __restrict p_out, float* __restrict p_in )
+{
+	_mm_store_ss( p_out, _mm_sqrt_ss( _mm_load_ss( p_in ) ) );
+}
+
+float math::util::fast_asin( float x )
+{
+	const auto negate = float( x < 0 );
+	x                 = abs( x );
+	auto ret          = -0.0187293;
+	ret *= x;
+	ret += 0.0742610;
+	ret *= x;
+	ret -= 0.2121144;
+	ret *= x;
+	ret += 1.5707288;
+	ret = 3.14159265358979 * 0.5 - sqrt( 1.0 - x ) * ret;
+	return float( ret - 2 * negate * ret );
+}
+
+float math::util::fast_sin( float x )
+{
+	x *= float( 0.159155 );
+	x -= floor( x );
+	const auto xx = x * x;
+	auto y        = -6.87897;
+	y             = y * xx + 33.7755;
+	y             = y * xx - 72.5257;
+	y             = y * xx + 80.5874;
+	y             = y * xx - 41.2408;
+	y             = y * xx + 6.28077;
+	return float( x * y );
+}
+
+float math::util::fast_cos( const float x )
+{
+	return ::math::util::fast_sin( x + 1.5708f );
+}
