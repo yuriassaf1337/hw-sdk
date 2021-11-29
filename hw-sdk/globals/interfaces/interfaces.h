@@ -4,14 +4,7 @@
 #include <iostream>
 #include <string.h>
 
-#include "../../game/sdk/classes/c_client_state.h"
-#include "../../game/sdk/classes/c_input.h"
-#include "../../game/sdk/classes/i_client_dll.h"
-#include "../../game/sdk/classes/i_client_entity_list.h"
-#include "../../game/sdk/classes/i_cvar.h"
-#include "../../game/sdk/classes/i_global_vars.h"
-#include "../../game/sdk/classes/i_prediction.h"
-#include "../../game/sdk/classes/iv_engine_client.h"
+#include "../../game/sdk/include.h"
 
 #include "../../utils/utils.h"
 #include "../../utils/vfunc/vfunc.h"
@@ -34,6 +27,20 @@ namespace sdk
 
 		bool init( );
 	};
+
+	inline std::int32_t time_to_ticks( float time );
+
+	inline float ticks_to_time( std::int32_t ticks );
 } // namespace sdk
 
 inline sdk::interfaces g_interfaces;
+
+inline std::int32_t sdk::time_to_ticks( float time )
+{
+	return static_cast< std::int32_t >( 0.5f + time / g_interfaces.globals->interval_per_tick );
+}
+
+inline float sdk::ticks_to_time( std::int32_t ticks )
+{
+	return static_cast< float >( ticks ) * g_interfaces.globals->interval_per_tick;
+}

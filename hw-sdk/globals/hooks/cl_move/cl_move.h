@@ -6,7 +6,7 @@
 #include "../../../hacks/gui/gui.h"
 #include "../../../utils/renderer/renderer.h"
 #include "../../../utils/vfunc/vfunc.h"
-#include "../../intefaces/interfaces.h"
+#include "../../interfaces/interfaces.h"
 #include "../hooking.h"
 
 namespace hooks

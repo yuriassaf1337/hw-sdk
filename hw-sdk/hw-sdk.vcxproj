@@ -180,7 +180,7 @@
     <ClCompile Include="globals\hooks\item_post_frame\item_post_frame.cpp" />
     <ClCompile Include="globals\hooks\wndproc\wndproc.cpp" />
     <ClCompile Include="globals\hotwheels\hotwheels.cpp" />
-    <ClCompile Include="globals\intefaces\interfaces.cpp" />
+    <ClCompile Include="globals\interfaces\interfaces.cpp" />
     <ClCompile Include="hacks\features\movement\movement.cpp" />
     <ClCompile Include="hacks\gui\cfg\cfg.cpp" />
     <ClCompile Include="hacks\gui\ctx\ctx.cpp" />
@@ -251,6 +251,7 @@
     <ClInclude Include="game\sdk\classes\i_prediction.h" />
     <ClInclude Include="game\sdk\enums\buttons.h" />
     <ClInclude Include="game\sdk\enums\cvar_ids.h" />
+    <ClInclude Include="game\sdk\include.h" />
     <ClInclude Include="game\sdk\structs\cnetmsg_signonstate_t.h" />
     <ClInclude Include="game\sdk\structs\color.h" />
     <ClInclude Include="game\sdk\classes\i_app_system.h" />
@@ -284,7 +285,7 @@
     <ClInclude Include="globals\hooks\wndproc\wndproc.h" />
     <ClInclude Include="globals\hotwheels\hotwheels.h" />
     <ClInclude Include="globals\includes\includes.h" />
-    <ClInclude Include="globals\intefaces\interfaces.h" />
+    <ClInclude Include="globals\interfaces\interfaces.h" />
     <ClInclude Include="globals\macros\macros.h" />
     <ClInclude Include="hacks\features\movement\movement.h" />
     <ClInclude Include="hacks\gui\anims\anims.h" />

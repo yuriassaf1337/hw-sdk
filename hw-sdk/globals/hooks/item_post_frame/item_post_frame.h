@@ -6,7 +6,7 @@
 #include "../../../game/sdk/classes/c_base_entity.h"
 #include "../../../game/sdk/classes/c_usercmd.h"
 #include "../../../utils/vfunc/vfunc.h"
-#include "../../intefaces/interfaces.h"
+#include "../../interfaces/interfaces.h"
 #include "../hooking.h"
 
 namespace hooks

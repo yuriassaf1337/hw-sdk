@@ -5,7 +5,7 @@
 
 #include "../../../utils/keybinds/keybinds.h"
 #include "../../../utils/vfunc/vfunc.h"
-#include "../../intefaces/interfaces.h"
+#include "../../interfaces/interfaces.h"
 #include "../hooking.h"
 
 namespace hooks

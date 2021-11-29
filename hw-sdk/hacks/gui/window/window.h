@@ -1,7 +1,7 @@
 #pragma once
 #include "../../../game/sdk/classes/i_global_vars.h"
 #include "../../../game/sdk/structs/color.h"
-#include "../../../globals/intefaces/interfaces.h"
+#include "../../../globals/interfaces/interfaces.h"
 #include "../../../utils/keybinds/keybinds.h"
 #include "../../../utils/renderer/renderer.h"
 #include "../includes/includes.h"

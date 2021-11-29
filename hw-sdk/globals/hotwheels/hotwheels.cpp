@@ -1,16 +1,13 @@
+#include "hotwheels.h"
 #include "../../dependencies/audio/kyu/loaded.h"
 #include "../../dependencies/audio/peter_griffin/loaded.h"
 #include "../../dependencies/audio/soilder/loaded.h"
-
-#include <sapi.h>
-
 #include "../../utils/helpers/function_enforce/function_enforce.h"
-#include "../csgo.h"
-#include "hotwheels.h"
-
 #include "../../utils/keybinds/keybinds.h"
+#include "../csgo.h"
 #include "../hooks/hooking.h"
-#include "../intefaces/interfaces.h"
+#include "../interfaces/interfaces.h"
+#include <sapi.h>
 
 DWORD WINAPI hotwheels::init( void* module_handle )
 {

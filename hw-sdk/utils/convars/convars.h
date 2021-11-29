@@ -1,7 +1,7 @@
 #pragma once
 #include "../../game/sdk/classes/i_cvar.h"
 #include "../../globals/includes/includes.h"
-#include "../../globals/intefaces/interfaces.h"
+#include "../../globals/interfaces/interfaces.h"
 
 namespace convars
 {

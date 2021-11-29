@@ -51,7 +51,7 @@
     <ClCompile Include="dependencies\minhook\src\trampoline.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="globals\intefaces\interfaces.cpp">
+    <ClCompile Include="globals\interfaces\interfaces.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="globals\hooks\end_scene\end_scene.cpp">
@@ -314,7 +314,7 @@
     <ClInclude Include="dependencies\minhook\src\trampoline.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="globals\intefaces\interfaces.h">
+    <ClInclude Include="globals\interfaces\interfaces.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="globals\hooks\end_scene\end_scene.h">
@@ -456,6 +456,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="globals\hooks\item_post_frame\item_post_frame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\sdk\include.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

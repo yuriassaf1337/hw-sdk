@@ -40,7 +40,9 @@ namespace prediction
 		void store_backup( );
 
 	private:
-		void pre_think( sdk::c_base_player* player );
+		bool m_backup_is_first_time_predicted;
+		bool m_backup_in_prediction;
+
 		void post_think( sdk::c_base_player* player );
 	};
 } // namespace prediction

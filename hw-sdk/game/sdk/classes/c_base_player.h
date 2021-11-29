@@ -40,6 +40,16 @@ namespace sdk
 			return *reinterpret_cast< int_flag* >( reinterpret_cast< std::uintptr_t >( this ) + offset );
 		}
 
+		void pre_think( )
+		{
+			return virtual_func::call< void >( this, 318 );
+		}
+
+		void select_item( const char* item, int sub_type )
+		{
+			return virtual_func::call< void, const char*, int >( this, 330, item, sub_type );
+		}
+
 		static void set_prediction_random_seed( c_user_cmd* command )
 		{
 			static float* random_seed = *g_client_dll.pattern_scan( _( "A3 ? ? ? ? 66 0F 6E 86 " ) ).add( 0x1 ).as< float** >( );

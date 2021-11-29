@@ -2,7 +2,7 @@
 
 #include "../../globals/ctx/ctx.h"
 #include "../../globals/hooks/cl_move/cl_move.h"
-#include "../../globals/intefaces/interfaces.h"
+#include "../../globals/interfaces/interfaces.h"
 
 // NOTE: There is no reason to rebuild these functions!! Rebuilding would waste CPU and time.
 //       These functions inside of the game are the exact same as if we were to rebuild them.
@@ -13,15 +13,6 @@
 //  as there's no gathering for the current predicted data but the last game called one(ill rebuild post think u dont need to)
 
 // TODO: replace pre think and post think functions with vfunc for simplicity(and put the functions in ccsplayer class)
-
-void prediction::impl::pre_think( sdk::c_base_player* player )
-{
-	static auto pre_think_signature = g_client_dll.pattern_scan( _( "55 8B EC 83 E4 ? 51 56 8B F1 8B 06" ) ).as< std::uintptr_t >( );
-
-	using pre_think_type = void( __thiscall* )( sdk::c_base_player* );
-
-	reinterpret_cast< pre_think_type >( pre_think_signature )( player );
-}
 
 void prediction::impl::post_think( sdk::c_base_player* player )
 {
@@ -64,14 +55,26 @@ void prediction::impl::start( sdk::c_base_player* player )
 	reset_vars.current_time = g_interfaces.globals->current_time;
 	reset_vars.frame_time   = g_interfaces.globals->frame_time;
 
-	g_interfaces.globals->current_time = player->tick_base( ) * g_interfaces.globals->interval_per_tick;
+	g_interfaces.globals->current_time = sdk::ticks_to_time( player->tick_base( ) );
 	g_interfaces.globals->frame_time   = g_interfaces.prediction->engine_paused ? 0 : g_interfaces.globals->interval_per_tick;
+
+	m_backup_is_first_time_predicted = g_interfaces.prediction->is_first_time_predicted_var;
+	m_backup_in_prediction           = g_interfaces.prediction->in_prediction_var;
 
 	g_interfaces.game_movement->start_track_prediction_errors( player );
 
+	if ( g_ctx.cmd->weapon_select ) {
+		auto weapon = g_interfaces.entity_list->get_client_entity( g_ctx.cmd->weapon_select )->as< sdk::c_base_combat_weapon* >( );
+		if ( weapon ) {
+			auto weapon_info = weapon->get_weapon_data( );
+			if ( weapon_info )
+				player->select_item( weapon_info->weapon_name, g_ctx.cmd->weapon_subtype );
+		}
+	}
+
 	g_interfaces.prediction->set_local_view_angles( g_ctx.cmd->view_angles );
 
-	pre_think( player );
+	player->pre_think( );
 
 	g_interfaces.move_helper->set_host( player );
 
