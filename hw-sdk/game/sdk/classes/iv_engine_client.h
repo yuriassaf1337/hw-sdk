@@ -50,9 +50,9 @@ namespace sdk
 		{
 			return virtual_func::call< bool >( this, 27 );
 		}
-		const bool connected_in_game( )
+		const bool connected_safe( )
 		{
-			return is_connected( ) && is_in_game( );
+			return is_connected( ) && is_in_game( ) && !is_playing_demo( );
 		}
 		bool is_drawing_loading_image( )
 		{

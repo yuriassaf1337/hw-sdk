@@ -6,6 +6,12 @@
 namespace movement
 {
 	struct impl {
+		struct pre_prediction {
+			void think( );
+		} pre_prediction;
+		struct post_prediction {
+			void think( );
+		} post_prediction;
 		void bhop( );
 	};
 } // namespace movement

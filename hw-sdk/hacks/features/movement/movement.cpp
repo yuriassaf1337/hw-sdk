@@ -1,5 +1,19 @@
 #include "movement.h"
 
+void movement::impl::pre_prediction::think( )
+{
+	if ( !g_ctx.local->is_alive( ) || !g_interfaces.engine->connected_safe( ) )
+		return;
+
+	g_movement.bhop( );
+}
+
+void movement::impl::post_prediction::think( )
+{
+	if ( !g_ctx.local->is_alive( ) || !g_interfaces.engine->connected_safe( ) )
+		return;
+}
+
 void movement::impl::bhop( )
 {
 	// will return if player is noclip/ladder/fly mode
@@ -8,5 +22,5 @@ void movement::impl::bhop( )
 
 	// remove jump flag if player in air
 	if ( !g_ctx.local->flags( ).has( sdk::flags::ONGROUND ) )
-		g_ctx.cmd->buttons.add( sdk::buttons::IN_JUMP );
+		g_ctx.cmd->buttons.remove( sdk::buttons::IN_JUMP );
 }

@@ -23,7 +23,7 @@ void __stdcall create_move_function( int sequence_number, float input_sample_fra
 	if ( !g_ctx.local || !command || !verified )
 		return;
 
-	g_movement.bhop( );
+	g_movement.pre_prediction.think( );
 
 	g_prediction.update( );
 	g_prediction.start( g_ctx.local );
@@ -32,6 +32,8 @@ void __stdcall create_move_function( int sequence_number, float input_sample_fra
 			send_packet = false;
 	}
 	g_prediction.end( g_ctx.local );
+
+	g_movement.post_prediction.think( );
 
 	verified->command  = *command;
 	verified->checksum = command->checksum( );
