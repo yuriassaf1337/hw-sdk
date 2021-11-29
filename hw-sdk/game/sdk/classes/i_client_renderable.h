@@ -3,7 +3,7 @@
 
 #include "i_client_unknown.h"
 
-#include "../../../utils/math/types/matrix_3x4.h"
+#include "../../../utils/math/types/matrix.h"
 #include "../../../utils/math/types/vector.h"
 
 typedef std::uintptr_t client_shadow_handle;

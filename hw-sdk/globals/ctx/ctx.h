@@ -12,6 +12,8 @@ namespace ctx
 		sdk::c_user_cmd* cmd              = nullptr;
 		sdk::c_base_combat_weapon* weapon = nullptr;
 
+		math::vec2< int > screen_size = { };
+
 		bool running_post_think = false;
 	};
 } // namespace ctx

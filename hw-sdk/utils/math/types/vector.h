@@ -47,8 +47,6 @@ namespace math
 			y += add.y;
 			return *this;
 		}
-
-	private:
 	};
 
 	class vec3
@@ -142,7 +140,6 @@ namespace math
 			return vec3( this->y * cross.z - this->z * cross.y, this->z * cross.x - this->x * cross.z, this->x * cross.y - this->y * cross.x );
 		}
 
-	public:
 		//	operators:
 		float& operator[]( const std::size_t i )
 		{
@@ -270,5 +267,14 @@ namespace math
 		{
 			return vec3( this->x / div, this->y / div, this->z / div );
 		}
+	};
+
+	struct vec4 {
+		vec4( ) = default;
+		constexpr vec4( float xyzw ) : x( xyzw ), y( xyzw ), z( xyzw ), w( xyzw ){ };
+		constexpr vec4( float x, float y ) : x( x ), y( y ), z( x ), w( y ){ };
+		constexpr vec4( float x, float y, float z, float w ) : x( x ), y( y ), z( z ), w( w ){ };
+
+		float x, y, z, w;
 	};
 }; // namespace math

@@ -303,7 +303,7 @@
     <ClInclude Include="globals\hooks\hooking.h" />
     <ClInclude Include="utils\keybinds\keybinds.h" />
     <ClInclude Include="utils\math\math.h" />
-    <ClInclude Include="utils\math\types\matrix_3x4.h" />
+    <ClInclude Include="utils\math\types\matrix.h" />
     <ClInclude Include="utils\math\types\vector.h" />
     <ClInclude Include="utils\modules\address\address.h" />
     <ClInclude Include="utils\modules\modules.h" />

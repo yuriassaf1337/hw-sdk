@@ -1,5 +1,5 @@
 #pragma once
-#include "types/matrix_3x4.h"
+#include "types/matrix.h"
 #include "types/vector.h"
 #include <corecrt_math_defines.h>
 #include <numbers>
@@ -18,6 +18,22 @@ namespace math
 	math::vec3 angle_vector( const math::vec3& angle );
 
 	void angle_vectors( const math::vec3& angles, math::vec3* fw, math::vec3* rg = nullptr, math::vec3* up = nullptr );
+
+	void vector_angles( math::vec3& fw, math::vec3& angles );
+
+	math::vec3 calculate_angle( const math::vec3& src, const math::vec3& dst );
+
+	bool world_to_screen( const math::vec3 origin, math::vec3& screen );
+
+	void clamp_angle( math::vec3& angle );
+
+	float approach_angle( float to, float from, const float speed );
+
+	float snap_yaw( float value );
+
+	void sin_cos( const float a, float* s, float* c );
+
+	math::vec3 matrix_position( const math::matrix_3x4& src );
 
 	template< typename T = float >
 	T& get_fov( const math::vec3& view_angles, const math::vec3& start, const math::vec3& end );
