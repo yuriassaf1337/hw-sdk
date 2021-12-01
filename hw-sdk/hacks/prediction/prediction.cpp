@@ -62,7 +62,9 @@ void prediction::impl::start( sdk::c_base_player* player )
 
 	g_interfaces.move_helper->process_impacts( );
 
+	g_ctx.running_post_think = true;
 	player->post_think( );
+	g_ctx.running_post_think = false;
 
 	player->tick_base( ) = reset_vars.tick_base;
 }
