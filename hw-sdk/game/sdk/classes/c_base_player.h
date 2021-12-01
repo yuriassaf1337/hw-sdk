@@ -45,6 +45,11 @@ namespace sdk
 			return virtual_func::call< void >( this, 318 );
 		}
 
+		void post_think( )
+		{
+			return virtual_func::call< void >( this, 319 );
+		}
+
 		void select_item( const char* item, int sub_type )
 		{
 			return virtual_func::call< void, const char*, int >( this, 330, item, sub_type );

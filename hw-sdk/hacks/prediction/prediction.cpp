@@ -4,30 +4,6 @@
 #include "../../globals/hooks/cl_move/cl_move.h"
 #include "../../globals/interfaces/interfaces.h"
 
-// NOTE: There is no reason to rebuild these functions!! Rebuilding would waste CPU and time.
-//       These functions inside of the game are the exact same as if we were to rebuild them.
-//       Valve may be stupid but they know how to optimize a game (sometimes).
-
-// NOTE @ liga: we dont need to rebuild pre think, but the point of rebuilding postthink is
-//  not to call itempostframe as it runs in another thread and therefore weapon data gets corrupted
-//  as there's no gathering for the current predicted data but the last game called one(ill rebuild post think u dont need to)
-
-// TODO: replace pre think and post think functions with vfunc for simplicity(and put the functions in ccsplayer class)
-
-void prediction::impl::post_think( sdk::c_base_player* player )
-{
-	g_ctx.running_post_think = true;
-
-	static auto post_think_signature =
-		g_client_dll.pattern_scan( _( "56 8B 35 ? ? ? ? 57 8B F9 8B CE 8B 06 FF 90 ? ? ? ? 8B 07" ) ).as< std::uintptr_t >( );
-
-	using post_think_type = void( __thiscall* )( sdk::c_base_player* );
-
-	reinterpret_cast< post_think_type >( post_think_signature )( player );
-
-	g_ctx.running_post_think = false;
-}
-
 void prediction::impl::store_backup( )
 {
 	g_prediction.backup_vars.flags         = g_ctx.local->flags( );
@@ -86,19 +62,9 @@ void prediction::impl::start( sdk::c_base_player* player )
 
 	g_interfaces.move_helper->process_impacts( );
 
-	post_think( player );
+	player->post_think( );
 
 	player->tick_base( ) = reset_vars.tick_base;
-
-	if ( hooks::adjust != 0 ) {
-		if ( hooks::adjust < 0 ) {
-			player->tick_base( )--;
-			hooks::adjust++;
-		} else {
-			player->tick_base( )++;
-			hooks::adjust--;
-		}
-	}
 }
 
 void prediction::impl::end( sdk::c_base_player* player )
@@ -138,6 +104,16 @@ int prediction::impl::get_tick_base( sdk::c_base_player* player )
 			tick++;
 
 		last_command = g_ctx.cmd;
+	}
+
+	if ( hooks::adjust != 0 ) {
+		if ( hooks::adjust < 0 ) {
+			tick--;
+			hooks::adjust++;
+		} else {
+			tick++;
+			hooks::adjust--;
+		}
 	}
 
 	return tick;
