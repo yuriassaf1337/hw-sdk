@@ -27,11 +27,21 @@ namespace movement
 			int tickcount;
 			float moused_x;
 			static movement::edgebug_type mode;
+
+			edgebug_t ( )
+			{
+				memset(this, false, sizeof this);
+			}
 		};
 
 		struct longjump_t {
 			bool standalone = false, start_timer = false;
 			int timestamp;
+
+			longjump_t ( )
+			{
+				memset(this, false, sizeof this);
+			}
 		};
 
 		void bhop( );
