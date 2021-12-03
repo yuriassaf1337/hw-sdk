@@ -4,6 +4,7 @@
 #include "../../../globals/includes/includes.h"
 #include "../../../utils/math/types/vector.h"
 #include "../../../utils/netvar/netvar.h"
+#include "../structs/data_map.h"
 
 #include "c_handle.h"
 
@@ -33,6 +34,16 @@ namespace sdk
 		bool is_player( )
 		{
 			return virtual_func::call< bool >( this, 158 );
+		}
+
+		data_map* data_description_map( )
+		{
+			return virtual_func::call< data_map* >( this, 15 );
+		}
+
+		data_map* prediction_description_map( )
+		{
+			return virtual_func::call< data_map* >( this, 17 );
 		}
 	};
 } // namespace sdk

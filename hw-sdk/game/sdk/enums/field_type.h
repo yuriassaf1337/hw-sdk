@@ -2,7 +2,7 @@
 
 namespace sdk
 {
-	enum class field_type
+	enum class field_type : int
 	{
 		UNKNOWN = 0,
 		FLOAT,

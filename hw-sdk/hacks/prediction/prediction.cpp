@@ -108,15 +108,5 @@ int prediction::impl::get_tick_base( sdk::c_base_player* player )
 		last_command = g_ctx.cmd;
 	}
 
-	if ( hooks::adjust != 0 ) {
-		if ( hooks::adjust < 0 ) {
-			tick--;
-			hooks::adjust++;
-		} else {
-			tick++;
-			hooks::adjust--;
-		}
-	}
-
 	return tick;
 }

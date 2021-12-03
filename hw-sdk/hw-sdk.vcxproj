@@ -269,12 +269,14 @@
     <ClInclude Include="game\sdk\enums\prop_type.h" />
     <ClInclude Include="game\sdk\enums\weapon_type.h" />
     <ClInclude Include="game\sdk\classes\iv_engine_client.h" />
+    <ClInclude Include="game\sdk\structs\data_map.h" />
     <ClInclude Include="game\sdk\structs\demo_playback_parameters_t.h" />
     <ClInclude Include="game\sdk\structs\dt_common.h" />
     <ClInclude Include="game\sdk\structs\dt_recv.h" />
     <ClInclude Include="game\sdk\structs\i_client_class.h" />
     <ClInclude Include="game\sdk\structs\player_info_t.h" />
     <ClInclude Include="game\sdk\enums\teams.h" />
+    <ClInclude Include="game\sdk\structs\type_description.h" />
     <ClInclude Include="game\sdk\structs\weapon_data_t.h" />
     <ClInclude Include="globals\csgo.h" />
     <ClInclude Include="globals\ctx\ctx.h" />
