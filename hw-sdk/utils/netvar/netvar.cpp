@@ -40,3 +40,26 @@ std::uintptr_t netvar::get_table( const char* table, const char* var )
 
 	return std::uintptr_t( );
 }
+
+//std::uintptr_t netvar::get_table( sdk::data_map* table, const char* var )
+//{
+//	for ( auto current_map = table; current_map; current_map = current_map->base_map ) {
+//		for ( auto current_field = table->fields; current_field; current_field++ ) {
+//			auto table_description = table->description[ current_field ];
+//
+//			if ( table_description.name )
+//				continue;
+//
+//			if ( strstr( table_description.name, var ) /*HASH( table_description.name ) == HASH( var )*/ )
+//				return table_description.offset[ static_cast< unsigned int >( sdk::td_offset::NORMAL ) ]; // thanx c++
+//
+//			if ( table_description.type == sdk::field_type::EMBEDDED && table_description.type_description) {
+//				auto offset = get_table( table_description.type_description, var );
+//
+//				return offset;
+//			}
+//		}
+//	}
+//
+//	return std::uintptr_t( );
+//}

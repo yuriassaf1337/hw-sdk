@@ -1,16 +1,18 @@
 #pragma once
 #include "../../../globals/includes/includes.h"
-#include "../enums/field_type.h"
 
-struct data_map;
+#include "../enums/field_type.h"
+#include "../enums/td_offset.h"
 
 namespace sdk
 {
+	struct data_map;
+
 	struct type_description {
 	public:
 		field_type type;
 		const char* name;
-		int offset[ 0x2 ]; // Honestly there's a better way to do this just ignore it though...
+		int offset[ static_cast< unsigned int >( td_offset::COUNT ) ]; // thanx c++
 		unsigned short size;
 		short flags;
 		PAD( 0xC );

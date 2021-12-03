@@ -25,6 +25,8 @@ namespace sdk
 		NETVAR( absolute_origin, bool, "CBaseEntity", "m_angAbsAngles" );
 		NETVAR( absoulte_angles, bool, "CBaseEntity", "m_angAbsOrigin" );
 
+		//NETVAR( surface_friction, float, this->prediction_description_map( ), "m_surfaceFriction");
+
 		[[nodiscard]] math::matrix_3x4& rgfl_coordinate_frame( )
 		{
 			static std::uintptr_t offset = netvar::get_table( _( "CBaseEntity" ), _( "m_CollisionGroup" ) ) - 0x30;

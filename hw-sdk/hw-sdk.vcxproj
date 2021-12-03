@@ -251,6 +251,7 @@
     <ClInclude Include="game\sdk\classes\i_prediction.h" />
     <ClInclude Include="game\sdk\enums\buttons.h" />
     <ClInclude Include="game\sdk\enums\cvar_ids.h" />
+    <ClInclude Include="game\sdk\enums\td_offset.h" />
     <ClInclude Include="game\sdk\include.h" />
     <ClInclude Include="game\sdk\structs\cnetmsg_signonstate_t.h" />
     <ClInclude Include="game\sdk\structs\color.h" />

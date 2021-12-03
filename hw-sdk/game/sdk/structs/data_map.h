@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../structs/type_description.h"
+#include "type_description.h"
 
 namespace sdk
 {
