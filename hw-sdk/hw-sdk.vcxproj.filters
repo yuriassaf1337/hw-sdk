@@ -484,5 +484,8 @@
     <None Include="utils\renderer\renderer.inl">
       <Filter>Header Files</Filter>
     </None>
+    <None Include="utils\modules\modules.inl">
+      <Filter>Header Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

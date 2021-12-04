@@ -323,6 +323,7 @@
     <None Include="hacks\gui\cfg\cfg.inl" />
     <None Include="utils\console\console.inl" />
     <None Include="utils\math\math.inl" />
+    <None Include="utils\modules\modules.inl" />
     <None Include="utils\renderer\renderer.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
