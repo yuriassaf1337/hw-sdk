@@ -239,6 +239,7 @@
     <ClInclude Include="game\sdk\classes\c_client_state.h" />
     <ClInclude Include="game\sdk\classes\c_handle.h" />
     <ClInclude Include="game\sdk\classes\c_hud_chat.h" />
+    <ClInclude Include="game\sdk\classes\c_studio_render.h" />
     <ClInclude Include="game\sdk\classes\c_usercmd.h" />
     <ClInclude Include="game\sdk\classes\c_verified_cmd.h" />
     <ClInclude Include="game\sdk\classes\c_view_setup.h" />
@@ -252,9 +253,11 @@
     <ClInclude Include="game\sdk\classes\i_client_entity_list.h" />
     <ClInclude Include="game\sdk\classes\i_engine_sound.h" />
     <ClInclude Include="game\sdk\classes\i_engine_trace.h" />
+    <ClInclude Include="game\sdk\classes\i_mat_render_ctx.h" />
     <ClInclude Include="game\sdk\classes\i_prediction.h" />
     <ClInclude Include="game\sdk\enums\buttons.h" />
     <ClInclude Include="game\sdk\enums\cvar_ids.h" />
+    <ClInclude Include="game\sdk\enums\material_var_flags.h" />
     <ClInclude Include="game\sdk\enums\td_offset.h" />
     <ClInclude Include="game\sdk\enums\trace_type.h" />
     <ClInclude Include="game\sdk\include.h" />
@@ -280,8 +283,10 @@
     <ClInclude Include="game\sdk\structs\dt_common.h" />
     <ClInclude Include="game\sdk\structs\dt_recv.h" />
     <ClInclude Include="game\sdk\structs\i_client_class.h" />
+    <ClInclude Include="game\sdk\structs\i_material.h" />
     <ClInclude Include="game\sdk\structs\player_info_t.h" />
     <ClInclude Include="game\sdk\enums\teams.h" />
+    <ClInclude Include="game\sdk\structs\studio.h" />
     <ClInclude Include="game\sdk\structs\type_description.h" />
     <ClInclude Include="game\sdk\structs\weapon_data_t.h" />
     <ClInclude Include="globals\csgo.h" />
@@ -314,6 +319,7 @@
     <ClInclude Include="utils\keybinds\keybinds.h" />
     <ClInclude Include="utils\math\math.h" />
     <ClInclude Include="utils\math\types\matrix.h" />
+    <ClInclude Include="utils\math\types\quaternion.h" />
     <ClInclude Include="utils\math\types\vector.h" />
     <ClInclude Include="utils\modules\address\address.h" />
     <ClInclude Include="utils\modules\modules.h" />

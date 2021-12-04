@@ -1,5 +1,6 @@
 #pragma once
 #include "types/matrix.h"
+#include "types/quaternion.h"
 #include "types/vector.h"
 #include <corecrt_math_defines.h>
 #include <numbers>

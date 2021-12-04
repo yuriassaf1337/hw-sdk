@@ -24,6 +24,8 @@ bool sdk::interfaces::init( )
 		engine_trace = g_engine_dll.find_interface< sdk::i_engine_trace_client* >( VENGINE_CLIENT_TRACE_VERSION );
 
 		engine_sound = g_engine_dll.find_interface< sdk::i_engine_sound* >( VENGINE_SOUND_CLIENT_VERSION );
+
+		studio_render = g_studio_render_dll.find_interface< sdk::c_studio_render* >( VSTUDIO_RENDER_VERSION );
 	}
 
 	// virtuals
