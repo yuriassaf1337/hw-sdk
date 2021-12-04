@@ -68,6 +68,23 @@ namespace sdk
 			*predicted_player = entity;
 		}
 
+		int determine_simulation_ticks( )
+		{
+			static auto determine_simulation_ticks_address = g_server_dll.pattern_scan( _( "56 8B F1 33 D2 57 33 FF" ) ).as< std::uintptr_t* >( );
+			using determine_simulation_ticks_type          = int( __thiscall* )( c_base_player* );
+
+			return reinterpret_cast< determine_simulation_ticks_type >( determine_simulation_ticks_address )( this );
+		}
+
+		void adjust_player_timebase( int simulation_ticks )
+		{
+			static auto adjust_player_timebase_address =
+				g_server_dll.pattern_scan( _( "55 8B EC 51 53 56 8B 75 ? 8B D9 85 F6" ) ).as< std::uintptr_t* >( );
+			using adjust_player_timebase_type = void( __thiscall* )( c_base_player*, int );
+
+			reinterpret_cast< adjust_player_timebase_type >( adjust_player_timebase_address )( this, simulation_ticks );
+		}
+
 		bool is_alive( )
 		{
 			return ( this->life_state( ) == sdk::life_state::LIFE_ALIVE && this->health( ) > 0 );

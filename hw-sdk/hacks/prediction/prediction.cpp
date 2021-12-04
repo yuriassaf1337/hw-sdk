@@ -67,6 +67,8 @@ void prediction::impl::start( sdk::c_base_player* player )
 	g_ctx.running_post_think = false;
 
 	player->tick_base( ) = reset_vars.tick_base;
+
+	//player->adjust_player_timebase( simulation_ticks );
 }
 
 void prediction::impl::end( sdk::c_base_player* player )
