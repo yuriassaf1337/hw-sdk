@@ -4,6 +4,7 @@
 #include "../ctx/ctx.h"
 #include "cl_move/cl_move.h"
 #include "create_move/create_move.h"
+#include "emit_sound/emit_sound.h"
 #include "end_scene/end_scene.h"
 #include "item_post_frame/item_post_frame.h"
 #include "wndproc/wndproc.h"
@@ -26,6 +27,7 @@ bool hooks::init( )
 	hooks::create_move::init( );
 	hooks::cl_move::init( );
 	hooks::item_post_frame::init( );
+	hooks::emit_sound::init( );
 
 	MOCKING_CATCH( return false );
 
@@ -39,6 +41,7 @@ void hooks::unload( )
 	hooks::create_move::unload( );
 	hooks::cl_move::unload( );
 	hooks::item_post_frame::unload( );
+	hooks::emit_sound::unload( );
 
 	// this is so useless lol
 	if ( MH_Uninitialize( ) != MH_OK )

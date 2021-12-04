@@ -175,6 +175,7 @@
     <ClCompile Include="globals\csgo.cpp" />
     <ClCompile Include="globals\hooks\cl_move\cl_move.cpp" />
     <ClCompile Include="globals\hooks\create_move\create_move.cpp" />
+    <ClCompile Include="globals\hooks\emit_sound\emit_sound.cpp" />
     <ClCompile Include="globals\hooks\hooking.cpp" />
     <ClCompile Include="globals\hooks\end_scene\end_scene.cpp" />
     <ClCompile Include="globals\hooks\item_post_frame\item_post_frame.cpp" />
@@ -227,6 +228,7 @@
     <ClInclude Include="dependencies\mocking_bird\mocking_bird.h" />
     <ClInclude Include="dependencies\formatting\tinyformat.h" />
     <ClInclude Include="dependencies\xor\xor.h" />
+    <ClInclude Include="game\datatypes\cutl.h" />
     <ClInclude Include="game\sdk\classes\c_base_animating.h" />
     <ClInclude Include="game\sdk\classes\c_base_combat_character.h" />
     <ClInclude Include="game\sdk\classes\c_base_combat_weapon.h" />
@@ -248,6 +250,7 @@
     <ClInclude Include="game\sdk\classes\i_client_dll.h" />
     <ClInclude Include="game\sdk\classes\i_client_entity.h" />
     <ClInclude Include="game\sdk\classes\i_client_entity_list.h" />
+    <ClInclude Include="game\sdk\classes\i_engine_sound.h" />
     <ClInclude Include="game\sdk\classes\i_engine_trace.h" />
     <ClInclude Include="game\sdk\classes\i_prediction.h" />
     <ClInclude Include="game\sdk\enums\buttons.h" />
@@ -285,6 +288,7 @@
     <ClInclude Include="globals\ctx\ctx.h" />
     <ClInclude Include="globals\hooks\cl_move\cl_move.h" />
     <ClInclude Include="globals\hooks\create_move\create_move.h" />
+    <ClInclude Include="globals\hooks\emit_sound\emit_sound.h" />
     <ClInclude Include="globals\hooks\end_scene\end_scene.h" />
     <ClInclude Include="globals\hooks\item_post_frame\item_post_frame.h" />
     <ClInclude Include="globals\hooks\wndproc\wndproc.h" />

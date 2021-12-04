@@ -25,6 +25,7 @@ namespace sdk
 		sdk::i_cvar* convar;
 		sdk::c_client_state* client_state;
 		sdk::i_engine_trace_client* engine_trace;
+		sdk::i_engine_sound* engine_sound;
 
 		bool init( );
 	};

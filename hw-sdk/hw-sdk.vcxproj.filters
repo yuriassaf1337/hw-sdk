@@ -108,6 +108,9 @@
     <ClCompile Include="globals\hooks\item_post_frame\item_post_frame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="globals\hooks\emit_sound\emit_sound.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals\includes\includes.h">
@@ -474,6 +477,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game\sdk\enums\trace_type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="globals\hooks\emit_sound\emit_sound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\sdk\classes\i_engine_sound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\datatypes\cutl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

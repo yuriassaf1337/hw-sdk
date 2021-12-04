@@ -1,5 +1,6 @@
 #pragma once
 #include "../../../utils/vfunc/vfunc.h"
+#include "../../datatypes/cutl.h"
 #include "../enums/cvar_ids.h"
 #include "../structs/color.h"
 #include "i_app_system.h"
@@ -77,7 +78,7 @@ namespace sdk
 		float min;
 		std::int32_t has_max;
 		float max;
-		// utl_vector< unsigned int* > callbacks;
+		sdk::datatypes::c_utl_vector< unsigned int* > callbacks;
 	};
 	struct i_cvar : public i_app_system {
 	public:
