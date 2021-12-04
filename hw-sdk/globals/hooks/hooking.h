@@ -51,6 +51,10 @@ public:
 
 namespace hooks
 {
-	bool init( );
-	void unload( );
+	struct impl {
+		bool init( );
+		void unload( );
+	};
 } // namespace hooks
+
+inline hooks::impl g_hooks;

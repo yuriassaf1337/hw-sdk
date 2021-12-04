@@ -19,7 +19,7 @@ DWORD WINAPI hotwheels::init( void* module_handle )
 
 	ENFORCE_FAILURE( g_interfaces.init( ), "Failed to init interfaces" );
 
-	ENFORCE_FAILURE( hooks::init( ), "Failed to init hooks" );
+	ENFORCE_FAILURE( g_hooks.init( ), "Failed to init hooks" );
 
 	LI_FN( PlaySoundA )( reinterpret_cast< LPCSTR >( kyu::loaded ), nullptr, SND_MEMORY | SND_ASYNC );
 
@@ -35,11 +35,15 @@ DWORD WINAPI hotwheels::init( void* module_handle )
 
 DWORD WINAPI hotwheels::unload( DWORD exit_code )
 {
-	hooks::unload( );
+	MOCKING_TRY
 
-	console::unload( );
+	g_hooks.unload( );
+
+	g_csgo.unload( );
 
 	LI_FN( FreeLibraryAndExitThread )( handle, exit_code );
+
+	MOCKING_CATCH( return 1 );
 
 	return exit_code;
 }

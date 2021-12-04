@@ -14,3 +14,14 @@ bool csgo::init( )
 
 	return true;
 }
+
+bool csgo::unload( )
+{
+	MOCKING_TRY;
+
+	MOCK console::unload( );
+
+	MOCKING_CATCH( return false );
+
+	return true;
+}

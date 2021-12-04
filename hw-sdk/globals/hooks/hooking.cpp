@@ -9,7 +9,7 @@
 #include "item_post_frame/item_post_frame.h"
 #include "wndproc/wndproc.h"
 
-bool hooks::init( )
+bool hooks::impl::init( )
 {
 	MOCKING_TRY;
 
@@ -34,7 +34,7 @@ bool hooks::init( )
 	return true;
 }
 
-void hooks::unload( )
+void hooks::impl::unload( )
 {
 	hooks::wndproc::unload( );
 	hooks::end_scene::unload( );
