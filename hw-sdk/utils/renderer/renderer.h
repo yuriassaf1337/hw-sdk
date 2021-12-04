@@ -125,6 +125,10 @@ namespace render
 		// ty aiden
 		template< class T = int >
 		void quadratic_curve( const math::vec2< T >& start, const math::vec2< T >& control, const math::vec2< T >& end, color color );
+
+		const auto get_viewport( );
+		bool set_viewport(const math::vec2< int >& pos, const math::vec2< int >& size);
+		bool set_viewport( D3DVIEWPORT9 vp );
 	};
 } // namespace render
 inline render::impl g_render;

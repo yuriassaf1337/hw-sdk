@@ -26,11 +26,6 @@ LONG __stdcall hooks::end_scene::end_scene_detour( IDirect3DDevice9* device )
 		g_render.render_text( 200, 200, font_alignment::AL_DEFAULT, font_flags::FLAG_DROPSHADOW, _( "SHOOT!" ),
 		                      g_fonts[ _( "indicator_verdana_font" ) ], color( 255, 50, 150, 50 ) );
 
-	if ( g_ctx.local )
-		g_render.render_text( 200, 200, font_alignment::AL_DEFAULT, font_flags::FLAG_DROPSHADOW,
-		                      console::format( _( "{}" ), g_ctx.local->surface_friction( ) ).c_str( ), g_fonts[ _( "indicator_verdana_font" ) ],
-		                      color( 50, 150, 50, 255 ) );
-
 	// g_render.render_vertical_gradient( 20, 20, 100, 100, color( 255, 255, 0, 0 ), color( 255, 255, 255, 0 ), true );
 	g_render.render_gradient< gradient_type_t::HORIZONTAL >( 20, 20, 100, 100, color( 0, 255, 0, 255 ), color( 255, 0, 0, 255 ) );
 
