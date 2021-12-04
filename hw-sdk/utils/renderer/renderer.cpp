@@ -119,6 +119,27 @@ D3DXVECTOR2 render::impl::render_text_size( const char* string, LPD3DXFONT font 
 	return D3DXVECTOR2( rect.left - rect.right, rect.bottom - rect.top );
 }
 
+const auto render::impl::get_viewport( )
+{
+	D3DVIEWPORT9 vp{ };
+	device->GetViewport( &vp );
+	return vp;
+}
+
+bool render::impl::set_viewport( const math::vec2< int >& pos, const math::vec2< int >& size )
+{
+	const D3DVIEWPORT9 view = {
+		static_cast< DWORD >( pos.x ), static_cast< DWORD >( pos.y ), static_cast< DWORD >( size.x ), static_cast< DWORD >( size.y ), 0, 1
+	};
+
+	return g_render.set_viewport( view );
+}
+
+bool render::impl::set_viewport( D3DVIEWPORT9 vp )
+{
+	return device->SetViewport( &vp );
+}
+
 void render::impl::render_text( int x, int y, unsigned int alignment, unsigned int flags, const char* string, LPD3DXFONT font, color _color )
 {
 	DEVICE_SAFETY( );

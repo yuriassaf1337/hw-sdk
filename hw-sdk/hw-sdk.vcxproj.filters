@@ -470,6 +470,12 @@
     <ClInclude Include="game\sdk\enums\td_offset.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="game\sdk\classes\i_engine_trace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\sdk\enums\trace_type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="utils\math\math.inl">
@@ -482,6 +488,9 @@
       <Filter>Header Files</Filter>
     </None>
     <None Include="utils\renderer\renderer.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="utils\modules\modules.inl">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>

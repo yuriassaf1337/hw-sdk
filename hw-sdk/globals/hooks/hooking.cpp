@@ -1,6 +1,7 @@
 #include "hooking.h"
 
 #include "../../dependencies/mocking_bird/mocking_bird.h"
+#include "../ctx/ctx.h"
 #include "cl_move/cl_move.h"
 #include "create_move/create_move.h"
 #include "end_scene/end_scene.h"
@@ -13,6 +14,12 @@ bool hooks::init( )
 
 	if ( MH_Initialize( ) != MH_OK )
 		return false;
+
+	// alloc backup mem
+	if ( !g_ctx.backup.cmd )
+		g_ctx.backup.cmd = reinterpret_cast< sdk::c_user_cmd* >( std::malloc( sizeof( sdk::c_user_cmd ) ) );
+	if ( !g_ctx.backup.local )
+		g_ctx.backup.local = reinterpret_cast< sdk::c_cs_player* >( std::malloc( 0x3870U ) );
 
 	hooks::wndproc::init( );
 	hooks::end_scene::init( );
@@ -33,5 +40,7 @@ void hooks::unload( )
 	hooks::cl_move::unload( );
 	hooks::item_post_frame::unload( );
 
-	MH_Uninitialize( );
+	// this is so useless lol
+	if ( MH_Uninitialize( ) != MH_OK )
+		console::print< console::log_level::FATAL >( _( "MH_Uninitialize was not MH_OK" ) );
 }

@@ -24,6 +24,7 @@ namespace sdk
 		sdk::i_move_helper* move_helper;
 		sdk::i_cvar* convar;
 		sdk::c_client_state* client_state;
+		sdk::i_engine_trace_client* engine_trace;
 
 		bool init( );
 	};
