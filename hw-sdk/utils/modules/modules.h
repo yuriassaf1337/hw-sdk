@@ -21,6 +21,8 @@ namespace modules
 		template< class T >
 		T find_interface( const char* interface_name );
 
+		constexpr HMODULE get_module_handle_safe( const char* name );
+
 	private:
 		HMODULE module_handle{ };
 
@@ -29,8 +31,6 @@ namespace modules
 		std::uintptr_t find_pattern( std::uint8_t* region_start, std::uintptr_t region_size, const char* pattern );
 
 		std::vector< int > pattern_to_bytes( const char* pattern );
-
-		constexpr HMODULE get_module_handle_safe( const char* name );
 	};
 } // namespace modules
 
