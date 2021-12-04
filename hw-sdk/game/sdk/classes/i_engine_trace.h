@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../../../globals/includes/includes.h"
-#include "c_base_player.h"
-
-#define VENGINE_CLIENT_TRACE_VERSION _( "EngineTraceClient004" )
+#include "../enums/trace_type.h"
+#include "../../../utils/math/types/vector.h"
 
 namespace sdk
 {
+	struct c_base_player;
+
 	// this struct is here because its only used with conjuntion of engine trace
 	struct ray_t {
 		// no need to forceinline this i believe
@@ -84,7 +84,7 @@ namespace sdk
 		WORD flags;
 	};
 
-	class c_game_trace : public sdk::c_base_trace
+	class c_game_trace : public c_base_trace
 	{
 	public:
 		__forceinline c_game_trace( ) { }
@@ -104,34 +104,34 @@ namespace sdk
 		int hit_group;
 		short physics_bone;
 		WORD world_surface_index;
-		sdk::c_base_player* entity = nullptr;
+		c_base_player* entity = nullptr;
 		int hitbox;
 	};
 
 	class i_trace_filter
 	{
 	public:
-		virtual bool should_hit_entity( sdk::c_base_player* entity, int contents_mask ) = 0;
-		virtual sdk::trace_type get_trace_type( ) const                                 = 0;
-		int collision_group                                                             = 0;
-		sdk::c_base_player* skip;
+		virtual bool should_hit_entity( c_base_player* entity, int contents_mask ) = 0;
+		virtual trace_type get_trace_type( ) const                                 = 0;
+		int collision_group                                                        = 0;
+		c_base_player* skip;
 	};
 
-	class c_trace_filter : public sdk::i_trace_filter
+	class c_trace_filter : public i_trace_filter
 	{
 	public:
-		bool should_hit_entity( sdk::c_base_player* entity_handle, int contents_mask )
+		bool should_hit_entity( c_base_player* entity_handle, int contents_mask )
 		{
 			return !( entity_handle == skip );
 		}
 
-		sdk::trace_type get_trace_type( ) const
+		trace_type get_trace_type( ) const
 		{
-			return sdk::trace_type::TRACE_EVERYTHING;
+			return trace_type::TRACE_EVERYTHING;
 		}
 	};
 
-	class c_trace_filter_skip_two_entities : public sdk::i_trace_filter
+	class c_trace_filter_skip_two_entities : public i_trace_filter
 	{
 	public:
 		__forceinline c_trace_filter_skip_two_entities( c_base_player* lhs, c_base_player* rhs )
@@ -145,52 +145,51 @@ namespace sdk
 			return !( entity_handle == skip || entity_handle == skip2 );
 		}
 
-		virtual sdk::trace_type get_trace_type( ) const
+		virtual trace_type get_trace_type( ) const
 		{
-			return sdk::trace_type::TRACE_EVERYTHING;
+			return trace_type::TRACE_EVERYTHING;
 		}
 
-		sdk::c_base_player* skip2;
+		c_base_player* skip2;
 	};
 
 	class c_trace_filter_skip_grenades
 	{
 	public:
-		virtual bool should_hit_entity( sdk::c_base_player* entity_handle, int contents_mask )
+		virtual bool should_hit_entity( c_base_player* entity_handle, int contents_mask )
 		{
 			if ( !entity_handle )
 				return !( entity_handle == skip );
 
-			auto cclass = entity_handle->get_client_networkable( )->get_client_class( );
+			//auto cclass = entity_handle->get_client_networkable( )->get_client_class( );
 
-			if ( !cclass )
-				return !( entity_handle == skip );
+			//if ( !cclass )
+			//	return !( entity_handle == skip );
 
-			if ( cclass->class_id == sdk::class_ids::BASE_CS_GRENADE_PROJECTILE )
-				return false;
+			//if ( cclass->class_id == class_ids::BASE_CS_GRENADE_PROJECTILE )
+			//	return false;
 
 			return !( entity_handle == skip );
 		}
 
-		virtual sdk::trace_type get_trace_type( ) const
+		virtual trace_type get_trace_type( ) const
 		{
-			return sdk::trace_type::TRACE_EVERYTHING;
+			return trace_type::TRACE_EVERYTHING;
 		}
 
-		sdk::c_base_player* skip;
+		c_base_player* skip;
 		int collision_group;
 	};
 
 	class i_engine_trace_client
 	{
 	public:
-		virtual int get_point_contents( const math::vec3& vec_abs_pos, int content_mask = sdk::masks::MASK_ALL,
-		                                sdk::c_base_player** entity = nullptr )                                                            = 0;
-		virtual int get_point_contents_world_only( const math::vec3& vec_abs_pos, int content_mask = sdk::masks::MASK_ALL )                = 0;
-		virtual int get_point_contents_collideable( void* collide, const math::vec3& vec_abs_pos )                                         = 0;
-		virtual void clip_ray_to_entity( const sdk::ray_t& ray, unsigned int fmask, sdk::c_base_player* entity, sdk::c_game_trace* trace ) = 0;
-		virtual void clip_ray_to_collideable( const sdk::ray_t& ray, unsigned int fmask, void* collide, sdk::c_game_trace* trace )         = 0;
-		virtual void trace_ray( const sdk::ray_t& ray, unsigned int fmask, sdk::i_trace_filter* trace_filter, sdk::c_game_trace* trace )   = 0;
+		virtual int get_point_contents( const math::vec3& vec_abs_pos, int content_mask = masks::MASK_ALL, c_base_player** entity = nullptr ) = 0;
+		virtual int get_point_contents_world_only( const math::vec3& vec_abs_pos, int content_mask = masks::MASK_ALL )                        = 0;
+		virtual int get_point_contents_collideable( void* collide, const math::vec3& vec_abs_pos )                                            = 0;
+		virtual void clip_ray_to_entity( const ray_t& ray, unsigned int fmask, c_base_player* entity, c_game_trace* trace )                   = 0;
+		virtual void clip_ray_to_collideable( const ray_t& ray, unsigned int fmask, void* collide, c_game_trace* trace )                      = 0;
+		virtual void trace_ray( const ray_t& ray, unsigned int fmask, i_trace_filter* trace_filter, c_game_trace* trace )                     = 0;
 	};
 } // namespace sdk
 

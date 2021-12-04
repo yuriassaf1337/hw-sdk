@@ -41,6 +41,7 @@
 #define VCLIENTENTITYLIST_INTERFACE_VERSION   _( "VClientEntityList003" )
 #define VCLIENTPREDICTION_INTERFACE_VERSION   _( "VClientPrediction001" )
 #define VCLIENTGAMEMOVEMENT_INTERFACE_VERSION _( "GameMovement001" )
+#define VENGINE_CLIENT_TRACE_VERSION          _( "EngineTraceClient004" )
 
 // [#] utils
 
