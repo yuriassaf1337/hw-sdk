@@ -124,9 +124,7 @@ math::vec3 math::calculate_angle( const math::vec3& src, const math::vec3& dst )
 
 	math::vector_angles( delta, angles );
 
-	angles.normalized( );
-
-	return angles;
+	return angles.normalize_in_place( );
 }
 
 bool math::world_to_screen( const math::vec3 origin, math::vec3& screen )
