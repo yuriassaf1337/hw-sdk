@@ -506,6 +506,9 @@
     <ClInclude Include="game\sdk\enums\material_var_flags.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="game\sdk\classes\i_debug_overlay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="utils\math\math.inl">

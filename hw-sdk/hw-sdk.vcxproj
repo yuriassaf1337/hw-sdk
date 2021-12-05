@@ -251,6 +251,7 @@
     <ClInclude Include="game\sdk\classes\i_client_dll.h" />
     <ClInclude Include="game\sdk\classes\i_client_entity.h" />
     <ClInclude Include="game\sdk\classes\i_client_entity_list.h" />
+    <ClInclude Include="game\sdk\classes\i_debug_overlay.h" />
     <ClInclude Include="game\sdk\classes\i_engine_sound.h" />
     <ClInclude Include="game\sdk\classes\i_engine_trace.h" />
     <ClInclude Include="game\sdk\classes\i_mat_render_ctx.h" />

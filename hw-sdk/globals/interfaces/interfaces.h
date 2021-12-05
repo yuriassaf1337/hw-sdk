@@ -27,6 +27,7 @@ namespace sdk
 		sdk::i_engine_trace_client* engine_trace;
 		sdk::i_engine_sound* engine_sound;
 		sdk::c_studio_render* studio_render;
+		sdk::i_debug_overlay* debug_overlay;
 
 		bool init( );
 	};

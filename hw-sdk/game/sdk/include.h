@@ -7,6 +7,7 @@
 #include "classes/i_client_dll.h"
 #include "classes/i_client_entity_list.h"
 #include "classes/i_cvar.h"
+#include "classes/i_debug_overlay.h"
 #include "classes/i_engine_sound.h"
 #include "classes/i_engine_trace.h"
 #include "classes/i_global_vars.h"

@@ -44,6 +44,7 @@
 #define VENGINE_CLIENT_TRACE_VERSION          _( "EngineTraceClient004" )
 #define VENGINE_SOUND_CLIENT_VERSION          _( "IEngineSoundClient003" )
 #define VSTUDIO_RENDER_VERSION                _( "VStudioRender026" )
+#define VENGINE_DEBUG_OVERLAY_VERSION         _( "VDebugOverlay004" )
 
 // [#] utils
 
