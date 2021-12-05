@@ -27,13 +27,13 @@ namespace sdk
 		template< class T >
 		__forceinline T get_client_entity( int index )
 		{
-			return private_get_client_entity( index );
+			return private_get_client_entity( index )->as< T >( );
 		};
 
 		template< class T >
 		__forceinline T get_client_entity_from_handle( c_base_handle handle )
 		{
-			return private_get_client_entity_from_handle( handle );
+			return private_get_client_entity_from_handle( handle )->as< T >( );
 		}
 	};
 } // namespace sdk
