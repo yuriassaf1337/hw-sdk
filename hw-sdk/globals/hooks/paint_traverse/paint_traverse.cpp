@@ -11,5 +11,5 @@ void __stdcall hooks::paint_traverse::paint_traverse_detour( unsigned int panel,
 		g_log.print( _( "injection success." ), _( "[hotwheels.vip]" ) );
 	} );
 
-	return hooks::paint_traverse_hook.call_original< void >( panel, force_repaint, allow_force );
+	return hooks::paint_traverse_hook.call_original< void >( g_interfaces.panel, panel, force_repaint, allow_force );
 }
