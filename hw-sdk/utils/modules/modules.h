@@ -36,12 +36,22 @@ namespace modules
 
 // global modules
 
-inline modules::impl g_client_dll        = modules::impl( CLIENT_DLL );
-inline modules::impl g_engine_dll        = modules::impl( ENGINE_DLL );
-inline modules::impl g_localize_dll      = modules::impl( LOCALIZE_DLL );
-inline modules::impl g_shaderapidx9_dll  = modules::impl( SHADERAPIDX9_DLL );
-inline modules::impl g_vstdlib_dll       = modules::impl( VSTDLIB_DLL );
-inline modules::impl g_server_dll        = modules::impl( SERVER_DLL );
-inline modules::impl g_studio_render_dll = modules::impl( STUDIORENDER_DLL );
+inline modules::impl g_client_dll                = modules::impl( CLIENT_DLL );
+inline modules::impl g_engine_dll                = modules::impl( ENGINE_DLL );
+inline modules::impl g_localize_dll              = modules::impl( LOCALIZE_DLL );
+inline modules::impl g_shaderapidx9_dll          = modules::impl( SHADERAPIDX9_DLL );
+inline modules::impl g_vstdlib_dll               = modules::impl( VSTDLIB_DLL );
+inline modules::impl g_server_dll                = modules::impl( SERVER_DLL );
+inline modules::impl g_studio_render_dll         = modules::impl( STUDIORENDER_DLL );
+inline modules::impl g_material_system_dll       = modules::impl( MATERIALSYSTEM_DLL );
+inline modules::impl g_vgui_dll                  = modules::impl( VGUI_DLL );
+inline modules::impl g_vgui2_dll                 = modules::impl( VGUI2_DLL );
+inline modules::impl g_game_overlay_renderer_dll = modules::impl( GAMEOVERLAYRENDERER_DLL );
+inline modules::impl g_physics_dll               = modules::impl( PHYSICS_DLL );
+inline modules::impl g_tier0_dll                 = modules::impl( TIER0_DLL );
+inline modules::impl g_input_system_dll          = modules::impl( INPUTSYSTEM_DLL );
+inline modules::impl g_data_cache_dll            = modules::impl( DATACACHE_DLL );
+inline modules::impl g_steam_api_dll             = modules::impl( STEAM_API_DLL );
+inline modules::impl g_matchmaking_dll           = modules::impl( MATCHMAKING_DLL );
 
 #include "modules.inl"
