@@ -37,5 +37,14 @@ namespace sdk
 
 			return find( this, key_name, create );
 		}
+
+		void set_string( const char* key_name, const char* value )
+		{
+			void( __thiscall * set )( c_key_values*, const char*, const char* ) =
+				g_client_dll.pattern_scan( _( "E8 ? ? ? ? 89 77 38" ) ).add( 1 ).as< decltype( set ) >( );
+
+			if ( const auto key = find_key( key_name, false ) )
+				set( this, key_name, value );
+		}
 	};
 } // namespace sdk
