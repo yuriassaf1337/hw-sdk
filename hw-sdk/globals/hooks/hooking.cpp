@@ -7,6 +7,7 @@
 #include "emit_sound/emit_sound.h"
 #include "end_scene/end_scene.h"
 #include "item_post_frame/item_post_frame.h"
+#include "paint_traverse/paint_traverse.h"
 #include "wndproc/wndproc.h"
 
 bool hooks::impl::init( )
@@ -28,6 +29,7 @@ bool hooks::impl::init( )
 	hooks::cl_move::init( );
 	hooks::item_post_frame::init( );
 	hooks::emit_sound::init( );
+	hooks::paint_traverse::init( );
 
 	MOCKING_CATCH( return false );
 
@@ -42,6 +44,7 @@ void hooks::impl::unload( )
 	hooks::cl_move::unload( );
 	hooks::item_post_frame::unload( );
 	hooks::emit_sound::unload( );
+	hooks::paint_traverse::unload( );
 
 	// this is so useless lol
 	if ( MH_Uninitialize( ) != MH_OK )

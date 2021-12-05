@@ -1,5 +1,6 @@
 #include <string.h>
 
+#include "../../../hacks/logging/logging.h"
 #include "../../../utils/entity_list/entity_list.h"
 #include "../../ctx/ctx.h"
 #include "../create_move/create_move.h"
@@ -25,6 +26,8 @@ LONG __stdcall hooks::end_scene::end_scene_detour( IDirect3DDevice9* device )
 	if ( hooks::can_shoot )
 		g_render.render_text( 200, 200, font_alignment::AL_DEFAULT, font_flags::FLAG_DROPSHADOW, _( "SHOOT!" ),
 		                      g_fonts[ HASH( "indicator_verdana_font" ) ], color( 255, 50, 150, 50 ) );
+
+	g_log.think( );
 
 	g_menu.draw( );
 

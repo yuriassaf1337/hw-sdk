@@ -46,6 +46,7 @@
 #define VSTUDIO_RENDER_VERSION                _( "VStudioRender026" )
 #define VENGINE_DEBUG_OVERLAY_VERSION         _( "VDebugOverlay004" )
 #define VMATERIAL_SYSTEM_CLIENT_VERSION       _( "VMaterialSystem080" )
+#define VGUI_PANEL_CLIENT_VERSION             _( "VGUI_Panel009" )
 
 // [#] utils
 

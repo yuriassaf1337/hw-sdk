@@ -29,6 +29,7 @@ namespace sdk
 		sdk::c_studio_render* studio_render;
 		sdk::i_debug_overlay* debug_overlay;
 		sdk::i_material_system* material_system;
+		sdk::i_panel* panel;
 
 		bool init( );
 	};

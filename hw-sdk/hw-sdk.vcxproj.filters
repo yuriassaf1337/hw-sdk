@@ -111,6 +111,12 @@
     <ClCompile Include="globals\hooks\emit_sound\emit_sound.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="hacks\logging\logging.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="globals\hooks\paint_traverse\paint_traverse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals\includes\includes.h">
@@ -519,6 +525,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game\sdk\enums\key_type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\logging\logging.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="globals\hooks\paint_traverse\paint_traverse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\sdk\classes\i_panel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

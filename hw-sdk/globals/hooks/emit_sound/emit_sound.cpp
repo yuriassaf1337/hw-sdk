@@ -8,7 +8,7 @@ void __fastcall hooks::emit_sound::emit_sound_detour( void* ecx, void* edx, void
                                                       void* utl_vec_origins, bool update_positions, float soundtime, int speaker_entity,
                                                       void* sound_params )
 {
-	if ( !g_ctx.local || !g_ctx.local->is_alive( ) && g_interfaces.engine->connected_safe( ) )
+	if ( !g_ctx.local || g_ctx.local->entity_index( ) != entity_index || !g_ctx.local->is_alive( ) && g_interfaces.engine->connected_safe( ) )
 		goto CALL_ORIGINAL;
 
 	// dont play sounds twice while running ProcessMove

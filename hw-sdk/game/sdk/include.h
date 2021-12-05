@@ -13,6 +13,7 @@
 #include "classes/i_global_vars.h"
 #include "classes/i_mat_render_ctx.h"
 #include "classes/i_material_system.h"
+#include "classes/i_panel.h"
 #include "classes/i_prediction.h"
 #include "classes/iv_engine_client.h"
 

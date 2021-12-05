@@ -116,7 +116,7 @@ D3DXVECTOR2 render::impl::render_text_size( const char* string, LPD3DXFONT font 
 
 	font->DrawTextA( nullptr, string, -1, &rect, DT_CALCRECT, color( 0, 0, 0, 0 ).to_d3d( ) );
 
-	return D3DXVECTOR2( rect.left - rect.right, rect.bottom - rect.top );
+	return D3DXVECTOR2( rect.right - rect.left, rect.bottom - rect.top );
 }
 
 const auto render::impl::get_viewport( )
@@ -140,7 +140,7 @@ bool render::impl::set_viewport( D3DVIEWPORT9 vp )
 	return device->SetViewport( &vp );
 }
 
-void render::impl::render_text( int x, int y, unsigned int alignment, unsigned int flags, const char* string, LPD3DXFONT font, color _color )
+void render::impl::render_text( int x, int y, unsigned int alignment, const font_flags flags, const char* string, LPD3DXFONT font, color _color )
 {
 	DEVICE_SAFETY( );
 
@@ -167,7 +167,7 @@ void render::impl::render_text( int x, int y, unsigned int alignment, unsigned i
 	} else {
 		if ( flags & font_flags::FLAG_DROPSHADOW ) {
 			set_rect( &rect, x + 1, y + 1 );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( _color.r, 0, 0, 0 ).to_d3d( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_d3d( ) );
 
 			set_rect( &rect, x, y );
 			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, _color.to_d3d( ) );
@@ -175,31 +175,44 @@ void render::impl::render_text( int x, int y, unsigned int alignment, unsigned i
 
 		if ( flags & font_flags::FLAG_OUTLINE ) {
 			set_rect( &rect, x, y + 1 );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_d3d( ) );
 			set_rect( &rect, x + 1, y );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_d3d( ) );
 			set_rect( &rect, x, y - 1 );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_d3d( ) );
 			set_rect( &rect, x - 1, y );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_d3d( ) );
 
 			set_rect( &rect, x + 1, y );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_d3d( ) );
 			set_rect( &rect, x, y + 1 );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_d3d( ) );
 			set_rect( &rect, x - 1, y );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_d3d( ) );
 			set_rect( &rect, x, y - 1 );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_d3d( ) );
 
 			set_rect( &rect, x + 1, y + 1 );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_d3d( ) );
 			set_rect( &rect, x - 1, y - 1 );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_d3d( ) );
 			set_rect( &rect, x + 1, y - 1 );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_d3d( ) );
 			set_rect( &rect, x - 1, y + 1 );
-			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 255, 0, 0, 0 ).to_d3d( ) );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_d3d( ) );
+
+			set_rect( &rect, x, y );
+			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, _color.to_d3d( ) );
+		}
+		if ( flags & font_flags::FLAG_OUTLINE_SEMI ) {
+			set_rect( &rect, x - 1, y );
+			font->DrawTextA( NULL, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_d3d( ) );
+			set_rect( &rect, x + 1, y );
+			font->DrawTextA( NULL, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_d3d( ) );
+			set_rect( &rect, x, y - 1 );
+			font->DrawTextA( NULL, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_d3d( ) );
+			set_rect( &rect, x, y + 1 );
+			font->DrawTextA( NULL, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_d3d( ) );
 
 			set_rect( &rect, x, y );
 			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, _color.to_d3d( ) );

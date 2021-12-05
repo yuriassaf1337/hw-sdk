@@ -18,7 +18,8 @@ enum font_flags : unsigned
 {
 	FLAG_NONE,
 	FLAG_DROPSHADOW,
-	FLAG_OUTLINE
+	FLAG_OUTLINE,
+	FLAG_OUTLINE_SEMI
 };
 
 enum class gradient_type_t
@@ -111,9 +112,9 @@ namespace render
 
 		D3DXVECTOR2 render_text_size( const char* string, LPD3DXFONT font );
 
-		void render_text( int x, int y, std::uint32_t alignment, std::uint32_t flags, const char* string, LPD3DXFONT font, color color );
+		void render_text( int x, int y, unsigned int alignment, const font_flags flags, const char* string, LPD3DXFONT font, color color );
 		template< class T = int >
-		void render_text( const math::vec2< T >& pos, std::uint32_t alignment, std::uint32_t flags, const char* string, LPD3DXFONT font,
+		void render_text( const math::vec2< T >& pos, unsigned int alignment, const font_flags flags, const char* string, LPD3DXFONT font,
 		                  color color );
 
 		template< auto gradient_type = gradient_type_t::HORIZONTAL >

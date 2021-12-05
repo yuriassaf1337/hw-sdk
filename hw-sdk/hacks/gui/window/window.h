@@ -18,6 +18,8 @@ namespace gui::forms
 		void end_window( );
 
 	private:
+		void handle_background( );
+		void handle_title_header( );
 		float ui_anim_state    = 0.f;
 		bool title_bar_hovered = false;
 		std::uint8_t open_key{ };

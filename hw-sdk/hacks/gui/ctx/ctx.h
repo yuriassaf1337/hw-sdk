@@ -23,7 +23,7 @@ namespace gui
 		int active_tab = 0;
 
 		struct {
-			bool open     = false;
+			bool open     = true;
 			bool dragging = false;
 			float alpha   = 0.f;
 		} main;

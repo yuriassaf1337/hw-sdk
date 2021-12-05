@@ -41,7 +41,8 @@ void render::impl::render_filled_rectangle( const math::vec2< T >& pos, const ma
 }
 
 template< class T >
-void render::impl::render_text( const math::vec2< T >& pos, std::uint32_t alignment, std::uint32_t flags, const char* string, LPD3DXFONT font, color color )
+void render::impl::render_text( const math::vec2< T >& pos, unsigned int alignment, const font_flags flags, const char* string, LPD3DXFONT font,
+                                color color )
 {
 	render_text( pos.x, pos.y, alignment, flags, string, font, color );
 }

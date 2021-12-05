@@ -11,7 +11,7 @@ address modules::impl::pattern_scan( const char* sig )
 	const std::uintptr_t offset = find_pattern( module_address, nt_headers->OptionalHeader.SizeOfImage, sig );
 
 	if ( offset )
-		console::print< console::log_level::NORMAL >( _( "Found signature - [ {} -> {} ]" ), module_name, sig );
+		console::print< console::log_level::NORMAL >( _( "Found signature: {} [ {} ]" ), module_name, sig );
 
 	return offset;
 };

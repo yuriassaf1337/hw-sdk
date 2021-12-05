@@ -179,6 +179,7 @@
     <ClCompile Include="globals\hooks\hooking.cpp" />
     <ClCompile Include="globals\hooks\end_scene\end_scene.cpp" />
     <ClCompile Include="globals\hooks\item_post_frame\item_post_frame.cpp" />
+    <ClCompile Include="globals\hooks\paint_traverse\paint_traverse.cpp" />
     <ClCompile Include="globals\hooks\wndproc\wndproc.cpp" />
     <ClCompile Include="globals\hotwheels\hotwheels.cpp" />
     <ClCompile Include="globals\interfaces\interfaces.cpp" />
@@ -188,6 +189,7 @@
     <ClCompile Include="hacks\gui\gui.cpp" />
     <ClCompile Include="hacks\gui\window\tabs\tabs.cpp" />
     <ClCompile Include="hacks\gui\window\window.cpp" />
+    <ClCompile Include="hacks\logging\logging.cpp" />
     <ClCompile Include="hacks\prediction\prediction.cpp" />
     <ClCompile Include="utils\entity_list\entity_list.cpp" />
     <ClCompile Include="utils\keybinds\keybinds.cpp" />
@@ -257,6 +259,7 @@
     <ClInclude Include="game\sdk\classes\i_engine_trace.h" />
     <ClInclude Include="game\sdk\classes\i_material_system.h" />
     <ClInclude Include="game\sdk\classes\i_mat_render_ctx.h" />
+    <ClInclude Include="game\sdk\classes\i_panel.h" />
     <ClInclude Include="game\sdk\classes\i_prediction.h" />
     <ClInclude Include="game\sdk\enums\buttons.h" />
     <ClInclude Include="game\sdk\enums\cvar_ids.h" />
@@ -301,6 +304,7 @@
     <ClInclude Include="globals\hooks\emit_sound\emit_sound.h" />
     <ClInclude Include="globals\hooks\end_scene\end_scene.h" />
     <ClInclude Include="globals\hooks\item_post_frame\item_post_frame.h" />
+    <ClInclude Include="globals\hooks\paint_traverse\paint_traverse.h" />
     <ClInclude Include="globals\hooks\wndproc\wndproc.h" />
     <ClInclude Include="globals\hotwheels\hotwheels.h" />
     <ClInclude Include="globals\includes\includes.h" />
@@ -315,6 +319,7 @@
     <ClInclude Include="hacks\gui\utils\utils.h" />
     <ClInclude Include="hacks\gui\window\tabs\tabs.h" />
     <ClInclude Include="hacks\gui\window\window.h" />
+    <ClInclude Include="hacks\logging\logging.h" />
     <ClInclude Include="hacks\prediction\prediction.h" />
     <ClInclude Include="utils\console\log_level\log_level.h" />
     <ClInclude Include="utils\convars\convars.h" />

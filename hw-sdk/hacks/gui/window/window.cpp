@@ -3,6 +3,30 @@
 #include "../utils/utils.h"
 #include "tabs/tabs.h"
 
+void gui::forms::window_impl::handle_background( )
+{
+	// render all 3 menu outlines
+	g_render.render_filled_rectangle< int >( g_gui.position, g_gui.size, gui::pallete::first_outline( ) );
+	g_render.render_filled_rectangle< int >( g_gui.position + 2, g_gui.size - 4, gui::pallete::second_outline( ) );
+	g_render.render_filled_rectangle< int >( g_gui.position + math::vec2< int >( 4, 36 ), g_gui.size - math::vec2< int >( 8, 40 ),
+	                                         gui::pallete::third_outline( ) );
+
+	// render menu's main gradient
+	g_render.render_gradient< gradient_type_t::VERTICAL, int >( g_gui.position + math::vec2< int >( 6, 38 ), g_gui.size - 6,
+	                                                            color( 32, 32, 32, g_gui.main.alpha ), color( 24, 24, 24, g_gui.main.alpha ) );
+}
+
+void gui::forms::window_impl::handle_title_header( )
+{
+	// black header outline
+	g_render.render_filled_rectangle< int >( g_gui.position + 2, math::vec2< int >( g_gui.size.x - 4, 32 ), gui::pallete::first_outline( ) );
+	// grey header outline
+	g_render.render_filled_rectangle< int >( g_gui.position + 2, math::vec2< int >( g_gui.size.x - 4, 30 ), gui::pallete::first_outline( ) );
+	// gradient
+	g_render.render_gradient< gradient_type_t::VERTICAL, int >( g_gui.position + 4, math::vec2< int >( g_gui.size.x - 6, 30 ),
+	                                                            color( 27, 27, 27, g_gui.main.alpha ), color( 17, 17, 17, g_gui.main.alpha ) );
+}
+
 bool gui::forms::window_impl::begin_window( const std::string_view name )
 {
 	static math::vec2< int > old_mouse_pos;
@@ -48,23 +72,17 @@ bool gui::forms::window_impl::begin_window( const std::string_view name )
 			g_gui.main.dragging = false;
 	}
 
-	// render all 3 menu outlines
-	g_render.render_rectangle< int >( g_gui.position, g_gui.size, gui::pallete::first_outline( ) );
-	g_render.render_rectangle< int >( g_gui.position + 1, g_gui.size - 2, gui::pallete::second_outline( ) );
-	g_render.render_rectangle< int >( g_gui.position + 2, g_gui.size - 4, gui::pallete::third_outline( ) );
+	handle_background( );
 
-	// render menu's main gradient
-	g_render.render_gradient< gradient_type_t::VERTICAL, int >( g_gui.position + 3, g_gui.size - 6, color( 25, 25, 25, g_gui.main.alpha ),
-	                                                            color( 17, 17, 17, g_gui.main.alpha ) );
+	handle_title_header( );
 
 	// render text and add a .vip next to it.
-	g_render.render_text( g_gui.position + math::vec2< int >( 12, 10 ), font_alignment::AL_DEFAULT, font_flags::FLAG_OUTLINE, name.data( ),
+	g_render.render_text( g_gui.position + math::vec2< int >( 12, 10 ), font_alignment::AL_DEFAULT, font_flags::FLAG_OUTLINE_SEMI, name.data( ),
 	                      g_fonts[ HASH( "main_font" ) ], color( 255, 255, 255, g_gui.main.alpha ) );
 
-	color accent = g_cfg.as_color< configs::alpha_type::GUI_ALPHA >( _( "main_menu_color" ) );
-
 	g_render.render_text( g_gui.position + math::vec2< int >( 14 + g_render.render_text_size( name.data( ), g_fonts[ HASH( "main_font" ) ] ).x, 10 ),
-	                      font_alignment::AL_DEFAULT, font_flags::FLAG_OUTLINE, _( ".vip" ), g_fonts[ HASH( "main_font" ) ], accent);
+	                      font_alignment::AL_DEFAULT, font_flags::FLAG_OUTLINE_SEMI, _( ".vip" ), g_fonts[ HASH( "main_font" ) ],
+	                      g_cfg.as_color< configs::alpha_type::GUI_ALPHA >( _( "main_menu_color" ) ) );
 
 	// swap stack
 	std::stack< math::vec2< int > >( ).swap( g_gui.cursor_pos_stack );

@@ -30,6 +30,8 @@ bool sdk::interfaces::init( )
 		debug_overlay = g_engine_dll.find_interface< sdk::i_debug_overlay* >( VENGINE_DEBUG_OVERLAY_VERSION );
 
 		material_system = g_material_system_dll.find_interface< sdk::i_material_system* >( VMATERIAL_SYSTEM_CLIENT_VERSION );
+
+		panel = g_vgui2_dll.find_interface< sdk::i_panel* >( VGUI_PANEL_CLIENT_VERSION );
 	}
 
 	// virtuals
