@@ -2,6 +2,7 @@
 #include "../../dependencies/audio/kyu/loaded.h"
 #include "../../dependencies/audio/peter_griffin/loaded.h"
 #include "../../dependencies/audio/soilder/loaded.h"
+#include "../../hacks/gui/cfg/cfg.h"
 #include "../../utils/helpers/function_enforce/function_enforce.h"
 #include "../../utils/keybinds/keybinds.h"
 #include "../csgo.h"
@@ -18,6 +19,8 @@ DWORD WINAPI hotwheels::init( void* module_handle )
 	ENFORCE_FAILURE( g_csgo.init( ), "Failed to init csgo" );
 
 	ENFORCE_FAILURE( g_interfaces.init( ), "Failed to init interfaces" );
+
+	ENFORCE_FAILURE( g_cfg.init( ), "Failed to init cfgs" );
 
 	ENFORCE_FAILURE( g_hooks.init( ), "Failed to init hooks" );
 

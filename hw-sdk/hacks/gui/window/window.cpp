@@ -47,14 +47,22 @@ bool gui::forms::window_impl::begin_window( const std::string_view name )
 			g_gui.main.dragging = false;
 	}
 
-	// outer outline (TODO: change this to an outline so we dont draw useless black background under menu)
+	// render all 3 menu outlines
 	g_render.render_rectangle< int >( g_gui.position, g_gui.size, gui::pallete::first_outline( ) );
 	g_render.render_rectangle< int >( g_gui.position + 1, g_gui.size - 2, gui::pallete::second_outline( ) );
 	g_render.render_rectangle< int >( g_gui.position + 2, g_gui.size - 4, gui::pallete::third_outline( ) );
-	// TODO @ LIGA - add gradient dumb f
-	g_render.render_filled_rectangle< int >( g_gui.position + 3, g_gui.size - 6, gui::pallete::first_outline( ) );
-	g_render.render_text( g_gui.position + math::vec2< int >( 20, 20 ), font_alignment::AL_VERTICAL_TOP, font_flags::FLAG_DROPSHADOW, name.data( ),
-	                      g_fonts[ _( "main_font" ) ], color( 255, 255, 255, 255 ) );
+
+	// render menu's main gradient
+	g_render.render_gradient< gradient_type_t::VERTICAL, int >( g_gui.position + 3, g_gui.size - 6, color( 25, 25, 25, g_gui.main.alpha ),
+	                                                            color( 17, 17, 17, g_gui.main.alpha ) );
+
+	// render text and add a .vip next to it.
+	g_render.render_text( g_gui.position + math::vec2< int >( 12, 10 ), font_alignment::AL_DEFAULT, font_flags::FLAG_OUTLINE, name.data( ),
+	                      g_fonts[ HASH( "main_font" ) ], color( 255, 255, 255, g_gui.main.alpha ) );
+
+	g_render.render_text( g_gui.position + math::vec2< int >( 14 + g_render.render_text_size( name.data( ), g_fonts[ HASH( "main_font" ) ] ).x, 10 ),
+	                      font_alignment::AL_DEFAULT, font_flags::FLAG_OUTLINE, _( ".vip" ), g_fonts[ HASH( "main_font" ) ], color( 255, 255, 255 ) );
+
 	// swap stack
 	std::stack< math::vec2< int > >( ).swap( g_gui.cursor_pos_stack );
 

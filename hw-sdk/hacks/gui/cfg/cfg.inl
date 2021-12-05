@@ -9,13 +9,11 @@ static T& configs::impl::get( std::uint32_t hash )
 
 	switch ( value._Ptr->_Myval.second.variable_type ) {
 	case variable_type_t::TYPE_BOOL:
-		return *( T* )&value._Ptr->_Myval.second.bvalue;
+		return *( T* )&value._Ptr->_Myval.second.as_bool;
 	case variable_type_t::TYPE_INT:
-		return *( T* )&value._Ptr->_Myval.second.ivalue;
+		return *( T* )&value._Ptr->_Myval.second.as_int;
 	case variable_type_t::TYPE_FLOAT:
-		return *( T* )&value._Ptr->_Myval.second.fvalue;
-	case variable_type_t::TYPE_COLOR:
-		return *( T* )&value._Ptr->_Myval.second.cvalue;
+		return *( T* )&value._Ptr->_Myval.second.as_float;
 	case variable_type_t::TYPE_MAX:
 		return *( T* )nullptr;
 	}

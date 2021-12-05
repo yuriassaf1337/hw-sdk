@@ -11,7 +11,6 @@ namespace configs
 		TYPE_BOOL = 0,
 		TYPE_INT,
 		TYPE_FLOAT,
-		TYPE_COLOR,
 		TYPE_MAX
 	};
 
@@ -24,27 +23,29 @@ namespace configs
 		bool as_bool{ };
 		int as_int{ };
 		float as_float{ };
-		color as_color{ };
+
 		// ctors
-		//(clang doesnt let me format this right lol)
-		explicit variable_t( const int value, std::uint32_t hashed ) : hash( hashed ), as_int( value ), variable_type( variable_type_t::TYPE_INT ){ };
+		variable_t( int value, std::uint32_t hashed ) : hash( hashed ), as_int( value ), variable_type( variable_type_t::TYPE_INT ){ };
 
-		explicit variable_t( const bool value, std::uint32_t hashed )
-			: hash( hashed ), as_bool( value ), variable_type( variable_type_t::TYPE_BOOL ){ };
+		variable_t( bool value, std::uint32_t hashed ) : hash( hashed ), as_bool( value ), variable_type( variable_type_t::TYPE_BOOL ){ };
 
-		explicit variable_t( const float value, std::uint32_t hashed )
-			: hash( hashed ), as_float( value ), variable_type( variable_type_t::TYPE_FLOAT ){ };
-
-		explicit variable_t( const color value, std::uint32_t hashed )
-			: hash( hashed ), as_color( value ), variable_type( variable_type_t::TYPE_COLOR ){ };
+		variable_t( float value, std::uint32_t hashed ) : hash( hashed ), as_float( value ), variable_type( variable_type_t::TYPE_FLOAT ){ };
 	};
 
 	struct impl {
 	public:
-		std::unordered_map< std::uint32_t, configs::variable_t > variable_map;
+		static inline std::unordered_map< std::uint32_t, configs::variable_t > variable_map;
+
+		bool init( );
 
 		template< typename T >
 		static T& get( std::uint32_t hash );
+
+		template< typename T >
+		const T& operator[]( std::uint32_t hash )
+		{
+			return get( hash );
+		}
 	};
 } // namespace configs
 

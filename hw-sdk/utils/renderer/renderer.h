@@ -127,7 +127,7 @@ namespace render
 		void quadratic_curve( const math::vec2< T >& start, const math::vec2< T >& control, const math::vec2< T >& end, color color );
 
 		const auto get_viewport( );
-		bool set_viewport(const math::vec2< int >& pos, const math::vec2< int >& size);
+		bool set_viewport( const math::vec2< int >& pos, const math::vec2< int >& size );
 		bool set_viewport( D3DVIEWPORT9 vp );
 	};
 } // namespace render
@@ -140,28 +140,14 @@ namespace fonts
 
 		void create_font( const char* name, std::size_t size, std::size_t weight, bool anti_aliased, const char* font_name );
 
-		inline LPD3DXFONT find( const char* name )
+		LPD3DXFONT find( std::uint32_t hashed )
 		{
 			for ( auto iterator = font_list.begin( ); iterator != font_list.end( ); iterator++ ) {
-				if ( iterator->name == HASH( name ) )
+				if ( iterator->name == hashed )
 					return iterator->_font;
 			}
 
 			return nullptr;
-		}
-		inline LPD3DXFONT find( std::uint32_t name )
-		{
-			for ( auto iterator = font_list.begin( ); iterator != font_list.end( ); iterator++ ) {
-				if ( iterator->name == name )
-					return iterator->_font;
-			}
-
-			return nullptr;
-		}
-
-		LPD3DXFONT operator[]( const char* name )
-		{
-			return find( name );
 		}
 
 		LPD3DXFONT operator[]( std::uint32_t hash )
