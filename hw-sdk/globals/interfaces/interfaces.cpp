@@ -28,6 +28,8 @@ bool sdk::interfaces::init( )
 		studio_render = g_studio_render_dll.find_interface< sdk::c_studio_render* >( VSTUDIO_RENDER_VERSION );
 
 		debug_overlay = g_engine_dll.find_interface< sdk::i_debug_overlay* >( VENGINE_DEBUG_OVERLAY_VERSION );
+
+		material_system = g_material_system_dll.find_interface< sdk::i_material_system* >( VMATERIAL_SYSTEM_CLIENT_VERSION );
 	}
 
 	// virtuals

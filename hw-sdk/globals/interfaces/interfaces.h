@@ -28,10 +28,12 @@ namespace sdk
 		sdk::i_engine_sound* engine_sound;
 		sdk::c_studio_render* studio_render;
 		sdk::i_debug_overlay* debug_overlay;
+		sdk::i_material_system* material_system;
 
 		bool init( );
 	};
 
+	// sry for putting these here, include errors fudge me
 	inline std::int32_t time_to_ticks( float time );
 
 	inline float ticks_to_time( std::int32_t ticks );
