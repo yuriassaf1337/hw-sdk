@@ -6,6 +6,16 @@
 
 namespace configs
 {
+	// max alpha = 255
+	// own alpha = actual variable alpha
+	// gui alpha = gui's current alpha
+	enum alpha_type
+	{
+		MAX_ALPHA = 0,
+		OWN_ALPHA,
+		GUI_ALPHA
+	};
+
 	enum class variable_type_t : std::int32_t
 	{
 		TYPE_BOOL = 0,
@@ -44,8 +54,11 @@ namespace configs
 		template< typename T >
 		const T& operator[]( std::uint32_t hash )
 		{
-			return get( hash );
+			return get< T >( hash );
 		}
+
+		template< alpha_type alpha >
+		const color as_color( const std::string& color_name );
 	};
 } // namespace configs
 

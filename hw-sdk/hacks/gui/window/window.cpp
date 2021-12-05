@@ -1,4 +1,5 @@
 #include "window.h"
+#include "../cfg/cfg.h"
 #include "../utils/utils.h"
 #include "tabs/tabs.h"
 
@@ -60,8 +61,10 @@ bool gui::forms::window_impl::begin_window( const std::string_view name )
 	g_render.render_text( g_gui.position + math::vec2< int >( 12, 10 ), font_alignment::AL_DEFAULT, font_flags::FLAG_OUTLINE, name.data( ),
 	                      g_fonts[ HASH( "main_font" ) ], color( 255, 255, 255, g_gui.main.alpha ) );
 
+	color accent = g_cfg.as_color< configs::alpha_type::GUI_ALPHA >( _( "main_menu_color" ) );
+
 	g_render.render_text( g_gui.position + math::vec2< int >( 14 + g_render.render_text_size( name.data( ), g_fonts[ HASH( "main_font" ) ] ).x, 10 ),
-	                      font_alignment::AL_DEFAULT, font_flags::FLAG_OUTLINE, _( ".vip" ), g_fonts[ HASH( "main_font" ) ], color( 255, 255, 255 ) );
+	                      font_alignment::AL_DEFAULT, font_flags::FLAG_OUTLINE, _( ".vip" ), g_fonts[ HASH( "main_font" ) ], accent);
 
 	// swap stack
 	std::stack< math::vec2< int > >( ).swap( g_gui.cursor_pos_stack );
