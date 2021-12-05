@@ -12,7 +12,7 @@
 
 bool hooks::impl::init( )
 {
-	MOCKING_TRY;
+	MOCKING_TRY
 
 	if ( MH_Initialize( ) != MH_OK )
 		return false;
@@ -38,6 +38,8 @@ bool hooks::impl::init( )
 
 void hooks::impl::unload( )
 {
+	MOCKING_TRY
+
 	hooks::wndproc::unload( );
 	hooks::end_scene::unload( );
 	hooks::create_move::unload( );
@@ -49,4 +51,6 @@ void hooks::impl::unload( )
 	// this is so useless lol
 	if ( MH_Uninitialize( ) != MH_OK )
 		console::print< console::log_level::FATAL >( _( "MH_Uninitialize was not MH_OK" ) );
+
+	MOCKING_CATCH( );
 }
