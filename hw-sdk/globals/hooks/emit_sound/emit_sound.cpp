@@ -9,16 +9,16 @@ void __fastcall hooks::emit_sound::emit_sound_detour( void* ecx, void* edx, void
                                                       void* sound_params )
 {
 	if ( !g_ctx.local || !g_ctx.local->is_alive( ) && g_interfaces.engine->connected_safe( ) )
-		 goto CALL_ORIGINAL;
+		goto CALL_ORIGINAL;
 
 	// dont play sounds twice while running ProcessMove
-	//if ( g_interfaces.prediction->in_prediction( ) && g_interfaces.prediction->is_first_time_predicted( ) )
+	// if ( g_interfaces.prediction->in_prediction( ) && g_interfaces.prediction->is_first_time_predicted( ) )
 	//	return;
 
 	goto CALL_ORIGINAL;
 
 CALL_ORIGINAL:
-		hooks::emit_sound_hook.call_original< void >( ecx, edx, filter, entity_index, channel, sound_entry, sound_entry_hash, sample, volume, seed,
-		                                            sound_level, flags, pitch, origin, direction, utl_vec_origins,
-		                                            update_positions, soundtime, speaker_entity, sound_params );
+	hooks::emit_sound_hook.call_original< void >( ecx, edx, filter, entity_index, channel, sound_entry, sound_entry_hash, sample, volume, seed,
+	                                              sound_level, flags, pitch, origin, direction, utl_vec_origins, update_positions, soundtime,
+	                                              speaker_entity, sound_params );
 }
