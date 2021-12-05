@@ -515,6 +515,12 @@
     <ClInclude Include="game\sdk\structs\i_texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="game\datatypes\keyvalues.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\sdk\enums\key_type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="utils\math\math.inl">

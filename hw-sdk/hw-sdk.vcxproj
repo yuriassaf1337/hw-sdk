@@ -229,6 +229,7 @@
     <ClInclude Include="dependencies\formatting\tinyformat.h" />
     <ClInclude Include="dependencies\xor\xor.h" />
     <ClInclude Include="game\datatypes\cutl.h" />
+    <ClInclude Include="game\datatypes\keyvalues.h" />
     <ClInclude Include="game\sdk\classes\c_base_animating.h" />
     <ClInclude Include="game\sdk\classes\c_base_combat_character.h" />
     <ClInclude Include="game\sdk\classes\c_base_combat_weapon.h" />
@@ -259,6 +260,7 @@
     <ClInclude Include="game\sdk\classes\i_prediction.h" />
     <ClInclude Include="game\sdk\enums\buttons.h" />
     <ClInclude Include="game\sdk\enums\cvar_ids.h" />
+    <ClInclude Include="game\sdk\enums\key_type.h" />
     <ClInclude Include="game\sdk\enums\material_var_flags.h" />
     <ClInclude Include="game\sdk\enums\td_offset.h" />
     <ClInclude Include="game\sdk\enums\trace_type.h" />
