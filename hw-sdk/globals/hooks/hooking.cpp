@@ -17,12 +17,6 @@ bool hooks::impl::init( )
 	if ( MH_Initialize( ) != MH_OK )
 		return false;
 
-	// alloc backup mem
-	if ( !g_ctx.backup.cmd )
-		g_ctx.backup.cmd = reinterpret_cast< sdk::c_user_cmd* >( std::malloc( sizeof( sdk::c_user_cmd ) ) );
-	if ( !g_ctx.backup.local )
-		g_ctx.backup.local = reinterpret_cast< sdk::c_cs_player* >( std::malloc( 0x3870U ) );
-
 	hooks::wndproc::init( );
 	hooks::end_scene::init( );
 	hooks::create_move::init( );
@@ -30,6 +24,8 @@ bool hooks::impl::init( )
 	hooks::item_post_frame::init( );
 	hooks::emit_sound::init( );
 	hooks::paint_traverse::init( );
+
+	console::print< console::log_level::SUCCESS >( _( "Initialized all hooks." ) );
 
 	MOCKING_CATCH( return false );
 

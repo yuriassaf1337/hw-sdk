@@ -1,7 +1,10 @@
 #include "hotwheels.h"
+// liga's autism
 #include "../../dependencies/audio/kyu/loaded.h"
 #include "../../dependencies/audio/peter_griffin/loaded.h"
 #include "../../dependencies/audio/soilder/loaded.h"
+
+#include "../../globals/ctx/ctx.h"
 #include "../../hacks/gui/cfg/cfg.h"
 #include "../../utils/helpers/function_enforce/function_enforce.h"
 #include "../../utils/keybinds/keybinds.h"
@@ -17,6 +20,8 @@ DWORD WINAPI hotwheels::init( void* module_handle )
 		utils::sleep( 100 );
 
 	ENFORCE_FAILURE( g_csgo.init( ), "Failed to init csgo" );
+
+	ENFORCE_FAILURE( g_ctx.init( ), "Failed to init context" );
 
 	ENFORCE_FAILURE( g_interfaces.init( ), "Failed to init interfaces" );
 

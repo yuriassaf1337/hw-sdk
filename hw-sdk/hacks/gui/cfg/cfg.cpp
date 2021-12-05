@@ -18,5 +18,7 @@ bool configs::impl::init( )
 
 	MOCKING_CATCH( return false );
 
+	console::print< console::log_level::DEBUG >( _( "Initialized {} config variables." ), configs::impl::variable_map.size( ) );
+
 	return true;
 }

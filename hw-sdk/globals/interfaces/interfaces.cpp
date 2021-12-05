@@ -50,7 +50,7 @@ bool sdk::interfaces::init( )
 
 	MOCKING_CATCH( return false );
 
-	console::print< console::log_level::SUCCESS >( _( "Initialized interfaces" ) );
+	console::print< console::log_level::DEBUG >( _( "Initialized interfaces." ) );
 
 	return true;
 }

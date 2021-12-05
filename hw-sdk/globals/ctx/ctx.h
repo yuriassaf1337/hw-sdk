@@ -8,6 +8,8 @@
 namespace ctx
 {
 	struct impl {
+		bool init( );
+
 		sdk::c_cs_player* local           = nullptr;
 		sdk::c_user_cmd* cmd              = nullptr;
 		sdk::c_base_combat_weapon* weapon = nullptr;

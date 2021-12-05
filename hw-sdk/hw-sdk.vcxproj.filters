@@ -117,6 +117,9 @@
     <ClCompile Include="globals\hooks\paint_traverse\paint_traverse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="globals\ctx\ctx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals\includes\includes.h">

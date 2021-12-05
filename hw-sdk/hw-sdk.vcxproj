@@ -173,6 +173,7 @@
     <ClCompile Include="dependencies\minhook\src\trampoline.c" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="globals\csgo.cpp" />
+    <ClCompile Include="globals\ctx\ctx.cpp" />
     <ClCompile Include="globals\hooks\cl_move\cl_move.cpp" />
     <ClCompile Include="globals\hooks\create_move\create_move.cpp" />
     <ClCompile Include="globals\hooks\emit_sound\emit_sound.cpp" />
