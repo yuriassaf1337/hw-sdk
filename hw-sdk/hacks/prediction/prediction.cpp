@@ -40,7 +40,7 @@ void prediction::impl::start( sdk::c_base_player* player )
 	g_interfaces.game_movement->start_track_prediction_errors( player );
 
 	if ( g_ctx.cmd->weapon_select ) {
-		auto weapon = g_interfaces.entity_list->get_client_entity( g_ctx.cmd->weapon_select )->as< sdk::c_base_combat_weapon* >( );
+		auto weapon = g_interfaces.entity_list->get_client_entity< sdk::c_base_combat_weapon* >( g_ctx.cmd->weapon_select );
 		if ( weapon ) {
 			auto weapon_info = weapon->get_weapon_data( );
 			if ( weapon_info )
@@ -68,7 +68,7 @@ void prediction::impl::start( sdk::c_base_player* player )
 
 	player->tick_base( ) = reset_vars.tick_base;
 
-	//player->adjust_player_timebase( simulation_ticks );
+	// player->adjust_player_timebase( simulation_ticks );
 }
 
 void prediction::impl::end( sdk::c_base_player* player )

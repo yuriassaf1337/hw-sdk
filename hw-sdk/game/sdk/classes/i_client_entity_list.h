@@ -11,15 +11,29 @@
 namespace sdk
 {
 	struct i_client_entity_list {
-		virtual i_client_networkable get_client_networkable( int index )                        = 0;
-		virtual i_client_networkable get_client_networkable_from_handle( c_base_handle handle ) = 0;
+		virtual sdk::i_client_networkable get_client_networkable( int index )                        = 0;
+		virtual sdk::i_client_networkable get_client_networkable_from_handle( c_base_handle handle ) = 0;
 
-		virtual i_client_unknown get_client_unknown_from_handle( c_base_handle handle ) = 0;
+		virtual sdk::i_client_unknown get_client_unknown_from_handle( c_base_handle handle ) = 0;
 
-		virtual i_client_entity* get_client_entity( int index )                        = 0;
-		virtual i_client_entity* get_client_entity_from_handle( c_base_handle handle ) = 0;
+	private: // sorry for the names, cant build with it being the same name.
+		virtual sdk::i_client_entity* private_get_client_entity( int index )                        = 0;
+		virtual sdk::i_client_entity* private_get_client_entity_from_handle( c_base_handle handle ) = 0;
 
+	public:
 		virtual int number_of_entities( bool include_non_networkable ) = 0;
 		virtual int get_highest_entity_index( )                        = 0;
+
+		template< class T >
+		__forceinline T get_client_entity( int index )
+		{
+			return private_get_client_entity( index )->as< T >( );
+		};
+
+		template< class T >
+		__forceinline T get_client_entity_from_handle( c_base_handle handle )
+		{
+			return private_get_client_entity_from_handle( handle )->as< T >( );
+		}
 	};
 } // namespace sdk

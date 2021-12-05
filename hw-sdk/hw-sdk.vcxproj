@@ -254,6 +254,7 @@
     <ClInclude Include="game\sdk\classes\i_debug_overlay.h" />
     <ClInclude Include="game\sdk\classes\i_engine_sound.h" />
     <ClInclude Include="game\sdk\classes\i_engine_trace.h" />
+    <ClInclude Include="game\sdk\classes\i_material_system.h" />
     <ClInclude Include="game\sdk\classes\i_mat_render_ctx.h" />
     <ClInclude Include="game\sdk\classes\i_prediction.h" />
     <ClInclude Include="game\sdk\enums\buttons.h" />
@@ -285,6 +286,7 @@
     <ClInclude Include="game\sdk\structs\dt_recv.h" />
     <ClInclude Include="game\sdk\structs\i_client_class.h" />
     <ClInclude Include="game\sdk\structs\i_material.h" />
+    <ClInclude Include="game\sdk\structs\i_texture.h" />
     <ClInclude Include="game\sdk\structs\player_info_t.h" />
     <ClInclude Include="game\sdk\enums\teams.h" />
     <ClInclude Include="game\sdk\structs\studio.h" />
