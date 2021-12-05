@@ -23,7 +23,8 @@ bool hooks::impl::init( )
 	hooks::cl_move::init( );
 	hooks::item_post_frame::init( );
 	hooks::emit_sound::init( );
-	hooks::paint_traverse::init( );
+	// temporary, it crashes for now.
+	// hooks::paint_traverse::init( );
 
 	console::print< console::log_level::SUCCESS >( _( "Initialized all hooks." ) );
 
