@@ -39,11 +39,11 @@ bool gui::forms::window_impl::begin_window( const std::string_view name )
 	// make sure we're not focused on any elements to move menu
 	if ( g_gui.focused_id == UNFOCUSED ) {
 		// set is dragging flag
-		if ( !g_gui.main.dragging && g_input.key_state< input::key_state_t::KEY_RELEASED >( VK_LBUTTON ) && title_bar_hovered )
+		if ( !g_gui.main.dragging && g_input.key_state< input::key_state_t::KEY_DOWN >( VK_LBUTTON ) && title_bar_hovered )
 			g_gui.main.dragging = true;
 		else if ( g_gui.main.dragging && g_input.key_state< input::key_state_t::KEY_DOWN >( VK_LBUTTON ) )
-			g_gui.position -= delta;
-		else if ( g_gui.main.dragging && !g_input.key_state< input::key_state_t::KEY_DOWN >( VK_LBUTTON ) )
+			g_gui.position += delta;
+		else if ( g_gui.main.dragging && !g_input.key_state< input::key_state_t::KEY_RELEASED >( VK_LBUTTON ) )
 			g_gui.main.dragging = false;
 	}
 
