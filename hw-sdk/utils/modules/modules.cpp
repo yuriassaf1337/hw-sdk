@@ -3,15 +3,12 @@
 address modules::impl::pattern_scan( const char* sig )
 {
 	if ( !module_handle )
-		console::print< console::log_level::WARNING >( _( "Failed to get handle - [ {} ]" ), module_name );
+		console::print< console::log_level::FATAL >( _( "Failed to get handle - [ {} ]" ), module_name );
 
 	const auto module_address   = reinterpret_cast< std::uint8_t* >( module_handle );
 	const auto dos_header       = reinterpret_cast< PIMAGE_DOS_HEADER >( module_handle );
 	const auto nt_headers       = reinterpret_cast< PIMAGE_NT_HEADERS >( module_address + dos_header->e_lfanew );
 	const std::uintptr_t offset = find_pattern( module_address, nt_headers->OptionalHeader.SizeOfImage, sig );
-
-	if ( offset )
-		console::print< console::log_level::NORMAL >( _( "Found signature: {} [ {} ]" ), module_name, sig );
 
 	return offset;
 };

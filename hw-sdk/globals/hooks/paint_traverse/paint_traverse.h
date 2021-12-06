@@ -16,12 +16,12 @@ namespace hooks
 
 		static void init( )
 		{
-			hooks::paint_traverse_hook.create( virtual_func::get( g_interfaces.panel, 41 ), paint_traverse_detour, _( "paint_traverse_detour" ) );
+			// hooks::paint_traverse_hook.create( virtual_func::get( g_interfaces.panel, 41 ), paint_traverse_detour, _( "paint_traverse_detour" ) );
 		}
 
 		static void unload( )
 		{
-			hooks::paint_traverse_hook.disable( );
+			// hooks::paint_traverse_hook.disable( );
 		}
 	};
 } // namespace hooks

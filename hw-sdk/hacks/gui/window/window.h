@@ -7,7 +7,7 @@
 #include "../includes/includes.h"
 #include <stack>
 
-namespace gui::forms
+namespace gui::elements
 {
 	struct window_impl {
 	public:
@@ -17,17 +17,26 @@ namespace gui::forms
 		bool begin_window( const std::string_view name );
 		void end_window( );
 
+		void begin_tab( const std::string_view name );
+
 	private:
-		void handle_background( );
-		void handle_title_header( );
-		float ui_anim_state    = 0.f;
-		bool title_bar_hovered = false;
+		struct util_t {
+			void draw_background( );
+			void draw_title_header( );
+
+			void handle_drag( bool hover, const math::vec2< int >& delta );
+			void handle_resize( bool hover );
+		} utils;
+
+		float ui_anim_state      = 0.f;
+		bool title_bar_hovered   = false;
+		bool resize_area_hovered = false;
 		std::uint8_t open_key{ };
 	};
 
 	struct groupbox_impl {
 	};
-} // namespace gui::forms
+} // namespace gui::elements
 
-inline gui::forms::window_impl g_window{ gui::forms::window_impl( VK_INSERT ) };
-inline gui::forms::groupbox_impl g_groupbox;
+inline gui::elements::window_impl g_window{ gui::elements::window_impl( VK_INSERT ) };
+inline gui::elements::groupbox_impl g_groupbox;

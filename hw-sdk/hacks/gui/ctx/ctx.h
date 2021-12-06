@@ -25,6 +25,7 @@ namespace gui
 		struct {
 			bool open     = true;
 			bool dragging = false;
+			bool resizing = false;
 			float alpha   = 0.f;
 		} main;
 	};
