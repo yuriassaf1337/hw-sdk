@@ -7,6 +7,18 @@
 #include "../includes/includes.h"
 #include <stack>
 
+namespace gui::tabs
+{
+	struct impl {
+		void think( const std::vector< std::string_view >& feeder );
+
+	private:
+		void draw_background( );
+	};
+} // namespace gui::tabs
+
+inline gui::tabs::impl g_tabs;
+
 namespace gui::elements
 {
 	struct window_impl {

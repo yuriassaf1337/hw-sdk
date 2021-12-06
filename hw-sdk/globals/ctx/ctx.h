@@ -25,4 +25,4 @@ namespace ctx
 	};
 } // namespace ctx
 
-inline ctx::impl g_ctx;
+inline ctx::impl g_ctx{ };

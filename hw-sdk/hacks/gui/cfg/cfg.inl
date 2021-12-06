@@ -1,5 +1,5 @@
 #include "cfg.h"
-#include "../ctx/ctx.h"
+#include "../gui_ctx/gui_ctx.h"
 
 template< typename T >
 static T& configs::impl::get( std::uint32_t hash )

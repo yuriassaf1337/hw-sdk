@@ -90,10 +90,7 @@
     <ClCompile Include="hacks\gui\gui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="hacks\gui\ctx\ctx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="hacks\gui\window\tabs\tabs.cpp">
+    <ClCompile Include="hacks\gui\gui_ctx\gui_ctx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="utils\netvar\netvar.cpp">
@@ -401,10 +398,7 @@
     <ClInclude Include="hacks\prediction\prediction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="hacks\gui\ctx\ctx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="hacks\gui\window\tabs\tabs.h">
+    <ClInclude Include="hacks\gui\gui_ctx\gui_ctx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="utils\netvar\netvar.h">

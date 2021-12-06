@@ -2,7 +2,6 @@
 #include "../../../globals/ctx/ctx.h"
 #include "../cfg/cfg.h"
 #include "../utils/utils.h"
-#include "tabs/tabs.h"
 
 void gui::elements::window_impl::util_t::draw_background( )
 {
@@ -89,7 +88,7 @@ bool gui::elements::window_impl::begin_window( const std::string_view name )
 		g_gui.main.alpha = std::clamp< float >( gui::easing::in_quint( ui_anim_state ) * 255.f, 0.f, 255.f );
 	}
 
-	title_bar_hovered   = g_input.mouse.in_params( g_gui.position, math::vec2< int >( g_gui.size.x, 50 ) );
+	title_bar_hovered   = g_input.mouse.in_params( g_gui.position, math::vec2< int >( g_gui.size.x, 48 ) );
 	resize_area_hovered = g_input.mouse.in_params( g_gui.position + ( g_gui.size - math::vec2< int >( 30, 30 ) ), math::vec2< int >( 35, 35 ) );
 
 	// make sure we're not focused on any elements to move menu
@@ -131,4 +130,28 @@ void gui::elements::window_impl::end_window( )
 	if ( !g_gui.tabs.empty( ) ) {
 		g_tabs.think( g_gui.tabs );
 	}
+}
+
+// include errors made me do this im sorry
+struct {
+	const math::vec2< int > pos  = { g_gui.position.x + 22, g_gui.position.y + 48 };
+	const math::vec2< int > size = { g_gui.size.x - 44, 39 };
+} tab_util;
+
+void gui::tabs::impl::draw_background( )
+{
+	g_render.render_rectangle( tab_util.pos, tab_util.size, gui::pallete::first_outline( ) );
+	g_render.render_rectangle( tab_util.pos + 1, tab_util.size - 2, gui::pallete::second_outline( ) );
+	g_render.render_rectangle( tab_util.pos + 2, tab_util.size - 4, gui::pallete::third_outline( ) );
+	g_render.render_gradient< gradient_type_t::VERTICAL, int >( tab_util.pos + 3, tab_util.size - 6, color( 25, 25, 25, g_gui.main.alpha ),
+	                                                            color( 17, 17, 17, g_gui.main.alpha ) );
+}
+
+void gui::tabs::impl::think( const std::vector< std::string_view >& feeder )
+{
+	for ( auto& tab : feeder ) { }
+
+	bool m_in_tab_area[ 6 ]{ };
+
+	draw_background( );
 }
