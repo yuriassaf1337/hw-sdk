@@ -33,7 +33,7 @@ void entity_list::impl::update( )
 			if ( entity->is_dormant( ) )
 				continue;
 
-			if ( entity->health( ) < 1 )
+			if ( !entity->is_alive( ) )
 				continue;
 
 			players.push_back( entity );

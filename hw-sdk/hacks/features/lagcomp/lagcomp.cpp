@@ -16,7 +16,7 @@ void lagcomp::impl::update( )
 		auto& current_heap_iterator = heap_iterator[ player->entity_index( ) ];
 
 		if ( !heap_records[ player->entity_index( ) ] )
-			heap_records[ player->entity_index( ) ] = new record[sv_maxunlag_ticks];
+			heap_records[ player->entity_index( ) ] = new record[ sv_maxunlag_ticks ];
 
 		auto& current_record = heap_records[ player->entity_index( ) ][ current_heap_iterator ];
 

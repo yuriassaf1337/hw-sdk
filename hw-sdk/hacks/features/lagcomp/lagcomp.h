@@ -14,10 +14,11 @@ namespace lagcomp
 
 	struct impl {
 	private:
-		int heap_iterator[ 63 ];
+		// [ 1-64 ] is the range of possible player indexes.
+		int heap_iterator[ 65 ];
 
 	public:
-		record* heap_records[ 63 ];
+		record* heap_records[ 65 ];
 
 		bool is_valid( );
 		void update( );
