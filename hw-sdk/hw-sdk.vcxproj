@@ -184,6 +184,7 @@
     <ClCompile Include="globals\hooks\wndproc\wndproc.cpp" />
     <ClCompile Include="globals\hotwheels\hotwheels.cpp" />
     <ClCompile Include="globals\interfaces\interfaces.cpp" />
+    <ClCompile Include="hacks\features\lagcomp\lagcomp.cpp" />
     <ClCompile Include="hacks\features\movement\movement.cpp" />
     <ClCompile Include="hacks\gui\cfg\cfg.cpp" />
     <ClCompile Include="hacks\gui\gui_ctx\gui_ctx.cpp" />
@@ -310,6 +311,7 @@
     <ClInclude Include="globals\includes\includes.h" />
     <ClInclude Include="globals\interfaces\interfaces.h" />
     <ClInclude Include="globals\macros\macros.h" />
+    <ClInclude Include="hacks\features\lagcomp\lagcomp.h" />
     <ClInclude Include="hacks\features\movement\movement.h" />
     <ClInclude Include="hacks\gui\anims\anims.h" />
     <ClInclude Include="hacks\gui\cfg\cfg.h" />

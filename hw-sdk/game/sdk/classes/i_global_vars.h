@@ -13,7 +13,7 @@ namespace sdk
 		float current_time;
 		float frame_time;
 		float max_clients;
-		float tick_count;
+		int tick_count;
 		float interval_per_tick;
 		float interpolation_amount;
 		float frame_simulation_ticks;

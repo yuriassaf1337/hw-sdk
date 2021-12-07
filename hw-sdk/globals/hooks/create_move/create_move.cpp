@@ -1,5 +1,6 @@
 #include <string.h>
 
+#include "../../../hacks/features/lagcomp/lagcomp.h"
 #include "../../../hacks/features/movement/movement.h"
 #include "../../../hacks/prediction/prediction.h"
 #include "../../../utils/convars/convars.h"
@@ -24,6 +25,8 @@ void __stdcall create_move_function( int sequence_number, float input_sample_fra
 		return;
 
 	g_movement.pre_prediction.think( );
+
+	g_lagcomp.update( );
 
 	g_prediction.update( );
 	g_prediction.store_backup( );

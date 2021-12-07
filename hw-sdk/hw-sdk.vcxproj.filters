@@ -117,6 +117,9 @@
     <ClCompile Include="globals\ctx\ctx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="hacks\features\lagcomp\lagcomp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals\includes\includes.h">
@@ -531,6 +534,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game\sdk\classes\i_panel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\features\lagcomp\lagcomp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
