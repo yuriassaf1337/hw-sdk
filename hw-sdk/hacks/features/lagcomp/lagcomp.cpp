@@ -17,7 +17,7 @@ void lagcomp::impl::update( )
 		if ( !current_heap_iterator )
 			current_heap_record = reinterpret_cast< record* >( malloc( sv_maxunlag_ticks * sizeof record ) );
 
-		auto current_record = current_heap_record[ current_heap_iterator * sizeof record ];
+		auto current_record = current_heap_record[ current_heap_iterator ];
 
 		current_record.valid = false;
 
