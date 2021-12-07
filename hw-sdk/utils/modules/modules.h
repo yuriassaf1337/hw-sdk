@@ -6,6 +6,13 @@
 
 namespace modules
 {
+	struct interface_node {
+	public:
+		void* ( *get )( );
+		const char* name;
+		interface_node* next;
+	};
+
 	class impl
 	{
 	public:

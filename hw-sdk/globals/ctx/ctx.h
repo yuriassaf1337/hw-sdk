@@ -20,6 +20,7 @@ namespace ctx
 		} backup;
 
 		math::vec2< int > screen_size = { };
+		math::matrix_4x4 view_matrix  = { };
 
 		bool running_post_think = false;
 	};

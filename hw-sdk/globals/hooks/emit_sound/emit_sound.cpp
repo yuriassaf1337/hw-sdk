@@ -12,8 +12,8 @@ void __fastcall hooks::emit_sound::emit_sound_detour( void* ecx, void* edx, void
 		goto CALL_ORIGINAL;
 
 	// dont play sounds twice while running ProcessMove
-	if ( g_interfaces.prediction->in_prediction_var && !g_interfaces.prediction->is_first_time_predicted_var )
-		return;
+	//if ( g_interfaces.prediction->in_prediction_var && !g_interfaces.prediction->is_first_time_predicted_var )
+	//	return;
 
 	goto CALL_ORIGINAL;
 

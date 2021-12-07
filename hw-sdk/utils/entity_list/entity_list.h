@@ -9,7 +9,7 @@
 namespace entity_list
 {
 	struct impl {
-		std::deque< sdk::c_cs_player* > players;
+		std::vector< sdk::c_cs_player* > players;
 
 		void update( );
 	};

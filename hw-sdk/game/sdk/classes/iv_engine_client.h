@@ -59,9 +59,9 @@ namespace sdk
 		{
 			return virtual_func::call< bool >( this, 28 );
 		}
-		const math::matrix_3x4& world_to_screen_matrix( )
+		const math::matrix_4x4& world_to_screen_matrix( )
 		{
-			return virtual_func::call< const math::matrix_3x4& >( this, 37 );
+			return virtual_func::call< const math::matrix_4x4& >( this, 37 );
 		}
 		void* get_bsp_tree_query( )
 		{

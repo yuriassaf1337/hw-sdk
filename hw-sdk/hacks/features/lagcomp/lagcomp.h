@@ -14,10 +14,12 @@ namespace lagcomp
 
 	struct impl {
 	private:
-		std::array< int, 24 > heap_iterator;
-		std::array< record*, 24 > heap_records;
+		int heap_iterator[ 63 ];
 
 	public:
+		record* heap_records[ 63 ];
+
+		bool is_valid( );
 		void update( );
 	};
 } // namespace lagcomp

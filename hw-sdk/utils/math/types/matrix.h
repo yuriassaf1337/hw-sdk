@@ -58,6 +58,18 @@ namespace math
 		}
 	};
 	struct matrix_4x4 {
-		float data[ 4 ][ 4 ];
+		float data[ 4 ][ 4 ]{ };
+
+		constexpr matrix_4x4( ) = default;
+
+		float* operator[]( const std::int32_t idx )
+		{
+			return data[ idx ];
+		}
+
+		const float* operator[]( const std::int32_t idx ) const
+		{
+			return data[ idx ];
+		}
 	};
 } // namespace math
