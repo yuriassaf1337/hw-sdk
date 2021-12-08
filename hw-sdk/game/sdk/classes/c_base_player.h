@@ -84,10 +84,5 @@ namespace sdk
 
 			reinterpret_cast< adjust_player_timebase_type >( adjust_player_timebase_address )( this, simulation_ticks );
 		}
-
-		bool is_alive( )
-		{
-			return ( this->life_state( ) == sdk::life_state::LIFE_ALIVE && this->health( ) > 0 );
-		}
 	};
 } // namespace sdk

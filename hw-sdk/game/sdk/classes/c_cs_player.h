@@ -3,6 +3,8 @@
 
 #include "../../../globals/includes/includes.h"
 
+#include "../../../utils/convars/convars.h"
+
 #include "c_base_player.h"
 
 namespace sdk
@@ -21,5 +23,23 @@ namespace sdk
 		NETVAR( flash_max_alpha, float, "CCSPlayer", "m_flFlashMaxAlpha" );
 		NETVAR( account, std::int32_t, "CCSPlayer", "m_iAccount" );
 		NETVAR( flash_duration, float, "CCSPlayer", "m_flFlashDuration" );
+
+		bool is_enemy( sdk::teams team )
+		{
+			static auto mp_teammates_are_enemies = g_convars[ _( "mp_teammates_are_enemies" ) ];
+
+			if ( mp_teammates_are_enemies->get_bool( ) )
+				return true;
+
+			if ( this->team_number( ) == team )
+				return false;
+
+			return true;
+		}
+
+		bool is_alive( )
+		{
+			return ( this->life_state( ) == sdk::life_state::LIFE_ALIVE && this->health( ) > 0 ) && !gun_game_immunity( );
+		}
 	};
 } // namespace sdk

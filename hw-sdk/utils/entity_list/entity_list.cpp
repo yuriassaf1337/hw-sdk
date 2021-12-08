@@ -36,6 +36,9 @@ void entity_list::impl::update( )
 			if ( !entity->is_alive( ) )
 				continue;
 
+			if ( !entity->is_enemy( g_ctx.local->team_number( ) ) )
+				continue;
+
 			players.push_back( entity );
 		}
 	}
