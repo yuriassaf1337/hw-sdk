@@ -88,13 +88,20 @@ bool gui::elements::window_impl::begin_window( const std::string_view name )
 		g_gui.main.alpha = std::clamp< float >( gui::easing::in_quint( ui_anim_state ) * 255.f, 0.f, 255.f );
 	}
 
-	title_bar_hovered   = g_input.mouse.in_params( g_gui.position, math::vec2< int >( g_gui.size.x, 48 ) );
+	// square around the menu so we dont drag only with title header (mess)
+	moveable_area_hovered = g_input.mouse.in_params( g_gui.position, math::vec2< int >( g_gui.size.x, 48 ) ) ||
+	                        g_input.mouse.in_params( g_gui.position, math::vec2< int >( 22, g_gui.size.y ) ) ||
+	                        g_input.mouse.in_params( math::vec2< int >( g_gui.position.x, g_gui.position.y + g_gui.size.y - 30 ),
+	                                                 math::vec2< int >( g_gui.size.x - 30, 30 ) ) ||
+	                        g_input.mouse.in_params( math::vec2< int >( g_gui.position.x + g_gui.size.x - 30, g_gui.position.y ),
+	                                                 math::vec2< int >( 30, g_gui.size.y - 30 ) );
+	// square on bottom right menu
 	resize_area_hovered = g_input.mouse.in_params( g_gui.position + ( g_gui.size - math::vec2< int >( 30, 30 ) ), math::vec2< int >( 35, 35 ) );
 
 	// make sure we're not focused on any elements to move menu
 	if ( g_gui.focused_id == UNFOCUSED ) {
 		// handle dragging
-		utils.handle_drag( title_bar_hovered, delta );
+		utils.handle_drag( moveable_area_hovered, delta );
 
 		// handle resizing
 		utils.handle_resize( resize_area_hovered );
@@ -164,9 +171,9 @@ void gui::tabs::impl::think( )
 		// cancer
 		const int a                      = tab_util.pos.x + ( 1 + ( tab_util.size.x / 6 ) * ( i + 1 ) );
 		const int b                      = tab_util.pos.x + ( 1 + ( tab_util.size.x / 6 ) * i );
-		math::vec2< int > final_position = math::vec2< int >( ( a + b ) / 2, tab_util.pos.y + 20 );
+		math::vec2< int > final_position = math::vec2< int >( ( a + b ) / 2, tab_util.pos.y + 12 );
 
-		g_render.render_text( final_position, font_alignment::AL_HORIZONTAL_CENTER | font_alignment::AL_VERTICAL_CENTER,
-		                      font_flags::FLAG_OUTLINE_SEMI, g_gui.tabs[ i ].data( ), g_fonts[ HASH( "main_font" ) ], gui::pallete::white( ) );
+		g_render.render_text( final_position, font_alignment::AL_HORIZONTAL_CENTER, font_flags::FLAG_OUTLINE_SEMI, g_gui.tabs[ i ].data( ),
+		                      g_fonts[ HASH( "main_font" ) ], gui::pallete::white( ) );
 	}
 }

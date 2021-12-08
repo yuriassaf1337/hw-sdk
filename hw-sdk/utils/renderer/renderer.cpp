@@ -153,11 +153,11 @@ void render::impl::render_text( int x, int y, unsigned int alignment, const font
 	if ( !( alignment & font_alignment::AL_DEFAULT ) ) {
 		if ( alignment & font_alignment::AL_VERTICAL_TOP )
 			y -= text_size.y;
-		if ( alignment & font_alignment::AL_VERTICAL_CENTER )
+		else if ( alignment & font_alignment::AL_VERTICAL_CENTER )
 			y -= text_size.y / 2;
 		if ( alignment & font_alignment::AL_HORIZONTAL_LEFT )
 			x -= text_size.x;
-		if ( alignment & font_alignment::AL_HORIZONTAL_CENTER )
+		else if ( alignment & font_alignment::AL_HORIZONTAL_CENTER )
 			x -= text_size.x / 2;
 	}
 

@@ -51,9 +51,9 @@ namespace gui::elements
 			void handle_resize( bool hover );
 		} utils;
 
-		float ui_anim_state      = 0.f;
-		bool title_bar_hovered   = false;
-		bool resize_area_hovered = false;
+		float ui_anim_state        = 0.f;
+		bool moveable_area_hovered = false;
+		bool resize_area_hovered   = false;
 		std::uint8_t open_key{ };
 	};
 
