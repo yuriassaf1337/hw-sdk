@@ -45,6 +45,9 @@ void lagcomp::impl::update( )
 	auto sv_maxunlag_ticks  = static_cast< int >( sv_maxunlag / g_interfaces.globals->interval_per_tick );
 
 	for ( auto& player : g_entity_list.players ) {
+		if ( player->gun_game_immunity( ) )
+			continue;
+
 		auto& current_heap_iterator = heap_iterator[ player->entity_index( ) ];
 
 		if ( !heap_records[ player->entity_index( ) ] )

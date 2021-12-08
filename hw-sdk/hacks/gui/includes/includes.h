@@ -32,4 +32,8 @@ namespace gui::pallete
 	{
 		return color( 38, 34, 38, alpha );
 	}
+	static inline color white( const float alpha = g_gui.main.alpha )
+	{
+		return color( 255, 255, 255, alpha );
+	}
 } // namespace gui::pallete

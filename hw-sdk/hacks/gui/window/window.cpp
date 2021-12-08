@@ -35,8 +35,8 @@ void gui::elements::window_impl::util_t::handle_drag( bool hover, const math::ve
 	else if ( g_gui.main.dragging && g_input.key_state< input::key_state_t::KEY_DOWN >( VK_LBUTTON ) ) {
 		g_gui.position += delta;
 
-		g_gui.position.x = std::clamp< int >( g_gui.position.x, 0, g_ctx.screen_size.x - g_gui.size.x );
-		g_gui.position.y = std::clamp< int >( g_gui.position.y, 0, g_ctx.screen_size.y - g_gui.size.y );
+		// g_gui.position.x = std::clamp< int >( g_gui.position.x, 0, g_ctx.screen_size.x - g_gui.size.x );
+		// g_gui.position.y = std::clamp< int >( g_gui.position.y, 0, g_ctx.screen_size.y - g_gui.size.y );
 	} else if ( g_gui.main.dragging && !g_input.key_state< input::key_state_t::KEY_RELEASED >( VK_LBUTTON ) )
 		g_gui.main.dragging = false;
 }
@@ -106,7 +106,7 @@ bool gui::elements::window_impl::begin_window( const std::string_view name )
 
 	// render text and add a .vip next to it.
 	g_render.render_text( g_gui.position + math::vec2< int >( 12, 10 ), font_alignment::AL_DEFAULT, font_flags::FLAG_OUTLINE_SEMI, name.data( ),
-	                      g_fonts[ HASH( "main_font_bold" ) ], color( 255, 255, 255, g_gui.main.alpha ) );
+	                      g_fonts[ HASH( "main_font_bold" ) ], gui::pallete::white( ) );
 
 	g_render.render_text( g_gui.position +
 	                          math::vec2< int >( 13 + g_render.render_text_size( name.data( ), g_fonts[ HASH( "main_font_bold" ) ] ).x, 10 ),
@@ -126,32 +126,47 @@ bool gui::elements::window_impl::begin_window( const std::string_view name )
 
 void gui::elements::window_impl::end_window( )
 {
-	// do tabs here
-	if ( !g_gui.tabs.empty( ) ) {
-		g_tabs.think( g_gui.tabs );
+	// draw tabs
+	if ( !g_gui.tabs.empty( ) )
+		g_tabs.think( );
+}
+
+// [#] tabs
+
+void gui::tabs::impl::begin_tabs( const std::vector< std::string_view >& m_tabs )
+{
+	if ( g_gui.tabs.empty( ) )
+		g_gui.tabs = m_tabs;
+}
+
+void gui::tabs::impl::think( )
+{
+	struct {
+		math::vec2< int > pos  = { g_gui.position.x + 22, g_gui.position.y + 48 };
+		math::vec2< int > size = { g_gui.size.x - 44, 39 };
+	} tab_util;
+
+	std::array< bool, 6 > m_in_tab_area = { };
+
+	// draw background
+	{
+		g_render.render_filled_rectangle( tab_util.pos, tab_util.size, gui::pallete::first_outline( ) );
+		g_render.render_filled_rectangle( tab_util.pos + 1, tab_util.size - 2, gui::pallete::second_outline( ) );
+		g_render.render_filled_rectangle( tab_util.pos + 2, tab_util.size - 4, gui::pallete::third_outline( ) );
+		g_render.render_gradient< gradient_type_t::VERTICAL, int >( tab_util.pos + 3, tab_util.size - 6, color( 25, 25, 25, g_gui.main.alpha ),
+		                                                            color( 17, 17, 17, g_gui.main.alpha ) );
 	}
-}
 
-// include errors made me do this im sorry
-struct {
-	const math::vec2< int > pos  = { g_gui.position.x + 22, g_gui.position.y + 48 };
-	const math::vec2< int > size = { g_gui.size.x - 44, 39 };
-} tab_util;
+	for ( std::int32_t i = 0; i <= 5; i++ ) {
+		if ( i > 0 )
+			g_render.render_filled_rectangle< int >( tab_util.pos + math::vec2< int >( 1 + ( tab_util.size.x / 6 ) * i, 3 ),
+			                                         math::vec2< int >( 2, 33 ), color( 38, 35, 38, g_gui.main.alpha ) );
+		// cancer
+		const int a                      = tab_util.pos.x + ( 1 + ( tab_util.size.x / 6 ) * ( i + 1 ) );
+		const int b                      = tab_util.pos.x + ( 1 + ( tab_util.size.x / 6 ) * i );
+		math::vec2< int > final_position = math::vec2< int >( ( a + b ) / 2, tab_util.pos.y + 20 );
 
-void gui::tabs::impl::draw_background( )
-{
-	g_render.render_rectangle( tab_util.pos, tab_util.size, gui::pallete::first_outline( ) );
-	g_render.render_rectangle( tab_util.pos + 1, tab_util.size - 2, gui::pallete::second_outline( ) );
-	g_render.render_rectangle( tab_util.pos + 2, tab_util.size - 4, gui::pallete::third_outline( ) );
-	g_render.render_gradient< gradient_type_t::VERTICAL, int >( tab_util.pos + 3, tab_util.size - 6, color( 25, 25, 25, g_gui.main.alpha ),
-	                                                            color( 17, 17, 17, g_gui.main.alpha ) );
-}
-
-void gui::tabs::impl::think( const std::vector< std::string_view >& feeder )
-{
-	for ( auto& tab : feeder ) { }
-
-	bool m_in_tab_area[ 6 ]{ };
-
-	draw_background( );
+		g_render.render_text( final_position, font_alignment::AL_HORIZONTAL_CENTER | font_alignment::AL_VERTICAL_CENTER,
+		                      font_flags::FLAG_OUTLINE_SEMI, g_gui.tabs[ i ].data( ), g_fonts[ HASH( "main_font" ) ], gui::pallete::white( ) );
+	}
 }

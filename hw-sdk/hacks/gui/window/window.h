@@ -9,11 +9,22 @@
 
 namespace gui::tabs
 {
+	enum tab_index : int
+	{
+		AIMBOT = 0,
+		VISUALS,
+		MISC,
+		SKINS,
+		DEMOS,
+		CONFIG
+	};
+
 	struct impl {
-		void think( const std::vector< std::string_view >& feeder );
+		void begin_tabs( const std::vector< std::string_view >& );
+
+		void think( );
 
 	private:
-		void draw_background( );
 	};
 } // namespace gui::tabs
 

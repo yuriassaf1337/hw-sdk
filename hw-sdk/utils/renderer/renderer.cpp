@@ -112,11 +112,11 @@ void render::impl::render_filled_rectangle( int x, int y, int width, int height,
 
 D3DXVECTOR2 render::impl::render_text_size( const char* string, LPD3DXFONT font )
 {
-	RECT rect{ };
+	RECT rect{ 0, 0, 0, 0 };
 
 	font->DrawTextA( nullptr, string, -1, &rect, DT_CALCRECT, color( 0, 0, 0, 0 ).to_d3d( ) );
 
-	return D3DXVECTOR2( rect.right - rect.left, rect.bottom - rect.top );
+	return D3DXVECTOR2( static_cast< const short >( rect.right - rect.left ), static_cast< const short >( rect.bottom - rect.top ) );
 }
 
 const auto render::impl::get_viewport( )
@@ -158,7 +158,7 @@ void render::impl::render_text( int x, int y, unsigned int alignment, const font
 		if ( alignment & font_alignment::AL_HORIZONTAL_LEFT )
 			x -= text_size.x;
 		if ( alignment & font_alignment::AL_HORIZONTAL_CENTER )
-			x -= text_size.x;
+			x -= text_size.x / 2;
 	}
 
 	if ( flags & font_flags::FLAG_NONE ) {

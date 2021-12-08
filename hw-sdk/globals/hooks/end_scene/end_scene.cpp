@@ -44,8 +44,7 @@ LONG __stdcall hooks::end_scene::end_scene_detour( IDirect3DDevice9* device )
 			math::vec3 screen_position;
 
 			if ( current_record.valid )
-				g_render.render_rectangle< int >( utils::world_to_screen( current_record.origin ), math::vec2( 10, 10 ),
-				                                  color( 255, 255, 255, 255 ) );
+				g_render.render_rectangle< int >( utils::world_to_screen( current_record.origin ), math::vec2( 1, 1 ), color( 255, 255, 255, 255 ) );
 		}
 	}
 
