@@ -264,6 +264,7 @@
     <ClInclude Include="game\sdk\classes\i_prediction.h" />
     <ClInclude Include="game\sdk\enums\buttons.h" />
     <ClInclude Include="game\sdk\enums\cvar_ids.h" />
+    <ClInclude Include="game\sdk\enums\flow.h" />
     <ClInclude Include="game\sdk\enums\key_type.h" />
     <ClInclude Include="game\sdk\enums\material_var_flags.h" />
     <ClInclude Include="game\sdk\enums\td_offset.h" />

@@ -32,7 +32,7 @@ math::vec2< int > utils::world_to_screen( math::vec3 position )
 	float width = matrix[ 3 ][ 0 ] * position.x + matrix[ 3 ][ 1 ] * position.y + matrix[ 3 ][ 2 ] * position.z + matrix[ 3 ][ 3 ];
 
 	if ( width < 0.001f )
-		return math::vec2< int >( );
+		return math::vec2< int >( -1, -1 );
 
 	float inverse = 1.f / width;
 
