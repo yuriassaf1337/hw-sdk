@@ -171,7 +171,7 @@ void gui::tabs::impl::think( )
 		// cancer
 		const int a                      = tab_util.pos.x + ( 1 + ( tab_util.size.x / 6 ) * ( i + 1 ) );
 		const int b                      = tab_util.pos.x + ( 1 + ( tab_util.size.x / 6 ) * i );
-		math::vec2< int > final_position = math::vec2< int >( ( a + b ) / 2, tab_util.pos.y + 12 );
+		math::vec2< int > final_position = math::vec2< int >( ( a + b ) / 2, tab_util.pos.y + 14 );
 
 		g_render.render_text( final_position, font_alignment::AL_HORIZONTAL_CENTER, font_flags::FLAG_OUTLINE_SEMI, g_gui.tabs[ i ].data( ),
 		                      g_fonts[ HASH( "main_font" ) ], gui::pallete::white( ) );
