@@ -13,6 +13,7 @@ namespace ctx
 		sdk::c_cs_player* local           = nullptr;
 		sdk::c_user_cmd* cmd              = nullptr;
 		sdk::c_base_combat_weapon* weapon = nullptr;
+		lagcomp::record* record           = nullptr;
 
 		struct {
 			sdk::c_user_cmd* cmd    = nullptr;

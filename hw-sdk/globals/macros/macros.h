@@ -102,3 +102,6 @@ public:
 	{                                                                                                                                                \
 		return ( std::add_pointer_t< type > )( reinterpret_cast< std::uintptr_t >( this ) + value );                                                 \
 	}
+
+#define TIME_TO_TICKS( time ) static_cast<int>(0.5f + time / g_interfaces.globals->interval_per_tick)
+#define TICKS_TO_TIME( ticks ) g_interfaces.globals->interval_per_tick * time

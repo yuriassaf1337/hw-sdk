@@ -45,7 +45,7 @@ namespace math
 	math::vec3 matrix_position( const math::matrix_3x4& src );
 
 	template< typename T = float >
-	T& get_fov( const math::vec3& view_angles, const math::vec3& start, const math::vec3& end );
+	T get_fov( const math::vec3& view_angles, const math::vec3& start, const math::vec3& end );
 
 	template< typename T >
 	constexpr T min( const T& t1, const T& t2 );

@@ -84,5 +84,10 @@ namespace sdk
 
 			reinterpret_cast< adjust_player_timebase_type >( adjust_player_timebase_address )( this, simulation_ticks );
 		}
+
+		math::vec3 eye_position( )
+		{
+			return vector_origin( ) + view_offset( );
+		}
 	};
 } // namespace sdk

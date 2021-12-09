@@ -2,6 +2,8 @@
 
 #include "../../../game/sdk/enums/flow.h"
 
+#include "../../../globals/ctx/ctx.h"
+
 #include "../../../utils/convars/convars.h"
 #include "../../../utils/entity_list/entity_list.h"
 
@@ -42,7 +44,7 @@ float lagcomp::impl::lerp_time( )
 void lagcomp::impl::update( )
 {
 	static auto sv_maxunlag = g_convars[ _( "sv_maxunlag" ) ]->get_float( );
-	auto sv_maxunlag_ticks  = static_cast< int >( sv_maxunlag / g_interfaces.globals->interval_per_tick );
+	auto sv_maxunlag_ticks  = TIME_TO_TICKS( sv_maxunlag );
 
 	for ( auto& player : g_entity_list.players ) {
 		if ( player->gun_game_immunity( ) )
@@ -58,6 +60,7 @@ void lagcomp::impl::update( )
 		current_record.origin          = player->get_abs_angles( );
 		current_record.simulation_time = player->simulation_time( );
 		current_record.valid           = is_valid( current_record );
+		current_record.player          = player;
 
 		current_heap_iterator++;
 
@@ -66,4 +69,46 @@ void lagcomp::impl::update( )
 	}
 }
 
-void lagcomp::impl::backtrack_player( record heap_record ) { }
+void lagcomp::impl::backtrack_player( record* heap_record )
+{
+	g_ctx.record = heap_record;
+
+	if ( !heap_record )
+		return;
+
+	g_ctx.cmd->tick_count = TIME_TO_TICKS( heap_record->simulation_time );
+}
+
+void lagcomp::impl::backtrack_player( sdk::c_cs_player* player )
+{
+	static auto sv_maxunlag = g_convars[ _( "sv_maxunlag" ) ]->get_float( );
+	auto sv_maxunlag_ticks  = TIME_TO_TICKS( sv_maxunlag );
+
+	auto entity_index = player->entity_index( );
+
+	auto closest_fov = 0.f;
+	record* closest_record{ };
+
+	for ( int current_heap_iterator = 0; current_heap_iterator < sv_maxunlag_ticks; current_heap_iterator++ ) {
+		auto& current_record = heap_records[ entity_index ][ current_heap_iterator ];
+
+		if ( !current_record.valid )
+			continue;
+
+		math::vec3 player_angles;
+
+		auto record_fov = math::get_fov( player_angles, player->eye_position( ), current_record.origin );
+
+		if ( record_fov < closest_fov ) {
+			closest_fov    = record_fov;
+			closest_record = &current_record;
+		}
+	}
+
+	g_ctx.record = closest_record;
+
+	if ( !closest_record )
+		return;
+
+	g_ctx.cmd->tick_count = TIME_TO_TICKS( closest_record->simulation_time );
+}

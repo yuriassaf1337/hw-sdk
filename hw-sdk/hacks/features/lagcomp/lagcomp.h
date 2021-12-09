@@ -12,10 +12,12 @@ namespace lagcomp
 		bool valid;
 		math::vec3 origin;
 		float simulation_time;
+		sdk::c_cs_player* player;
 	};
 
 	struct impl {
 	private:
+		// You should kill yourself NOW!
 		// [ 1-64 ] is the range of possible player indexes.
 		int heap_iterator[ 65 ];
 		float lerp_time( );
@@ -25,7 +27,9 @@ namespace lagcomp
 		record* heap_records[ 65 ];
 
 		void update( );
-		void backtrack_player( record heap_record );
+
+		void backtrack_player( record* heap_record );
+		void backtrack_player( sdk::c_cs_player* player );
 	};
 } // namespace lagcomp
 

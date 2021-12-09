@@ -11,7 +11,7 @@ T& math::normalize_yaw( T& yaw )
 }
 
 template< typename T >
-T& math::get_fov(const math::vec3& view_angles, const math::vec3& start, const math::vec3& end)
+T math::get_fov(const math::vec3& view_angles, const math::vec3& start, const math::vec3& end)
 {
 	math::vec3 fw{ },
 		dir = ( end - start ).normalized( );
