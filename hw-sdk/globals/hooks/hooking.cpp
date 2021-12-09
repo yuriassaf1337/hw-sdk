@@ -6,6 +6,7 @@
 #include "create_move/create_move.h"
 #include "emit_sound/emit_sound.h"
 #include "end_scene/end_scene.h"
+#include "glow_effect_spectator/glow_effect_spectator.h"
 #include "item_post_frame/item_post_frame.h"
 #include "paint_traverse/paint_traverse.h"
 #include "wndproc/wndproc.h"
@@ -23,8 +24,8 @@ bool hooks::impl::init( )
 	hooks::cl_move::init( );
 	hooks::item_post_frame::init( );
 	hooks::emit_sound::init( );
-	// temporary, it crashes for now.
-	 hooks::paint_traverse::init( );
+	hooks::glow_effect_spectator::init( );
+	hooks::paint_traverse::init( );
 
 	console::print< console::log_level::SUCCESS >( _( "Initialized all hooks." ) );
 

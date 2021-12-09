@@ -24,14 +24,14 @@ namespace sdk
 		NETVAR( account, std::int32_t, "CCSPlayer", "m_iAccount" );
 		NETVAR( flash_duration, float, "CCSPlayer", "m_flFlashDuration" );
 
-		const bool is_enemy( sdk::teams team )
+		const bool is_enemy( sdk::c_cs_player* player )
 		{
 			static auto mp_teammates_are_enemies = g_convars[ _( "mp_teammates_are_enemies" ) ];
 
 			if ( mp_teammates_are_enemies->get_bool( ) )
 				return true;
 
-			if ( this->team_number( ) == team )
+			if ( this->team_number( ) == player->team_number( ) )
 				return false;
 
 			return true;

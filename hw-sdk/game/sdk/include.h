@@ -23,6 +23,7 @@
 #include "structs/studio.h"
 
 // enum
+#include "enums/glow_style.h"
 #include "enums/material_var_flags.h"
 #include "enums/trace_type.h"
 

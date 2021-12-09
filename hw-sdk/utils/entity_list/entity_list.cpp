@@ -36,7 +36,7 @@ void entity_list::impl::update( )
 			if ( !entity->is_alive( ) )
 				continue;
 
-			if ( !entity->is_enemy( g_ctx.local->team_number( ) ) )
+			if ( !entity->is_enemy( g_ctx.local ) )
 				continue;
 
 			players.push_back( entity );
