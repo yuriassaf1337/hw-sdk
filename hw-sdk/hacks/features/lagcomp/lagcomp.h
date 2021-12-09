@@ -5,18 +5,18 @@
 
 namespace lagcomp
 {
-	struct record {
+	class record
+	{
 	public:
 		record( ) = default;
 
-		bool valid;
-		float simulation_time;
+		bool valid            = false;
+		float simulation_time = -1.f;
 
-		math::vec3 abs_origin;
-		math::vec3 eye_position;
-		math::vec3 /*hitboxes idfk how many*/ hitboxes[ 20 ];
+		math::vec3 abs_origin   = { };
+		math::vec3 eye_position = { };
 
-		sdk::c_cs_player* player;
+		sdk::c_cs_player* player = { };
 	};
 
 	struct impl {

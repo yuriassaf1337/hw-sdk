@@ -90,6 +90,9 @@ void lagcomp::impl::backtrack_player( sdk::c_cs_player* player )
 	auto closest_fov = FLT_MAX;
 	record* closest_record{ };
 
+	if ( !heap_records[ entity_index ] )
+		return;
+
 	for ( int current_heap_iterator = 0; current_heap_iterator < sv_maxunlag_ticks; current_heap_iterator++ ) {
 		record* current_record = &heap_records[ entity_index ][ current_heap_iterator ];
 

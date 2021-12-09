@@ -25,29 +25,6 @@ LONG __stdcall hooks::end_scene::end_scene_detour( IDirect3DDevice9* device )
 
 	g_render.setup_state( );
 
-	if ( hooks::can_shoot )
-		g_render.render_text( 200, 200, font_alignment::AL_DEFAULT, font_flags::FLAG_DROPSHADOW, _( "SHOOT!" ),
-		                      g_fonts[ HASH( "indicator_verdana_font" ) ], color( 255, 50, 150, 50 ) );
-
-	static auto sv_maxunlag = g_convars[ _( "sv_maxunlag" ) ];
-	auto sv_maxunlag_ticks  = static_cast< int >( sv_maxunlag->get_float( ) / g_interfaces.globals->interval_per_tick );
-
-	for ( auto& player : g_entity_list.players ) {
-		auto heap_record = g_lagcomp.heap_records[ player->entity_index( ) ];
-
-		if ( !heap_record->valid )
-			continue;
-
-		for ( auto heap_iterator = 0; heap_iterator < sv_maxunlag_ticks; heap_iterator++ ) {
-			auto current_record = heap_record[ heap_iterator ];
-
-			math::vec3 screen_position;
-
-			if ( current_record.valid )
-				g_render.render_rectangle< int >( utils::world_to_screen( current_record.eye_position ), math::vec2( 1, 1 ), color( 255, 255, 255, 255 ) );
-		}
-	}
-
 	g_log.think( );
 
 	g_menu.draw( );
