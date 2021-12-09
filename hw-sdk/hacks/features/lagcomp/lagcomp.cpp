@@ -18,12 +18,9 @@ bool lagcomp::impl::is_valid( record heap_record )
 
 	correct = std::clamp( correct, 0.f, sv_maxunlag );
 
-	float delta_correct = fabs( correct - ( g_interfaces.globals->current_time - heap_record.simulation_time ) );
+	float delta_correct = std::fabsf( correct - ( g_interfaces.globals->current_time - heap_record.simulation_time ) );
 
-	if ( delta_correct > .2f )
-		return false;
-
-	return true;
+	return delta_correct <= .2f;
 }
 
 float lagcomp::impl::lerp_time( )
@@ -44,7 +41,7 @@ float lagcomp::impl::lerp_time( )
 void lagcomp::impl::update( )
 {
 	static auto sv_maxunlag = g_convars[ _( "sv_maxunlag" ) ]->get_float( );
-	auto sv_maxunlag_ticks  = TIME_TO_TICKS( sv_maxunlag );
+	auto sv_maxunlag_ticks  = sdk::time_to_ticks( sv_maxunlag );
 
 	for ( auto& player : g_entity_list.players ) {
 		if ( player->gun_game_immunity( ) )
@@ -77,18 +74,24 @@ void lagcomp::impl::backtrack_player( record* heap_record )
 	if ( !heap_record )
 		return;
 
-	g_ctx.cmd->tick_count = TIME_TO_TICKS( heap_record->simulation_time );
+	g_ctx.cmd->tick_count = sdk::time_to_ticks( heap_record->simulation_time );
 }
 
 void lagcomp::impl::backtrack_player( sdk::c_cs_player* player )
 {
+	// dont set tick count if not shooting.
+	if ( !g_ctx.cmd->buttons.has( sdk::buttons::IN_ATTACK ) )
+		return;
+
 	static auto sv_maxunlag = g_convars[ _( "sv_maxunlag" ) ]->get_float( );
-	auto sv_maxunlag_ticks  = TIME_TO_TICKS( sv_maxunlag );
+	auto sv_maxunlag_ticks  = sdk::time_to_ticks( sv_maxunlag );
 
 	auto entity_index = player->entity_index( );
 
 	auto closest_fov = FLT_MAX;
 	record* closest_record{ };
+
+	math::vec3 player_angles = g_interfaces.engine->get_view_angles( );
 
 	if ( !heap_records[ entity_index ] )
 		return;
@@ -98,8 +101,6 @@ void lagcomp::impl::backtrack_player( sdk::c_cs_player* player )
 
 		if ( !current_record )
 			continue;
-
-		math::vec3 player_angles = g_interfaces.engine->get_view_angles( );
 
 		auto record_fov = math::get_fov( player_angles, g_ctx.local->eye_position( ), current_record->eye_position );
 
@@ -114,5 +115,5 @@ void lagcomp::impl::backtrack_player( sdk::c_cs_player* player )
 	if ( !closest_record )
 		return;
 
-	g_ctx.cmd->tick_count = TIME_TO_TICKS( closest_record->simulation_time );
+	g_ctx.cmd->tick_count = sdk::time_to_ticks( closest_record->simulation_time + g_lagcomp.lerp_time( ) );
 }
