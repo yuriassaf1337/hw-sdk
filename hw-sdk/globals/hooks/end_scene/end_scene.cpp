@@ -35,7 +35,7 @@ LONG __stdcall hooks::end_scene::end_scene_detour( IDirect3DDevice9* device )
 	for ( auto& player : g_entity_list.players ) {
 		auto heap_record = g_lagcomp.heap_records[ player->entity_index( ) ];
 
-		if ( !heap_record )
+		if ( !heap_record->valid )
 			continue;
 
 		for ( auto heap_iterator = 0; heap_iterator < sv_maxunlag_ticks; heap_iterator++ ) {
@@ -44,7 +44,7 @@ LONG __stdcall hooks::end_scene::end_scene_detour( IDirect3DDevice9* device )
 			math::vec3 screen_position;
 
 			if ( current_record.valid )
-				g_render.render_rectangle< int >( utils::world_to_screen( current_record.origin ), math::vec2( 1, 1 ), color( 255, 255, 255, 255 ) );
+				g_render.render_rectangle< int >( utils::world_to_screen( current_record.eye_position ), math::vec2( 1, 1 ), color( 255, 255, 255, 255 ) );
 		}
 	}
 

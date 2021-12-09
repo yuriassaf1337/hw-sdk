@@ -4,6 +4,7 @@
 #include "../../game/sdk/classes/c_usercmd.h"
 #include "../../game/sdk/enums/buttons.h"
 #include "../../game/sdk/enums/move_type.h"
+#include "../../hacks/features/lagcomp/lagcomp.h"
 
 namespace ctx
 {

@@ -57,7 +57,8 @@ void lagcomp::impl::update( )
 
 		auto& current_record = heap_records[ player->entity_index( ) ][ current_heap_iterator ];
 
-		current_record.origin          = player->get_abs_angles( );
+		current_record.abs_origin      = player->get_abs_angles( );
+		current_record.eye_position    = player->eye_position( );
 		current_record.simulation_time = player->simulation_time( );
 		current_record.valid           = is_valid( current_record );
 		current_record.player          = player;
@@ -86,22 +87,22 @@ void lagcomp::impl::backtrack_player( sdk::c_cs_player* player )
 
 	auto entity_index = player->entity_index( );
 
-	auto closest_fov = 0.f;
+	auto closest_fov = FLT_MAX;
 	record* closest_record{ };
 
 	for ( int current_heap_iterator = 0; current_heap_iterator < sv_maxunlag_ticks; current_heap_iterator++ ) {
-		auto& current_record = heap_records[ entity_index ][ current_heap_iterator ];
+		record* current_record = &heap_records[ entity_index ][ current_heap_iterator ];
 
-		if ( !current_record.valid )
+		if ( !current_record )
 			continue;
 
-		math::vec3 player_angles;
+		math::vec3 player_angles = g_interfaces.engine->get_view_angles( );
 
-		auto record_fov = math::get_fov( player_angles, player->eye_position( ), current_record.origin );
+		auto record_fov = math::get_fov( player_angles, g_ctx.local->eye_position( ), current_record->eye_position );
 
 		if ( record_fov < closest_fov ) {
 			closest_fov    = record_fov;
-			closest_record = &current_record;
+			closest_record = current_record;
 		}
 	}
 

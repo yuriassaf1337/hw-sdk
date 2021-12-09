@@ -1,5 +1,6 @@
 #include <string.h>
 
+#include "../../../hacks/features/aimbot/aimbot.h"
 #include "../../../hacks/features/lagcomp/lagcomp.h"
 #include "../../../hacks/features/movement/movement.h"
 #include "../../../hacks/prediction/prediction.h"
@@ -32,6 +33,8 @@ void __stdcall create_move_function( int sequence_number, float input_sample_fra
 	g_prediction.store_backup( );
 	g_prediction.start( g_ctx.local );
 	{
+		g_aimbot.run( );
+
 		if ( g_input.key_state< input::key_state_t::KEY_DOWN >( VK_END ) )
 			send_packet = false;
 	}

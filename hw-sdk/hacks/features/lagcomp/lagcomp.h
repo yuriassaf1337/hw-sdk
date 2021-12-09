@@ -10,8 +10,12 @@ namespace lagcomp
 		record( ) = default;
 
 		bool valid;
-		math::vec3 origin;
 		float simulation_time;
+
+		math::vec3 abs_origin;
+		math::vec3 eye_position;
+		math::vec3 /*hitboxes idfk how many*/ hitboxes[ 20 ];
+
 		sdk::c_cs_player* player;
 	};
 
