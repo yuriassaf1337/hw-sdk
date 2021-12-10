@@ -6,6 +6,7 @@
 #include "create_move/create_move.h"
 #include "emit_sound/emit_sound.h"
 #include "end_scene/end_scene.h"
+#include "frame_stage_notify/frame_stage_notify.h"
 #include "glow_effect_spectator/glow_effect_spectator.h"
 #include "item_post_frame/item_post_frame.h"
 #include "paint_traverse/paint_traverse.h"
@@ -26,6 +27,7 @@ bool hooks::impl::init( )
 	hooks::emit_sound::init( );
 	hooks::glow_effect_spectator::init( );
 	hooks::paint_traverse::init( );
+	hooks::frame_stage_notify::init( );
 
 	console::print< console::log_level::SUCCESS >( _( "Initialized all hooks." ) );
 
@@ -45,6 +47,7 @@ void hooks::impl::unload( )
 	hooks::item_post_frame::unload( );
 	hooks::emit_sound::unload( );
 	hooks::paint_traverse::unload( );
+	hooks::frame_stage_notify::unload( );
 
 	// this is so useless lol
 	if ( MH_Uninitialize( ) != MH_OK )

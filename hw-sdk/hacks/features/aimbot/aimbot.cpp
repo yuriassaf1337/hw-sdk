@@ -30,6 +30,9 @@ sdk::c_cs_player* aimbot::impl::find_closest( )
 
 void aimbot::impl::run( )
 {
+	if ( !g_ctx.cmd->buttons.has( sdk::buttons::IN_ATTACK ) )
+		return;
+
 	if ( !g_ctx.local )
 		return;
 

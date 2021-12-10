@@ -2,7 +2,7 @@
 
 namespace sdk
 {
-	enum class frame_stage
+	enum class frame_stage : int
 	{
 		UNDEFINED = -1,
 		START,

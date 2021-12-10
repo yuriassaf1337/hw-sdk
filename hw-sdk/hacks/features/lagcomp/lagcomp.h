@@ -23,12 +23,12 @@ namespace lagcomp
 	private:
 		// You should kill yourself NOW!
 		// [ 1-64 ] is the range of possible player indexes.
-		int heap_iterator[ 65 ];
+		std::array<int, 65> heap_iterator;
 		float lerp_time( );
 		bool is_valid( record heap_record );
 
 	public:
-		record* heap_records[ 65 ];
+		std::array<record*, 65> heap_records;
 
 		void update( );
 

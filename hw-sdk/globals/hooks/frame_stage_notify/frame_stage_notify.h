@@ -7,12 +7,17 @@
 #include "../../../utils/vfunc/vfunc.h"
 #include "../../interfaces/interfaces.h"
 #include "../hooking.h"
+
+#include "../../../game/sdk/enums/frame_stage.h"
+#include "../../../hacks/features/lagcomp/lagcomp.h"
+#include "../../../utils/entity_list/entity_list.h"
+
 namespace hooks
 {
-	CREATE_HOOK_HELPER( frame_stage_notify_hook, bool( __fastcall* )( void*, int ) );
+	CREATE_HOOK_HELPER( frame_stage_notify_hook, void( __fastcall )( void*, void*, sdk::frame_stage ) );
 
 	struct frame_stage_notify {
-		static bool __stdcall frame_stage_notify_detour( int stage );
+		static void __fastcall frame_stage_notify_detour( void* self, void* ecx, sdk::frame_stage stage );
 
 		static void init( )
 		{

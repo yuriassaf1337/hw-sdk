@@ -20,19 +20,15 @@ void __stdcall create_move_function( int sequence_number, float input_sample_fra
 	// grab global cmd
 	g_ctx.cmd = command;
 
-	g_entity_list.update( );
-
 	if ( !g_ctx.local || !command || !verified || !command->command_number )
 		return;
 
 	g_movement.pre_prediction.think( );
 
-
 	g_prediction.update( );
 	g_prediction.store_backup( );
 	g_prediction.start( g_ctx.local );
 	{
-		g_lagcomp.update( );
 		g_aimbot.run( );
 
 		if ( g_input.key_state< input::key_state_t::KEY_DOWN >( VK_END ) )

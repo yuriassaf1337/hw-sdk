@@ -80,8 +80,8 @@ void lagcomp::impl::backtrack_player( record* heap_record )
 void lagcomp::impl::backtrack_player( sdk::c_cs_player* player )
 {
 	// dont set tick count if not shooting.
-	if ( !g_ctx.cmd->buttons.has( sdk::buttons::IN_ATTACK ) )
-		return;
+	//if ( !g_ctx.cmd->buttons.has( sdk::buttons::IN_ATTACK ) )
+	//	return;
 
 	static auto sv_maxunlag = g_convars[ _( "sv_maxunlag" ) ]->get_float( );
 	auto sv_maxunlag_ticks  = sdk::time_to_ticks( sv_maxunlag );
@@ -115,5 +115,5 @@ void lagcomp::impl::backtrack_player( sdk::c_cs_player* player )
 	if ( !closest_record )
 		return;
 
-	g_ctx.cmd->tick_count = sdk::time_to_ticks( closest_record->simulation_time + g_lagcomp.lerp_time( ) );
+	g_ctx.cmd->tick_count = sdk::time_to_ticks( closest_record->simulation_time );
 }

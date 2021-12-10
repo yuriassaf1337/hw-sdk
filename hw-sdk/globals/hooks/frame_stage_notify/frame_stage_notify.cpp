@@ -1,6 +1,11 @@
 #include "frame_stage_notify.h"
 
-bool __stdcall hooks::frame_stage_notify::frame_stage_notify_detour( int stage )
+void __fastcall hooks::frame_stage_notify::frame_stage_notify_detour( void* self, void* ecx, sdk::frame_stage stage )
 {
-	hooks::frame_stage_notify_hook.call_original< bool >( g_interfaces.client, stage );
+	hooks::frame_stage_notify_hook.call_original< void >( self, ecx, stage );
+
+	if ( stage == sdk::frame_stage::NET_UPDATE_END ) {
+		g_entity_list.update( );
+		g_lagcomp.update( );
+	}
 }
