@@ -5,5 +5,6 @@ bool __cdecl hooks::glow_effect_spectator::glow_effect_spectator_detour( sdk::c_
                                                                          float& time_target, bool& animate )
 {
 	glow_color = { 1.f, 0.f, 0.f };
+	alpha /= 2.f;
 	return player != local && player->is_enemy( local );
 }

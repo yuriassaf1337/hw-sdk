@@ -177,6 +177,7 @@
     <ClCompile Include="globals\hooks\cl_move\cl_move.cpp" />
     <ClCompile Include="globals\hooks\create_move\create_move.cpp" />
     <ClCompile Include="globals\hooks\emit_sound\emit_sound.cpp" />
+    <ClCompile Include="globals\hooks\frame_stage_notify\frame_stage_notify.cpp" />
     <ClCompile Include="globals\hooks\glow_effect_spectator\glow_effect_spectator.cpp" />
     <ClCompile Include="globals\hooks\hooking.cpp" />
     <ClCompile Include="globals\hooks\end_scene\end_scene.cpp" />
@@ -308,6 +309,7 @@
     <ClInclude Include="globals\hooks\create_move\create_move.h" />
     <ClInclude Include="globals\hooks\emit_sound\emit_sound.h" />
     <ClInclude Include="globals\hooks\end_scene\end_scene.h" />
+    <ClInclude Include="globals\hooks\frame_stage_notify\frame_stage_notify.h" />
     <ClInclude Include="globals\hooks\glow_effect_spectator\glow_effect_spectator.h" />
     <ClInclude Include="globals\hooks\item_post_frame\item_post_frame.h" />
     <ClInclude Include="globals\hooks\paint_traverse\paint_traverse.h" />
