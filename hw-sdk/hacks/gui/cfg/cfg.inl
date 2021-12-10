@@ -26,7 +26,7 @@ static T& configs::impl::get( std::uint32_t hash )
 }
 
 template< configs::alpha_type alpha >
-const color configs::impl::as_color( const std::string& color_name )
+color configs::impl::as_color( const std::string& color_name )
 {
 	// separate our names into strings.
 	std::string m_r = color_name + _( "_r" ), m_g = color_name + _( "_g" ), m_b = color_name + _( "_b" ), m_a = color_name + _( "_a" );

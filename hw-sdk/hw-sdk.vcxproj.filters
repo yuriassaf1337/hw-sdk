@@ -129,6 +129,9 @@
     <ClCompile Include="globals\hooks\frame_stage_notify\frame_stage_notify.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="game\sdk\classes\c_cs_player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals\includes\includes.h">

@@ -24,22 +24,10 @@ namespace sdk
 		NETVAR( account, std::int32_t, "CCSPlayer", "m_iAccount" );
 		NETVAR( flash_duration, float, "CCSPlayer", "m_flFlashDuration" );
 
-		const bool is_enemy( sdk::c_cs_player* player )
-		{
-			static auto mp_teammates_are_enemies = g_convars[ _( "mp_teammates_are_enemies" ) ];
+		const bool is_enemy( sdk::c_cs_player* player );
 
-			if ( mp_teammates_are_enemies->get_bool( ) )
-				return true;
+		bool is_alive( );
 
-			if ( this->team_number( ) == player->team_number( ) )
-				return false;
-
-			return true;
-		}
-
-		bool is_alive( )
-		{
-			return ( this->life_state( ) == sdk::life_state::LIFE_ALIVE && this->health( ) > 0 );
-		}
+		const std::string& name( );
 	};
 } // namespace sdk

@@ -20,7 +20,7 @@ void logging::impl::think( )
 
 		log.m_time -= g_interfaces.globals->frame_time;
 		if ( log.m_time <= 0.f || i > 15 ) {
-			logs.erase( logs.begin( ) + 1 );
+			logs.erase( logs.begin( ) + i );
 			continue;
 		}
 	}
@@ -46,7 +46,8 @@ void logging::impl::think( )
 			draw_color.a = 255;
 
 		g_render.render_text( x, y, font_alignment::AL_DEFAULT, font_flags::FLAG_DROPSHADOW, log.m_prefix.data( ),
-		                      g_fonts[ HASH( "main_font_bold" ) ], g_cfg.as_color< configs::alpha_type::GUI_ALPHA >( _( "main_menu_color" ) ) );
+		                      g_fonts[ HASH( "main_font_bold" ) ],
+		                      g_cfg.as_color< configs::alpha_type::MAX_ALPHA >( _( "main_menu_color" ) ).set_alpha( draw_color.a ) );
 
 		g_render.render_text( x + g_render.render_text_size( log.m_text.data( ), g_fonts[ HASH( "main_font" ) ] ).x, y, font_alignment::AL_DEFAULT,
 		                      font_flags::FLAG_DROPSHADOW, log.m_text.data( ), g_fonts[ HASH( "main_font" ) ], draw_color );

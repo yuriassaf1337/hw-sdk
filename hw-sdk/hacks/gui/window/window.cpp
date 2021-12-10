@@ -134,16 +134,19 @@ bool gui::elements::window_impl::begin_window( const std::string_view name )
 void gui::elements::window_impl::end_window( )
 {
 	// draw tabs
-	if ( !g_gui.tabs.empty( ) )
-		g_tabs.think( );
+	g_tabs.think( );
 }
 
 // [#] tabs
 
 void gui::tabs::impl::begin_tabs( const std::vector< std::string_view >& m_tabs )
 {
-	if ( g_gui.tabs.empty( ) )
-		g_gui.tabs = m_tabs;
+	g_gui.tabs = m_tabs;
+}
+
+void gui::tabs::impl::handle_selection( )
+{
+	if ( g_gui.focused_id == UNFOCUSED ) { }
 }
 
 void gui::tabs::impl::think( )
@@ -176,4 +179,6 @@ void gui::tabs::impl::think( )
 		g_render.render_text( final_position, font_alignment::AL_HORIZONTAL_CENTER, font_flags::FLAG_OUTLINE_SEMI, g_gui.tabs[ i ].data( ),
 		                      g_fonts[ HASH( "main_font" ) ], gui::pallete::white( ) );
 	}
+
+	handle_selection( );
 }

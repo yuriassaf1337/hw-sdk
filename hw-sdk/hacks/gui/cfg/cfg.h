@@ -58,7 +58,7 @@ namespace configs
 		}
 
 		template< alpha_type alpha >
-		const color as_color( const std::string& color_name );
+		color as_color( const std::string& color_name );
 	};
 } // namespace configs
 

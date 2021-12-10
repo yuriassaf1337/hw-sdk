@@ -7,14 +7,14 @@ void __fastcall hooks::paint_traverse::paint_traverse_detour( sdk::i_panel* self
 {
 	const auto panel_hash = HASH( g_interfaces.panel->panel_name( panel ) );
 
-	// static bool already_logged = false;
+	static bool already_logged = false;
 
-	// if ( !already_logged ) {
-	//	g_interfaces.engine->execute_client_cmd( _( "clear" ) );
-	//	g_log.print( _( " injection success." ), _( "[hotwheels.vip]" ) );
+	if ( !already_logged ) {
+		//	g_interfaces.engine->execute_client_cmd( _( "clear" ) );
+		g_log.print( _( " injection success." ), _( "[hotwheels.vip]" ) );
 
-	//	already_logged = true;
-	//}
+		already_logged = true;
+	}
 
 	g_ctx.view_matrix = g_interfaces.engine->world_to_screen_matrix( );
 

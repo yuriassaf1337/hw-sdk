@@ -28,9 +28,9 @@ struct color {
 		return color( static_cast< int >( ( col >> 0 ) & 0xFF ), static_cast< int >( ( col >> 8 ) & 0xFF ),
 		              static_cast< int >( ( col >> 16 ) & 0xFF ), static_cast< int >( ( col >> 24 ) & 0xFF ) );
 	}
-	color set_alpha( std::uint8_t new_alpha )
+	color set_alpha( int new_alpha )
 	{
-		return color( r, g, b, std::clamp< std::uint8_t >( new_alpha, ( std::uint8_t )0, ( std::uint8_t )255 ) );
+		return color( r, g, b, static_cast< unsigned char >( new_alpha ) );
 	}
 	D3DCOLOR to_d3d( ) const
 	{

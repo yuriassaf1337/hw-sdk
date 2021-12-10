@@ -6,6 +6,7 @@
 
 #include "../../../utils/convars/convars.h"
 #include "../../../utils/entity_list/entity_list.h"
+#include "../../logging/logging.h"
 
 bool lagcomp::impl::is_valid( record heap_record )
 {
@@ -79,10 +80,6 @@ void lagcomp::impl::backtrack_player( record* heap_record )
 
 void lagcomp::impl::backtrack_player( sdk::c_cs_player* player )
 {
-	// dont set tick count if not shooting.
-	//if ( !g_ctx.cmd->buttons.has( sdk::buttons::IN_ATTACK ) )
-	//	return;
-
 	static auto sv_maxunlag = g_convars[ _( "sv_maxunlag" ) ]->get_float( );
 	auto sv_maxunlag_ticks  = sdk::time_to_ticks( sv_maxunlag );
 
