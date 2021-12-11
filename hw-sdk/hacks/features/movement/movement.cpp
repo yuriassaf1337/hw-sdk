@@ -28,8 +28,6 @@ void movement::impl::bhop( )
 
 void movement::impl::edgebug_t::run_ticks( const bool ducking )
 {
-
-	//black epoeple
 	if ( !ducking ) {
 		g_ctx.cmd->buttons.remove( sdk::buttons::IN_DUCK );
 		g_ctx.local->flags( ).remove( sdk::flags::DUCKING );
