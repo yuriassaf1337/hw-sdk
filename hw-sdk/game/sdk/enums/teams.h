@@ -3,7 +3,7 @@
 
 namespace sdk
 {
-	enum teams : std::int32_t
+	enum class teams : std::int32_t
 	{
 		TEAM_UNKNOWN,
 		TEAM_SPECTATOR,
