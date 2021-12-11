@@ -26,8 +26,8 @@ bool lagcomp::impl::is_valid( record heap_record )
 
 float lagcomp::impl::lerp_time( )
 {
-	static auto update_rate  = g_convars[ _( "sv_maxupdaterate" ) ]->get_int( );
-	static auto interp_ratio = std::clamp( g_convars[ _( "cl_interp_ratio" ) ]->get_float( ), 1.f, FLT_MAX );
+	static auto update_rate  = g_convars[ _( "cl_updaterate" ) ]->get_int( );
+	static auto interp_ratio = std::max( g_convars[ _( "cl_interp_ratio" ) ]->get_float( ), 1.f );
 
 	static auto interp = g_convars[ _( "cl_interp" ) ]->get_float( );
 
@@ -112,5 +112,5 @@ void lagcomp::impl::backtrack_player( sdk::c_cs_player* player )
 	if ( !closest_record )
 		return;
 
-	g_ctx.cmd->tick_count = sdk::time_to_ticks( closest_record->simulation_time );
+	g_ctx.cmd->tick_count = sdk::time_to_ticks( closest_record->simulation_time ) + sdk::time_to_ticks( lerp_time( ) );
 }

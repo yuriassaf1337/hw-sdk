@@ -9,7 +9,7 @@ namespace convars
 	public:
 		sdk::con_var* operator[]( const char* convar_name )
 		{
-			static auto pointer = g_interfaces.convar->find_var( convar_name );
+			auto pointer = g_interfaces.convar->find_var( convar_name );
 
 			return pointer;
 		}
