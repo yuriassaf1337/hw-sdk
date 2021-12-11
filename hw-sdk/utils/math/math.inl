@@ -1,4 +1,3 @@
-
 template< typename T >
 T& math::normalize_yaw( T& yaw )
 {
@@ -43,4 +42,16 @@ template< typename T, typename... ts_ >
 constexpr T math::max( const T& t1, const T& t2, ts_&&... ts )
 {
 	return t1 > t2 ? math::max( t1, std::forward< ts_ >( ts )... ) : math::max( t2, std::forward< ts_ >( ts )... );
+}
+
+template< typename T >
+constexpr T math::random(const T min, const T max)
+{
+	if constexpr ( !std::is_integral_v< T > ) {
+		std::uniform_real_distribution< T > dist( min, max );
+		return dist( gen );
+	} else {
+		std::uniform_int_distribution< T > dist( min, max );
+		return dist( gen );
+	}
 }

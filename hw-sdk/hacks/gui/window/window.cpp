@@ -78,7 +78,7 @@ void gui::elements::window_impl::util_t::handle_resize( bool hover )
 		g_gui.main.resizing = false;
 }
 
-bool gui::elements::window_impl::begin_window( const std::string_view name )
+bool gui::elements::window_impl::invoke_window( const std::string_view name )
 {
 	static math::vec2< int > old_mouse_pos;
 	math::vec2< int > delta = g_input.mouse.pos - old_mouse_pos;
@@ -162,7 +162,7 @@ void gui::elements::window_impl::end_window( )
 
 // [#] tabs
 
-void gui::tabs::impl::begin_tabs( const std::vector< std::string_view >& m_tabs )
+void gui::tabs::impl::invoke_tabs( const std::vector< std::string_view > m_tabs )
 {
 	g_gui.tabs = m_tabs;
 }
@@ -191,7 +191,7 @@ void gui::tabs::impl::think( )
 		                                                            color( 17, 17, 17, g_gui.main.alpha ) );
 	}
 
-	const int m_tab_width = tab_util.size.x / 6;
+	const int m_tab_width = static_cast< int >( tab_util.size.x / 6.f );
 	// do tab selection
 	if ( g_gui.focused_id == UNFOCUSED ) {
 		if ( g_input.mouse.in_params( AIMBOT_TAB_BOUNDING ) ) {

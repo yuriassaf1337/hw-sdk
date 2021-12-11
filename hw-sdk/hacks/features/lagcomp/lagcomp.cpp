@@ -12,7 +12,8 @@ bool lagcomp::impl::is_valid( record heap_record )
 {
 	float correct = 0.f;
 
-	static auto sv_maxunlag = g_convars[ _( "sv_maxunlag" ) ]->get_float( );
+	static auto unlag_pointer = g_convars[ _( "sv_maxunlag" ) ];
+	auto sv_maxunlag          = unlag_pointer->get_float( );
 
 	correct += g_interfaces.engine->get_net_channel_info( )->get_latency( sdk::flow::FLOW_OUTGOING );
 	correct += lerp_time( );
@@ -41,8 +42,9 @@ float lagcomp::impl::lerp_time( )
 
 void lagcomp::impl::update( )
 {
-	static auto sv_maxunlag = g_convars[ _( "sv_maxunlag" ) ]->get_float( );
-	auto sv_maxunlag_ticks  = sdk::time_to_ticks( sv_maxunlag );
+	static auto unlag_pointer = g_convars[ _( "sv_maxunlag" ) ];
+	auto sv_maxunlag          = unlag_pointer->get_float( );
+	auto sv_maxunlag_ticks    = sdk::time_to_ticks( sv_maxunlag );
 
 	for ( auto& player : g_entity_list.players ) {
 		if ( player->gun_game_immunity( ) )
@@ -75,13 +77,14 @@ void lagcomp::impl::backtrack_player( record* heap_record )
 	if ( !heap_record )
 		return;
 
-	g_ctx.cmd->tick_count = sdk::time_to_ticks( heap_record->simulation_time );
+	g_ctx.cmd->tick_count = sdk::time_to_ticks( heap_record->simulation_time ) + sdk::time_to_ticks( lerp_time( ) );
 }
 
 void lagcomp::impl::backtrack_player( sdk::c_cs_player* player )
 {
-	static auto sv_maxunlag = g_convars[ _( "sv_maxunlag" ) ]->get_float( );
-	auto sv_maxunlag_ticks  = sdk::time_to_ticks( sv_maxunlag );
+	static auto unlag_pointer = g_convars[ _( "sv_maxunlag" ) ];
+	auto sv_maxunlag          = unlag_pointer->get_float( );
+	auto sv_maxunlag_ticks    = sdk::time_to_ticks( sv_maxunlag );
 
 	auto entity_index = player->entity_index( );
 

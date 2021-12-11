@@ -4,6 +4,13 @@
 #include "types/vector.h"
 #include <corecrt_math_defines.h>
 #include <numbers>
+#include <random>
+
+namespace
+{
+	static std::random_device rd;
+	static std::mt19937 gen{ rd( ) };
+} // namespace
 
 #undef min
 #undef max
@@ -61,6 +68,9 @@ namespace math
 
 	template< typename T = float >
 	T& normalize_yaw( T& yaw );
+
+	template< typename T >
+	constexpr T random( const T min, const T max );
 
 	constexpr float rad2deg( const float x );
 	constexpr float deg2rad( const float x );

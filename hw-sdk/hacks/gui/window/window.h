@@ -20,13 +20,11 @@ namespace gui::tabs
 	};
 
 	struct impl {
-		void begin_tabs( const std::vector< std::string_view >& );
+		void invoke_tabs( const std::vector< std::string_view > );
 
 		void think( );
 
 		int current_tab = 0;
-
-	private:
 	};
 } // namespace gui::tabs
 
@@ -39,10 +37,10 @@ namespace gui::elements
 		window_impl( ) = default;
 		explicit window_impl( std::uint8_t vk_key ) : open_key( vk_key ){ };
 
-		bool begin_window( const std::string_view name );
+		bool invoke_window( const std::string_view name );
 		void end_window( );
 
-		void begin_tab( const std::string_view name );
+		void invoke_tab( const std::string_view name );
 
 	private:
 		struct util_t {
@@ -59,9 +57,6 @@ namespace gui::elements
 		std::uint8_t open_key{ };
 	};
 
-	struct groupbox_impl {
-	};
 } // namespace gui::elements
 
 inline gui::elements::window_impl g_window{ gui::elements::window_impl( VK_INSERT ) };
-inline gui::elements::groupbox_impl g_groupbox;
