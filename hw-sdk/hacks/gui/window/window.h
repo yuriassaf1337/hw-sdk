@@ -27,7 +27,6 @@ namespace gui::tabs
 		int current_tab = 0;
 
 	private:
-		void handle_selection( );
 	};
 } // namespace gui::tabs
 

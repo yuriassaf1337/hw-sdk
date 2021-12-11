@@ -3,6 +3,29 @@
 #include "../cfg/cfg.h"
 #include "../utils/utils.h"
 
+// im so sorry about this
+#define AIMBOT_TAB_BOUNDING    tab_util.pos + math::vec2< int >( 3, 3 ), math::vec2< int >( m_tab_width - 2, 33 )
+#define AIMBOT_ACCENT_BOUNDING tab_util.pos + math::vec2< int >( 3, 34 ), math::vec2< int >( m_tab_width - 2, 2 )
+
+#define VISUALS_TAB_BOUNDING    tab_util.pos + math::vec2< int >( 3 + static_cast< int >( m_tab_width ), 3 ), math::vec2< int >( m_tab_width - 2, 33 )
+#define VISUALS_ACCENT_BOUNDING tab_util.pos + math::vec2< int >( 3 + static_cast< int >( m_tab_width ), 34 ), math::vec2< int >( m_tab_width - 2, 2 )
+
+#define MISC_TAB_BOUNDING tab_util.pos + math::vec2< int >( 3 + static_cast< int >( m_tab_width * 2 ), 3 ), math::vec2< int >( m_tab_width - 2, 33 )
+#define MISC_ACCENT_BOUNDING                                                                                                                         \
+	tab_util.pos + math::vec2< int >( 3 + static_cast< int >( m_tab_width * 2 ), 34 ), math::vec2< int >( m_tab_width - 2, 2 )
+
+#define SKINS_TAB_BOUNDING tab_util.pos + math::vec2< int >( 3 + static_cast< int >( m_tab_width * 3 ), 3 ), math::vec2< int >( m_tab_width - 2, 33 )
+#define SKINS_ACCENT_BOUNDING                                                                                                                        \
+	tab_util.pos + math::vec2< int >( 3 + static_cast< int >( m_tab_width * 3 ), 34 ), math::vec2< int >( m_tab_width - 2, 2 )
+
+#define DEMOS_TAB_BOUNDING tab_util.pos + math::vec2< int >( 3 + static_cast< int >( m_tab_width * 4 ), 3 ), math::vec2< int >( m_tab_width - 2, 33 )
+#define DEMOS_ACCENT_BOUNDING                                                                                                                        \
+	tab_util.pos + math::vec2< int >( 3 + static_cast< int >( m_tab_width * 4 ), 34 ), math::vec2< int >( m_tab_width - 2, 2 )
+
+#define CONFIG_TAB_BOUNDING tab_util.pos + math::vec2< int >( 3 + static_cast< int >( m_tab_width * 5 ), 3 ), math::vec2< int >( m_tab_width - 5, 33 )
+#define CONFIG_ACCENT_BOUNDING                                                                                                                       \
+	tab_util.pos + math::vec2< int >( 3 + static_cast< int >( m_tab_width * 5 ), 34 ), math::vec2< int >( m_tab_width - 5, 2 )
+
 void gui::elements::window_impl::util_t::draw_background( )
 {
 	// render all 3 menu outlines
@@ -144,11 +167,6 @@ void gui::tabs::impl::begin_tabs( const std::vector< std::string_view >& m_tabs 
 	g_gui.tabs = m_tabs;
 }
 
-void gui::tabs::impl::handle_selection( )
-{
-	if ( g_gui.focused_id == UNFOCUSED ) { }
-}
-
 void gui::tabs::impl::think( )
 {
 	struct {
@@ -158,6 +176,12 @@ void gui::tabs::impl::think( )
 
 	std::array< bool, 6 > m_in_tab_area = { };
 
+	auto select_tab = [ &m_in_tab_area]( int tab_index ) constexpr
+	{
+		for ( std::int32_t i = 0; i <= 5; i++ )
+			i != tab_index ? m_in_tab_area[ i ] = false : m_in_tab_area[ i ] = true;
+	};
+
 	// draw background
 	{
 		g_render.render_filled_rectangle( tab_util.pos, tab_util.size, gui::pallete::first_outline( ) );
@@ -165,6 +189,68 @@ void gui::tabs::impl::think( )
 		g_render.render_filled_rectangle( tab_util.pos + 2, tab_util.size - 4, gui::pallete::third_outline( ) );
 		g_render.render_gradient< gradient_type_t::VERTICAL, int >( tab_util.pos + 3, tab_util.size - 6, color( 25, 25, 25, g_gui.main.alpha ),
 		                                                            color( 17, 17, 17, g_gui.main.alpha ) );
+	}
+
+	const int m_tab_width = tab_util.size.x / 6;
+	// do tab selection
+	if ( g_gui.focused_id == UNFOCUSED ) {
+		if ( g_input.mouse.in_params( AIMBOT_TAB_BOUNDING ) ) {
+			select_tab( gui::tabs::tab_index::AIMBOT );
+			if ( g_input.key_state< input::key_state_t::KEY_RELEASED >( VK_LBUTTON ) )
+				current_tab = gui::tabs::tab_index::AIMBOT;
+		} else if ( g_input.mouse.in_params( VISUALS_TAB_BOUNDING ) ) {
+			select_tab( gui::tabs::tab_index::VISUALS );
+			if ( g_input.key_state< input::key_state_t::KEY_RELEASED >( VK_LBUTTON ) )
+				current_tab = gui::tabs::tab_index::VISUALS;
+		} else if ( g_input.mouse.in_params( MISC_TAB_BOUNDING ) ) {
+			select_tab( gui::tabs::tab_index::MISC );
+			if ( g_input.key_state< input::key_state_t::KEY_RELEASED >( VK_LBUTTON ) )
+				current_tab = gui::tabs::tab_index::MISC;
+		} else if ( g_input.mouse.in_params( SKINS_TAB_BOUNDING ) ) {
+			select_tab( gui::tabs::tab_index::SKINS );
+			if ( g_input.key_state< input::key_state_t::KEY_RELEASED >( VK_LBUTTON ) )
+				current_tab = gui::tabs::tab_index::SKINS;
+		} else if ( g_input.mouse.in_params( DEMOS_TAB_BOUNDING ) ) {
+			select_tab( gui::tabs::tab_index::DEMOS );
+			if ( g_input.key_state< input::key_state_t::KEY_RELEASED >( VK_LBUTTON ) )
+				current_tab = gui::tabs::tab_index::DEMOS;
+		} else if ( g_input.mouse.in_params( CONFIG_TAB_BOUNDING ) ) {
+			select_tab( gui::tabs::tab_index::CONFIG );
+			if ( g_input.key_state< input::key_state_t::KEY_RELEASED >( VK_LBUTTON ) )
+				current_tab = gui::tabs::tab_index::CONFIG;
+		}
+	}
+
+	const color selected_a = color( 15, 15, 15, g_gui.main.alpha );
+	const color selected_b = color( 28, 28, 28, g_gui.main.alpha );
+
+	switch ( current_tab ) {
+		// c++ 20 thanks
+		using enum gui::tabs::tab_index;
+	case AIMBOT:
+		g_render.render_gradient< gradient_type_t::VERTICAL >( AIMBOT_TAB_BOUNDING, selected_a, selected_b );
+		g_render.render_filled_rectangle( AIMBOT_ACCENT_BOUNDING, g_cfg.as_color< configs::alpha_type::GUI_ALPHA >( _( "main_menu_color" ) ) );
+		break;
+	case VISUALS:
+		g_render.render_gradient< gradient_type_t::VERTICAL >( VISUALS_TAB_BOUNDING, selected_a, selected_b );
+		g_render.render_filled_rectangle( VISUALS_ACCENT_BOUNDING, g_cfg.as_color< configs::alpha_type::GUI_ALPHA >( _( "main_menu_color" ) ) );
+		break;
+	case MISC:
+		g_render.render_gradient< gradient_type_t::VERTICAL >( MISC_TAB_BOUNDING, selected_a, selected_b );
+		g_render.render_filled_rectangle( MISC_ACCENT_BOUNDING, g_cfg.as_color< configs::alpha_type::GUI_ALPHA >( _( "main_menu_color" ) ) );
+		break;
+	case SKINS:
+		g_render.render_gradient< gradient_type_t::VERTICAL >( SKINS_TAB_BOUNDING, selected_a, selected_b );
+		g_render.render_filled_rectangle( SKINS_ACCENT_BOUNDING, g_cfg.as_color< configs::alpha_type::GUI_ALPHA >( _( "main_menu_color" ) ) );
+		break;
+	case DEMOS:
+		g_render.render_gradient< gradient_type_t::VERTICAL >( DEMOS_TAB_BOUNDING, selected_a, selected_b );
+		g_render.render_filled_rectangle( DEMOS_ACCENT_BOUNDING, g_cfg.as_color< configs::alpha_type::GUI_ALPHA >( _( "main_menu_color" ) ) );
+		break;
+	case CONFIG:
+		g_render.render_gradient< gradient_type_t::VERTICAL >( CONFIG_TAB_BOUNDING, selected_a, selected_b );
+		g_render.render_filled_rectangle( CONFIG_ACCENT_BOUNDING, g_cfg.as_color< configs::alpha_type::GUI_ALPHA >( _( "main_menu_color" ) ) );
+		break;
 	}
 
 	for ( std::int32_t i = 0; i <= 5; i++ ) {
@@ -179,6 +265,4 @@ void gui::tabs::impl::think( )
 		g_render.render_text( final_position, font_alignment::AL_HORIZONTAL_CENTER, font_flags::FLAG_OUTLINE_SEMI, g_gui.tabs[ i ].data( ),
 		                      g_fonts[ HASH( "main_font" ) ], gui::pallete::white( ) );
 	}
-
-	handle_selection( );
 }
