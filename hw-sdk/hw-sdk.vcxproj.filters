@@ -383,7 +383,7 @@
     <ClInclude Include="hacks\gui\includes\includes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="hacks\gui\utils\utils.h">
+    <ClInclude Include="hacks\gui\utils\ui_utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="hacks\gui\cfg\cfg.h">

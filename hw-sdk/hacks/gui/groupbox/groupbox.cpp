@@ -1,6 +1,6 @@
 #include "groupbox.h"
 #include "../includes/includes.h"
-#include "../utils/utils.h"
+#include "../utils/ui_utils.h"
 
 void gui::groupbox::impl::invoke_groupbox( const std::string& name, const math::vec2< int >& pos, const math::vec2< int > size )
 {

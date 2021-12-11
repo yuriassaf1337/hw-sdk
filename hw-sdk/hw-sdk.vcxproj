@@ -331,7 +331,7 @@
     <ClInclude Include="hacks\gui\gui_ctx\gui_ctx.h" />
     <ClInclude Include="hacks\gui\gui.h" />
     <ClInclude Include="hacks\gui\includes\includes.h" />
-    <ClInclude Include="hacks\gui\utils\utils.h" />
+    <ClInclude Include="hacks\gui\utils\ui_utils.h" />
     <ClInclude Include="hacks\gui\window\window.h" />
     <ClInclude Include="hacks\logging\logging.h" />
     <ClInclude Include="hacks\prediction\prediction.h" />
