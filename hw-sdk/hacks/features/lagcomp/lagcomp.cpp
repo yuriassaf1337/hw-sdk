@@ -115,5 +115,8 @@ void lagcomp::impl::backtrack_player( sdk::c_cs_player* player )
 	if ( !closest_record )
 		return;
 
-	g_ctx.cmd->tick_count = sdk::time_to_ticks( closest_record->simulation_time ) + sdk::time_to_ticks( lerp_time( ) );
+	// https://github.com/perilouswithadollarsign/cstrike15_src/blob/master/game/server/player_lagcompensation.cpp#L287
+	// ty dalkr :3
+
+	g_ctx.cmd->tick_count = sdk::time_to_ticks( closest_record->simulation_time + lerp_time( ) );
 }
