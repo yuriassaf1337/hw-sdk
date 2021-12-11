@@ -120,7 +120,7 @@ namespace sdk
 
 		void restore_entity_to_predicted_frame( std::int32_t frame )
 		{
-			static auto pattern = g_client_dll.pattern_scan( _( "55 8B EC A1 ? ? ? ? 56 8B 75 08 83" ) ).as< void( __stdcall* )( int, int ) >( );
+			static auto pattern = g_client_dll.pattern_scan( _( "55 8B EC 8B 4D ? 56 8B C1 83 C0 ? 8B 75" ) ).as< void( __stdcall* )( int, int ) >( );
 
 			pattern( 0, frame );
 		}

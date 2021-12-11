@@ -7,4 +7,7 @@ void gui::groupbox::impl::invoke_groupbox( const std::string& name, const math::
 	// get groupbox id
 	const auto my_id = gui::helpers::hash( name );
 	m_id             = my_id;
+
+	math::vec2< int > cursor_pos = gui::helpers::pop_cursor( );
+	math::vec2< int > group_size{ };
 }
