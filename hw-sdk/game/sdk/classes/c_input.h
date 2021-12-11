@@ -37,9 +37,9 @@ namespace sdk
 		math::vec3 preview_view_angles_tilt;
 		float last_forward_move;
 		int clear_input_state;
-		PAD( 0x8 );
-		sdk::c_user_cmd* m_pCommands;
-		sdk::c_verified_cmd* m_pVerifiedCommands;
+		PAD( 0x18 );
+		sdk::c_user_cmd* commands;
+		sdk::c_verified_cmd* verified_commands;
 
 		inline sdk::c_user_cmd* get_user_cmd( int slot, int sequence_number );
 		inline sdk::c_verified_cmd* get_verified_cmd( int sequence_number );
