@@ -138,6 +138,9 @@
     <ClCompile Include="hacks\gui\utils\ui_utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="hacks\features\visuals\visuals.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals\includes\includes.h">
@@ -576,6 +579,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="hacks\gui\groupbox\groupbox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\features\visuals\visuals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
