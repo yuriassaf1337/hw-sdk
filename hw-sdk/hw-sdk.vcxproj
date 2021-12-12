@@ -254,6 +254,7 @@
     <ClInclude Include="game\sdk\classes\c_usercmd.h" />
     <ClInclude Include="game\sdk\classes\c_verified_cmd.h" />
     <ClInclude Include="game\sdk\classes\c_view_setup.h" />
+    <ClInclude Include="game\sdk\classes\i_collideable.h" />
     <ClInclude Include="game\sdk\classes\i_cvar.h" />
     <ClInclude Include="game\sdk\classes\i_client_networkable.h" />
     <ClInclude Include="game\sdk\classes\i_client_renderable.h" />

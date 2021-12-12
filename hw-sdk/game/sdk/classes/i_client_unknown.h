@@ -11,9 +11,11 @@ struct c_base_entity;
 
 namespace sdk
 {
+	struct i_collideable;
+
 	struct i_client_unknown : public i_handle_entity {
 	public:
-		virtual std::uintptr_t* get_collideable( )              = 0;
+		virtual i_collideable* get_collideable( )               = 0;
 		virtual i_client_networkable* get_client_networkable( ) = 0;
 		virtual i_client_renderable* get_client_renderable( )   = 0;
 		virtual i_client_entity* get_i_client_entity( )         = 0;

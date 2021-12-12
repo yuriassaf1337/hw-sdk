@@ -56,6 +56,8 @@ namespace math
 
 		constexpr vec3( float _x = 0, float _y = 0, float _z = 0 ) : x( _x ), y( _y ), z( _z ){ };
 
+		constexpr vec3( float* _fp ) : x( _fp[ 0 ] ), y( _fp[ 1 ] ), z( _fp[ 2 ] ){ };
+
 		bool valid( ) const
 		{
 			return std::isfinite( this->x ) && std::isfinite( this->y ) && std::isfinite( this->z );

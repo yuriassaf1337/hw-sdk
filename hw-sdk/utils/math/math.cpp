@@ -50,6 +50,16 @@ constexpr float math::deg2rad( const float x )
 	return x * ( math::util::pi_f / 180.f );
 }
 
+math::vec3 math::vector_transform( vec3 vector, matrix_3x4 matrix )
+{
+	vec3 output{ };
+
+	for ( int iterator = 0; iterator < 3; iterator++ )
+		output[ iterator ] = vector.dot_product( matrix[ iterator ] ) + matrix[ iterator ][ 3 ];
+
+	return output;
+}
+
 math::vec3 math::matrix_position( const math::matrix_3x4& src )
 {
 	return { src[ 0 ][ 3 ], src[ 1 ][ 3 ], src[ 2 ][ 3 ] };

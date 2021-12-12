@@ -48,3 +48,31 @@ math::vec2< int > utils::world_to_screen( math::vec3 position )
 
 	return math::vec2< int >( static_cast< int >( screen.x ), static_cast< int >( screen.y ) );
 }
+
+math::vec2< int > utils::world_to_screen( math::vec3 position, bool& on_screen )
+{
+	on_screen = true;
+
+	auto matrix = g_ctx.view_matrix;
+	float width = matrix[ 3 ][ 0 ] * position.x + matrix[ 3 ][ 1 ] * position.y + matrix[ 3 ][ 2 ] * position.z + matrix[ 3 ][ 3 ];
+
+	if ( width < 0.001f ) {
+		on_screen = false;
+
+		return math::vec2< int >( -1, -1 );
+	}
+
+	float inverse = 1.f / width;
+
+	math::vec2< float > screen;
+
+	screen.x = ( matrix[ 0 ][ 0 ] * position.x + matrix[ 0 ][ 1 ] * position.y + matrix[ 0 ][ 2 ] * position.z + matrix[ 0 ][ 3 ] ) * inverse;
+	screen.y = ( matrix[ 1 ][ 0 ] * position.x + matrix[ 1 ][ 1 ] * position.y + matrix[ 1 ][ 2 ] * position.z + matrix[ 1 ][ 3 ] ) * inverse;
+
+	auto screen_size = g_ctx.screen_size;
+
+	screen.x = ( screen_size.x * 0.5f ) + ( screen.x * screen_size.x ) * 0.5f;
+	screen.y = ( screen_size.y * 0.5f ) - ( screen.y * screen_size.y ) * 0.5f;
+
+	return math::vec2< int >( static_cast< int >( screen.x ), static_cast< int >( screen.y ) );
+}

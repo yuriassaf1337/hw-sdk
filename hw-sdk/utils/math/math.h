@@ -75,6 +75,8 @@ namespace math
 	constexpr float rad2deg( const float x );
 	constexpr float deg2rad( const float x );
 
+	vec3 vector_transform( vec3 vector, matrix_3x4 matrix );
+
 } // namespace math
 
 #include "math.inl"
