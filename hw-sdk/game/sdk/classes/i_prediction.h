@@ -83,21 +83,21 @@ namespace sdk
 		virtual void initialize( void ) = 0;
 		virtual void shutdown( void )   = 0;
 
-		virtual void update( int start_frame, bool valid_frame, int incoming_ack, int outgoing_command ) = 0;
-		virtual void pre_entity_packet_recieved( int commands_ack, int current_world_update_packet )     = 0;
-		virtual void post_entity_packet_recieved( void )                                                 = 0;
-		virtual void post_network_data_recieved( int commands_ack )                                      = 0;
-		virtual void on_recieve_uncompressed_packet( void )                                              = 0;
-		virtual void get_view_origin( math::vec3& origin )                                               = 0;
-		virtual void set_view_origin( math::vec3& origin )                                               = 0;
-		virtual void get_view_angles( math::vec3& angles )                                               = 0;
-		virtual void set_view_angles( math::vec3& angles )                                               = 0;
-		virtual void get_local_view_angles( math::vec3& angles )                                         = 0;
-		virtual void set_local_view_angles( math::vec3& angles )                                         = 0;
-		virtual bool in_prediction( void ) const;
-		virtual bool is_first_time_predicted( void ) const;
-		virtual int get_last_ack_command_number( void ) const;
-		virtual int get_incoming_packet_number( void ) const;
+		virtual void update( int start_frame, bool valid_frame, int incoming_ack, int outgoing_command )                      = 0;
+		virtual void pre_entity_packet_recieved( int commands_ack, int current_world_update_packet )                          = 0;
+		virtual void post_entity_packet_recieved( void )                                                                      = 0;
+		virtual void post_network_data_recieved( int commands_ack )                                                           = 0;
+		virtual void on_recieve_uncompressed_packet( void )                                                                   = 0;
+		virtual void get_view_origin( math::vec3& origin )                                                                    = 0;
+		virtual void set_view_origin( math::vec3& origin )                                                                    = 0;
+		virtual void get_view_angles( math::vec3& angles )                                                                    = 0;
+		virtual void set_view_angles( math::vec3& angles )                                                                    = 0;
+		virtual void get_local_view_angles( math::vec3& angles )                                                              = 0;
+		virtual void set_local_view_angles( math::vec3& angles )                                                              = 0;
+		virtual bool in_prediction( void ) const                                                                              = 0;
+		virtual bool is_first_time_predicted( void ) const                                                                    = 0;
+		virtual int get_last_ack_command_number( void ) const                                                                 = 0;
+		virtual int get_incoming_packet_number( void ) const                                                                  = 0;
 		virtual void check_moving_ground( sdk::c_base_player* player, double frame_time )                                     = 0;
 		virtual void run_command( sdk::c_base_player* player, c_user_cmd* cmd, i_move_helper* move_helper )                   = 0;
 		virtual void setup_move( sdk::c_base_player* player, c_user_cmd* cmd, i_move_helper* move_helper, move_data_t* data ) = 0;
@@ -126,10 +126,10 @@ namespace sdk
 		}
 
 		PAD( 8 );
-		bool in_prediction_var;
-		bool old_cl_predict_value;
-		bool engine_paused;
+		bool m_in_prediction;
+		bool m_old_cl_predict_value;
+		bool m_engine_paused;
 		PAD( 13 );
-		bool is_first_time_predicted_var;
+		bool m_is_first_time_predicted;
 	};
 } // namespace sdk

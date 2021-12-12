@@ -1,12 +1,12 @@
 #pragma once
-#include "../../../utils/math/math.h"
+#include "../includes/includes.h"
 #include <map>
 #include <string>
 
 namespace gui::groupbox
 {
 	struct impl {
-		void invoke_groupbox( const std::string& name, const math::vec2< int >& pos, const math::vec2< int > size );
+		void invoke_groupbox( const std::string& name, const math::vec2< int > size );
 		void end_groupbox( );
 
 	private:
@@ -21,3 +21,5 @@ namespace gui::groupbox
 		std::map< std::size_t, std::pair< float, bool > > m_should_scroll;
 	};
 } // namespace gui::groupbox
+
+inline gui::groupbox::impl g_groupbox;

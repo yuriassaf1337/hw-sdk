@@ -31,11 +31,14 @@ void prediction::impl::start( sdk::c_base_player* player )
 	reset_vars.current_time = g_interfaces.globals->current_time;
 	reset_vars.frame_time   = g_interfaces.globals->frame_time;
 
-	g_interfaces.globals->current_time = sdk::ticks_to_time( player->tick_base( ) );
-	g_interfaces.globals->frame_time   = g_interfaces.prediction->engine_paused ? 0 : g_interfaces.globals->interval_per_tick;
+	m_backup_is_first_time_predicted = g_interfaces.prediction->m_is_first_time_predicted;
+	m_backup_in_prediction           = g_interfaces.prediction->m_in_prediction;
 
-	m_backup_is_first_time_predicted = g_interfaces.prediction->is_first_time_predicted_var;
-	m_backup_in_prediction           = g_interfaces.prediction->in_prediction_var;
+	g_interfaces.prediction->m_in_prediction           = true;
+	g_interfaces.prediction->m_is_first_time_predicted = false;
+
+	g_interfaces.globals->current_time = sdk::ticks_to_time( player->tick_base( ) );
+	g_interfaces.globals->frame_time   = g_interfaces.prediction->m_engine_paused ? 0 : g_interfaces.globals->interval_per_tick;
 
 	g_interfaces.game_movement->start_track_prediction_errors( player );
 
@@ -66,8 +69,9 @@ void prediction::impl::start( sdk::c_base_player* player )
 	player->post_think( );
 	g_ctx.running_post_think = false;
 
-	player->tick_base( ) = reset_vars.tick_base;
-
+	player->tick_base( )                               = reset_vars.tick_base;
+	g_interfaces.prediction->m_is_first_time_predicted = m_backup_is_first_time_predicted;
+	g_interfaces.prediction->m_in_prediction           = m_backup_in_prediction;
 	// player->adjust_player_timebase( simulation_ticks );
 }
 

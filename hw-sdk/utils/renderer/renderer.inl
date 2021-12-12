@@ -3,7 +3,8 @@
 template< auto gradient_type >
 void render::impl::render_gradient( int x, int y, int width, int height, color from, color to )
 {
-	DEVICE_SAFETY( );
+	if ( !render::device )
+		return;
 	
 	struct vertex_mod
 	{
@@ -19,7 +20,7 @@ void render::impl::render_gradient( int x, int y, int width, int height, color f
 	};
 
 	device->SetTexture( 0, nullptr );
-	FAIL_CHECK( device->DrawPrimitiveUP( D3DPT_TRIANGLESTRIP, 2, &verts, 20 ) );
+	device->DrawPrimitiveUP( D3DPT_TRIANGLESTRIP, 2, &verts, 20 );
 }
 
 template< auto gradient_type, class T >
@@ -50,6 +51,9 @@ void render::impl::render_text( const math::vec2< T >& pos, unsigned int alignme
 template< class T >
 void render::impl::quadratic_curve( const math::vec2< T >& start, const math::vec2< T >& control, const math::vec2< T >& end, color color )
 {
+	if ( !render::device )
+		return;
+
 	float iterator      = 0.01;
 	const auto segments = 1 / iterator;
 	static auto verts   = static_cast< vertex* >( _malloca( sizeof( vertex ) * ( segments + 2 ) ) );
@@ -86,5 +90,5 @@ void render::impl::quadratic_curve( const math::vec2< T >& start, const math::ve
 	}
 
 	device->SetTexture( 0, nullptr );
-	FAIL_CHECK( device->DrawPrimitiveUP( D3DPT_LINESTRIP, segments, verts, 20 ) );
+	device->DrawPrimitiveUP( D3DPT_LINESTRIP, segments, verts, 20 );
 }

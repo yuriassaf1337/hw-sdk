@@ -1,4 +1,5 @@
 #include "gui.h"
+#include "groupbox/groupbox.h"
 #include "window/window.h"
 
 void gui::impl::draw( )
@@ -8,6 +9,7 @@ void gui::impl::draw( )
 
 	// begin main window
 	if ( g_window.invoke_window( _( "hotwheels" ) ) ) {
+		g_groupbox.invoke_groupbox( _( "Test" ), { 200, 100 } );
 		g_window.end_window( );
 	}
 }
