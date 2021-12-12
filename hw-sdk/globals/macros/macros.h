@@ -62,18 +62,6 @@ public:
 #define GETBITS( x )       ( INRANGE( ( x & ( ~0x20 ) ), 'A', 'F' ) ? ( ( x & ( ~0x20 ) ) - 'A' + 0xA ) : ( INRANGE( x, '0', '9' ) ? x - '0' : 0 ) )
 #define GETBYTES( x )      ( GETBITS( x[ 0 ] ) << 4 | GETBITS( x[ 1 ] ) )
 
-// [#] rendering utils
-
-#define DEVICE_SAFETY( )                                                                                                                             \
-	if ( !render::device ) {                                                                                                                         \
-		assert( _( "Forgot to initialize device?" ) );                                                                                               \
-		return;                                                                                                                                      \
-	}
-
-#define FAIL_CHECK( return_code )                                                                                                                    \
-	if ( FAILED( return_code ) )                                                                                                                     \
-		console::print< console::log_level::FATAL >( _( "Function '{}' failed." ), __func__ );
-
 // [#] hooking utils
 
 #define CREATE_HOOK_HELPER( name, args ) inline hook_helper< args > name;

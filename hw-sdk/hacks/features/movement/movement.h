@@ -7,9 +7,9 @@ namespace movement
 {
 	enum edgebug_type : int
 	{
-		standing = 0,
-		ducking,
-		onetick
+		STANDING = 0,
+		DUCKING,
+		ONETICK
 	};
 
 	struct impl {

@@ -4,6 +4,16 @@
 #include "../console/console.h"
 #include "renderer.h"
 
+#define DEVICE_SAFETY( )                                                                                                                             \
+	if ( !render::device ) {                                                                                                                         \
+		assert( _( "Forgot to initialize device?" ) );                                                                                               \
+		return;                                                                                                                                      \
+	}
+
+#define FAIL_CHECK( return_code )                                                                                                                    \
+	if ( FAILED( return_code ) )                                                                                                                     \
+		console::print< console::log_level::FATAL >( _( "Function '{}' failed." ), __func__ );
+
 void render::impl::init( IDirect3DDevice9* buffer_device )
 {
 	render::device = buffer_device;
