@@ -15,24 +15,22 @@ void gui::groupbox::impl::invoke_groupbox( const std::string& name, const math::
 	float m_width{ static_cast< float >( size.x ) / 100.f };
 	float m_height{ static_cast< float >( size.y ) / 100.f };
 
-	struct {
-		int width_available  = g_gui.size.x - 47;
-		int height_available = g_gui.size.y - 110;
-	} data;
+	int width_available  = g_gui.size.x - 110;
+	int height_available = g_gui.size.y - 120;
 
 	if ( cursor_pos.x == 16 && m_width == 1.0f )
-		data.width_available += 15;
+		width_available += 15;
 
-	group_size.x = static_cast< int >( data.width_available * m_width );
+	group_size.x = static_cast< int >( width_available * m_width );
 
 	if ( cursor_pos.y == 46 && m_height == 1.0f )
-		data.height_available += 15;
+		height_available += 15;
 
-	group_size.y = static_cast< int >( data.height_available * m_height );
+	group_size.y = static_cast< int >( height_available * m_height );
 
 	if ( ( cursor_pos.y - 15 + group_size.y ) > g_gui.size.y - 15 ) {
-		cursor_pos.x += group_size.x + 15;
-		cursor_pos.y = 46;
+		cursor_pos.x += group_size.x + 40;
+		cursor_pos.y = 80;
 
 		gui::helpers::push_cursor( cursor_pos );
 		gui::groupbox::impl::invoke_groupbox( name, size );
