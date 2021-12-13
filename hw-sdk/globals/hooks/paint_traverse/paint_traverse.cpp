@@ -1,4 +1,5 @@
 #include "paint_traverse.h"
+#include "../../../hacks/features/visuals/visuals.h"
 #include "../../../hacks/logging/logging.h"
 #include "../../ctx/ctx.h"
 
@@ -17,6 +18,23 @@ void __fastcall hooks::paint_traverse::paint_traverse_detour( sdk::i_panel* self
 	}
 
 	g_ctx.view_matrix = g_interfaces.engine->world_to_screen_matrix( );
+
+	for ( auto& player : g_entity_list.players ) {
+		visuals::esp_object& object = g_visuals.esp_objects[ player->entity_index( ) ];
+
+		if ( !object.owner )
+			continue;
+
+		auto collideable = object.owner->get_collideable( );
+
+		if ( !collideable )
+			continue;
+
+		object.box.mins = collideable->obb_mins( );
+		object.box.maxs = collideable->obb_maxs( );
+
+		object.box.rgfl = object.owner->rgfl_coordinate_frame( );
+	}
 
 	return hooks::paint_traverse_hook.call_original< void >( self, edx, panel, force_repaint, allow_force );
 }

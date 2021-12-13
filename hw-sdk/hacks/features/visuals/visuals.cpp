@@ -1,16 +1,11 @@
 #include "visuals.h"
 
-math::vec4 visuals::impl::calculate_box( sdk::c_cs_player* player )
+math::vec4 visuals::esp_box::calculate_box( sdk::c_cs_player* player )
 {
-	sdk::i_collideable* collideable = player->get_collideable( );
+	math::vec3 mins = this->mins;
+	math::vec3 maxs = this->maxs;
 
-	if ( !collideable )
-		return { };
-
-	math::vec3 mins = collideable->obb_mins( );
-	math::vec3 maxs = collideable->obb_maxs( );
-
-	math::matrix_3x4 transform = player->rgfl_coordinate_frame( );
+	math::matrix_3x4 transform = this->rgfl;
 
 	math::vec3 points[] = { math::vec3( mins.x, mins.y, mins.z ), math::vec3( mins.x, maxs.y, mins.z ), math::vec3( maxs.x, maxs.y, mins.z ),
 		                    math::vec3( maxs.x, mins.y, mins.z ), math::vec3( maxs.x, maxs.y, maxs.z ), math::vec3( mins.x, maxs.y, maxs.z ),
@@ -50,19 +45,50 @@ math::vec4 visuals::impl::calculate_box( sdk::c_cs_player* player )
 			bottom = screen_points[ iterator ].y;
 	}
 
-	return { left, top, right, bottom };
+	return math::vec4( left, top, right, bottom );
 }
 
-void visuals::impl::add_box( esp_object& object )
+void visuals::impl::update_box( esp_object& object )
 {
 	object.box.cornered = false;
 	object.box.outline  = true;
-	object.box._color   = color( 255, 255, 255, 255 );
+	object.box._color.r = 255;
+	object.box._color.g = 255;
+	object.box._color.b = 255;
+	object.box._color.a = 255;
 }
 
-void visuals::impl::update( ) 
+void visuals::impl::update( )
 {
-	
+	for ( auto& player : g_entity_list.players ) {
+		esp_object& buffer_object = esp_objects[ player->entity_index( ) ];
+
+		buffer_object.owner = player;
+
+		if ( true )
+			update_box( buffer_object );
+	}
 }
 
-void visuals::impl::render( ) { }
+void visuals::impl::render( )
+{
+	for ( auto& player : g_entity_list.players ) {
+		esp_object& object = esp_objects[ player->entity_index( ) ];
+
+		object.box.render( player );
+	}
+}
+
+void visuals::esp_box::render( sdk::c_cs_player* owner )
+{
+	auto dimensions = calculate_box( owner );
+	auto position   = math::vec2< int >( static_cast< int >( dimensions.x ), static_cast< int >( dimensions.y ) );
+	auto size       = math::vec2< int >( static_cast< int >( dimensions.z ), static_cast< int >( dimensions.w ) ) - position;
+
+	 if ( this->outline ) {
+		g_render.render_rectangle< int >( position - math::vec2< int >( 1, 1 ), size + math::vec2< int >( 2, 2 ), color( 0, 0, 0, this->_color.a ) );
+		g_render.render_rectangle< int >( position + math::vec2< int >( 1, 1 ), size - math::vec2< int >( 2, 2 ), color( 0, 0, 0, this->_color.a ) );
+	 }
+
+	g_render.render_rectangle< int >( position, size, this->_color );
+}

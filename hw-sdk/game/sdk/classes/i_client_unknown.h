@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "i_handle_entity.h"
+#include "i_collideable.h"
 
 struct i_client_networkable;
 struct i_client_renderable;
@@ -11,8 +12,6 @@ struct c_base_entity;
 
 namespace sdk
 {
-	struct i_collideable;
-
 	struct i_client_unknown : public i_handle_entity {
 	public:
 		virtual i_collideable* get_collideable( )               = 0;

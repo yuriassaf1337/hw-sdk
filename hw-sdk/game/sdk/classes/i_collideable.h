@@ -1,7 +1,6 @@
 #pragma once
 #include "../../../utils/math/types/matrix.h"
 #include "../../../utils/math/types/vector.h"
-#include "i_client_unknown.h"
 #include "i_engine_trace.h"
 #include "i_handle_entity.h"
 
@@ -10,6 +9,7 @@ namespace sdk
 	struct trace_t;
 	struct model_t;
 	struct i_physics_object;
+	struct i_client_unknown;
 
 	enum solid_type_t;
 

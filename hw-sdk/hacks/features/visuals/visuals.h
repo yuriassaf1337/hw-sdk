@@ -4,34 +4,51 @@
 #include "../../../game/sdk/classes/i_collideable.h"
 #include "../../../game/sdk/include.h"
 #include "../../../globals/includes/includes.h"
+#include "../../../utils/entity_list/entity_list.h"
+#include "../../../utils/renderer/renderer.h"
+
+#include <deque>
 
 namespace visuals
 {
 	struct esp_box {
+	private:
+		math::vec4 calculate_box( sdk::c_cs_player* player );
+
 	public:
+		void render( sdk::c_cs_player* owner );
+
 		bool outline;
 		bool cornered;
 
 		color _color;
+
+		math::vec3 mins;
+		math::vec3 maxs;
+
+		math::matrix_3x4 rgfl;
 	};
 
 	struct esp_object {
 	public:
+		esp_object( ){ };
+		esp_object( sdk::c_cs_player* owner ) : owner( owner ){ };
+
+		sdk::c_cs_player* owner;
+
 		esp_box box;
 	};
 
 	struct impl {
 	private:
-		math::vec4 calculate_box( sdk::c_cs_player* player );
-		void add_box( esp_object& object );
+		void update_box( esp_object& object );
 
 	public:
-		// Personally I feel like this is the best way to do it as if we did a shitty std::vector and used an iterator it would use too
-		// Much cpu to the point where having esp in general would just be a waste. I experienced this on my TF2 cheat and had aids fps.
-
 		std::array< esp_object, 65 > esp_objects;
 
 		void update( );
 		void render( );
 	};
 } // namespace visuals
+
+inline visuals::impl g_visuals;

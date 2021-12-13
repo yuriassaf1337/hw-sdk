@@ -10,6 +10,7 @@
 
 #include "../../../game/sdk/enums/frame_stage.h"
 #include "../../../hacks/features/lagcomp/lagcomp.h"
+#include "../../../hacks/features/visuals/visuals.h"
 #include "../../../utils/entity_list/entity_list.h"
 
 namespace hooks
