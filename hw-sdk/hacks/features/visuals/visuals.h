@@ -11,6 +11,12 @@
 
 namespace visuals
 {
+	// Welcome to the great wall of esp. I have designed this as a nice object oriented way to
+	// Do esp or visuals. If you want to create a new object follow the esp_box struct exactly.
+	// Make a render function, all helper functions must be private! If they use rgfl matrix or
+	// Use any function that relies i_collidable update them in paint like I do with esp_box rgfl.
+	// This is an issue with CS:GO and multicore rendering and I plan on having more than 2 FPS.
+
 	struct esp_box {
 	private:
 		math::vec4 calculate_box( sdk::c_cs_player* player );
