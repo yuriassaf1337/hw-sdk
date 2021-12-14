@@ -29,11 +29,11 @@ namespace visuals
 	public:
 		void render( math::box box );
 
-		std::string text;
+		std::string m_text;
 
-		color _color;
+		color m_color;
 
-		esp_title_location location;
+		esp_title_location m_location;
 	};
 
 	struct esp_box {
@@ -43,29 +43,29 @@ namespace visuals
 	public:
 		void render( sdk::c_cs_player* owner );
 
-		bool outline[ 2 ]; // 0 = outside, 1 = inside.
-		bool cornered;
+		bool m_outline[ 2 ]; // 0 = outside, 1 = inside.
+		bool m_cornered;
 
-		color _color;
+		color m_color;
 
-		math::vec3 mins;
-		math::vec3 maxs;
+		math::vec3 m_mins;
+		math::vec3 m_maxs;
 
-		math::matrix_3x4 rgfl;
+		math::matrix_3x4 m_rgfl;
 
-		bool draw;
+		bool m_draw;
 
-		std::deque< esp_title > titles;
+		std::deque< esp_title > m_titles;
 	};
 
 	struct esp_object {
 	public:
 		esp_object( ) = default;
-		esp_object( sdk::c_cs_player* owner ) : owner( owner ){ };
+		esp_object( sdk::c_cs_player* owner ) : m_owner( owner ){ };
 
-		sdk::c_cs_player* owner;
+		sdk::c_cs_player* m_owner;
 
-		esp_box box;
+		esp_box m_box;
 	};
 
 	struct impl {
