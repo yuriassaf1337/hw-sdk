@@ -6,7 +6,7 @@
 namespace gui::groupbox
 {
 	struct impl {
-		void invoke_groupbox( const std::string& name, const math::vec2< int > size );
+		void invoke_groupbox( const std::string& name, const math::vec2< int > pos, const math::vec2< int > size );
 		void end_groupbox( );
 
 	private:

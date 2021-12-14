@@ -9,7 +9,7 @@ void gui::impl::draw( )
 
 	// begin main window
 	if ( g_window.invoke_window( _( "hotwheels" ) ) ) {
-		g_groupbox.invoke_groupbox( _( "Test" ), { 100, 70 } );
+		g_groupbox.invoke_groupbox( _( "Test" ), { 0, 0 }, { 90, 100 } );
 		g_window.end_window( );
 	}
 }
