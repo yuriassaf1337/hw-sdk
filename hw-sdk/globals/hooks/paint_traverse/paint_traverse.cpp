@@ -22,18 +22,18 @@ void __fastcall hooks::paint_traverse::paint_traverse_detour( sdk::i_panel* self
 	for ( auto& player : g_entity_list.players ) {
 		visuals::esp_object& object = g_visuals.esp_objects[ player->entity_index( ) ];
 
-		if ( !object.owner )
+		if ( !object.m_owner )
 			continue;
 
-		auto collideable = object.owner->get_collideable( );
+		auto collideable = object.m_owner->get_collideable( );
 
 		if ( !collideable )
 			continue;
 
-		object.box.mins = collideable->obb_mins( );
-		object.box.maxs = collideable->obb_maxs( );
+		object.m_box.m_mins = collideable->obb_mins( );
+		object.m_box.m_maxs = collideable->obb_maxs( );
 
-		object.box.rgfl = object.owner->rgfl_coordinate_frame( );
+		object.m_box.m_rgfl = object.m_owner->rgfl_coordinate_frame( );
 	}
 
 	hooks::paint_traverse_hook.call_original< void >( self, edx, panel, force_repaint, allow_force );

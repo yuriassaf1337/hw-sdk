@@ -29,11 +29,11 @@ namespace visuals
 	public:
 		void render( math::box box );
 
-		std::string m_text;
+		std::string m_text{ };
 
-		color m_color;
+		color m_color{ };
 
-		esp_title_location m_location;
+		esp_title_location m_location{ };
 	};
 
 	struct esp_box {
@@ -43,19 +43,19 @@ namespace visuals
 	public:
 		void render( sdk::c_cs_player* owner );
 
-		bool m_outline[ 2 ]; // 0 = outside, 1 = inside.
-		bool m_cornered;
+		bool m_outline[ 2 ]{ }; // 0 = outside, 1 = inside.
+		bool m_cornered{ };
 
-		color m_color;
+		color m_color{ };
 
-		math::vec3 m_mins;
-		math::vec3 m_maxs;
+		math::vec3 m_mins{ };
+		math::vec3 m_maxs{ };
 
-		math::matrix_3x4 m_rgfl;
+		math::matrix_3x4 m_rgfl{ };
 
-		bool m_draw;
+		bool m_draw{ };
 
-		std::deque< esp_title > m_titles;
+		std::deque< esp_title > m_titles{ };
 	};
 
 	struct esp_object {
@@ -63,9 +63,9 @@ namespace visuals
 		esp_object( ) = default;
 		esp_object( sdk::c_cs_player* owner ) : m_owner( owner ){ };
 
-		sdk::c_cs_player* m_owner;
+		sdk::c_cs_player* m_owner{ };
 
-		esp_box m_box;
+		esp_box m_box{ };
 	};
 
 	struct impl {
@@ -73,12 +73,12 @@ namespace visuals
 		void update_box( esp_object& object );
 
 	public:
-		std::array< esp_object, 65 > esp_objects;
+		std::array< esp_object, 65 > esp_objects{ };
 
 		void update( );
 		void render( );
 
-		bool HEYIMDRAWINHERE; // dream please don't remove drain gang $$$$$$
+		bool HEYIMDRAWINHERE{ }; // dream please don't remove drain gang $$$$$$
 	};
 } // namespace visuals
 
