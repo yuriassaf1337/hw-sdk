@@ -53,7 +53,13 @@ math::vec2< int > utils::world_to_screen( math::vec3 position, bool& on_screen )
 {
 	on_screen = true;
 
-	auto matrix = g_ctx.view_matrix;
+	const auto matrix = g_ctx.view_matrix;
+	// not really needed but prevents useless math to be done
+	if ( !matrix.data ) {
+		on_screen = false;
+		return { };
+	}
+
 	float width = matrix[ 3 ][ 0 ] * position.x + matrix[ 3 ][ 1 ] * position.y + matrix[ 3 ][ 2 ] * position.z + matrix[ 3 ][ 3 ];
 
 	if ( width < 0.001f ) {
