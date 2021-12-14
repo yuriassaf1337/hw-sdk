@@ -16,7 +16,12 @@ sdk::c_cs_player* aimbot::impl::find_closest( )
 
 	math::vec3 local_angles = g_interfaces.engine->get_view_angles( );
 
-	for ( auto& player : g_entity_list.players ) {
+	for ( auto& player_info : g_entity_list.players ) {
+		auto player = g_interfaces.entity_list->get_client_entity< sdk::c_cs_player* >( player_info.m_index );
+
+		if ( !player_info.m_valid || !player )
+			continue;
+
 		auto player_fov = math::get_fov( local_angles, g_ctx.local->eye_position( ), player->eye_position( ) );
 
 		if ( player_fov < closest_fov ) {

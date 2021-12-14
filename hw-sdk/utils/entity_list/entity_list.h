@@ -8,8 +8,22 @@
 
 namespace entity_list
 {
+	struct player_info {
+	public:
+		std::string m_name;
+
+		math::vec3 m_mins{ };
+		math::vec3 m_maxs{ };
+
+		math::matrix_3x4 m_rgfl{ };
+
+		int m_index{ };
+
+		bool m_valid{ };
+	};
+
 	struct impl {
-		std::vector< sdk::c_cs_player* > players;
+		std::array< player_info, 65 > players;
 
 		void update( );
 	};

@@ -46,8 +46,10 @@ void lagcomp::impl::update( )
 	auto sv_maxunlag          = unlag_pointer->get_float( );
 	auto sv_maxunlag_ticks    = sdk::time_to_ticks( sv_maxunlag );
 
-	for ( auto& player : g_entity_list.players ) {
-		if ( player->gun_game_immunity( ) )
+	for ( auto& player_info : g_entity_list.players ) {
+		auto player = g_interfaces.entity_list->get_client_entity< sdk::c_cs_player* >( player_info.m_index );
+
+		if ( !player_info.m_valid || !player )
 			continue;
 
 		auto& current_heap_iterator = heap_iterator[ player->entity_index( ) ];

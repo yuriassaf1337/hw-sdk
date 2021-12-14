@@ -2,10 +2,12 @@
 
 math::box visuals::esp_box::calculate_box( sdk::c_cs_player* player )
 {
-	math::vec3 mins = m_mins;
-	math::vec3 maxs = m_maxs;
+	auto& player_info = g_entity_list.players[ player->entity_index( ) ];
 
-	math::matrix_3x4 transform = m_rgfl;
+	math::vec3 mins = player_info.m_mins;
+	math::vec3 maxs = player_info.m_maxs;
+
+	math::matrix_3x4 transform = player_info.m_rgfl;
 
 	math::vec3 points[] = { math::vec3( mins.x, mins.y, mins.z ), math::vec3( mins.x, maxs.y, mins.z ), math::vec3( maxs.x, maxs.y, mins.z ),
 		                    math::vec3( maxs.x, mins.y, mins.z ), math::vec3( maxs.x, maxs.y, maxs.z ), math::vec3( mins.x, maxs.y, maxs.z ),
@@ -54,10 +56,11 @@ void visuals::impl::update_box( esp_object& object )
 	object.m_box.m_outline[ 0 ] = true;
 	object.m_box.m_outline[ 1 ] = true;
 	object.m_box.m_draw         = false;
-	object.m_box.m_color.r      = 255;
-	object.m_box.m_color.g      = 255;
-	object.m_box.m_color.b      = 255;
-	object.m_box.m_color.a      = 255;
+
+	object.m_box.m_color.r = 255;
+	object.m_box.m_color.g = 255;
+	object.m_box.m_color.b = 255;
+	object.m_box.m_color.a = 255;
 
 	object.m_box.m_titles.clear( );
 
@@ -75,7 +78,12 @@ void visuals::impl::update_box( esp_object& object )
 
 void visuals::impl::update( )
 {
-	for ( auto player : g_entity_list.players ) {
+	for ( auto& player_info : g_entity_list.players ) {
+		auto player = g_interfaces.entity_list->get_client_entity< sdk::c_cs_player* >( player_info.m_index );
+
+		if ( !player_info.m_valid || !player )
+			continue;
+
 		esp_object& buffer_object = esp_objects[ player->entity_index( ) ];
 
 		buffer_object.m_owner = player;
@@ -87,10 +95,10 @@ void visuals::impl::update( )
 
 void visuals::impl::render( )
 {
-	HEYIMDRAWINHERE = true;
+	for ( auto& player_info : g_entity_list.players ) {
+		auto player = g_interfaces.entity_list->get_client_entity< sdk::c_cs_player* >( player_info.m_index );
 
-	for ( auto player : g_entity_list.players ) {
-		if ( !player )
+		if ( !player_info.m_valid || !player )
 			continue;
 
 		esp_object& object = esp_objects[ player->entity_index( ) ];
@@ -99,8 +107,6 @@ void visuals::impl::render( )
 
 		object.m_box.render( player );
 	}
-
-	HEYIMDRAWINHERE = false;
 }
 
 void visuals::esp_box::render( sdk::c_cs_player* owner )

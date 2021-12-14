@@ -48,11 +48,6 @@ namespace visuals
 
 		color m_color{ };
 
-		math::vec3 m_mins{ };
-		math::vec3 m_maxs{ };
-
-		math::matrix_3x4 m_rgfl{ };
-
 		bool m_draw{ };
 
 		std::deque< esp_title > m_titles{ };

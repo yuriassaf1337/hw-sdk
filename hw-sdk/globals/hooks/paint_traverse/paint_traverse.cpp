@@ -17,10 +17,15 @@ void __fastcall hooks::paint_traverse::paint_traverse_detour( sdk::i_panel* self
 
 	g_ctx.view_matrix = g_interfaces.engine->world_to_screen_matrix( );
 
-	for ( auto& player : g_entity_list.players ) {
+	for ( auto& player_info : g_entity_list.players ) {
+		auto player = g_interfaces.entity_list->get_client_entity< sdk::c_cs_player* >( player_info.m_index );
+
+		if ( !player_info.m_valid || !player )
+			continue;
+
 		visuals::esp_object& object = g_visuals.esp_objects[ player->entity_index( ) ];
 
-		if ( !object.m_owner )
+		if ( object.m_owner != player )
 			continue;
 
 		auto collideable = object.m_owner->get_collideable( );
@@ -28,10 +33,10 @@ void __fastcall hooks::paint_traverse::paint_traverse_detour( sdk::i_panel* self
 		if ( !collideable )
 			continue;
 
-		object.m_box.m_mins = collideable->obb_mins( );
-		object.m_box.m_maxs = collideable->obb_maxs( );
+		player_info.m_mins = collideable->obb_mins( );
+		player_info.m_maxs = collideable->obb_maxs( );
 
-		object.m_box.m_rgfl = object.m_owner->rgfl_coordinate_frame( );
+		player_info.m_rgfl = player->rgfl_coordinate_frame( );
 	}
 
 	hooks::paint_traverse_hook.call_original< void >( self, edx, panel, force_repaint, allow_force );

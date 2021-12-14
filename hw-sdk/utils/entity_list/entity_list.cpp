@@ -4,8 +4,6 @@
 
 void entity_list::impl::update( )
 {
-	players.clear( );
-
 	g_ctx.local  = nullptr;
 	g_ctx.weapon = nullptr;
 
@@ -23,26 +21,29 @@ void entity_list::impl::update( )
 			g_ctx.weapon = local_weapon_entity;
 	}
 
-	for ( int i = 0; i < g_interfaces.entity_list->get_highest_entity_index( ); i++ ) {
-		auto entity = g_interfaces.entity_list->get_client_entity< sdk::c_cs_player* >( i );
+	for ( int iterator = 0; iterator < 65; iterator++ ) {
+		auto player = g_interfaces.entity_list->get_client_entity< sdk::c_cs_player* >( iterator );
 
-		if ( !entity || entity == g_ctx.local )
+		auto& player_info = players[ iterator ];
+
+		player_info.m_valid = false;
+
+		if ( !player || player == g_ctx.local )
 			continue;
 
-		if ( !entity->get_i_client_unkown( ) )
-			continue;
-
-		if ( entity->is_player( ) ) {
-			if ( entity->is_dormant( ) )
+		if ( player->is_player( ) ) {
+			if ( player->is_dormant( ) )
 				continue;
 
-			if ( !entity->is_alive( ) )
+			if ( !player->is_alive( ) )
 				continue;
 
-			if ( !entity->is_enemy( g_ctx.local ) )
+			if ( !player->is_enemy( g_ctx.local ) )
 				continue;
 
-			players.push_back( entity );
+			player_info.m_valid = true;
+			player_info.m_name  = player->name( );
+			player_info.m_index = iterator;
 		}
 	}
 }
