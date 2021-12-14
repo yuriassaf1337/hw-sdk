@@ -17,14 +17,33 @@ namespace visuals
 	// Use any function that relies i_collidable update them in paint like I do with esp_box rgfl.
 	// This is an issue with CS:GO and multicore rendering and I plan on having more than 2 FPS.
 
+	enum class esp_title_location : int
+	{
+		TITLE_TOP = 0,
+		TITLE_LEFT,
+		TITLE_BOTTOM,
+		TITLE_RIGHT
+	};
+
+	struct esp_title {
+	public:
+		void render( math::box box );
+
+		std::string text;
+
+		color _color;
+
+		esp_title_location location;
+	};
+
 	struct esp_box {
 	private:
-		math::vec4 calculate_box( sdk::c_cs_player* player );
+		math::box calculate_box( sdk::c_cs_player* player );
 
 	public:
 		void render( sdk::c_cs_player* owner );
 
-		bool outline;
+		bool outline[ 2 ]; // 0 = outside, 1 = inside.
 		bool cornered;
 
 		color _color;
@@ -33,11 +52,15 @@ namespace visuals
 		math::vec3 maxs;
 
 		math::matrix_3x4 rgfl;
+
+		bool draw;
+
+		std::deque< esp_title > titles;
 	};
 
 	struct esp_object {
 	public:
-		esp_object( ){ };
+		esp_object( ) = default;
 		esp_object( sdk::c_cs_player* owner ) : owner( owner ){ };
 
 		sdk::c_cs_player* owner;
@@ -54,6 +77,8 @@ namespace visuals
 
 		void update( );
 		void render( );
+
+		bool HEYIMDRAWINHERE; // dream please don't remove drain gang $$$$$$
 	};
 } // namespace visuals
 

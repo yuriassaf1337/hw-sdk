@@ -28,6 +28,6 @@ namespace sdk
 
 		bool is_alive( );
 
-		const std::string& name( );
+		std::string name( );
 	};
 } // namespace sdk

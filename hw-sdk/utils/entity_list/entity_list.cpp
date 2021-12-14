@@ -26,7 +26,10 @@ void entity_list::impl::update( )
 	for ( int i = 0; i < g_interfaces.entity_list->get_highest_entity_index( ); i++ ) {
 		auto entity = g_interfaces.entity_list->get_client_entity< sdk::c_cs_player* >( i );
 
-		if ( !entity )
+		if ( !entity || entity == g_ctx.local )
+			continue;
+
+		if ( !entity->get_i_client_unkown( ) )
 			continue;
 
 		if ( entity->is_player( ) ) {

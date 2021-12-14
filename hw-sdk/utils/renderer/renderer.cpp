@@ -24,6 +24,8 @@ void render::impl::init( IDirect3DDevice9* buffer_device )
 	g_fonts.create_font( _( "main_verdana_bold_font" ), 13, FW_BOLD, true, _( "Verdana" ) );
 	g_fonts.create_font( _( "indicator_verdana_font" ), 30, FW_BOLD, true, _( "Verdana" ) );
 
+	g_fonts.create_font( _( "esp_font" ), 13, FW_NORMAL, false, _( "Verdana" ) );
+
 	console::print< console::log_level::DEBUG >( _( "Created {} fonts." ), g_fonts.font_list.size( ) );
 }
 
@@ -160,7 +162,7 @@ void render::impl::render_text( int x, int y, unsigned int alignment, const font
 
 	auto set_rect = []( RECT* rect, int x, int y ) { SetRect( rect, x, y, x, y ); };
 
-	if ( !( alignment & font_alignment::AL_DEFAULT ) ) {
+	if ( alignment != font_alignment::AL_DEFAULT ) {
 		if ( alignment & font_alignment::AL_VERTICAL_TOP )
 			y -= text_size.y;
 		else if ( alignment & font_alignment::AL_VERTICAL_CENTER )
@@ -171,7 +173,7 @@ void render::impl::render_text( int x, int y, unsigned int alignment, const font
 			x -= text_size.x / 2;
 	}
 
-	if ( flags & font_flags::FLAG_NONE ) {
+	if ( flags == font_flags::FLAG_NONE ) {
 		set_rect( &rect, x, y );
 		font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, _color.to_d3d( ) );
 	} else {

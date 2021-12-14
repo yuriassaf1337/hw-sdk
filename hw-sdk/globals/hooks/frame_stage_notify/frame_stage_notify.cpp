@@ -9,7 +9,6 @@ void __fastcall hooks::frame_stage_notify::frame_stage_notify_detour( void* self
 	case NET_UPDATE_END:
 		g_entity_list.update( );
 		g_lagcomp.update( );
-		g_visuals.update( );
 		break;
 	}
 }

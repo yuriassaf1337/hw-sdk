@@ -36,5 +36,5 @@ void __fastcall hooks::paint_traverse::paint_traverse_detour( sdk::i_panel* self
 		object.box.rgfl = object.owner->rgfl_coordinate_frame( );
 	}
 
-	return hooks::paint_traverse_hook.call_original< void >( self, edx, panel, force_repaint, allow_force );
+	hooks::paint_traverse_hook.call_original< void >( self, edx, panel, force_repaint, allow_force );
 }
