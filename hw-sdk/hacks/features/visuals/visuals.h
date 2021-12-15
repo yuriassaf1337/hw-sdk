@@ -39,7 +39,7 @@ namespace visuals
 
 	struct esp_box {
 	private:
-		math::box calculate_box( sdk::c_cs_player* player );
+		math::box calculate_box( sdk::c_cs_player* player, bool& on_screen );
 
 	public:
 		void render( sdk::c_cs_player* owner );

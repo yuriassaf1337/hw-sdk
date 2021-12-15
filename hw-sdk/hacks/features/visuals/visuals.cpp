@@ -1,7 +1,7 @@
 #include "visuals.h"
 #include <comdef.h>
 
-math::box visuals::esp_box::calculate_box( sdk::c_cs_player* player )
+math::box visuals::esp_box::calculate_box( sdk::c_cs_player* player, bool& on_screen )
 {
 	auto& player_info = g_entity_list.players[ player->entity_index( ) ];
 
@@ -18,8 +18,6 @@ math::box visuals::esp_box::calculate_box( sdk::c_cs_player* player )
 
 	for ( int iterator = 0; iterator < 8; iterator++ )
 		translated_points[ iterator ] = math::vector_transform( points[ iterator ], transform );
-
-	bool on_screen = false;
 
 	math::vec2< int > screen_points[ 8 ];
 
@@ -56,7 +54,7 @@ void visuals::impl::update_box( esp_object& object )
 	object.m_box.m_cornered     = false;
 	object.m_box.m_outline[ 0 ] = true;
 	object.m_box.m_outline[ 1 ] = true;
-	object.m_box.m_draw         = false;
+	object.m_box.m_draw         = true;
 
 	object.m_box.m_color.r = 255;
 	object.m_box.m_color.g = 255;
@@ -132,9 +130,13 @@ void visuals::impl::render( )
 
 void visuals::esp_box::render( sdk::c_cs_player* owner )
 {
-	auto dimensions = calculate_box( owner );
+	bool on_screen  = false;
+	auto dimensions = calculate_box( owner, on_screen );
 	auto position   = math::vec2< int >( static_cast< int >( dimensions.x ), static_cast< int >( dimensions.y ) );
 	auto size       = math::vec2< int >( static_cast< int >( dimensions.w ), static_cast< int >( dimensions.h ) ) - position;
+
+	if ( !on_screen )
+		return;
 
 	if ( m_draw ) {
 		if ( m_outline[ 0 ] )
@@ -145,12 +147,12 @@ void visuals::esp_box::render( sdk::c_cs_player* owner )
 		g_render.render_rectangle< int >( position, size, m_color );
 	}
 
-	int iterator = 0;
+	int iterator[ 4 ]{ };
 
 	for ( auto& title : m_titles ) {
-		title.render( dimensions, iterator );
+		title.render( dimensions, iterator[ static_cast< int >( title.m_location ) ] );
 
-		iterator++;
+		iterator[ static_cast< int >( title.m_location ) ]++;
 	}
 }
 
@@ -168,7 +170,7 @@ void visuals::esp_title::render( math::box box, int offset )
 		                              ( ( box.y - text_size.y ) - ( ( text_size.y + 4 ) * offset ) ) - 6 );
 	if ( m_location == esp_title_location::TITLE_BOTTOM )
 		position = math::vec2< int >( ( ( box.x + ( box.w - box.x ) / 2 ) - text_size.x / 2 ) - 2,
-		                              ( ( box.h + text_size.y ) - ( ( text_size.y + 4 ) * offset ) ) + 6 );
+		                              ( ( box.h + text_size.y ) + ( ( text_size.y + 4 ) * offset ) ) - 10 );
 
 	g_render.render_filled_rectangle( position, math::vec2< int >( text_size.x + 5, text_size.y + 4 ), color( 0, 0, 0, m_color.a * 0.7 ) );
 	g_render.render_filled_rectangle( position, math::vec2< int >( 1, text_size.y + 4 ), m_color );
