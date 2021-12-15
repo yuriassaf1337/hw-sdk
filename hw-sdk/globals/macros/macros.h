@@ -91,3 +91,5 @@ public:
 	{                                                                                                                                                \
 		return ( std::add_pointer_t< type > )( reinterpret_cast< std::uintptr_t >( this ) + value );                                                 \
 	}
+
+#define ROUND_UP( value ) ( int )( ( float )value + 0.5f )

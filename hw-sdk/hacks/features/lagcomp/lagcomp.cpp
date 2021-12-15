@@ -54,10 +54,10 @@ void lagcomp::impl::update( )
 
 		auto& current_heap_iterator = heap_iterator[ player->entity_index( ) ];
 
-		if ( !heap_records[ player->entity_index( ) ] )
-			heap_records[ player->entity_index( ) ] = new record[ sv_maxunlag_ticks ];
+		if ( !heap_records[ player_info.m_index ] )
+			heap_records[ player_info.m_index ] = new record[ sv_maxunlag_ticks ];
 
-		auto& current_record = heap_records[ player->entity_index( ) ][ current_heap_iterator ];
+		auto& current_record = heap_records[ player_info.m_index ][ current_heap_iterator ];
 
 		current_record.abs_origin      = player->get_abs_angles( );
 		current_record.eye_position    = player->eye_position( );

@@ -77,6 +77,9 @@ void prediction::impl::start( sdk::c_base_player* player )
 
 void prediction::impl::end( sdk::c_base_player* player )
 {
+	if (!player)
+		return; // kys
+
 	g_interfaces.game_movement->finish_track_prediction_errors( player );
 
 	g_interfaces.move_helper->set_host( nullptr );

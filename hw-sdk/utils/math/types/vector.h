@@ -282,10 +282,10 @@ namespace math
 
 	struct box {
 		box( ) = default;
-		constexpr box( float xywh ) : x( xywh ), y( xywh ), w( xywh ), h( xywh ){ };
-		constexpr box( float x, float y ) : x( x ), y( y ), w( x ), h( y ){ };
-		constexpr box( float x, float y, float w, float h ) : x( x ), y( y ), w( w ), h( h ){ };
+		constexpr box( int xywh ) : x( xywh ), y( xywh ), w( xywh ), h( xywh ){ };
+		constexpr box( int x, int y ) : x( x ), y( y ), w( x ), h( y ){ };
+		constexpr box( int x, int y, int w, int h ) : x( x ), y( y ), w( w ), h( h ){ };
 
-		float x, y, w, h;
+		int x, y, w, h;
 	};
 }; // namespace math

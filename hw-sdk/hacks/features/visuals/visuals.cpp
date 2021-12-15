@@ -1,4 +1,5 @@
 #include "visuals.h"
+#include "../../../globals/ctx/ctx.h"
 #include <comdef.h>
 
 math::box visuals::esp_box::calculate_box( sdk::c_cs_player* player, bool& on_screen )
@@ -24,9 +25,12 @@ math::box visuals::esp_box::calculate_box( sdk::c_cs_player* player, bool& on_sc
 	for ( int iterator = 0; iterator < 8; iterator++ ) {
 		bool buffer_on_screen = true;
 
-		screen_points[ iterator ] = utils::world_to_screen( translated_points[ iterator ], buffer_on_screen );
+		auto& screen_point = screen_points[ iterator ];
 
-		if ( buffer_on_screen )
+		screen_point = utils::world_to_screen( translated_points[ iterator ], buffer_on_screen );
+
+		if ( buffer_on_screen && !( screen_point.x < 0 ) && !( screen_point.y < 0 ) && !( screen_point.x > g_ctx.screen_size.x ) &&
+		     !( screen_point.y > g_ctx.screen_size.y ) )
 			on_screen = true;
 	}
 
@@ -46,7 +50,7 @@ math::box visuals::esp_box::calculate_box( sdk::c_cs_player* player, bool& on_sc
 			bottom = screen_points[ iterator ].y;
 	}
 
-	return math::box( left, top, right, bottom );
+	return math::box( ROUND_UP( left ), ROUND_UP( top ), ROUND_UP( right ), ROUND_UP( bottom ) );
 }
 
 void visuals::impl::update_box( esp_object& object )
@@ -97,7 +101,7 @@ void visuals::impl::update_box( esp_object& object )
 
 void visuals::impl::update( )
 {
-	g_entity_list.update( );
+	// g_entity_list.update( );
 
 	for ( auto& player_info : g_entity_list.players ) {
 		auto player = g_interfaces.entity_list->get_client_entity< sdk::c_cs_player* >( player_info.m_index );
