@@ -97,6 +97,8 @@ void visuals::impl::update_box( esp_object& object )
 
 void visuals::impl::update( )
 {
+	g_entity_list.update( );
+
 	for ( auto& player_info : g_entity_list.players ) {
 		auto player = g_interfaces.entity_list->get_client_entity< sdk::c_cs_player* >( player_info.m_index );
 
@@ -114,6 +116,8 @@ void visuals::impl::update( )
 
 void visuals::impl::render( )
 {
+	update( );
+
 	for ( auto& player_info : g_entity_list.players ) {
 		auto player = g_interfaces.entity_list->get_client_entity< sdk::c_cs_player* >( player_info.m_index );
 
@@ -121,8 +125,6 @@ void visuals::impl::render( )
 			continue;
 
 		esp_object& object = esp_objects[ player->entity_index( ) ];
-
-		update( );
 
 		object.m_box.render( player );
 	}
