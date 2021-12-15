@@ -6,6 +6,7 @@
 #include "../../../globals/includes/includes.h"
 #include "../../../utils/entity_list/entity_list.h"
 #include "../../../utils/renderer/renderer.h"
+#include "../../../utils/console/console.h"
 
 #include <deque>
 
@@ -27,7 +28,7 @@ namespace visuals
 
 	struct esp_title {
 	public:
-		void render( math::box box );
+		void render( math::box box, int offset );
 
 		std::string m_text{ };
 

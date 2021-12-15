@@ -32,6 +32,8 @@ bool sdk::interfaces::init( )
 		material_system = g_material_system_dll.find_interface< sdk::i_material_system* >( VMATERIAL_SYSTEM_CLIENT_VERSION );
 
 		panel = g_vgui2_dll.find_interface< sdk::i_panel* >( VGUI_PANEL_CLIENT_VERSION );
+
+		localize = g_localize_dll.find_interface< sdk::i_localize* >( LOCALIZE_LOCALIZE_VERSION );
 	}
 
 	// virtuals

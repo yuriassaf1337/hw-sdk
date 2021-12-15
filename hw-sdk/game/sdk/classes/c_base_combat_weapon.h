@@ -12,7 +12,7 @@ namespace sdk
 		NETVAR( next_primary_attack, float, "CBaseCombatWeapon", "m_flNextPrimaryAttack" );
 		NETVAR( next_secondary_attack, float, "CBaseCombatWeapon", "m_flNextSecondaryAttack" );
 		NETVAR( clip_mag, std::int32_t, "CBaseCombatWeapon", "m_iClip1" );
-		NETVAR( clip_reserve, std::int32_t, "CBaseCombatWeapon", "m_iClip2" );
+		NETVAR( clip_reserve, std::int32_t, "CBaseCombatWeapon", "m_iPrimaryReserveAmmoCount" );
 		NETVAR( view_model_index, std::int32_t, "CBaseCombatWeapon", "m_iViewModelIndex" );
 		NETVAR( world_model_index, std::int32_t, "CBaseCombatWeapon", "m_iWorldModelIndex" );
 		NETVAR( world_dropped_model_index, std::int32_t, "CBaseCombatWeapon", "m_iWorldDroppedModelIndex" );

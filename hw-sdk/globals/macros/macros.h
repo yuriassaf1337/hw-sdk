@@ -47,6 +47,7 @@
 #define VENGINE_DEBUG_OVERLAY_VERSION         _( "VDebugOverlay004" )
 #define VMATERIAL_SYSTEM_CLIENT_VERSION       _( "VMaterialSystem080" )
 #define VGUI_PANEL_CLIENT_VERSION             _( "VGUI_Panel009" )
+#define LOCALIZE_LOCALIZE_VERSION             _( "Localize_001" )
 
 // [#] utils
 

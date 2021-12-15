@@ -26,7 +26,7 @@ void entity_list::impl::update( )
 
 		auto& player_info = players[ iterator ];
 
-		player_info.m_valid = false;
+		player_info.m_valid  = false;
 
 		if ( !player || player == g_ctx.local )
 			continue;
@@ -44,6 +44,13 @@ void entity_list::impl::update( )
 			player_info.m_valid = true;
 			player_info.m_name  = player->name( );
 			player_info.m_index = iterator;
+
+			if ( auto weapon_handle = player->active_weapon( ) ) {
+				auto weapon_entity = g_interfaces.entity_list->get_client_entity_from_handle< sdk::c_base_combat_weapon* >( weapon_handle );
+
+				if ( weapon_entity )
+					player_info.m_weapon = weapon_entity;
+			}
 		}
 	}
 }

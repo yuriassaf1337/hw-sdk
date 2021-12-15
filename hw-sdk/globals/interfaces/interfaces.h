@@ -30,6 +30,7 @@ namespace sdk
 		sdk::i_debug_overlay* debug_overlay;
 		sdk::i_material_system* material_system;
 		sdk::i_panel* panel;
+		sdk::i_localize* localize;
 
 		bool init( );
 	};

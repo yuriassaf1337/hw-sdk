@@ -16,6 +16,7 @@
 #include "classes/i_panel.h"
 #include "classes/i_prediction.h"
 #include "classes/iv_engine_client.h"
+#include "classes/i_localize.h"
 
 // structs
 #include "structs/i_material.h"

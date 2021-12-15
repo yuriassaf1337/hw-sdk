@@ -20,6 +20,8 @@ namespace entity_list
 		int m_index{ };
 
 		bool m_valid{ };
+
+		sdk::c_base_combat_weapon* m_weapon{ };
 	};
 
 	struct impl {

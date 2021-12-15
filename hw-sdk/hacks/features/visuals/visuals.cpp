@@ -1,4 +1,5 @@
 #include "visuals.h"
+#include <comdef.h>
 
 math::box visuals::esp_box::calculate_box( sdk::c_cs_player* player )
 {
@@ -67,13 +68,33 @@ void visuals::impl::update_box( esp_object& object )
 	auto buffer_title = esp_title( );
 
 	buffer_title.m_location = esp_title_location::TITLE_TOP;
-	buffer_title.m_text     = object.m_owner->name( ).c_str( ); // yeah....
-	buffer_title.m_color.r  = 255;
-	buffer_title.m_color.g  = 0;
+	buffer_title.m_text     = object.m_owner->name( );
+	buffer_title.m_color.r  = 200;
+	buffer_title.m_color.g  = 50;
 	buffer_title.m_color.b  = 0;
 	buffer_title.m_color.a  = 255;
 
 	object.m_box.m_titles.push_back( buffer_title );
+
+	auto& current_weapon = g_entity_list.players[ object.m_owner->entity_index( ) ].m_weapon;
+
+	if ( current_weapon ) {
+		auto weapon_info      = current_weapon->get_weapon_data( );
+		auto weapon_name_wide = g_interfaces.localize->find( weapon_info->hud_name );
+
+		_bstr_t conversion( weapon_name_wide );
+
+		const char* weapon_name = conversion;
+
+		buffer_title.m_location = esp_title_location::TITLE_BOTTOM;
+		buffer_title.m_text     = console::format( _( "{}: {}/{}" ), weapon_name, current_weapon->clip_mag( ), weapon_info->max_clip1 );
+		buffer_title.m_color.r  = 50;
+		buffer_title.m_color.g  = 50;
+		buffer_title.m_color.b  = 200;
+		buffer_title.m_color.a  = 255;
+
+		object.m_box.m_titles.push_back( buffer_title );
+	}
 }
 
 void visuals::impl::update( )
@@ -124,11 +145,16 @@ void visuals::esp_box::render( sdk::c_cs_player* owner )
 		g_render.render_rectangle< int >( position, size, m_color );
 	}
 
-	for ( auto& title : m_titles )
-		title.render( dimensions );
+	int iterator = 0;
+
+	for ( auto& title : m_titles ) {
+		title.render( dimensions, iterator );
+
+		iterator++;
+	}
 }
 
-void visuals::esp_title::render( math::box box )
+void visuals::esp_title::render( math::box box, int offset )
 {
 	auto font = g_fonts[ HASH( _( "esp_font" ) ) ];
 
@@ -138,7 +164,11 @@ void visuals::esp_title::render( math::box box )
 	math::vec2< int > position;
 
 	if ( m_location == esp_title_location::TITLE_TOP )
-		position = math::vec2< int >( ( ( box.x + ( box.w - box.x ) / 2 ) - text_size.x / 2 ) - 2, ( box.y - text_size.y ) - 6 );
+		position = math::vec2< int >( ( ( box.x + ( box.w - box.x ) / 2 ) - text_size.x / 2 ) - 2,
+		                              ( ( box.y - text_size.y ) - ( ( text_size.y + 4 ) * offset ) ) - 6 );
+	if ( m_location == esp_title_location::TITLE_BOTTOM )
+		position = math::vec2< int >( ( ( box.x + ( box.w - box.x ) / 2 ) - text_size.x / 2 ) - 2,
+		                              ( ( box.h + text_size.y ) - ( ( text_size.y + 4 ) * offset ) ) + 6 );
 
 	g_render.render_filled_rectangle( position, math::vec2< int >( text_size.x + 5, text_size.y + 4 ), color( 0, 0, 0, m_color.a * 0.7 ) );
 	g_render.render_filled_rectangle( position, math::vec2< int >( 1, text_size.y + 4 ), m_color );
