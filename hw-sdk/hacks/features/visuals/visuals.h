@@ -4,9 +4,9 @@
 #include "../../../game/sdk/classes/i_collideable.h"
 #include "../../../game/sdk/include.h"
 #include "../../../globals/includes/includes.h"
+#include "../../../utils/console/console.h"
 #include "../../../utils/entity_list/entity_list.h"
 #include "../../../utils/renderer/renderer.h"
-#include "../../../utils/console/console.h"
 
 #include <deque>
 
@@ -18,15 +18,15 @@ namespace visuals
 	// Use any function that relies i_collidable update them in paint like I do with esp_box rgfl.
 	// This is an issue with CS:GO and multicore rendering and I plan on having more than 2 FPS.
 
-	enum class esp_title_location : int
+	enum class esp_location : int
 	{
-		TITLE_TOP = 0,
-		TITLE_LEFT,
-		TITLE_BOTTOM,
-		TITLE_RIGHT
+		LOCATION_TOP = 0,
+		LOCATION_LEFT,
+		LOCATION_BOTTOM,
+		LOCATION_RIGHT
 	};
 
-	struct esp_title {
+	struct esp_text {
 	public:
 		void render( math::box box, int offset );
 
@@ -34,7 +34,16 @@ namespace visuals
 
 		color m_color{ };
 
-		esp_title_location m_location{ };
+		esp_location m_location{ };
+
+		LPD3DXFONT m_font{ };
+
+		font_flags m_flags;
+	};
+
+	struct esp_title : public esp_text {
+	public:
+		void render( math::box box, int offset );
 	};
 
 	struct esp_box {
@@ -52,6 +61,7 @@ namespace visuals
 		bool m_draw{ };
 
 		std::deque< esp_title > m_titles{ };
+		std::deque< esp_text > m_texts{ };
 	};
 
 	struct esp_object {

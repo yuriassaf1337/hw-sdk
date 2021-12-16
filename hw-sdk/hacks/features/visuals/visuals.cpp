@@ -58,7 +58,7 @@ void visuals::impl::update_box( esp_object& object )
 	object.m_box.m_cornered     = false;
 	object.m_box.m_outline[ 0 ] = true;
 	object.m_box.m_outline[ 1 ] = true;
-	object.m_box.m_draw         = true;
+	object.m_box.m_draw         = false;
 
 	object.m_box.m_color.r = 255;
 	object.m_box.m_color.g = 255;
@@ -66,43 +66,66 @@ void visuals::impl::update_box( esp_object& object )
 	object.m_box.m_color.a = 255;
 
 	object.m_box.m_titles.clear( );
+	object.m_box.m_texts.clear( );
 
 	auto buffer_title = esp_title( );
+	auto buffer_text  = esp_text( );
 
-	buffer_title.m_location = esp_title_location::TITLE_TOP;
+	buffer_title.m_location = esp_location::LOCATION_LEFT;
 	buffer_title.m_text     = object.m_owner->name( );
 	buffer_title.m_color.r  = 200;
 	buffer_title.m_color.g  = 50;
 	buffer_title.m_color.b  = 0;
 	buffer_title.m_color.a  = 255;
+	buffer_title.m_font     = g_fonts[ HASH( _( "esp_font" ) ) ];
+	buffer_title.m_flags    = font_flags::FLAG_NONE;
 
 	object.m_box.m_titles.push_back( buffer_title );
+	object.m_box.m_titles.push_back( buffer_title );
 
-	auto& current_weapon = g_entity_list.players[ object.m_owner->entity_index( ) ].m_weapon;
+	buffer_title.m_location = esp_location::LOCATION_RIGHT;
 
-	if ( current_weapon ) {
-		auto weapon_info      = current_weapon->get_weapon_data( );
-		auto weapon_name_wide = g_interfaces.localize->find( weapon_info->hud_name );
+	object.m_box.m_titles.push_back( buffer_title );
+	object.m_box.m_titles.push_back( buffer_title );
 
-		_bstr_t conversion( weapon_name_wide );
+	buffer_title.m_location = esp_location::LOCATION_TOP;
 
-		const char* weapon_name = conversion;
+	object.m_box.m_titles.push_back( buffer_title );
+	object.m_box.m_titles.push_back( buffer_title );
+	buffer_title.m_location = esp_location::LOCATION_BOTTOM;
 
-		buffer_title.m_location = esp_title_location::TITLE_BOTTOM;
-		buffer_title.m_text     = console::format( _( "{}: {}/{}" ), weapon_name, current_weapon->clip_mag( ), weapon_info->max_clip1 );
-		buffer_title.m_color.r  = 50;
-		buffer_title.m_color.g  = 50;
-		buffer_title.m_color.b  = 200;
-		buffer_title.m_color.a  = 255;
+	object.m_box.m_titles.push_back( buffer_title );
+	object.m_box.m_titles.push_back( buffer_title );
 
-		object.m_box.m_titles.push_back( buffer_title );
-	}
+	buffer_text.m_location = esp_location::LOCATION_LEFT;
+	buffer_text.m_text     = object.m_owner->name( );
+	buffer_text.m_color.r  = 255;
+	buffer_text.m_color.g  = 192;
+	buffer_text.m_color.b  = 203;
+	buffer_text.m_color.a  = 255;
+	buffer_text.m_font     = g_fonts[ HASH( _( "esp_font" ) ) ];
+	buffer_text.m_flags    = font_flags::FLAG_DROPSHADOW;
+
+	object.m_box.m_texts.push_back( buffer_text );
+	object.m_box.m_texts.push_back( buffer_text );
+
+	buffer_text.m_location = esp_location::LOCATION_RIGHT;
+
+	object.m_box.m_texts.push_back( buffer_text );
+	object.m_box.m_texts.push_back( buffer_text );
+
+	buffer_text.m_location = esp_location::LOCATION_TOP;
+
+	object.m_box.m_texts.push_back( buffer_text );
+	object.m_box.m_texts.push_back( buffer_text );
+	buffer_text.m_location = esp_location::LOCATION_BOTTOM;
+
+	object.m_box.m_texts.push_back( buffer_text );
+	object.m_box.m_texts.push_back( buffer_text );
 }
 
 void visuals::impl::update( )
 {
-	// g_entity_list.update( );
-
 	for ( auto& player_info : g_entity_list.players ) {
 		auto player = g_interfaces.entity_list->get_client_entity< sdk::c_cs_player* >( player_info.m_index );
 
@@ -153,34 +176,63 @@ void visuals::esp_box::render( sdk::c_cs_player* owner )
 		g_render.render_rectangle< int >( position, size, m_color );
 	}
 
-	int iterator[ 4 ]{ };
+	unsigned int iterator[ 4 ]{ };
 
 	for ( auto& title : m_titles ) {
-		title.render( dimensions, iterator[ static_cast< int >( title.m_location ) ] );
+		title.render( dimensions, iterator[ static_cast< unsigned int >( title.m_location ) ] );
 
-		iterator[ static_cast< int >( title.m_location ) ]++;
+		iterator[ static_cast< unsigned int >( title.m_location ) ]++;
+	}
+
+	for ( auto& text : m_texts ) {
+		text.render( dimensions, iterator[ static_cast< unsigned int >( text.m_location ) ] );
+
+		iterator[ static_cast< unsigned int >( text.m_location ) ]++;
 	}
 }
 
 void visuals::esp_title::render( math::box box, int offset )
 {
-	auto font = g_fonts[ HASH( _( "esp_font" ) ) ];
-
-	auto text_size_buffer = g_render.render_text_size( m_text.c_str( ), font );
+	auto text_size_buffer = g_render.render_text_size( m_text.c_str( ), m_font );
 	auto text_size        = math::vec2< int >( text_size_buffer.x, text_size_buffer.y );
 
 	math::vec2< int > position;
 
-	if ( m_location == esp_title_location::TITLE_TOP )
+	if ( m_location == esp_location::LOCATION_TOP )
 		position = math::vec2< int >( ( ( box.x + ( box.w - box.x ) / 2 ) - text_size.x / 2 ) - 2,
 		                              ( ( box.y - text_size.y ) - ( ( text_size.y + 4 ) * offset ) ) - 6 );
-	if ( m_location == esp_title_location::TITLE_BOTTOM )
+	if ( m_location == esp_location::LOCATION_BOTTOM )
 		position = math::vec2< int >( ( ( box.x + ( box.w - box.x ) / 2 ) - text_size.x / 2 ) - 2,
 		                              ( ( box.h + text_size.y ) + ( ( text_size.y + 4 ) * offset ) ) - 10 );
+	if ( m_location == esp_location::LOCATION_RIGHT )
+		position = math::vec2< int >( box.w + 3, ( ( box.y + text_size.y ) + ( ( text_size.y + 4 ) * offset ) ) - 13 );
+	if ( m_location == esp_location::LOCATION_LEFT )
+		position = math::vec2< int >( ( box.x - text_size.x ) - 7, ( ( box.y + text_size.y ) + ( ( text_size.y + 4 ) * offset ) ) - 13 );
 
 	g_render.render_filled_rectangle( position, math::vec2< int >( text_size.x + 5, text_size.y + 4 ), color( 0, 0, 0, m_color.a * 0.7 ) );
 	g_render.render_filled_rectangle( position, math::vec2< int >( 1, text_size.y + 4 ), m_color );
 
-	g_render.render_text( position + math::vec2< int >( 3, 2 ), font_alignment::AL_DEFAULT, font_flags::FLAG_NONE, m_text.c_str( ), font,
+	g_render.render_text( position + math::vec2< int >( 3, 2 ), font_alignment::AL_DEFAULT, m_flags, m_text.c_str( ), m_font,
 	                      color( 255, 255, 255, 255 ) );
+}
+
+void visuals::esp_text::render( math::box box, int offset )
+{
+	auto text_size_buffer = g_render.render_text_size( m_text.c_str( ), m_font );
+	auto text_size        = math::vec2< int >( text_size_buffer.x, text_size_buffer.y );
+
+	math::vec2< int > position;
+
+	if ( m_location == esp_location::LOCATION_TOP )
+		position = math::vec2< int >( ( ( box.x + ( box.w - box.x ) / 2 ) - text_size.x / 2 ) - 2,
+		                              ( ( box.y - text_size.y ) - ( ( text_size.y + 4 ) * offset ) ) - 6 );
+	if ( m_location == esp_location::LOCATION_BOTTOM )
+		position = math::vec2< int >( ( ( box.x + ( box.w - box.x ) / 2 ) - text_size.x / 2 ) - 2,
+		                              ( ( box.h + text_size.y ) + ( ( text_size.y + 4 ) * offset ) ) - 10 );
+	if ( m_location == esp_location::LOCATION_RIGHT )
+		position = math::vec2< int >( box.w + 2, ( ( box.y + text_size.y ) + ( ( text_size.y + 4 ) * offset ) ) - 10 );
+	if ( m_location == esp_location::LOCATION_LEFT )
+		position = math::vec2< int >( ( box.x - text_size.x ) - 1, ( ( box.y + text_size.y ) + ( ( text_size.y + 4 ) * offset ) ) - 10 );
+
+	g_render.render_text( position, font_alignment::AL_DEFAULT, m_flags, m_text.c_str( ), m_font, m_color );
 }

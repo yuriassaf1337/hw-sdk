@@ -177,7 +177,7 @@ void render::impl::render_text( int x, int y, unsigned int alignment, const font
 		set_rect( &rect, x, y );
 		font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, _color.to_d3d( ) );
 	} else {
-		if ( flags & font_flags::FLAG_DROPSHADOW ) {
+		if ( flags == font_flags::FLAG_DROPSHADOW ) {
 			set_rect( &rect, x + 1, y + 1 );
 			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_d3d( ) );
 
@@ -185,7 +185,7 @@ void render::impl::render_text( int x, int y, unsigned int alignment, const font
 			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, _color.to_d3d( ) );
 		}
 
-		if ( flags & font_flags::FLAG_OUTLINE ) {
+		if ( flags == font_flags::FLAG_OUTLINE ) {
 			set_rect( &rect, x, y + 1 );
 			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_d3d( ) );
 			set_rect( &rect, x + 1, y );
@@ -216,7 +216,7 @@ void render::impl::render_text( int x, int y, unsigned int alignment, const font
 			set_rect( &rect, x, y );
 			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, _color.to_d3d( ) );
 		}
-		if ( flags & font_flags::FLAG_OUTLINE_SEMI ) {
+		if ( flags == font_flags::FLAG_OUTLINE_SEMI ) {
 			set_rect( &rect, x - 1, y );
 			font->DrawTextA( NULL, string, -1, &rect, DT_LEFT | DT_NOCLIP, color( 0, 0, 0, _color.a ).to_d3d( ) );
 			set_rect( &rect, x + 1, y );
