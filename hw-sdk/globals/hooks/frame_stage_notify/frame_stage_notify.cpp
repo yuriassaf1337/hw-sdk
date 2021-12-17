@@ -15,7 +15,7 @@ void __fastcall hooks::frame_stage_notify::frame_stage_notify_detour( void* self
 			if ( !player_info.m_valid || !player )
 				continue;
 
-			//g_ctx.updating_animations = true;
+			g_ctx.updating_animations = true;
 			//player->update_client_side_animation( );
 			//g_ctx.updating_animations = false;
 		}
