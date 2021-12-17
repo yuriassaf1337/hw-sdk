@@ -9,6 +9,7 @@
 #include "../../../utils/keybinds/keybinds.h"
 #include "../../ctx/ctx.h"
 #include "create_move.h"
+#include "../cl_move/cl_move.h"
 
 void __stdcall create_move_function( int sequence_number, float input_sample_frametime, bool active, bool& send_packet )
 {
@@ -37,6 +38,9 @@ void __stdcall create_move_function( int sequence_number, float input_sample_fra
 	g_prediction.end( g_ctx.local );
 
 	g_movement.post_prediction.think( );
+
+	if (hooks::shifting_tb)
+		send_packet = hooks::send_packet;
 
 	verified->command  = *command;
 	verified->checksum = command->checksum( );

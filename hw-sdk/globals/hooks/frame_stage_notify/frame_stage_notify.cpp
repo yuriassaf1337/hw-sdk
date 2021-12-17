@@ -8,6 +8,18 @@ void __fastcall hooks::frame_stage_notify::frame_stage_notify_detour( void* self
 		using enum sdk::frame_stage;
 	case NET_UPDATE_END:
 		g_entity_list.update( );
+
+		for ( auto& player_info : g_entity_list.players ) {
+			auto player = g_interfaces.entity_list->get_client_entity< sdk::c_cs_player* >( player_info.m_index );
+
+			if ( !player_info.m_valid || !player )
+				continue;
+
+			//g_ctx.updating_animations = true;
+			//player->update_client_side_animation( );
+			//g_ctx.updating_animations = false;
+		}
+
 		g_lagcomp.update( );
 		break;
 	}

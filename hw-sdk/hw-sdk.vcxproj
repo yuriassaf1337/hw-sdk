@@ -175,6 +175,7 @@
     <ClCompile Include="game\sdk\classes\c_cs_player.cpp" />
     <ClCompile Include="globals\csgo.cpp" />
     <ClCompile Include="globals\ctx\ctx.cpp" />
+    <ClCompile Include="globals\hooks\anim_fix\anim_fix.cpp" />
     <ClCompile Include="globals\hooks\cl_move\cl_move.cpp" />
     <ClCompile Include="globals\hooks\create_move\create_move.cpp" />
     <ClCompile Include="globals\hooks\emit_sound\emit_sound.cpp" />
@@ -311,6 +312,7 @@
     <ClInclude Include="game\sdk\structs\weapon_data_t.h" />
     <ClInclude Include="globals\csgo.h" />
     <ClInclude Include="globals\ctx\ctx.h" />
+    <ClInclude Include="globals\hooks\anim_fix\anim_fix.h" />
     <ClInclude Include="globals\hooks\cl_move\cl_move.h" />
     <ClInclude Include="globals\hooks\create_move\create_move.h" />
     <ClInclude Include="globals\hooks\emit_sound\emit_sound.h" />

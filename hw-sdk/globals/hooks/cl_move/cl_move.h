@@ -11,7 +11,8 @@
 
 namespace hooks
 {
-	inline auto adjust = 0;
+	inline auto send_packet = false;
+	inline auto shifting_tb = false;
 
 	CREATE_HOOK_HELPER( cl_move_hook, void( __cdecl )( float, bool ) );
 	struct cl_move {

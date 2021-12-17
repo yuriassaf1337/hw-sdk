@@ -25,6 +25,7 @@ namespace ctx
 		math::matrix_4x4 view_matrix  = { };
 
 		bool running_post_think = false;
+		bool updating_animations = false;
 	};
 } // namespace ctx
 

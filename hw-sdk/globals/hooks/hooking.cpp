@@ -2,6 +2,7 @@
 
 #include "../../dependencies/mocking_bird/mocking_bird.h"
 #include "../ctx/ctx.h"
+#include "anim_fix/anim_fix.h"
 #include "cl_move/cl_move.h"
 #include "create_move/create_move.h"
 #include "emit_sound/emit_sound.h"
@@ -28,6 +29,11 @@ bool hooks::impl::init( )
 	hooks::glow_effect_spectator::init( );
 	hooks::paint_traverse::init( );
 	hooks::frame_stage_notify::init( );
+	hooks::standard_blending_rules::init( );
+	hooks::do_extra_bone_processing::init( );
+	hooks::update_client_side_animation::init( );
+	hooks::should_skip_animation_frame::init( );
+	hooks::process_interpolated_list::init( );
 
 	console::print< console::log_level::SUCCESS >( _( "Initialized all hooks." ) );
 
@@ -48,6 +54,11 @@ void hooks::impl::unload( )
 	hooks::emit_sound::unload( );
 	hooks::paint_traverse::unload( );
 	hooks::frame_stage_notify::unload( );
+	hooks::standard_blending_rules::unload( );
+	hooks::do_extra_bone_processing::unload( );
+	hooks::update_client_side_animation::unload( );
+	hooks::should_skip_animation_frame::unload( );
+	hooks::process_interpolated_list::unload( );
 
 	// this is so useless lol
 	if ( MH_Uninitialize( ) != MH_OK )

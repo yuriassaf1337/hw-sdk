@@ -18,22 +18,22 @@ void __cdecl hooks::cl_move::cl_move_detour( float accumulated_extra_samples, bo
 		return sure;
 	};
 
-	auto charge = []( ) -> void {
-		adjust--;
-		charged++;
-	};
-
 	auto release = [ accumulated_extra_samples, final_tick ]( ) -> void {
+		shifting_tb = true;
+
 		for ( int i = 0; i < charged; i++ ) {
-			adjust++;
 			hooks::cl_move_hook.call_original< void >( accumulated_extra_samples, final_tick );
+
+			send_packet = i == 1;
 		}
 
 		charged = 0;
+
+		shifting_tb = false;
 	};
 
 	if ( charged < 16 && can_charge( ) ) {
-		charge( );
+		charged++;
 		return;
 	}
 

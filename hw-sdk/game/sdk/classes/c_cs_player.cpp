@@ -24,3 +24,19 @@ std::string sdk::c_cs_player::name( )
 		return std::string( info.name ).substr( 0, 24 );
 	return { };
 }
+
+void sdk::c_cs_player::update_client_side_animation( )
+{
+	if ( !this )
+		return;
+
+	using update_client_side_animation_type = void( __thiscall* )( c_cs_player* );
+
+	static auto update_client_side_animation_address =
+		g_client_dll.pattern_scan( _( "55 8B EC 51 56 8B F1 80 BE ? ? ? ? ? 74 36" ) ).as< std::uintptr_t >( );
+
+	if ( !update_client_side_animation_address )
+		return;
+
+	reinterpret_cast< update_client_side_animation_type >( update_client_side_animation_address )( this );
+}

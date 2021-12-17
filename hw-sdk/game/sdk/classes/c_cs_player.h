@@ -29,5 +29,7 @@ namespace sdk
 		bool is_alive( );
 
 		std::string name( );
+
+		void update_client_side_animation();
 	};
 } // namespace sdk
