@@ -77,7 +77,7 @@ void visuals::impl::update_box( esp_object& object )
 	buffer_title.m_color.g  = 50;
 	buffer_title.m_color.b  = 0;
 	buffer_title.m_color.a  = 255;
-	buffer_title.m_font     = g_fonts[ HASH( _( "esp_font" ) ) ];
+	buffer_title.m_font     = g_fonts[ HASH( "esp_font" ) ];
 	buffer_title.m_flags    = font_flags::FLAG_NONE;
 
 	object.m_box.m_titles.push_back( buffer_title );
@@ -103,7 +103,7 @@ void visuals::impl::update_box( esp_object& object )
 	buffer_text.m_color.g  = 192;
 	buffer_text.m_color.b  = 203;
 	buffer_text.m_color.a  = 255;
-	buffer_text.m_font     = g_fonts[ HASH( _( "esp_font" ) ) ];
+	buffer_text.m_font     = g_fonts[ HASH( "esp_font" ) ];
 	buffer_text.m_flags    = font_flags::FLAG_DROPSHADOW;
 
 	object.m_box.m_texts.push_back( buffer_text );
@@ -168,8 +168,10 @@ void visuals::esp_box::render( sdk::c_cs_player* owner )
 		return;
 
 	if ( m_draw ) {
+		// outer outline
 		if ( m_outline[ 0 ] )
 			g_render.render_rectangle< int >( position - math::vec2< int >( 1, 1 ), size + math::vec2< int >( 2, 2 ), color( 0, 0, 0, m_color.a ) );
+		// inner outline
 		if ( m_outline[ 1 ] )
 			g_render.render_rectangle< int >( position + math::vec2< int >( 1, 1 ), size - math::vec2< int >( 2, 2 ), color( 0, 0, 0, m_color.a ) );
 

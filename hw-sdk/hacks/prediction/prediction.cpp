@@ -14,6 +14,9 @@ void prediction::impl::store_backup( )
 
 void prediction::impl::update( )
 {
+	// delta_tick is the delta between server tick and current frame time, for example if u're in a 64 tick server and u have 63 fps u have 1
+	// delta_tick, that means prediction will run update function whenever ur fps is lower then tickrate, making it less likely to have errors/bugs
+	// with low fps
 	if ( g_interfaces.client_state->delta_tick > 0 )
 		g_interfaces.prediction->update( g_interfaces.client_state->delta_tick, g_interfaces.client_state->delta_tick > 0,
 		                                 g_interfaces.client_state->last_command_ack,
@@ -22,6 +25,8 @@ void prediction::impl::update( )
 
 void prediction::impl::start( sdk::c_base_player* player )
 {
+	// TODO: fix prediction noises, alot of stuff in this prediction is either in the wrong place or not needed.
+
 	player->current_command( ) = g_ctx.cmd;
 
 	sdk::c_base_player::set_prediction_random_seed( g_ctx.cmd );
@@ -77,7 +82,7 @@ void prediction::impl::start( sdk::c_base_player* player )
 
 void prediction::impl::end( sdk::c_base_player* player )
 {
-	if (!player)
+	if ( !player )
 		return; // kys
 
 	g_interfaces.game_movement->finish_track_prediction_errors( player );

@@ -38,7 +38,7 @@ namespace visuals
 
 		LPD3DXFONT m_font{ };
 
-		font_flags m_flags;
+		font_flags m_flags{ };
 	};
 
 	struct esp_title : public esp_text {

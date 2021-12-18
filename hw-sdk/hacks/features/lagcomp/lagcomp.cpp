@@ -10,12 +10,17 @@
 
 bool lagcomp::impl::is_valid( record heap_record )
 {
+	// sanity check
+	auto m_nci = g_interfaces.engine->get_net_channel_info( );
+	if ( !m_nci )
+		return false;
+
 	float correct = 0.f;
 
 	static auto unlag_pointer = g_convars[ _( "sv_maxunlag" ) ];
 	auto sv_maxunlag          = unlag_pointer->get_float( );
 
-	correct += g_interfaces.engine->get_net_channel_info( )->get_latency( sdk::flow::FLOW_OUTGOING );
+	correct += m_nci->get_latency( sdk::flow::FLOW_OUTGOING );
 	correct += lerp_time( );
 
 	correct = std::clamp( correct, 0.f, sv_maxunlag );
@@ -27,17 +32,17 @@ bool lagcomp::impl::is_valid( record heap_record )
 
 float lagcomp::impl::lerp_time( )
 {
-	static auto update_rate  = g_convars[ _( "cl_updaterate" ) ]->get_int( );
-	static auto interp_ratio = std::max( g_convars[ _( "cl_interp_ratio" ) ]->get_float( ), 1.f );
+	// feel free to revert this if u want. fuck you pussy
+	static sdk::con_var *cl_updaterate = g_convars[ _( "cl_updaterate" ) ], *cl_interp_ratio = g_convars[ _( "cl_interp_ratio" ) ],
+						*cl_interp_ratio = g_convars[ _( "cl_interp_ratio" ) ], *cl_interp = g_convars[ _( "cl_interp" ) ],
+						*sv_client_min_interp_ratio = g_convars[ _( "sv_client_min_interp_ratio" ) ],
+						*sv_client_max_interp_ratio = g_convars[ _( "sv_client_max_interp_ratio" ) ];
 
-	static auto interp = g_convars[ _( "cl_interp" ) ]->get_float( );
+	static auto interp_ratio = std::max( cl_interp_ratio->get_float( ), 1.f );
 
-	static auto min_interp_ratio = g_convars[ _( "sv_client_min_interp_ratio" ) ]->get_float( );
-	static auto max_interp_ratio = g_convars[ _( "sv_client_max_interp_ratio" ) ]->get_float( );
+	interp_ratio = std::clamp( interp_ratio, sv_client_min_interp_ratio->get_float( ), sv_client_max_interp_ratio->get_float( ) );
 
-	interp_ratio = std::clamp( interp_ratio, min_interp_ratio, max_interp_ratio );
-
-	return std::max( interp, interp_ratio / update_rate );
+	return std::max( cl_interp->get_float( ), interp_ratio / cl_updaterate->get_int( ) );
 }
 
 void lagcomp::impl::update( )
@@ -79,14 +84,13 @@ void lagcomp::impl::backtrack_player( record* heap_record )
 	if ( !heap_record )
 		return;
 
-	g_ctx.cmd->tick_count = sdk::time_to_ticks( heap_record->simulation_time ) + sdk::time_to_ticks( lerp_time( ) );
+	g_ctx.cmd->tick_count = sdk::time_to_ticks( heap_record->simulation_time + lerp_time( ) );
 }
 
 void lagcomp::impl::backtrack_player( sdk::c_cs_player* player )
 {
 	static auto unlag_pointer = g_convars[ _( "sv_maxunlag" ) ];
-	auto sv_maxunlag          = unlag_pointer->get_float( );
-	auto sv_maxunlag_ticks    = sdk::time_to_ticks( sv_maxunlag );
+	auto sv_maxunlag_ticks    = sdk::time_to_ticks( unlag_pointer->get_float( ) );
 
 	auto entity_index = player->entity_index( );
 
