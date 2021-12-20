@@ -69,7 +69,7 @@ void particle_system::impl::run( )
 	if ( g_input.key_state< input::KEY_DOWN >( 'V' ) ) {
 		math::vec3 origin = g_ctx.local->get_abs_origin( );
 
-		void* system = get_particle_system_index( _( "explosion_molotov_air" ) );
+		void* system = get_particle_system_index( _( "molotov_groundfire" ) );
 		auto effect  = create_effect( system, &origin );
 		__asm add esp, 8;
 
