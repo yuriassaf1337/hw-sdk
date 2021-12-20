@@ -5,16 +5,19 @@ inline void* play_effect{ };
 void* particle_system::impl::get_particle_system_index( const char* system_name )
 {
 	using is_effect_chached_type = bool( __thiscall* )( void*, const char* );
-	static auto is_effect_cached = g_client_dll.pattern_scan( _( "E8 CC CC CC CC 8A 4D 10" ) ).as< is_effect_chached_type >( );
+	static auto is_effect_cached =
+		g_client_dll.pattern_scan( _( "55 8B EC 83 EC ? 53 56 57 8B 7D ? 8D 59 ? 85 FF" ) ).as< is_effect_chached_type >( );
 
-	using find_string_index_type  = void( __thiscall* )( void*, int*, const char* );
-	static auto find_string_index = g_client_dll.pattern_scan( _( "55 8B EC 83 EC ? 53 8B 5D ? 57 8B F9 89 7D ? 85 DB" ) ).as< find_string_index_type >( );
+	using find_string_index_type = void( __thiscall* )( void*, int*, const char* );
+	static auto find_string_index =
+		g_client_dll.pattern_scan( _( "55 8B EC 83 EC ? 53 8B 5D ? 57 8B F9 89 7D ? 85 DB" ) ).as< find_string_index_type >( );
 
-	//TODO @Dream: Fix these sigs please.
-	//https://www.unknowncheats.me/forum/counterstrike-global-offensive/482402-particle-system.html#post3324342
-	//https://gitlab.com/KittenPopo/csgo-2018-source/-/blob/main/game/shared/cstrike15/smokegrenade_projectile.cpp
+	// TODO @Dream: Fix these sigs please.
+	// https://www.unknowncheats.me/forum/counterstrike-global-offensive/482402-particle-system.html#post3324342
+	// https://gitlab.com/KittenPopo/csgo-2018-source/-/blob/main/game/shared/cstrike15/smokegrenade_projectile.cpp
 
-	static void* particle_system_manager = **reinterpret_cast< void*** >( g_client_dll.pattern_scan( _( "F3 0F 7E 87 ? ? ? ? 8B 8F ? ? ? ? 8B 87" ) ) + 0x3 );
+	static void* particle_system_manager =
+		**reinterpret_cast< void*** >( g_client_dll.pattern_scan( _( "55 8B EC 51 56 8B 35 ? ? ? ? 8B CE" ) ) + 0x7 );
 
 	void* system{ };
 
@@ -55,7 +58,7 @@ __declspec( naked ) sdk::c_effect* particle_system::impl::create_effect( void* s
 void particle_system::impl::run( )
 {
 	using set_control_point_type  = void( __thiscall* )( sdk::c_effect*, int, math::vec3* );
-	static auto set_control_point = g_client_dll.pattern_scan( "55 8B EC 53 8B 5D ? 56 8B F1 F6 86" ).as< set_control_point_type >( );
+	static auto set_control_point = g_client_dll.pattern_scan( _( "55 8B EC 53 8B 5D ? 56 8B F1 F6 86" ) ).as< set_control_point_type >( );
 
 	if ( !g_ctx.local )
 		return; // shew
@@ -66,7 +69,7 @@ void particle_system::impl::run( )
 	if ( g_input.key_state< input::KEY_DOWN >( 'V' ) ) {
 		math::vec3 origin = g_ctx.local->get_abs_origin( );
 
-		void* system = get_particle_system_index( "firework_crate_ground_effect" );
+		void* system = get_particle_system_index( _( "explosion_molotov_air" ) );
 		auto effect  = create_effect( system, &origin );
 		__asm add esp, 8;
 
