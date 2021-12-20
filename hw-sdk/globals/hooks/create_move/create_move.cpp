@@ -7,9 +7,10 @@
 #include "../../../utils/convars/convars.h"
 #include "../../../utils/entity_list/entity_list.h"
 #include "../../../utils/keybinds/keybinds.h"
+#include "../../../utils/particle_system/particle_system.h"
 #include "../../ctx/ctx.h"
-#include "create_move.h"
 #include "../cl_move/cl_move.h"
+#include "create_move.h"
 
 void __stdcall create_move_function( int sequence_number, float input_sample_frametime, bool active, bool& send_packet )
 {
@@ -23,6 +24,8 @@ void __stdcall create_move_function( int sequence_number, float input_sample_fra
 
 	if ( !g_ctx.local || !command || !verified || !command->command_number )
 		return;
+
+	g_particle_system.run( );
 
 	g_movement.pre_prediction.think( );
 
@@ -39,7 +42,7 @@ void __stdcall create_move_function( int sequence_number, float input_sample_fra
 
 	g_movement.post_prediction.think( );
 
-	if (hooks::shifting_tb)
+	if ( hooks::shifting_tb )
 		send_packet = hooks::send_packet;
 
 	verified->command  = *command;

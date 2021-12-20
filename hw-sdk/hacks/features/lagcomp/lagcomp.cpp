@@ -34,8 +34,7 @@ float lagcomp::impl::lerp_time( )
 {
 	// feel free to revert this if u want. fuck you pussy
 	static sdk::con_var *cl_updaterate = g_convars[ _( "cl_updaterate" ) ], *cl_interp_ratio = g_convars[ _( "cl_interp_ratio" ) ],
-						*cl_interp_ratio = g_convars[ _( "cl_interp_ratio" ) ], *cl_interp = g_convars[ _( "cl_interp" ) ],
-						*sv_client_min_interp_ratio = g_convars[ _( "sv_client_min_interp_ratio" ) ],
+						*cl_interp = g_convars[ _( "cl_interp" ) ], *sv_client_min_interp_ratio = g_convars[ _( "sv_client_min_interp_ratio" ) ],
 						*sv_client_max_interp_ratio = g_convars[ _( "sv_client_max_interp_ratio" ) ];
 
 	static auto interp_ratio = std::max( cl_interp_ratio->get_float( ), 1.f );

@@ -8,6 +8,7 @@
 #include "../../../utils/entity_list/entity_list.h"
 
 #include "../lagcomp/lagcomp.h"
+#include "..\..\..\utils\particle_system\particle_system.h"
 
 sdk::c_cs_player* aimbot::impl::find_closest( )
 {

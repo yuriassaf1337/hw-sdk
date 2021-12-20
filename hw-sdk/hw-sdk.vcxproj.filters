@@ -144,6 +144,9 @@
     <ClCompile Include="globals\hooks\anim_fix\anim_fix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="utils\particle_system\particle_system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals\includes\includes.h">
@@ -594,6 +597,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="globals\hooks\anim_fix\anim_fix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\particle_system\particle_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\sdk\classes\c_effect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
