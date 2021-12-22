@@ -53,7 +53,7 @@ math::box visuals::esp_box::calculate_box( sdk::c_cs_player* player, bool& on_sc
 	return math::box( ROUND_UP( left ), ROUND_UP( top ), ROUND_UP( right ), ROUND_UP( bottom ) );
 }
 
-void visuals::impl::update_box( esp_object& object )
+void visuals::impl::update_object( esp_object& object )
 {
 	object.m_box.m_cornered     = false;
 	object.m_box.m_outline[ 0 ] = true;
@@ -137,7 +137,7 @@ void visuals::impl::update( )
 		buffer_object.m_owner = player;
 
 		if ( true )
-			update_box( buffer_object );
+			update_object( buffer_object );
 	}
 }
 
@@ -237,4 +237,32 @@ void visuals::esp_text::render( math::box box, int offset )
 		position = math::vec2< int >( ( box.x - text_size.x ) - 1, ( ( box.y + text_size.y ) + ( ( text_size.y + 4 ) * offset ) ) - 10 );
 
 	g_render.render_text( position, font_alignment::AL_DEFAULT, m_flags, m_text.c_str( ), m_font, m_color );
+}
+
+void visuals::esp_bar::render( math::box box, int offset )
+{
+	auto text_size_buffer = g_render.render_text_size( m_text.c_str( ), m_font );
+	auto text_size        = math::vec2< int >( text_size_buffer.x, text_size_buffer.y );
+
+	math::vec2< int > start_position;
+	math::vec2< int > end_position;
+
+	if ( m_location == esp_location::LOCATION_TOP ) {
+		start_position = math::vec2< int >( box.x, box.y - m_width - 4 );
+		end_position   = math::vec2< int >( box.w, box.y );
+	}
+	if ( m_location == esp_location::LOCATION_BOTTOM ) {
+		start_position = math::vec2< int >( box.x, box.h );
+		end_position   = math::vec2< int >( box.w, box.h + m_width + 4 );
+	}
+	if ( m_location == esp_location::LOCATION_RIGHT ) {
+		start_position = math::vec2< int >( box.w, box.y );
+		end_position   = math::vec2< int >( box.w + m_width + 4, box.h );
+	}
+	if ( m_location == esp_location::LOCATION_LEFT ) {
+		start_position = math::vec2< int >( box.x - m_width - 4, box.y );
+		end_position   = math::vec2< int >( box.x, box.h );
+	}
+
+
 }

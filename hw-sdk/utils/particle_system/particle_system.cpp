@@ -12,10 +12,6 @@ void* particle_system::impl::get_particle_system_index( const char* system_name 
 	static auto find_string_index =
 		g_client_dll.pattern_scan( _( "55 8B EC 83 EC ? 53 8B 5D ? 57 8B F9 89 7D ? 85 DB" ) ).as< find_string_index_type >( );
 
-	// TODO @Dream: Fix these sigs please.
-	// https://www.unknowncheats.me/forum/counterstrike-global-offensive/482402-particle-system.html#post3324342
-	// https://gitlab.com/KittenPopo/csgo-2018-source/-/blob/main/game/shared/cstrike15/smokegrenade_projectile.cpp
-
 	static auto particle_system_manager = **g_client_dll.pattern_scan( _( "55 8B EC 51 56 8B 35 ? ? ? ? 8B CE" ) ).add( 0x7 ).as< void*** >( );
 
 	void* system{ };

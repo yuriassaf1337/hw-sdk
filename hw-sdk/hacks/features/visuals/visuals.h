@@ -46,6 +46,24 @@ namespace visuals
 		void render( math::box box, int offset );
 	};
 
+	struct esp_bar {
+	public:
+		void render( math::box box, int offset );
+
+		float m_width{ };
+
+		std::string m_text{ };
+
+		LPD3DXFONT m_font{ };
+
+		font_flags m_flags{ };
+
+		color m_color_from{ };
+		color m_color_to{ };
+
+		esp_location m_location{ };
+	};
+
 	struct esp_box {
 	private:
 		math::box calculate_box( sdk::c_cs_player* player, bool& on_screen );
@@ -76,7 +94,7 @@ namespace visuals
 
 	struct impl {
 	private:
-		void update_box( esp_object& object );
+		void update_object( esp_object& object );
 
 	public:
 		std::array< esp_object, 65 > esp_objects{ };
