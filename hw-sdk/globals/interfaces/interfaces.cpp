@@ -34,6 +34,8 @@ bool sdk::interfaces::init( )
 		panel = g_vgui2_dll.find_interface< sdk::i_panel* >( VGUI_PANEL_CLIENT_VERSION );
 
 		localize = g_localize_dll.find_interface< sdk::i_localize* >( LOCALIZE_LOCALIZE_VERSION );
+
+		model_render = g_engine_dll.find_interface< sdk::iv_model_render* >( VENGINE_MODEL_VERSION );
 	}
 
 	// virtuals

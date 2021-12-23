@@ -147,6 +147,9 @@
     <ClCompile Include="utils\particle_system\particle_system.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="globals\hooks\draw_model_execute\draw_model_execute.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals\includes\includes.h">
@@ -603,6 +606,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game\sdk\classes\c_effect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="globals\hooks\draw_model_execute\draw_model_execute.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\sdk\classes\iv_model_render.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\sdk\structs\model_render_info.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

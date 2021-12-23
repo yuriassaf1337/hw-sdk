@@ -5,6 +5,7 @@
 #include "anim_fix/anim_fix.h"
 #include "cl_move/cl_move.h"
 #include "create_move/create_move.h"
+#include "draw_model_execute/draw_model_execute.h"
 #include "emit_sound/emit_sound.h"
 #include "end_scene/end_scene.h"
 #include "frame_stage_notify/frame_stage_notify.h"
@@ -34,6 +35,7 @@ bool hooks::impl::init( )
 	hooks::update_client_side_animation::init( );
 	hooks::should_skip_animation_frame::init( );
 	hooks::process_interpolated_list::init( );
+	hooks::draw_model_execute::init( );
 
 	console::print< console::log_level::SUCCESS >( _( "Initialized all hooks." ) );
 
@@ -59,6 +61,7 @@ void hooks::impl::unload( )
 	hooks::update_client_side_animation::unload( );
 	hooks::should_skip_animation_frame::unload( );
 	hooks::process_interpolated_list::unload( );
+	hooks::draw_model_execute::unload( );
 
 	// this is so useless lol
 	if ( MH_Uninitialize( ) != MH_OK )

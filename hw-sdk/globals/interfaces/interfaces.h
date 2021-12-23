@@ -31,6 +31,7 @@ namespace sdk
 		sdk::i_material_system* material_system;
 		sdk::i_panel* panel;
 		sdk::i_localize* localize;
+		sdk::iv_model_render* model_render;
 
 		bool init( );
 	};
