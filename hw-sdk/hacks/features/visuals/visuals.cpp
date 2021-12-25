@@ -1,4 +1,4 @@
-#include "visuals.h"
+﻿#include "visuals.h"
 #include "../../../globals/ctx/ctx.h"
 #include <comdef.h>
 
@@ -263,6 +263,4 @@ void visuals::esp_bar::render( math::box box, int offset )
 		start_position = math::vec2< int >( box.x - m_width - 4, box.y );
 		end_position   = math::vec2< int >( box.x, box.h );
 	}
-
-
 }
