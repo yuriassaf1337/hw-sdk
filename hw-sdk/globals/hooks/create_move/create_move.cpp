@@ -12,11 +12,11 @@
 #include "../cl_move/cl_move.h"
 #include "create_move.h"
 
-void __stdcall create_move_function( int sequence_number, float input_sample_frametime, bool active, bool& send_packet )
+void __stdcall create_move_fn( int sequence_number, float input_sample_frametime, bool active, bool& send_packet )
 {
 	hooks::create_move_hook.call_original< void >( g_interfaces.client, nullptr, sequence_number, input_sample_frametime, active );
 
-	auto command  = g_interfaces.input->get_user_cmd( 0, sequence_number );
+	auto command  = g_interfaces.input->get_user_cmd( sequence_number );
 	auto verified = g_interfaces.input->get_verified_cmd( sequence_number );
 
 	// grab global cmd
@@ -61,7 +61,7 @@ __declspec( naked ) void __fastcall hooks::create_move::create_move_detour( sdk:
 		push dword ptr[active]
 		push dword ptr[input_sample_frametime]
 		push dword ptr[sequence_number]
-		call create_move_function
+		call create_move_fn
 		pop  ebx
 		pop  ebp
 		retn 0Ch
