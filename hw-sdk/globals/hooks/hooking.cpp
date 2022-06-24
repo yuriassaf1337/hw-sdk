@@ -2,6 +2,7 @@
 
 #include "../../dependencies/mocking_bird/mocking_bird.h"
 #include "../ctx/ctx.h"
+#include "alloc_key_value_memory/alloc_key_value_memory.h"
 #include "anim_fix/anim_fix.h"
 #include "cl_move/cl_move.h"
 #include "create_move/create_move.h"
@@ -36,6 +37,7 @@ bool hooks::impl::init( )
 	hooks::should_skip_animation_frame::init( );
 	hooks::process_interpolated_list::init( );
 	hooks::draw_model_execute::init( );
+	hooks::alloc_key_value_memory::init( );
 
 	console::print< console::log_level::SUCCESS >( _( "Initialized all hooks." ) );
 
@@ -47,6 +49,8 @@ bool hooks::impl::init( )
 void hooks::impl::unload( )
 {
 	MOCKING_TRY
+
+	// TODO: instead of unloading them 1 by one just unload with MH_ALL_HOOKS
 
 	hooks::wndproc::unload( );
 	hooks::end_scene::unload( );
@@ -62,6 +66,7 @@ void hooks::impl::unload( )
 	hooks::should_skip_animation_frame::unload( );
 	hooks::process_interpolated_list::unload( );
 	hooks::draw_model_execute::unload( );
+	hooks::alloc_key_value_memory::unload( );
 
 	// this is so useless lol
 	if ( MH_Uninitialize( ) != MH_OK )

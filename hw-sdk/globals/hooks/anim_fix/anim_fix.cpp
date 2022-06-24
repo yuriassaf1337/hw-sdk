@@ -11,7 +11,7 @@ void __fastcall hooks::standard_blending_rules::standard_blending_rules_detour( 
 
 		standard_blending_rules_hook.call_original< void >( player, edx, hdr, position, quaternion, curtime, bone_mask );
 
-		player->effects( ) = backup_effects;
+		player->effects( ).add( backup_effects );
 	} else {
 		standard_blending_rules_hook.call_original< void >( player, edx, hdr, position, quaternion, curtime, bone_mask );
 	}

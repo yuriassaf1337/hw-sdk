@@ -61,16 +61,16 @@ void particle_system::impl::run( )
 	if ( !play_effect )
 		play_effect = g_client_dll.pattern_scan( _( "55 8B EC 83 EC ? 53 56 8B F2 89 75" ) ).as< void* >( );
 
-	if ( g_input.key_state< input::KEY_DOWN >( 'V' ) ) {
-		math::vec3 origin = g_ctx.local->get_abs_origin( );
-
-		void* system = get_particle_system_index( _( "explosion_c4_500" ) );
-		auto effect  = create_effect( system, &origin );
-		__asm add esp, 8;
-
-		effect->origin( ) = origin;
-
-		set_control_point( effect, 0, &origin );
-		set_control_point( effect, 1, &origin );
-	}
+	// if ( g_input.key_state< input::KEY_DOWN >( 'V' ) ) {
+	//	math::vec3 origin = g_ctx.local->get_abs_origin( );
+	//
+	//	void* system = get_particle_system_index( _( "explosion_c4_500" ) );
+	//	auto effect  = create_effect( system, &origin );
+	//	__asm add esp, 8;
+	//
+	//	effect->origin( ) = origin;
+	//
+	//	set_control_point( effect, 0, &origin );
+	//	set_control_point( effect, 1, &origin );
+	// }
 }

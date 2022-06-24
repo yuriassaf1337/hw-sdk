@@ -8,8 +8,7 @@
 
 namespace input
 {
-	enum key_state_t
-	{
+	enum key_state_t {
 		KEY_NONE,
 		KEY_UP,
 		KEY_DOWN,
@@ -19,6 +18,9 @@ namespace input
 	constexpr static inline std::uint64_t MAX_RELEASED_TIME = 100;
 
 	struct keybind {
+		bool awaiting_input{ };
+		std::function< void( std::uint8_t, bool ) > poll_callback;
+
 		std::uint8_t virtual_key;
 		std::function< void( bool pressed ) > callback;
 	};
@@ -63,7 +65,7 @@ namespace input
 
 			std::uint64_t time = lazy_get_tickcount( );
 
-			if constexpr ( state == key_state_t::KEY_RELEASED ) {
+			if ( state == key_state_t::KEY_RELEASED ) {
 				if ( key.state == state )
 					if ( time - key.time <= input::MAX_RELEASED_TIME )
 						return key.state = key_state_t::KEY_UP;
@@ -77,6 +79,10 @@ namespace input
 
 		void add_keybind( std::uint8_t virtual_key, std::function< void( bool ) > callback );
 		void remove_keybind( std::uint8_t virtual_key );
+
+		void poll_keybind( std::function< void( std::uint8_t, bool ) > callback, std::function< void( bool ) > callback_fail = nullptr );
+
+		char* key_to_char( std::uint8_t virtual_key );
 	};
 } // namespace input
 

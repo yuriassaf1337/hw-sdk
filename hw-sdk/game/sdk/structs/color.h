@@ -7,17 +7,25 @@
 // https://docs.microsoft.com/en-us/cpp/error-messages/compiler-warnings/compiler-warning-levels-3-and-4-c4244?view=msvc-160
 #pragma warning( disable : 4244 )
 
+struct color;
+
+struct hsv {
+	int h{ }, s{ }, v{ }, a{ };
+
+	color to_color( );
+};
+
 struct color {
-	unsigned char r, g, b, a;
+	int r, g, b, a;
 
 	// ctors
 	color( ) : r{ 0 }, g{ 0 }, b{ 0 }, a{ 255 } { };
 
-	color( unsigned char re, unsigned char gr, unsigned char bl, unsigned char al = 255 ) : r{ re }, g{ gr }, b{ bl }, a{ al } { };
+	color( int re, int gr, int bl, int al = 255 ) : r{ re }, g{ gr }, b{ bl }, a{ al } { };
 
 	color( std::uint32_t hex ) : r( ( hex >> 24 ) & 0xFF ), g( ( hex >> 16 ) & 0xFF ), b( ( hex >> 8 ) & 0xFF ), a( hex & 0xFF ){ };
 
-	constexpr static auto MAX_ALPHA = ( unsigned char )255;
+	constexpr static int MAX_ALPHA = 255;
 
 	std::uint32_t to_u32( ) const
 	{
@@ -35,6 +43,38 @@ struct color {
 	D3DCOLOR to_d3d( ) const
 	{
 		return D3DCOLOR_ARGB( a, r, g, b );
+	}
+	hsv to_hsv( )
+	{
+		constexpr auto max_lambda = []( float a, float b, float c ) -> float { return ( ( a > b ) ? ( a > c ? a : c ) : ( b > c ? b : c ) ); };
+
+		constexpr auto min_lambda = []( float a, float b, float c ) -> float { return ( ( a < b ) ? ( a < c ? a : c ) : ( b < c ? b : c ) ); };
+
+		float hue, saturation, vibrance;
+		float red   = r / 255.f;
+		float green = g / 255.f;
+		float blue  = b / 255.f;
+
+		float cmax = max_lambda( red, green, blue );
+		float cmin = min_lambda( red, green, blue );
+		float diff = cmax - cmin;
+		if ( cmax == cmin )
+			hue = 0;
+		else if ( cmax == red )
+			hue = fmod( ( 60.f * ( ( green - blue ) / diff ) + 360.f ), 360.f );
+		else if ( cmax == green )
+			hue = fmod( ( 60.f * ( ( blue - red ) / diff ) + 120.f ), 360.f );
+		else if ( cmax == blue )
+			hue = fmod( ( 60.f * ( ( red - green ) / diff ) + 240.f ), 360.f );
+
+		if ( cmax == 0.f )
+			saturation = 0.f;
+		else
+			saturation = ( diff / cmax ) * 100.f;
+
+		vibrance = cmax * 100.f;
+
+		return { static_cast< int >( hue + 0.5f ), static_cast< int >( saturation + 0.5f ), static_cast< int >( vibrance + 0.5f ), a };
 	}
 	color lerp( const color col, const float t )
 	{

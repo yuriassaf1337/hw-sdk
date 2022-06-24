@@ -72,12 +72,6 @@
     <ClCompile Include="utils\renderer\renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="hacks\gui\window\window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="hacks\gui\cfg\cfg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="dependencies\checksum\checksum.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -85,12 +79,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="hacks\prediction\prediction.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="hacks\gui\gui.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="hacks\gui\gui_ctx\gui_ctx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="utils\netvar\netvar.cpp">
@@ -132,12 +120,6 @@
     <ClCompile Include="game\sdk\classes\c_cs_player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="hacks\gui\groupbox\groupbox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="hacks\gui\utils\ui_utils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="hacks\features\visuals\visuals.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -148,6 +130,36 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="globals\hooks\draw_model_execute\draw_model_execute.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="globals\hooks\alloc_key_value_memory\alloc_key_value_memory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\menu\config\config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\menu\window\tab\group\objects\checkbox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\menu\window\tab\group\objects\slider_float.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\menu\window\tab\group\objects\slider_int.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\menu\window\tab\group\group.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\menu\window\tab\tab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\menu\window\window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\menu\menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\sdk\structs\color.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -386,24 +398,6 @@
     <ClInclude Include="utils\renderer\renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="hacks\gui\gui.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="hacks\gui\window\window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="hacks\gui\includes\includes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="hacks\gui\utils\ui_utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="hacks\gui\cfg\cfg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="hacks\gui\anims\anims.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="game\sdk\structs\cnetmsg_signonstate_t.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -429,9 +423,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="hacks\prediction\prediction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="hacks\gui\gui_ctx\gui_ctx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="utils\netvar\netvar.h">
@@ -584,12 +575,6 @@
     <ClInclude Include="globals\hooks\frame_stage_notify\frame_stage_notify.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="hacks\gui\anims\effects.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="hacks\gui\groupbox\groupbox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="hacks\features\visuals\visuals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -617,15 +602,45 @@
     <ClInclude Include="game\sdk\structs\model_render_info.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="globals\hooks\alloc_key_value_memory\alloc_key_value_memory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\menu\menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\menu\config\config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\menu\window\tab\group\objects\base_object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\menu\window\tab\group\objects\checkbox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\menu\window\tab\group\objects\slider_float.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\menu\window\tab\group\objects\slider_int.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\menu\window\tab\group\group.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\menu\window\tab\tab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\menu\window\window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\json\json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="utils\math\math.inl">
       <Filter>Header Files</Filter>
     </None>
     <None Include="utils\console\console.inl">
-      <Filter>Header Files</Filter>
-    </None>
-    <None Include="hacks\gui\cfg\cfg.inl">
       <Filter>Header Files</Filter>
     </None>
     <None Include="utils\renderer\renderer.inl">

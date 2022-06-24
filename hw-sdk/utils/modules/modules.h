@@ -30,9 +30,9 @@ namespace modules
 
 		constexpr HMODULE get_module_handle_safe( const char* name );
 
-	private:
 		HMODULE module_handle{ };
 
+	private:
 		const char* module_name{ };
 
 		std::uintptr_t find_pattern( std::uint8_t* region_start, std::uintptr_t region_size, const char* pattern );

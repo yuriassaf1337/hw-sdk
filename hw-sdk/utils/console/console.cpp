@@ -14,7 +14,7 @@ bool console::init( )
 	if ( freopen_s( reinterpret_cast< _iobuf** >( stdout ), _( "CONOUT$" ), _( "w" ), stdout ) != 0 )
 		return false;
 
-	if ( !SetConsoleTitleA( _( "> hotwheels" ) ) )
+	if ( !SetConsoleTitleA( _( "> merdahook" ) ) )
 		return false;
 
 	console::console_handle = GetStdHandle( STD_OUTPUT_HANDLE );

@@ -26,6 +26,8 @@ void render::impl::init( IDirect3DDevice9* buffer_device )
 
 	g_fonts.create_font( _( "esp_font" ), 13, FW_NORMAL, false, _( "Verdana" ) );
 
+	g_fonts.create_font( _( "menu_font" ), 12, FW_NORMAL, false, _( "Verdana" ) );
+
 	console::print< console::log_level::DEBUG >( _( "Created {} fonts." ), g_fonts.font_list.size( ) );
 }
 
@@ -131,7 +133,7 @@ D3DXVECTOR2 render::impl::render_text_size( const char* string, LPD3DXFONT font 
 	return D3DXVECTOR2( static_cast< const short >( rect.right - rect.left ), static_cast< const short >( rect.bottom - rect.top ) );
 }
 
-const auto render::impl::get_viewport( )
+D3DVIEWPORT9 render::impl::get_viewport( )
 {
 	D3DVIEWPORT9 vp{ };
 	device->GetViewport( &vp );
@@ -230,6 +232,20 @@ void render::impl::render_text( int x, int y, unsigned int alignment, const font
 			font->DrawTextA( nullptr, string, -1, &rect, DT_LEFT | DT_NOCLIP, _color.to_d3d( ) );
 		}
 	}
+}
+
+void render::impl::render_circle( int x, int y, int radius, int segments, color color )
+{
+	vertex* verticies = new vertex[ segments + 1 ];
+
+	for ( int iterator = 0; iterator <= segments; iterator++ )
+		verticies[ iterator ] = vertex( x + radius * cos( D3DX_PI * ( iterator / ( segments / 2.f ) ) ),
+		                                y + radius * sin( D3DX_PI * ( iterator / ( segments / 2.f ) ) ), color );
+
+	device->SetFVF( D3DFVF_XYZRHW | D3DFVF_DIFFUSE );
+	device->DrawPrimitiveUP( D3DPT_LINESTRIP, segments, verticies, sizeof vertex );
+
+	delete[] verticies;
 }
 
 void fonts::impl::create_font( const char* name, std::size_t size, std::size_t weight, bool anti_aliased, const char* font_name )

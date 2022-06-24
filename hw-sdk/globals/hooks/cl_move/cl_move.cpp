@@ -9,16 +9,14 @@ static int charged = 0;
 
 void __cdecl hooks::cl_move::cl_move_detour( float accumulated_extra_samples, bool final_tick )
 {
-	auto can_charge = []( ) -> bool {
-		bool sure = false;
+	if ( charged < 16 && g_ctx.local && g_ctx.local->is_alive( ) ) {
+		charged++;
+		return;
+	}
 
-		if ( g_ctx.local )
-			sure = true;
+	hooks::cl_move_hook.call_original< void >( accumulated_extra_samples, final_tick );
 
-		return sure;
-	};
-
-	auto release = [ accumulated_extra_samples, final_tick ]( ) -> void {
+	if ( g_input.key_state< input::KEY_DOWN >( VK_HOME ) && charged == 16 ) {
 		shifting_tb = true;
 
 		for ( int i = 0; i < charged; i++ ) {
@@ -30,15 +28,5 @@ void __cdecl hooks::cl_move::cl_move_detour( float accumulated_extra_samples, bo
 		charged = 0;
 
 		shifting_tb = false;
-	};
-
-	if ( charged < 16 && can_charge( ) ) {
-		charged++;
-		return;
 	}
-
-	hooks::cl_move_hook.call_original< void >( accumulated_extra_samples, final_tick );
-
-	if ( g_input.key_state< input::KEY_DOWN >( VK_HOME ) && charged == 16 )
-		release( );
 }

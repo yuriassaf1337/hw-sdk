@@ -173,8 +173,10 @@
     <ClCompile Include="dependencies\minhook\src\trampoline.c" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="game\sdk\classes\c_cs_player.cpp" />
+    <ClCompile Include="game\sdk\structs\color.cpp" />
     <ClCompile Include="globals\csgo.cpp" />
     <ClCompile Include="globals\ctx\ctx.cpp" />
+    <ClCompile Include="globals\hooks\alloc_key_value_memory\alloc_key_value_memory.cpp" />
     <ClCompile Include="globals\hooks\anim_fix\anim_fix.cpp" />
     <ClCompile Include="globals\hooks\cl_move\cl_move.cpp" />
     <ClCompile Include="globals\hooks\create_move\create_move.cpp" />
@@ -193,13 +195,15 @@
     <ClCompile Include="hacks\features\lagcomp\lagcomp.cpp" />
     <ClCompile Include="hacks\features\movement\movement.cpp" />
     <ClCompile Include="hacks\features\visuals\visuals.cpp" />
-    <ClCompile Include="hacks\gui\cfg\cfg.cpp" />
-    <ClCompile Include="hacks\gui\groupbox\groupbox.cpp" />
-    <ClCompile Include="hacks\gui\gui_ctx\gui_ctx.cpp" />
-    <ClCompile Include="hacks\gui\gui.cpp" />
-    <ClCompile Include="hacks\gui\utils\ui_utils.cpp" />
-    <ClCompile Include="hacks\gui\window\window.cpp" />
     <ClCompile Include="hacks\logging\logging.cpp" />
+    <ClCompile Include="hacks\menu\config\config.cpp" />
+    <ClCompile Include="hacks\menu\menu.cpp" />
+    <ClCompile Include="hacks\menu\window\tab\group\group.cpp" />
+    <ClCompile Include="hacks\menu\window\tab\group\objects\checkbox.cpp" />
+    <ClCompile Include="hacks\menu\window\tab\group\objects\slider_float.cpp" />
+    <ClCompile Include="hacks\menu\window\tab\group\objects\slider_int.cpp" />
+    <ClCompile Include="hacks\menu\window\tab\tab.cpp" />
+    <ClCompile Include="hacks\menu\window\window.cpp" />
     <ClCompile Include="hacks\prediction\prediction.cpp" />
     <ClCompile Include="utils\entity_list\entity_list.cpp" />
     <ClCompile Include="utils\keybinds\keybinds.cpp" />
@@ -229,6 +233,7 @@
     <ClInclude Include="dependencies\formatting\fmt\printf.h" />
     <ClInclude Include="dependencies\formatting\fmt\ranges.h" />
     <ClInclude Include="dependencies\hash\hash.h" />
+    <ClInclude Include="dependencies\json\json.hpp" />
     <ClInclude Include="dependencies\lazy_importer\lazy_importer.h" />
     <ClInclude Include="dependencies\minhook\include\MinHook.h" />
     <ClInclude Include="dependencies\minhook\src\buffer.h" />
@@ -317,6 +322,7 @@
     <ClInclude Include="game\sdk\structs\weapon_data_t.h" />
     <ClInclude Include="globals\csgo.h" />
     <ClInclude Include="globals\ctx\ctx.h" />
+    <ClInclude Include="globals\hooks\alloc_key_value_memory\alloc_key_value_memory.h" />
     <ClInclude Include="globals\hooks\anim_fix\anim_fix.h" />
     <ClInclude Include="globals\hooks\cl_move\cl_move.h" />
     <ClInclude Include="globals\hooks\create_move\create_move.h" />
@@ -336,16 +342,16 @@
     <ClInclude Include="hacks\features\lagcomp\lagcomp.h" />
     <ClInclude Include="hacks\features\movement\movement.h" />
     <ClInclude Include="hacks\features\visuals\visuals.h" />
-    <ClInclude Include="hacks\gui\anims\anims.h" />
-    <ClInclude Include="hacks\gui\anims\effects.h" />
-    <ClInclude Include="hacks\gui\cfg\cfg.h" />
-    <ClInclude Include="hacks\gui\groupbox\groupbox.h" />
-    <ClInclude Include="hacks\gui\gui_ctx\gui_ctx.h" />
-    <ClInclude Include="hacks\gui\gui.h" />
-    <ClInclude Include="hacks\gui\includes\includes.h" />
-    <ClInclude Include="hacks\gui\utils\ui_utils.h" />
-    <ClInclude Include="hacks\gui\window\window.h" />
     <ClInclude Include="hacks\logging\logging.h" />
+    <ClInclude Include="hacks\menu\config\config.h" />
+    <ClInclude Include="hacks\menu\menu.h" />
+    <ClInclude Include="hacks\menu\window\tab\group\group.h" />
+    <ClInclude Include="hacks\menu\window\tab\group\objects\base_object.h" />
+    <ClInclude Include="hacks\menu\window\tab\group\objects\checkbox.h" />
+    <ClInclude Include="hacks\menu\window\tab\group\objects\slider_float.h" />
+    <ClInclude Include="hacks\menu\window\tab\group\objects\slider_int.h" />
+    <ClInclude Include="hacks\menu\window\tab\tab.h" />
+    <ClInclude Include="hacks\menu\window\window.h" />
     <ClInclude Include="hacks\prediction\prediction.h" />
     <ClInclude Include="utils\console\log_level\log_level.h" />
     <ClInclude Include="utils\convars\convars.h" />
@@ -369,7 +375,6 @@
     <ClInclude Include="utils\vfunc\vfunc.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="hacks\gui\cfg\cfg.inl" />
     <None Include="utils\console\console.inl" />
     <None Include="utils\math\math.inl" />
     <None Include="utils\modules\modules.inl" />

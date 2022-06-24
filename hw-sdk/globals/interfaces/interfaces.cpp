@@ -52,6 +52,8 @@ bool sdk::interfaces::init( )
 
 	client_state = **g_engine_dll.pattern_scan( _( "A1 ? ? ? ? 8B 88 ? ? ? ? 85 C9 75 07" ) ).add( 0x1 ).as< sdk::c_client_state*** >( );
 
+	key_values_system = reinterpret_cast< void*( __cdecl* )( ) >( LI_FN( GetProcAddress )( g_vstdlib_dll.module_handle, _( "KeyValuesSystem" ) ) )( );
+
 	MOCKING_CATCH( return false );
 
 	console::print< console::log_level::DEBUG >( _( "Initialized interfaces." ) );

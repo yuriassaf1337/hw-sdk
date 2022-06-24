@@ -14,22 +14,19 @@
 #pragma comment( lib, "d3d9.lib" )
 #pragma comment( lib, "d3dx9.lib" )
 
-enum font_flags : unsigned
-{
+enum font_flags : unsigned {
 	FLAG_NONE,
 	FLAG_DROPSHADOW,
 	FLAG_OUTLINE,
 	FLAG_OUTLINE_SEMI
 };
 
-enum class gradient_type_t
-{
+enum class gradient_type_t {
 	HORIZONTAL = 0,
 	VERTICAL
 };
 
-enum font_alignment : unsigned
-{
+enum font_alignment : unsigned {
 	AL_DEFAULT,
 	AL_VERTICAL_TOP,
 	AL_VERTICAL_CENTER,
@@ -117,6 +114,10 @@ namespace render
 		void render_text( const math::vec2< T >& pos, unsigned int alignment, const font_flags flags, const char* string, LPD3DXFONT font,
 		                  color color );
 
+		void render_circle( int x, int y, int radius, int segments, color color );
+		template< class T = int >
+		void render_circle( const math::vec2< T >& pos, const math::vec2< T >& size, color color );
+
 		template< auto gradient_type = gradient_type_t::HORIZONTAL >
 		void render_gradient( int x, int y, int width, int height, color from, color to );
 
@@ -127,7 +128,7 @@ namespace render
 		template< class T = int >
 		void quadratic_curve( const math::vec2< T >& start, const math::vec2< T >& control, const math::vec2< T >& end, color color );
 
-		const auto get_viewport( );
+		D3DVIEWPORT9 get_viewport( );
 		bool set_viewport( const math::vec2< int >& pos, const math::vec2< int >& size );
 		bool set_viewport( D3DVIEWPORT9 vp );
 	};

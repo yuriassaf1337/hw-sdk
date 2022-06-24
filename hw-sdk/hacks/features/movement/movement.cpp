@@ -1,5 +1,4 @@
 #include "movement.h"
-#include "../../gui/cfg/cfg.h"
 
 void movement::impl::pre_prediction::think( )
 {
@@ -40,7 +39,7 @@ void movement::impl::edgebug_t::run_ticks( const bool ducking )
 	std::memcpy( m_backup.cmd, g_ctx.cmd, sizeof( sdk::c_user_cmd ) );
 
 	// loop through ticks
-	for ( int m_tick = 0; m_tick <= g_cfg.get< int >( HASH( "eb_ticks" ) ); m_tick++ ) { }
+	// for ( int m_tick = 0; m_tick <= g_cfg.get< int >( HASH( "eb_ticks" ) ); m_tick++ ) { }
 
 	// set current pointers to backed up pointers
 	std::memcpy( g_ctx.local, m_backup.local, 0x3870 );

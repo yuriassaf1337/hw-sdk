@@ -5,12 +5,14 @@
 #include "../../dependencies/audio/soilder/loaded.h"
 
 #include "../../globals/ctx/ctx.h"
-#include "../../hacks/gui/cfg/cfg.h"
+#include "../../hacks/menu/config/config.h"
 #include "../../utils/helpers/function_enforce/function_enforce.h"
 #include "../../utils/keybinds/keybinds.h"
 #include "../csgo.h"
 #include "../hooks/hooking.h"
 #include "../interfaces/interfaces.h"
+
+#include "../../hacks/menu/menu.h"
 #include <sapi.h>
 
 DWORD WINAPI hotwheels::init( void* module_handle )
@@ -25,7 +27,7 @@ DWORD WINAPI hotwheels::init( void* module_handle )
 
 	ENFORCE_FAILURE( g_interfaces.init( ), "Failed to init interfaces" );
 
-	ENFORCE_FAILURE( g_cfg.init( ), "Failed to init cfgs" );
+	ENFORCE_FAILURE( g_menu.init( ), "Failed to init menu" );
 
 	ENFORCE_FAILURE( g_hooks.init( ), "Failed to init hooks" );
 
