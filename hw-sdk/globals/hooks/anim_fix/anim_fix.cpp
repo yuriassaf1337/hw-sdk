@@ -4,14 +4,14 @@
 void __fastcall hooks::standard_blending_rules::standard_blending_rules_detour( sdk::c_cs_player* player, void* edx, void* hdr, math::vec3* position,
                                                                                 math::quaternion< float >* quaternion, float curtime, int bone_mask )
 {
-	auto backup_effects = player->effects( );
+	const auto backup_effects = player->effects( );
 
 	if ( player == g_ctx.local ) {
 		player->effects( ).remove( 0x8 );
 
 		standard_blending_rules_hook.call_original< void >( player, edx, hdr, position, quaternion, curtime, bone_mask );
 
-		player->effects( ) = backup_effects;
+		player->effects( ).add( backup_effects );
 	} else {
 		standard_blending_rules_hook.call_original< void >( player, edx, hdr, position, quaternion, curtime, bone_mask );
 	}

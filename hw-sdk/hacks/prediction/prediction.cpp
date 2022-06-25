@@ -10,6 +10,7 @@ void prediction::impl::store_backup( )
 	g_prediction.backup_vars.velocity      = g_ctx.local->velocity( );
 	g_prediction.backup_vars.fall_velocity = g_ctx.local->fall_velocity( );
 	g_prediction.backup_vars.move_type     = g_ctx.local->move_type( );
+	g_prediction.backup_vars.view_angles   = g_ctx.cmd->view_angles;
 }
 
 void prediction::impl::update( )

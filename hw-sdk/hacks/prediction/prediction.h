@@ -21,6 +21,7 @@ namespace prediction
 
 		struct {
 			math::vec3 velocity;
+			math::vec3 view_angles;
 			float fall_velocity;
 			int_flag flags;
 			int_flag move_type;

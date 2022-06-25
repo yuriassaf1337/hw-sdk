@@ -48,8 +48,8 @@ void logging::impl::think( )
 		g_render.render_text( x, y, font_alignment::AL_DEFAULT, font_flags::FLAG_DROPSHADOW, log.m_prefix.data( ),
 		                      g_fonts[ HASH( "main_font_bold" ) ], g_config.find< color >( _( "menu_color" ) ) );
 
-		g_render.render_text( x + 3 + g_render.render_text_size( log.m_text.data( ), g_fonts[ HASH( "main_font" ) ] ).x, y,
-		                      font_alignment::AL_DEFAULT, font_flags::FLAG_DROPSHADOW, log.m_text.data( ), g_fonts[ HASH( "main_font" ) ],
+		g_render.render_text( x + 3 + g_render.render_text_size( log.m_text.data( ), g_fonts[ HASH( "main_font_bold" ) ] ).x, y,
+		                      font_alignment::AL_DEFAULT, font_flags::FLAG_DROPSHADOW, log.m_text.data( ), g_fonts[ HASH( "main_font_bold" ) ],
 		                      draw_color );
 		y += size;
 	}

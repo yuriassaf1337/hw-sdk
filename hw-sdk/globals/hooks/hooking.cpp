@@ -32,7 +32,7 @@ bool hooks::impl::init( )
 	hooks::wndproc::init( );
 	hooks::end_scene::init( );
 	hooks::create_move::init( );
-	hooks::cl_move::init( );
+	// hooks::cl_move::init( );
 	hooks::item_post_frame::init( );
 	hooks::emit_sound::init( );
 	hooks::glow_effect_spectator::init( );
@@ -66,7 +66,7 @@ void hooks::impl::unload( )
 	hooks::wndproc::unload( );
 	hooks::end_scene::unload( );
 	hooks::create_move::unload( );
-	hooks::cl_move::unload( );
+	// hooks::cl_move::unload( );
 	hooks::item_post_frame::unload( );
 	hooks::emit_sound::unload( );
 	hooks::paint_traverse::unload( );
