@@ -7,8 +7,8 @@ void movement::impl::pre_prediction::think( )
 	if ( !g_ctx.local->is_alive( ) || !g_interfaces.engine->connected_safe( ) )
 		return;
 
-	if ( !g_ctx.cmd->buttons.has( sdk::IN_BULLRUSH ) )
-		g_ctx.cmd->buttons.add( sdk::IN_BULLRUSH );
+	// if ( !g_ctx.cmd->buttons.has( sdk::IN_BULLRUSH ) )
+	// 	g_ctx.cmd->buttons.add( sdk::IN_BULLRUSH );
 
 	g_movement.bhop( );
 
@@ -19,6 +19,8 @@ void movement::impl::post_prediction::think( )
 {
 	if ( !g_ctx.local->is_alive( ) || !g_interfaces.engine->connected_safe( ) )
 		return;
+
+	g_movement.jump_bug( );
 }
 
 void movement::impl::movement_fix( sdk::c_user_cmd* command, math::vec3 old_view_angle )
@@ -27,11 +29,9 @@ void movement::impl::movement_fix( sdk::c_user_cmd* command, math::vec3 old_view
 
 	static auto cl_forwardspeed = g_convars[ _( "cl_forwardspeed" ) ];
 	static auto cl_sidespeed    = g_convars[ _( "cl_sidespeed" ) ];
-	static auto cl_upspeed      = g_convars[ _( "cl_upspeed" ) ];
 
 	float max_forward_speed = cl_forwardspeed->get_float( );
 	float max_side_speed    = cl_sidespeed->get_float( );
-	float max_up_speed      = cl_upspeed->get_float( );
 
 	math::vec3 forward{ }, right{ }, up{ };
 	math::angle_vectors( old_view_angle, &forward, &right, &up );
@@ -64,40 +64,9 @@ void movement::impl::movement_fix( sdk::c_user_cmd* command, math::vec3 old_view
 
 	command->forward_move = std::clamp( x, -max_forward_speed, max_forward_speed );
 	command->side_move    = std::clamp( y, -max_side_speed, max_side_speed );
-	command->up_move      = std::clamp( z, -max_up_speed, max_up_speed );
 }
 
-void movement::impl::jump_bug( )
-{
-	static bool jump_bugged = false;
-
-	bool is_on_ground = !( g_prediction.backup_vars.flags.has( sdk::ONGROUND ) ) && g_ctx.local->flags( ).has( sdk::ONGROUND );
-
-	if ( !g_input.key_state< input::KEY_DOWN >( VK_SPACE ) ) {
-		if ( is_on_ground && !jump_bugged ) {
-			g_ctx.cmd->buttons.add( sdk::IN_DUCK );
-			jump_bugged = true;
-		} else {
-			jump_bugged = false;
-		}
-
-		if ( g_prediction.backup_vars.flags.has( sdk::ONGROUND ) && jump_bugged )
-			jump_bugged = false;
-	} else {
-		int pre_flags = g_ctx.local->flags( );
-
-		g_prediction.start( g_ctx.local );
-		g_prediction.end( g_ctx.local );
-
-		if ( g_prediction.backup_vars.flags.has( sdk::ONGROUND ) || !( g_ctx.local->flags( ).has( sdk::ONGROUND ) ) )
-			jump_bugged = false;
-		else {
-			g_ctx.cmd->buttons.add( sdk::IN_DUCK );
-			g_ctx.cmd->buttons.remove( sdk::IN_JUMP );
-			jump_bugged = true;
-		}
-	}
-}
+void movement::impl::jump_bug( ) { }
 
 void movement::impl::mini_hop( )
 {

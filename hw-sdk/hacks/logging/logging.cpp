@@ -38,7 +38,7 @@ void logging::impl::think( )
 
 			f /= .5f;
 
-			draw_color.a = ( int )( f * 255.f );
+			draw_color.a = static_cast< int >( f * 255.f );
 
 			if ( i == 0 && f < 0.2f )
 				y -= size * ( 1.f - f / 0.2f );
@@ -48,7 +48,7 @@ void logging::impl::think( )
 		g_render.render_text( x, y, font_alignment::AL_DEFAULT, font_flags::FLAG_DROPSHADOW, log.m_prefix.data( ),
 		                      g_fonts[ HASH( "main_font_bold" ) ], g_config.find< color >( _( "menu_color" ) ) );
 
-		g_render.render_text( x + 3 + g_render.render_text_size( log.m_text.data( ), g_fonts[ HASH( "main_font_bold" ) ] ).x, y,
+		g_render.render_text( x + g_render.render_text_size( log.m_text.data( ), g_fonts[ HASH( "main_font_bold" ) ] ).x, y,
 		                      font_alignment::AL_DEFAULT, font_flags::FLAG_DROPSHADOW, log.m_text.data( ), g_fonts[ HASH( "main_font_bold" ) ],
 		                      draw_color );
 		y += size;

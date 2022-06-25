@@ -98,7 +98,7 @@ void menu::group::input( int& window_x, int& window_y, int& size_x, int& size_y,
 
 		if ( menu::window::inside_position( { mouse_x, mouse_y }, { group_position_x, group_position_y }, { group_width, group_height } ) &&
 		     needed_scroll_amount > 0 ) {
-			scroll_amount = std::clamp( scroll_amount + g_input.mouse.scroll_amt, 0, needed_scroll_amount );
+			scroll_amount = std::clamp( scroll_amount + ( g_input.mouse.scroll_amt * 5 ), 0, needed_scroll_amount );
 
 			g_input.mouse.scroll_amt = 0;
 		}
