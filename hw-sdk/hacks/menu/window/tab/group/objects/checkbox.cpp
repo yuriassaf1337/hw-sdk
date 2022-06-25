@@ -45,7 +45,7 @@ void menu::check_box::draw( int& group_x, int& group_y, int& group_width, int& g
 	// ur mic is shit btw blanket
 
 	auto menu_color = g_config.find< color >( _( "menu_color" ) );
-	auto menu_font  = g_fonts[ _( "menu_font" ) ];
+	auto menu_font  = g_fonts[ HASH( "menu_font" ) ];
 
 	auto font_size = g_render.render_text_size( _( option_name.c_str( ) ), menu_font );
 
@@ -83,7 +83,7 @@ void menu::check_box::input( int& group_x, int& group_y, int& group_width, int& 
 	auto mouse_y = g_input.mouse.pos.y;
 
 	auto menu_color = g_config.find< color >( _( "menu_color" ) );
-	auto menu_font  = g_fonts[ _( "menu_font" ) ];
+	auto menu_font  = g_fonts[ HASH( "menu_font" ) ];
 
 	auto font_size = g_render.render_text_size( _( option_name.c_str( ) ), menu_font );
 
@@ -117,7 +117,7 @@ void menu::check_box::input( int& group_x, int& group_y, int& group_width, int& 
 void menu::check_box::color_picker_draw( int& group_x, int& group_y, int& group_width, int& group_height )
 {
 	auto menu_color = g_config.find< color >( _( "menu_color" ) );
-	auto menu_font  = g_fonts[ _( "menu_font" ) ];
+	auto menu_font  = g_fonts[ HASH( "menu_font" ) ];
 
 	auto font_size = g_render.render_text_size( _( option_name.c_str( ) ), menu_font );
 
@@ -138,7 +138,7 @@ void menu::check_box::color_picker_input( int& group_x, int& group_y, int& group
 	auto mouse_y = g_input.mouse.pos.y;
 
 	auto menu_color = g_config.find< color >( _( "menu_color" ) );
-	auto menu_font  = g_fonts[ _( "menu_font" ) ];
+	auto menu_font  = g_fonts[ HASH( "menu_font" ) ];
 
 	auto font_size = g_render.render_text_size( _( option_name.c_str( ) ), menu_font );
 
@@ -161,7 +161,7 @@ void menu::check_box::color_picker_input( int& group_x, int& group_y, int& group
 void menu::check_box::key_bind_draw( int& group_x, int& group_y, int& group_width, int& group_height )
 {
 	auto menu_color = g_config.find< color >( _( "menu_color" ) );
-	auto menu_font  = g_fonts[ _( "menu_font" ) ];
+	auto menu_font  = g_fonts[ HASH( "menu_font" ) ];
 
 	auto keybind_char = g_config.find< std::uint8_t >( keybind_hash );
 
@@ -186,7 +186,7 @@ void menu::check_box::key_bind_input( int& group_x, int& group_y, int& group_wid
 	auto mouse_y = g_input.mouse.pos.y;
 
 	auto menu_color = g_config.find< color >( _( "menu_color" ) );
-	auto menu_font  = g_fonts[ _( "menu_font" ) ];
+	auto menu_font  = g_fonts[ HASH( "menu_font" ) ];
 
 	auto keybind_char = g_config.find< std::uint8_t >( keybind_hash );
 

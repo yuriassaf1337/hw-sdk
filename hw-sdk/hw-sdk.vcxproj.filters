@@ -180,6 +180,9 @@
     <ClCompile Include="globals\hooks\send_net_msg\send_net_msg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="globals\hooks\alloc_key_value_memory\alloc_key_value_memory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals\includes\includes.h">
@@ -687,6 +690,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="globals\hooks\send_net_msg\send_net_msg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="globals\hooks\alloc_key_value_memory\alloc_key_value_memory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

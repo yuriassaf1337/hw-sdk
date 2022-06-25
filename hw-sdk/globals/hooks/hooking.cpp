@@ -2,6 +2,7 @@
 
 #include "../../dependencies/mocking_bird/mocking_bird.h"
 #include "../ctx/ctx.h"
+#include "alloc_key_value_memory/alloc_key_value_memory.h"
 #include "anim_fix/anim_fix.h"
 #include "cl_move/cl_move.h"
 #include "create_move/create_move.h"
@@ -47,6 +48,7 @@ bool hooks::impl::init( )
 	hooks::send_net_msg::init( );
 	hooks::fire_event_intern::init( );
 	hooks::return_address::init( );
+	hooks::alloc_key_value_memory::init( );
 
 	console::print< console::log_level::SUCCESS >( _( "Initialized all hooks." ) );
 
@@ -79,6 +81,7 @@ void hooks::impl::unload( )
 	hooks::send_net_msg::unload( );
 	hooks::fire_event_intern::unload( );
 	hooks::return_address::unload( );
+	hooks::alloc_key_value_memory::unload( );
 
 	// this is so useless lol
 	if ( MH_Uninitialize( ) != MH_OK )

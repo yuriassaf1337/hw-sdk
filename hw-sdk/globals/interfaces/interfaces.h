@@ -34,6 +34,7 @@ namespace sdk
 		sdk::iv_model_render* model_render;
 		sdk::iv_model_info* model_info;
 		void* file_system;
+		void* key_values_system;
 
 		bool init( );
 	};

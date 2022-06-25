@@ -7,7 +7,7 @@ void menu::slider_float::draw( int& group_x, int& group_y, int& group_width, int
 	// ur mic is shit btw blanket
 
 	auto menu_color = g_config.find< color >( _( "menu_color" ) );
-	auto menu_font  = g_fonts[ _( "menu_font" ) ];
+	auto menu_font  = g_fonts[ HASH( "menu_font" ) ];
 
 	auto font_size = g_render.render_text_size( _( option_name.c_str( ) ), menu_font );
 
@@ -56,7 +56,7 @@ void menu::slider_float::input( int& group_x, int& group_y, int& group_width, in
 	auto mouse_y = g_input.mouse.pos.y;
 
 	auto menu_color = g_config.find< color >( _( "menu_color" ) );
-	auto menu_font  = g_fonts[ _( "menu_font" ) ];
+	auto menu_font  = g_fonts[ HASH( "menu_font" ) ];
 
 	auto font_size = g_render.render_text_size( _( option_name.c_str( ) ), menu_font );
 

@@ -4,7 +4,7 @@
 void menu::group::draw( int& window_x, int& window_y, int& size_x, int& size_y, int current_index )
 {
 	auto menu_color = g_config.find< color >( _( "menu_color" ) );
-	auto menu_font  = g_fonts[ _( "menu_font" ) ];
+	auto menu_font  = g_fonts[ HASH( "menu_font" ) ];
 
 	if ( position & static_cast< int >( group_position::GROUP_LEFT ) ) {
 		int group_width     = ( size_x - 6 ) / 2;
@@ -84,7 +84,7 @@ void menu::group::input( int& window_x, int& window_y, int& size_x, int& size_y,
 	auto mouse_y = g_input.mouse.pos.y;
 
 	auto menu_color = g_config.find< color >( _( "menu_color" ) );
-	auto menu_font  = g_fonts[ _( "menu_font" ) ];
+	auto menu_font  = g_fonts[ HASH( "menu_font" ) ];
 
 	if ( position & static_cast< int >( group_position::GROUP_LEFT ) ) {
 		int group_width     = ( size_x - 6 ) / 2;

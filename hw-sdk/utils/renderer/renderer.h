@@ -14,22 +14,19 @@
 #pragma comment( lib, "d3d9.lib" )
 #pragma comment( lib, "d3dx9.lib" )
 
-enum font_flags : unsigned
-{
+enum font_flags : unsigned {
 	FLAG_NONE,
 	FLAG_DROPSHADOW,
 	FLAG_OUTLINE,
 	FLAG_OUTLINE_SEMI
 };
 
-enum class gradient_type_t
-{
+enum class gradient_type_t {
 	HORIZONTAL = 0,
 	VERTICAL
 };
 
-enum font_alignment : unsigned
-{
+enum font_alignment : unsigned {
 	AL_DEFAULT           = ( 1 << 0 ),
 	AL_VERTICAL_TOP      = ( 1 << 1 ),
 	AL_VERTICAL_CENTER   = ( 1 << 2 ),
@@ -158,11 +155,6 @@ namespace fonts
 		LPD3DXFONT operator[]( std::uint32_t hash )
 		{
 			return find( hash );
-		}
-
-		LPD3DXFONT operator[]( std::string string )
-		{
-			return find( HASH( string ) );
 		}
 	};
 } // namespace fonts
