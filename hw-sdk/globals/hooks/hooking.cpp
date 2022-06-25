@@ -24,8 +24,10 @@ bool hooks::impl::init( )
 {
 	MOCKING_TRY
 
-	if ( MH_Initialize( ) != MH_OK )
+	if ( MH_Initialize( ) != MH_OK ) {
+		console::print< console::log_level::FATAL >( _( "MH_Initialize was not MH_OK" ) );
 		return false;
+	}
 
 	hooks::wndproc::init( );
 	hooks::end_scene::init( );
