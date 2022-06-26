@@ -7,15 +7,14 @@
 #include "../../../utils/convars/convars.h"
 #include "../../../utils/entity_list/entity_list.h"
 
+#include "../../../utils/particle_system/particle_system.h"
+#include "../../logging/logging.h"
 #include "../lagcomp/lagcomp.h"
-#include "..\..\..\utils\particle_system\particle_system.h"
 
 sdk::c_cs_player* aimbot::impl::find_closest( )
 {
 	float closest_fov                = FLT_MAX;
 	sdk::c_cs_player* closest_player = nullptr;
-
-	math::vec3 local_angles = g_interfaces.engine->get_view_angles( );
 
 	for ( auto& player_info : g_entity_list.players ) {
 		auto player = g_interfaces.entity_list->get_client_entity< sdk::c_cs_player* >( player_info.m_index );
@@ -23,7 +22,7 @@ sdk::c_cs_player* aimbot::impl::find_closest( )
 		if ( !player_info.m_valid || !player )
 			continue;
 
-		auto player_fov = math::get_fov( local_angles, g_ctx.local->eye_position( ), player->eye_position( ) );
+		auto player_fov = math::get_fov( g_ctx.cmd->view_angles, g_ctx.local->eye_position( ), player->eye_position( ) );
 
 		if ( player_fov < closest_fov ) {
 			closest_fov    = player_fov;
@@ -88,13 +87,21 @@ void aimbot::impl::run( )
 		math::vector_angles( forward_to_head, angles_to_head );
 	}
 
-	auto recoil_scale = g_convars[ _( "weapon_recoil_scale" ) ]->get_float( );
-	auto recoil_angle = g_ctx.local->aim_punch_angle( ) * ( recoil_scale * -1.f );
+	static auto recoil_scale = g_convars[ _( "weapon_recoil_scale" ) ];
+	auto recoil_angle        = g_ctx.local->aim_punch_angle( ) * ( recoil_scale->get_float( ) * -1.f );
 
 	angles_to_head += recoil_angle;
 
 	angles_to_head = angles_to_head.normalize( );
 
-	if ( head_hitchance > 70 && g_ctx.weapon->can_shoot_primary( ) )
+	if ( head_hitchance > 70 && g_ctx.weapon->can_shoot_primary( ) ) {
+		if ( g_ctx.record ) {
+			auto out = console::format( _( "hit player {} [ tick: {} | health: {} | chance: {} | fall: {} ]" ), entity->name( ),
+			                            sdk::time_to_ticks( g_ctx.record->simulation_time + g_lagcomp.lerp_time( ) ), entity->health( ),
+			                            ( int )head_hitchance, ( int )entity->velocity( ).z );
+			g_log.print( out );
+		}
+		g_interfaces.engine->set_view_angles( angles_to_head );
 		g_ctx.cmd->view_angles = angles_to_head;
+	}
 }

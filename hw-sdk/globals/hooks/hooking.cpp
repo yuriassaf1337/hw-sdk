@@ -4,6 +4,7 @@
 #include "../ctx/ctx.h"
 #include "alloc_key_value_memory/alloc_key_value_memory.h"
 #include "anim_fix/anim_fix.h"
+#include "calculate_view/calculate_view.h"
 #include "cl_move/cl_move.h"
 #include "create_move/create_move.h"
 #include "draw_model_execute/draw_model_execute.h"
@@ -15,6 +16,7 @@
 #include "is_loose_file_allowed/is_loose_file_allowed.h"
 #include "item_post_frame/item_post_frame.h"
 #include "list_leaves_in_box/list_leaves_in_box.h"
+#include "modify_eye_position/modify_eye_position.h"
 #include "paint_traverse/paint_traverse.h"
 #include "return_address/return_address.h"
 #include "send_net_msg/send_net_msg.h"
@@ -51,6 +53,8 @@ bool hooks::impl::init( )
 	hooks::fire_event_intern::init( );
 	hooks::return_address::init( );
 	hooks::alloc_key_value_memory::init( );
+	hooks::modify_eye_position::init( );
+	// hooks::calculate_view::init( );
 
 	console::print< console::log_level::SUCCESS >( _( "Initialized all hooks." ) );
 
@@ -84,6 +88,8 @@ void hooks::impl::unload( )
 	hooks::fire_event_intern::unload( );
 	hooks::return_address::unload( );
 	hooks::alloc_key_value_memory::unload( );
+	hooks::modify_eye_position::unload( );
+	// hooks::calculate_view::unload( );
 
 	// this is so useless lol
 	if ( MH_Uninitialize( ) != MH_OK )

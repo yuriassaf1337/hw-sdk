@@ -17,7 +17,7 @@ void __fastcall hooks::frame_stage_notify::frame_stage_notify_detour( void* self
 		for ( auto& player_info : g_entity_list.players ) {
 			auto player = g_interfaces.entity_list->get_client_entity< sdk::c_cs_player* >( player_info.m_index );
 
-			if ( !player_info.m_valid || !player )
+			if ( !player_info.m_valid || !player || !player->is_enemy( g_ctx.local ) )
 				continue;
 
 			g_ctx.updating_animations = true;

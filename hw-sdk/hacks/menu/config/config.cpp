@@ -1,12 +1,13 @@
 #include "config.h"
 #include "../../../dependencies/json/json.hpp"
+#include "../../logging/logging.h"
 
 bool config::impl::init( )
 {
 	return true;
 }
 
-void config::impl::save( std::string path )
+void config::impl::save( const std::string path )
 {
 	using namespace nlohmann;
 
@@ -41,9 +42,11 @@ void config::impl::save( std::string path )
 	stream << std::setw( 4 ) << reader << std::endl;
 
 	stream.close( );
+
+	g_log.print( console::format( _( "saved cfg {}" ), path ), _( "[config]" ), 10.f );
 }
 
-void config::impl::load( std::string path )
+void config::impl::load( const std::string path )
 {
 	using namespace nlohmann;
 
@@ -82,6 +85,8 @@ void config::impl::load( std::string path )
 			break;
 		}
 	}
+
+	g_log.print( console::format( _( "loaded cfg {}" ), path ), _( "[config]" ), 10.f );
 }
 
 void config::impl::insert( std::uint32_t hash, option _option )

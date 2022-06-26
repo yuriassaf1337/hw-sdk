@@ -6,10 +6,10 @@ void menu::slider_float::draw( int& group_x, int& group_y, int& group_width, int
 {
 	// ur mic is shit btw blanket
 
-	auto menu_color = g_config.find< color >( _( "menu_color" ) );
+	auto menu_color = g_config.find< color >( HASH( "menu_color" ) );
 	auto menu_font  = g_fonts[ HASH( "menu_font" ) ];
 
-	auto font_size = g_render.render_text_size( _( option_name.c_str( ) ), menu_font );
+	auto font_size = g_render.render_text_size( option_name.c_str( ), menu_font );
 
 	int slider_x = group_x + font_size.y / 2 - 5;
 	int slider_y = group_y + font_size.y / 2 + 3;
@@ -22,7 +22,7 @@ void menu::slider_float::draw( int& group_x, int& group_y, int& group_width, int
 
 	auto& option = g_config.find< float >( option_hash, option_min, option_max );
 
-	g_render.render_text( slider_x + font_size.y / 2, slider_y + 4, AL_VERTICAL_CENTER, FLAG_NONE, _( option_name.c_str( ) ), menu_font,
+	g_render.render_text( slider_x + font_size.y / 2, slider_y + 4, AL_VERTICAL_CENTER, FLAG_NONE, option_name.c_str( ), menu_font,
 	                      color( 255, 255, 255 ) );
 
 	g_render.render_text( slider_border_width, slider_y + 5, AL_HORIZONTAL_LEFT | AL_VERTICAL_CENTER, FLAG_NONE,
@@ -55,10 +55,10 @@ void menu::slider_float::input( int& group_x, int& group_y, int& group_width, in
 	auto mouse_x = g_input.mouse.pos.x;
 	auto mouse_y = g_input.mouse.pos.y;
 
-	auto menu_color = g_config.find< color >( _( "menu_color" ) );
+	auto menu_color = g_config.find< color >( HASH( "menu_color" ) );
 	auto menu_font  = g_fonts[ HASH( "menu_font" ) ];
 
-	auto font_size = g_render.render_text_size( _( option_name.c_str( ) ), menu_font );
+	auto font_size = g_render.render_text_size( option_name.c_str( ), menu_font );
 
 	int slider_x = group_x + font_size.y / 2 - 5;
 	int slider_y = group_y + font_size.y / 2 + 3;

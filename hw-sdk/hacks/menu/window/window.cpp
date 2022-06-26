@@ -2,7 +2,7 @@
 
 void menu::window::draw( int& window_x, int& window_y, int& size_x, int& size_y )
 {
-	auto menu_color = g_config.find< color >( _( "menu_color" ) );
+	auto menu_color = g_config.find< color >( HASH( "menu_color" ) );
 	auto menu_font  = g_fonts[ HASH( "menu_font" ) ];
 
 	g_render.render_filled_rectangle( window_x, window_y, size_x, size_y, color( 12, 12, 12 ) );
@@ -13,11 +13,16 @@ void menu::window::draw( int& window_x, int& window_y, int& size_x, int& size_y 
 	g_render.render_gradient( window_x + 3, window_y + 22, ( size_x - 6 ) / 2, 1, color( 0, 0, 0, 0 ), menu_color );
 	g_render.render_gradient( ( window_x + 3 ) + ( size_x - 6 ) / 2, window_y + 22, ( size_x - 6 ) / 2, 1, menu_color, color( 0, 0, 0, 0 ) );
 
-	auto font_size = g_render.render_text_size( _( "hotwheels.vip" ), menu_font );
+	// sorry for this
+	static const auto font_size = g_render.render_text_size( _( "hotwheels" ), menu_font );
 
-	g_render.render_text( ( window_x + 3 ) + ( size_x - 6 ) / 2, window_y + 5 + static_cast< int >( font_size.y ) / 2,
-	                      font_alignment::AL_HORIZONTAL_CENTER | font_alignment::AL_VERTICAL_CENTER, font_flags::FLAG_NONE, _( "hotwheels.vip" ),
+	g_render.render_text( ( window_x + 3 ) + ( size_x - 6 ) / 2 - 10, window_y + 5 + static_cast< int >( font_size.y ) / 2,
+	                      font_alignment::AL_HORIZONTAL_CENTER | font_alignment::AL_VERTICAL_CENTER, font_flags::FLAG_OUTLINE_SEMI, _( "hotwheels" ),
 	                      menu_font, color( 255, 255, 255 ) );
+
+	g_render.render_text( ( window_x + 3 ) + ( size_x - 6 ) / 2 + font_size.x - 25, window_y + 5 + static_cast< int >( font_size.y ) / 2,
+	                      font_alignment::AL_HORIZONTAL_CENTER | font_alignment::AL_VERTICAL_CENTER, font_flags::FLAG_OUTLINE_SEMI, _( ".vip" ),
+	                      menu_font, menu_color );
 
 	math::vec2 window_inset = { window_x + 3, window_y + 24 };
 
@@ -214,8 +219,8 @@ void menu::window::input( int& window_x, int& window_y, int& size_x, int& size_y
 		for ( auto& tab : tabs )
 			tab->input( window_x, window_y, size_x, size_y, current_index++ );
 
-	auto& menu_size_x = g_config.find< int >( _( "menu_size_x" ) );
-	auto& menu_size_y = g_config.find< int >( _( "menu_size_y" ) );
+	auto& menu_size_x = g_config.find< int >( HASH( "menu_size_x" ) );
+	auto& menu_size_y = g_config.find< int >( HASH( "menu_size_y" ) );
 
 	if ( g_input.key_state< input::KEY_DOWN >( VK_LBUTTON ) && !dragging_picker_color_picker && !dragging_hue_color_picker &&
 	     !dragging_alpha_color_picker ) {
@@ -226,14 +231,25 @@ void menu::window::input( int& window_x, int& window_y, int& size_x, int& size_y
 				menu_size_x += g_input.mouse.pos.x - last_mouse_x;
 				menu_size_y += g_input.mouse.pos.y - last_mouse_y;
 
-				menu_size_x = std::clamp( menu_size_x, 400, 1000 );
-				menu_size_y = std::clamp( menu_size_y, 500, 1000 );
+				menu_size_x = std::clamp( menu_size_x, 550, 900 );
+				menu_size_y = std::clamp( menu_size_y, 500, 900 );
 			} else {
 				window_x += g_input.mouse.pos.x - last_mouse_x;
 				window_y += g_input.mouse.pos.y - last_mouse_y;
 
-				window_x = std::clamp( window_x, 0, g_ctx.screen_size.x - size_x );
-				window_y = std::clamp( window_y, 0, g_ctx.screen_size.y - size_y );
+				// window_x = std::clamp( window_x, 0, g_ctx.screen_size.x - size_x );
+				// window_y = std::clamp( window_y, 0, g_ctx.screen_size.y - size_y );
+
+				if ( window_x < 0 )
+					window_x = 0;
+				if ( window_y < 0 )
+					window_y = 0;
+
+				if ( ( window_x + menu_size_x ) > g_ctx.screen_size.x )
+					window_x = g_ctx.screen_size.x - menu_size_x;
+
+				if ( ( window_y + menu_size_y ) > g_ctx.screen_size.y )
+					window_y = g_ctx.screen_size.y - menu_size_y;
 			}
 		}
 	} else {

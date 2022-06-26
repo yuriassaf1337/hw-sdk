@@ -1,17 +1,16 @@
 #pragma once
+#include "../../globals/macros/macros.h"
 #include <string>
 #include <string_view>
 #include <vector>
-#include "../../globals/macros/macros.h"
 
 namespace logging
 {
 	struct log_text_t {
 		log_text_t( ) = default;
-		log_text_t( std::string_view text, std::string_view prefix, float time )
-			: m_text{ std::move( text ) }, m_prefix{ std::move( prefix ) }, m_time{ time } { };
+		log_text_t( const std::string text, const std::string prefix, float time ) : m_text{ text }, m_prefix{ prefix }, m_time{ time } { };
 
-		std::string_view m_text{ }, m_prefix{ };
+		std::string m_text{ }, m_prefix{ };
 		float m_time{ };
 	};
 
@@ -20,9 +19,10 @@ namespace logging
 	public:
 		impl( ) : logs{ } { };
 
-		void print( std::string_view text, std::string_view prefix = _( "[log]" ), float time = 8.f );
+		void print( const std::string text, const std::string prefix = _( "[log]" ), float time = 8.f );
 
 		void think( );
+
 	private:
 		std::vector< logging::log_text_t > logs{ };
 	};

@@ -13,6 +13,8 @@ namespace prediction
 		// 'backup' vars, one being curtime, frametime, tick shit and one being stuff like flags, velocity since we want to use original values for
 		// them and not one that has been restored 1 bajillion times.
 
+		bool in_prediction = false;
+
 		struct {
 			int tick_base;
 			float current_time, frame_time;

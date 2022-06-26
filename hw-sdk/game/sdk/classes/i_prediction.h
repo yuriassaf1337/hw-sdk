@@ -62,7 +62,7 @@ namespace sdk
 	{
 	public:
 		virtual ~i_game_movement( ){ };
-		virtual void process_movement( sdk::c_base_player* player, move_data_t* movement )    = 0;
+		virtual void process_movement( sdk::c_base_player* player, void* movement )           = 0;
 		virtual void reset( )                                                                 = 0;
 		virtual void start_track_prediction_errors( sdk::c_base_player* player )              = 0;
 		virtual void finish_track_prediction_errors( sdk::c_base_player* player )             = 0;
@@ -83,25 +83,25 @@ namespace sdk
 		virtual void initialize( void ) = 0;
 		virtual void shutdown( void )   = 0;
 
-		virtual void update( int start_frame, bool valid_frame, int incoming_ack, int outgoing_command )                      = 0;
-		virtual void pre_entity_packet_recieved( int commands_ack, int current_world_update_packet )                          = 0;
-		virtual void post_entity_packet_recieved( void )                                                                      = 0;
-		virtual void post_network_data_recieved( int commands_ack )                                                           = 0;
-		virtual void on_recieve_uncompressed_packet( void )                                                                   = 0;
-		virtual void get_view_origin( math::vec3& origin )                                                                    = 0;
-		virtual void set_view_origin( math::vec3& origin )                                                                    = 0;
-		virtual void get_view_angles( math::vec3& angles )                                                                    = 0;
-		virtual void set_view_angles( math::vec3& angles )                                                                    = 0;
-		virtual void get_local_view_angles( math::vec3& angles )                                                              = 0;
-		virtual void set_local_view_angles( math::vec3& angles )                                                              = 0;
-		virtual bool in_prediction( void ) const                                                                              = 0;
-		virtual bool is_first_time_predicted( void ) const                                                                    = 0;
-		virtual int get_last_ack_command_number( void ) const                                                                 = 0;
-		virtual int get_incoming_packet_number( void ) const                                                                  = 0;
-		virtual void check_moving_ground( sdk::c_base_player* player, double frame_time )                                     = 0;
-		virtual void run_command( sdk::c_base_player* player, c_user_cmd* cmd, i_move_helper* move_helper )                   = 0;
-		virtual void setup_move( sdk::c_base_player* player, c_user_cmd* cmd, i_move_helper* move_helper, move_data_t* data ) = 0;
-		virtual void finish_move( sdk::c_base_player* player, c_user_cmd* cmd, move_data_t* data )                            = 0;
+		virtual void update( int start_frame, bool valid_frame, int incoming_ack, int outgoing_command )               = 0;
+		virtual void pre_entity_packet_recieved( int commands_ack, int current_world_update_packet )                   = 0;
+		virtual void post_entity_packet_recieved( void )                                                               = 0;
+		virtual void post_network_data_recieved( int commands_ack )                                                    = 0;
+		virtual void on_recieve_uncompressed_packet( void )                                                            = 0;
+		virtual void get_view_origin( math::vec3& origin )                                                             = 0;
+		virtual void set_view_origin( math::vec3& origin )                                                             = 0;
+		virtual void get_view_angles( math::vec3& angles )                                                             = 0;
+		virtual void set_view_angles( math::vec3& angles )                                                             = 0;
+		virtual void get_local_view_angles( math::vec3& angles )                                                       = 0;
+		virtual void set_local_view_angles( math::vec3& angles )                                                       = 0;
+		virtual bool in_prediction( void ) const                                                                       = 0;
+		virtual bool is_first_time_predicted( void ) const                                                             = 0;
+		virtual int get_last_ack_command_number( void ) const                                                          = 0;
+		virtual int get_incoming_packet_number( void ) const                                                           = 0;
+		virtual void check_moving_ground( sdk::c_base_player* player, double frame_time )                              = 0;
+		virtual void run_command( sdk::c_base_player* player, c_user_cmd* cmd, i_move_helper* move_helper )            = 0;
+		virtual void setup_move( sdk::c_base_player* player, c_user_cmd* cmd, i_move_helper* move_helper, void* data ) = 0;
+		virtual void finish_move( sdk::c_base_player* player, c_user_cmd* cmd, void* data )                            = 0;
 
 		std::int32_t& predicted_commands( )
 		{

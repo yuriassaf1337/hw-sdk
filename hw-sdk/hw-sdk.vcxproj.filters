@@ -183,6 +183,18 @@
     <ClCompile Include="globals\hooks\alloc_key_value_memory\alloc_key_value_memory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="globals\hooks\calculate_view\calculate_view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\sdk\classes\c_cs_player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\sdk\structs\c_anim_state.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="globals\hooks\modify_eye_position\modify_eye_position.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals\includes\includes.h">
@@ -693,6 +705,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="globals\hooks\alloc_key_value_memory\alloc_key_value_memory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="globals\hooks\calculate_view\calculate_view.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\sdk\structs\c_anim_state.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\sdk\classes\i_model_cache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="globals\hooks\modify_eye_position\modify_eye_position.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

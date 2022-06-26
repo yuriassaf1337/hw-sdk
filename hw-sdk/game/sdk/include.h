@@ -11,14 +11,14 @@
 #include "classes/i_engine_sound.h"
 #include "classes/i_engine_trace.h"
 #include "classes/i_global_vars.h"
+#include "classes/i_localize.h"
 #include "classes/i_mat_render_ctx.h"
 #include "classes/i_material_system.h"
 #include "classes/i_panel.h"
 #include "classes/i_prediction.h"
 #include "classes/iv_engine_client.h"
-#include "classes/i_localize.h"
-#include "classes/iv_model_render.h"
 #include "classes/iv_model_info.h"
+#include "classes/iv_model_render.h"
 
 // structs
 #include "structs/i_material.h"

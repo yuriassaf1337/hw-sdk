@@ -15,7 +15,7 @@ namespace menu
 		bool resizing{ };
 		bool allowed_to_drag{ };
 
-		std::uint32_t selected_tab{ };
+		std::uint32_t selected_tab = HASH( "aimbot" ); //... yeah
 
 		std::uint32_t selected_color_picker{ };
 		bool dragging_alpha_color_picker{ };
@@ -33,5 +33,8 @@ namespace menu
 
 		void draw( int& window_x, int& window_y, int& size_x, int& size_y );
 		void input( int& window_x, int& window_y, int& size_x, int& size_y );
+	};
+
+	struct group_impl {
 	};
 } // namespace menu

@@ -55,7 +55,7 @@ math::box visuals::esp_box::calculate_box( sdk::c_cs_player* player, bool& on_sc
 
 void visuals::impl::update_object( esp_object& object )
 {
-	if ( !object.m_owner->name( ) )
+	if ( !object.m_owner->name( ).c_str( ) )
 		return;
 
 	auto& dormant_info = g_entity_list.players[ object.m_owner->entity_index( ) ].m_dormant_info;
@@ -108,7 +108,7 @@ void visuals::impl::update_object( esp_object& object )
 	health_text.m_location = esp_location::LOCATION_LEFT;
 	health_text.m_text     = std::to_string( object.m_owner->health( ) );
 	health_text.m_color    = color( 255, 255, 255, 255 * dormant_alpha_modulation );
-	health_text.m_font     = g_fonts[ HASH( "esp_indicator_font" ) ];
+	health_text.m_font     = g_fonts[ HASH( "esp_font" ) ];
 	health_text.m_flags    = font_flags::FLAG_OUTLINE;
 
 	object.m_box.m_texts.push_back( health_text );
@@ -135,7 +135,7 @@ void visuals::impl::update_object( esp_object& object )
 			weapon_name_text.m_location = esp_location::LOCATION_BOTTOM;
 			weapon_name_text.m_text     = weapon_name_string;
 			weapon_name_text.m_color    = color( 255, 255, 255, 255 * dormant_alpha_modulation );
-			weapon_name_text.m_font     = g_fonts[ HASH( "esp_indicator_font" ) ];
+			weapon_name_text.m_font     = g_fonts[ HASH( "esp_font" ) ];
 			weapon_name_text.m_flags    = font_flags::FLAG_OUTLINE;
 
 			object.m_box.m_texts.push_back( weapon_name_text );

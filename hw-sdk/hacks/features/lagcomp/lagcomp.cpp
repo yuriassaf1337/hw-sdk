@@ -46,13 +46,12 @@ float lagcomp::impl::lerp_time( )
 void lagcomp::impl::update( )
 {
 	static auto unlag_pointer = g_convars[ _( "sv_maxunlag" ) ];
-	auto sv_maxunlag          = unlag_pointer->get_float( );
-	auto sv_maxunlag_ticks    = sdk::time_to_ticks( sv_maxunlag );
+	auto sv_maxunlag_ticks    = sdk::time_to_ticks( unlag_pointer->get_float( ) );
 
 	for ( auto& player_info : g_entity_list.players ) {
 		auto player = g_interfaces.entity_list->get_client_entity< sdk::c_cs_player* >( player_info.m_index );
 
-		if ( !player_info.m_valid || !player ) {
+		if ( !player_info.m_valid || !player || !player->is_enemy( g_ctx.local ) ) {
 			if ( heap_records[ player_info.m_index ] ) {
 				delete[] heap_records[ player_info.m_index ];
 				heap_records[ player_info.m_index ] = NULL;

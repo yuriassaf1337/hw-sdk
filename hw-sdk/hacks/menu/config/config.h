@@ -7,8 +7,7 @@
 
 namespace config
 {
-	enum class variable_type : int
-	{
+	enum class variable_type : int {
 		VARIABLE_BOOL,
 		VARIABLE_INT,
 		VARIABLE_FLOAT,
@@ -73,8 +72,8 @@ namespace config
 
 		bool init( );
 
-		void save( std::string path );
-		void load( std::string path );
+		void save( const std::string path );
+		void load( const std::string path );
 
 		void insert( std::uint32_t hash, option _option );
 		void insert( std::string name, option _option );
@@ -83,30 +82,6 @@ namespace config
 		T& find( std::uint32_t hash )
 		{
 			auto found_option = settings.find( hash );
-
-			if ( !found_option._Ptr )
-				return *reinterpret_cast< T* >( nullptr );
-
-			switch ( found_option->second.type ) {
-			case variable_type::VARIABLE_BOOL:
-				return ( T& )( found_option->second.bool_value );
-			case variable_type::VARIABLE_INT:
-				return ( T& )( found_option->second.int_value );
-			case variable_type::VARIABLE_FLOAT:
-				return ( T& )( found_option->second.float_value );
-			case variable_type::VARIABLE_COLOR:
-				return ( T& )( found_option->second.color_value );
-			case variable_type::VARIABLE_STRING:
-				return ( T& )( found_option->second.string_value );
-			}
-
-			return *reinterpret_cast< T* >( nullptr );
-		}
-
-		template< typename T >
-		T& find( std::string name )
-		{
-			auto found_option = settings.find( HASH( name ) );
 
 			if ( !found_option._Ptr )
 				return *reinterpret_cast< T* >( nullptr );

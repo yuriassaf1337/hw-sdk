@@ -52,6 +52,7 @@
 #define VENGINE_MODEL_VERSION                 _( "VEngineModel016" )
 #define VENGINE_MODEL_INFO                    _( "VModelInfoClient004" )
 #define VFILE_SYSTEM_VERSION                  _( "VFileSystem017" )
+#define VDATA_MODEL_CACHE_VERSION             _( "MDLCache004" )
 
 // [#] utils
 

@@ -140,7 +140,7 @@ namespace fonts
 	struct impl {
 		std::deque< font > font_list;
 
-		void create_font( const char* name, std::size_t size, std::size_t weight, bool anti_aliased, const char* font_name );
+		void create_font( std::uint32_t hash, std::size_t size, std::size_t weight, bool anti_aliased, const char* font_name );
 
 		LPD3DXFONT find( std::uint32_t hashed )
 		{

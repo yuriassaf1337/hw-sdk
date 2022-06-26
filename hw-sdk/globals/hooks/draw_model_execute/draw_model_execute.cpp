@@ -1,4 +1,5 @@
 #include "draw_model_execute.h"
+#include "../../../hacks/features/lagcomp/lagcomp.h"
 #include "../../ctx/ctx.h"
 #include <type_traits>
 
@@ -37,9 +38,31 @@ void __fastcall hooks::draw_model_execute::draw_model_execute_detour( void* ecx,
 
 	if ( model_is_player ) {
 		if ( info.entity_index >= 0 && info.entity_index <= 64 ) {
-			//auto& player_info = g_entity_list.players[ info.entity_index ];
+			static auto unlag_pointer = g_convars[ _( "sv_maxunlag" ) ];
+			auto sv_maxunlag_ticks    = sdk::time_to_ticks( unlag_pointer->get_float( ) );
+
+			for ( int current_heap_iterator = 0; current_heap_iterator < sv_maxunlag_ticks; current_heap_iterator++ ) {
+				auto current_record = &g_lagcomp.heap_records[ info.entity_index ][ current_heap_iterator ];
+
+				// if ( !current_record || !current_record->valid || !current_record->bone_matrix )
+				//	continue;
+				//
+				// const int green = static_cast< int >( ( current_heap_iterator + 1 ) * 3 * 2.55f );
+				//
+				// material_regular->color_modulate( ( 255 - green ) / 255.f, green / 255.f, 0.7058f );
+				// material_regular->alpha_modulate( 0.7f );
+				// material_regular->set_material_var_flag( sdk::MATERIAL_VAR_IGNOREZ, true );
+				//
+				// g_interfaces.model_render->forced_material_override( material_regular );
+				//
+				// draw_model_execute_hook.call_original< void >( ecx, edx, context, state, info, current_record->bone_matrix );
+				//
+				// g_interfaces.model_render->forced_material_override( nullptr );
+			}
+
+			// auto& player_info = g_entity_list.players[ info.entity_index ];
 			//
-			//if ( player_info.m_valid ) {
+			// if ( player_info.m_valid ) {
 			//	material_regular->color_modulate( 99 / 255.f, 0 / 255.f, 114 / 255.f );
 			//	material_regular->set_material_var_flag( sdk::MATERIAL_VAR_IGNOREZ, true );
 			//
@@ -55,7 +78,7 @@ void __fastcall hooks::draw_model_execute::draw_model_execute_detour( void* ecx,
 			//	draw_model_execute_hook.call_original< void >( ecx, edx, context, state, info, custom_bone_to_world );
 			//
 			//	return g_interfaces.model_render->forced_material_override( nullptr );
-			//}
+			// }
 		}
 	}
 

@@ -58,7 +58,7 @@ namespace sdk
 
 		static void set_prediction_random_seed( c_user_cmd* command )
 		{
-			static float* random_seed = *g_client_dll.pattern_scan( _( "A3 ? ? ? ? 66 0F 6E 86 " ) ).add( 0x1 ).as< float** >( );
+			static float* random_seed = *g_client_dll.pattern_scan( _( "A3 ? ? ? ? 66 ? ? 86" ) ).add( 0x1 ).as< float** >( );
 			*random_seed              = command ? command->random_seed : -1;
 		}
 

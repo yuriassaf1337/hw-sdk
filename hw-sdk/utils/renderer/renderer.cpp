@@ -18,16 +18,16 @@ void render::impl::init( IDirect3DDevice9* buffer_device )
 {
 	render::device = buffer_device;
 
-	g_fonts.create_font( _( "main_font" ), 14, FW_NORMAL, true, _( "Tahoma" ) );
-	g_fonts.create_font( _( "main_font_bold" ), 14, FW_BOLD, true, _( "Tahoma" ) );
-	g_fonts.create_font( _( "main_verdana_font" ), 13, FW_NORMAL, true, _( "Verdana" ) );
-	g_fonts.create_font( _( "main_verdana_bold_font" ), 13, FW_BOLD, true, _( "Verdana" ) );
-	g_fonts.create_font( _( "indicator_verdana_font" ), 30, FW_BOLD, true, _( "Verdana" ) );
+	g_fonts.create_font( HASH( "main_font" ), 14, FW_NORMAL, true, _( "Tahoma" ) );
+	g_fonts.create_font( HASH( "main_font_bold" ), 14, FW_BOLD, true, _( "Tahoma" ) );
+	g_fonts.create_font( HASH( "main_verdana_font" ), 13, FW_NORMAL, true, _( "Verdana" ) );
+	g_fonts.create_font( HASH( "main_verdana_bold_font" ), 13, FW_BOLD, true, _( "Verdana" ) );
+	g_fonts.create_font( HASH( "indicator_verdana_font" ), 30, FW_BOLD, true, _( "Verdana" ) );
 
-	g_fonts.create_font( _( "esp_font" ), 14, FW_BOLD, false, _( "Arial" ) );
-	g_fonts.create_font( _( "esp_indicator_font" ), 13, FW_BOLD, false, _( "Smallest Pixel-7" ) );
+	g_fonts.create_font( HASH( "esp_font" ), 12, FW_BOLD, false, _( "Tahoma" ) );
+	g_fonts.create_font( HASH( "esp_indicator_font" ), 13, FW_BOLD, false, _( "Smallest Pixel-7" ) );
 
-	g_fonts.create_font( _( "menu_font" ), 12, FW_NORMAL, false, _( "Verdana" ) );
+	g_fonts.create_font( HASH( "menu_font" ), 12, FW_NORMAL, false, _( "Tahoma" ) );
 
 	console::print< console::log_level::DEBUG >( _( "Created {} fonts." ), g_fonts.font_list.size( ) );
 }
@@ -152,7 +152,7 @@ bool render::impl::set_viewport( const math::vec2< int >& pos, const math::vec2<
 
 bool render::impl::set_viewport( D3DVIEWPORT9 vp )
 {
-	return device->SetViewport( &vp );
+	return static_cast< bool >( device->SetViewport( &vp ) );
 }
 
 void render::impl::render_text( int x, int y, unsigned int alignment, const font_flags flags, const char* string, LPD3DXFONT font, color _color )
@@ -249,11 +249,11 @@ void render::impl::render_circle( int x, int y, int radius, int segments, color 
 	delete[] verticies;
 }
 
-void fonts::impl::create_font( const char* name, std::size_t size, std::size_t weight, bool anti_aliased, const char* font_name )
+void fonts::impl::create_font( std::uint32_t hash, std::size_t size, std::size_t weight, bool anti_aliased, const char* font_name )
 {
 	LPD3DXFONT buffer_font;
 
 	g_render.create_font( size, weight, anti_aliased, font_name, buffer_font );
 
-	font_list.push_back( { buffer_font, HASH( name ) } );
+	font_list.push_back( { buffer_font, hash } );
 }

@@ -1,5 +1,6 @@
 #include "movement.h"
 #include "../../../utils/keybinds/keybinds.h"
+#include "../../menu/config/config.h"
 #include "../../prediction/prediction.h"
 
 void movement::impl::pre_prediction::think( )
@@ -7,12 +8,10 @@ void movement::impl::pre_prediction::think( )
 	if ( !g_ctx.local->is_alive( ) || !g_interfaces.engine->connected_safe( ) )
 		return;
 
-	// if ( !g_ctx.cmd->buttons.has( sdk::IN_BULLRUSH ) )
-	// 	g_ctx.cmd->buttons.add( sdk::IN_BULLRUSH );
+	if ( !g_ctx.cmd->buttons.has( sdk::IN_BULLRUSH ) && g_config.find< bool >( HASH( "m_fastduck" ) ) )
+		g_ctx.cmd->buttons.add( sdk::IN_BULLRUSH );
 
 	g_movement.bhop( );
-
-	// g_movement.mini_hop( );
 }
 
 void movement::impl::post_prediction::think( )
@@ -20,7 +19,11 @@ void movement::impl::post_prediction::think( )
 	if ( !g_ctx.local->is_alive( ) || !g_interfaces.engine->connected_safe( ) )
 		return;
 
+	g_movement.edge_jump( );
+
 	g_movement.jump_bug( );
+
+	g_movement.mini_jump( );
 }
 
 void movement::impl::movement_fix( sdk::c_user_cmd* command, math::vec3 old_view_angle )
@@ -66,33 +69,106 @@ void movement::impl::movement_fix( sdk::c_user_cmd* command, math::vec3 old_view
 	command->side_move    = std::clamp( y, -max_side_speed, max_side_speed );
 }
 
-void movement::impl::jump_bug( ) { }
-
-void movement::impl::mini_hop( )
+void movement::impl::edge_jump( )
 {
-	static bool did_duck = false;
-	bool stay_in_duck    = true;
+	if ( !g_config.find< bool >( HASH( "m_ej" ) ) || !g_input.key_state< input::KEY_DOWN >( g_config.find< std::uint8_t >( HASH( "m_ej_key" ) ) ) ) {
+		g_movement.longjump.start_timer = false;
+		g_movement.longjump.time_stamp  = 0;
+
+		return;
+	}
+
+	if ( g_prediction.backup_vars.flags.has( sdk::flags::ONGROUND ) &&
+	     !( g_ctx.local->flags( ).has( sdk::flags::ONGROUND ) && !g_ctx.cmd->buttons.has( sdk::buttons::IN_JUMP ) ) ) {
+		g_ctx.cmd->buttons.add( sdk::buttons::IN_JUMP );
+
+		g_movement.longjump.start_timer = true;
+		g_movement.longjump.time_stamp  = g_interfaces.globals->tick_count;
+	}
+
+	if ( g_config.find< bool >( HASH( "m_lj" ) ) ) {
+		if ( g_movement.longjump.start_timer ) {
+			if ( g_movement.longjump.time_stamp + 2 > g_interfaces.globals->tick_count ) {
+				// did lj = true
+				g_ctx.cmd->buttons.add( sdk::buttons::IN_DUCK );
+			} else {
+				// did lj = false
+				g_movement.longjump.start_timer = false;
+			}
+		}
+
+		if ( g_ctx.cmd->buttons.has( sdk::buttons::IN_DUCK ) && !g_ctx.cmd->buttons.has( sdk::buttons::IN_JUMP ) &&
+		     g_prediction.backup_vars.flags.has( sdk::flags::ONGROUND ) )
+			g_ctx.cmd->buttons.remove( sdk::buttons::IN_DUCK );
+	}
+}
+
+void movement::impl::jump_bug( )
+{
+	if ( !g_config.find< bool >( HASH( "m_jb" ) ) )
+		return;
+
+	if ( !g_input.key_state< input::KEY_DOWN >( g_config.find< std::uint8_t >( HASH( "m_jb_key" ) ) ) )
+		return;
 
 	[[unlikely]] if ( g_ctx.local->move_type( ).has_any_of(
 						  { sdk::move_type::MOVE_NOCLIP, sdk::move_type::MOVE_LADDER, sdk::move_type::MOVE_FLY } ) ) return;
 
-	if ( g_prediction.backup_vars.flags.has( sdk::ONGROUND ) && g_ctx.cmd->buttons.has( sdk::IN_JUMP ) ) {
-		if ( !did_duck ) {
-			did_duck = true;
-			g_ctx.cmd->buttons.add( sdk::IN_DUCK );
-		} else {
-			did_duck = false;
+	[[unlikely]] if ( !( g_ctx.cmd->buttons.has( sdk::buttons::IN_JUMP ) ) )
+	{
+		static bool ducked = false;
 
-			if ( stay_in_duck )
-				g_ctx.cmd->buttons.add( sdk::IN_DUCK );
+		if ( g_ctx.local->flags( ).has( sdk::flags::ONGROUND ) && !g_prediction.backup_vars.flags.has( sdk::flags::ONGROUND ) && !ducked ) {
+			g_ctx.cmd->buttons.add( sdk::buttons::IN_DUCK );
 
-			g_ctx.cmd->buttons.remove( sdk::IN_JUMP );
+			ducked = true;
+		} else
+			ducked = false;
+
+		// if player onground and somehow ducked is still true, reset
+
+		if ( g_prediction.backup_vars.flags.has( sdk::flags::ONGROUND ) && ducked )
+			ducked = false;
+	}
+	else // perform normal jb.
+	{
+		if ( g_ctx.local->flags( ).has( sdk::flags::ONGROUND ) ) {
+			if ( !g_prediction.backup_vars.flags.has( sdk::flags::ONGROUND ) )
+				g_ctx.cmd->buttons.add( sdk::buttons::IN_DUCK );
+
+			g_ctx.cmd->buttons.remove( sdk::buttons::IN_JUMP );
 		}
+
+		// secret sauce
+		if ( !g_ctx.local->flags( ).has( sdk::flags::ONGROUND ) && g_prediction.backup_vars.flags.has( sdk::flags::ONGROUND ) )
+			g_ctx.cmd->buttons.remove( sdk::buttons::IN_DUCK );
+	}
+}
+
+void movement::impl::mini_jump( )
+{
+	if ( !g_config.find< bool >( HASH( "m_mj" ) ) )
+		return;
+
+	if ( !g_input.key_state< input::KEY_DOWN >( g_config.find< std::uint8_t >( HASH( "m_mj_key" ) ) ) )
+		return;
+
+	[[unlikely]] if ( g_ctx.local->move_type( ).has_any_of(
+						  { sdk::move_type::MOVE_NOCLIP, sdk::move_type::MOVE_LADDER, sdk::move_type::MOVE_FLY } ) ) return;
+
+	if ( g_prediction.backup_vars.flags.has( sdk::flags::ONGROUND ) && !g_ctx.local->flags( ).has( sdk::flags::ONGROUND ) ) {
+		g_ctx.cmd->buttons.add( sdk::buttons::IN_DUCK | sdk::buttons::IN_JUMP );
 	}
 }
 
 void movement::impl::bhop( )
 {
+	if ( !g_config.find< bool >( HASH( "m_bh" ) ) )
+		return;
+
+	if ( g_config.find< bool >( HASH( "m_jb" ) ) && g_input.key_state< input::KEY_DOWN >( g_config.find< std::uint8_t >( HASH( "m_jb_key" ) ) ) )
+		return;
+
 	// will return if player is noclip/ladder/fly mode
 	[[unlikely]] if ( g_ctx.local->move_type( ).has_any_of(
 						  { sdk::move_type::MOVE_NOCLIP, sdk::move_type::MOVE_LADDER, sdk::move_type::MOVE_FLY } ) ) return;

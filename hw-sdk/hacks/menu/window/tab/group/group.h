@@ -9,8 +9,7 @@
 
 namespace menu
 {
-	enum class group_position : int
-	{
+	enum group_position : int {
 		GROUP_LEFT  = ( 1 << 0 ),
 		GROUP_RIGHT = ( 1 << 1 ),
 	};

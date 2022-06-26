@@ -39,6 +39,8 @@ bool sdk::interfaces::init( )
 
 		model_info = g_engine_dll.find_interface< sdk::iv_model_info* >( VENGINE_MODEL_INFO );
 
+		model_cache = g_data_cache_dll.find_interface< sdk::i_model_cache* >( VDATA_MODEL_CACHE_VERSION );
+
 		file_system = g_file_system_stdio_dll.find_interface< void* >( VFILE_SYSTEM_VERSION );
 	}
 

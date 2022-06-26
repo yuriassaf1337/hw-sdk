@@ -4,7 +4,7 @@
 #include "../../utils/renderer/renderer.h"
 #include "../menu/config/config.h"
 
-void logging::impl::print( std::string_view text, std::string_view prefix, float time )
+void logging::impl::print( const std::string text, const std::string prefix, float time )
 {
 	logs.push_back( logging::log_text_t( text, prefix, time ) );
 }
@@ -45,11 +45,11 @@ void logging::impl::think( )
 		} else
 			draw_color.a = 255;
 
-		g_render.render_text( x, y, font_alignment::AL_DEFAULT, font_flags::FLAG_DROPSHADOW, log.m_prefix.data( ),
-		                      g_fonts[ HASH( "main_font_bold" ) ], g_config.find< color >( _( "menu_color" ) ) );
+		g_render.render_text( x, y, font_alignment::AL_DEFAULT, font_flags::FLAG_DROPSHADOW, log.m_prefix.c_str( ),
+		                      g_fonts[ HASH( "main_font_bold" ) ], g_config.find< color >( HASH( "menu_color" ) ).set_alpha( draw_color.a ) );
 
-		g_render.render_text( x + g_render.render_text_size( log.m_text.data( ), g_fonts[ HASH( "main_font_bold" ) ] ).x, y,
-		                      font_alignment::AL_DEFAULT, font_flags::FLAG_DROPSHADOW, log.m_text.data( ), g_fonts[ HASH( "main_font_bold" ) ],
+		g_render.render_text( x + 3 + g_render.render_text_size( log.m_prefix.data( ), g_fonts[ HASH( "main_font_bold" ) ] ).x, y,
+		                      font_alignment::AL_DEFAULT, font_flags::FLAG_DROPSHADOW, log.m_text.c_str( ), g_fonts[ HASH( "main_font_bold" ) ],
 		                      draw_color );
 		y += size;
 	}

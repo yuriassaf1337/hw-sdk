@@ -3,7 +3,7 @@
 
 void menu::group::draw( int& window_x, int& window_y, int& size_x, int& size_y, int current_index )
 {
-	auto menu_color = g_config.find< color >( _( "menu_color" ) );
+	auto menu_color = g_config.find< color >( HASH( "menu_color" ) );
 	auto menu_font  = g_fonts[ HASH( "menu_font" ) ];
 
 	if ( position & static_cast< int >( group_position::GROUP_LEFT ) ) {
@@ -83,7 +83,7 @@ void menu::group::input( int& window_x, int& window_y, int& size_x, int& size_y,
 	auto mouse_x = g_input.mouse.pos.x;
 	auto mouse_y = g_input.mouse.pos.y;
 
-	auto menu_color = g_config.find< color >( _( "menu_color" ) );
+	auto menu_color = g_config.find< color >( HASH( "menu_color" ) );
 	auto menu_font  = g_fonts[ HASH( "menu_font" ) ];
 
 	if ( position & static_cast< int >( group_position::GROUP_LEFT ) ) {
@@ -94,7 +94,7 @@ void menu::group::input( int& window_x, int& window_y, int& size_x, int& size_y,
 		int group_position_x = ( window_x + 3 );
 		int group_position_y = ( window_y + 46 ) + ( group_height * current_index ) + ( current_index == 0 ? 0 : 2 );
 
-		auto font_size = g_render.render_text_size( _( name.c_str( ) ), menu_font );
+		auto font_size = g_render.render_text_size( name.c_str( ), menu_font );
 
 		if ( menu::window::inside_position( { mouse_x, mouse_y }, { group_position_x, group_position_y }, { group_width, group_height } ) &&
 		     needed_scroll_amount > 0 ) {
@@ -126,7 +126,7 @@ void menu::group::input( int& window_x, int& window_y, int& size_x, int& size_y,
 		int group_position_x = ( window_x + 3 );
 		int group_position_y = ( window_y + 46 ) + ( group_height * current_index ) + ( current_index == 0 ? 0 : 2 );
 
-		auto font_size = g_render.render_text_size( _( name.c_str( ) ), menu_font );
+		auto font_size = g_render.render_text_size( name.c_str( ), menu_font );
 
 		group_position_x += right_adjustment;
 		group_position_y += font_size.y + 3;

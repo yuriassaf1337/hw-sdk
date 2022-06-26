@@ -6,6 +6,7 @@
 
 #include "../../game/sdk/include.h"
 
+#include "../../game/sdk/classes/i_model_cache.h"
 #include "../../utils/utils.h"
 #include "../../utils/vfunc/vfunc.h"
 #include "../macros/macros.h"
@@ -33,6 +34,7 @@ namespace sdk
 		sdk::i_localize* localize;
 		sdk::iv_model_render* model_render;
 		sdk::iv_model_info* model_info;
+		sdk::i_model_cache* model_cache;
 		void* file_system;
 		void* key_values_system;
 

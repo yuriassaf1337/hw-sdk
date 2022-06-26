@@ -7,7 +7,7 @@
 namespace menu
 {
 	struct impl {
-		bool menu_open{ };
+		bool menu_open = true;
 
 		bool init( );
 

@@ -28,6 +28,8 @@ void prediction::impl::start( sdk::c_base_player* player )
 {
 	// TODO: fix prediction noises, alot of stuff in this prediction is either in the wrong place or not needed.
 
+	g_prediction.in_prediction = true;
+
 	player->current_command( ) = g_ctx.cmd;
 
 	sdk::c_base_player::set_prediction_random_seed( g_ctx.cmd );
@@ -99,6 +101,8 @@ void prediction::impl::end( sdk::c_base_player* player )
 	sdk::c_base_player::set_prediction_player( nullptr );
 
 	g_interfaces.game_movement->reset( );
+
+	g_prediction.in_prediction = false;
 }
 
 void prediction::impl::reset( )

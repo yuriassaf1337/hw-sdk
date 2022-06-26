@@ -11,6 +11,18 @@ namespace sdk
 {
 	struct c_cs_player : public c_base_player {
 	public:
+		template< typename T >
+		__forceinline T& get( size_t offset )
+		{
+			return *reinterpret_cast< T* >( reinterpret_cast< std::uintptr_t >( this ) + offset );
+		}
+
+		template< typename T >
+		__forceinline void set( size_t offset, const T& val )
+		{
+			*reinterpret_cast< T* >( reinterpret_cast< std::uintptr_t >( this ) + offset ) = val;
+		}
+
 		NETVAR( has_defuser, bool, "CCSPlayer", "m_bHasDefuser" );
 		NETVAR( gun_game_immunity, bool, "CCSPlayer", "m_bGunGameImmunity" );
 		NETVAR( shots_fired, std::int32_t, "CCSPlayer", "m_iShotsFired" );
@@ -29,7 +41,7 @@ namespace sdk
 
 		bool is_alive( );
 
-		const char* name( );
+		std::string name( );
 
 		void update_client_side_animation( );
 	};

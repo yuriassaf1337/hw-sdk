@@ -7,7 +7,7 @@ void menu::tab::draw( int& window_x, int& window_y, int& size_x, int& size_y, in
 	auto adjusted_x = ( ( size_x - 7 ) / parent_window->tabs.size( ) ) * ( current_index + 1 );
 	auto centered_x = ( ( window_x + adjusted_x ) - ( window_x + current_x ) ) / 2;
 
-	auto menu_color = g_config.find< color >( _( "menu_color" ) );
+	auto menu_color = g_config.find< color >( HASH( "menu_color" ) );
 	auto menu_font  = g_fonts[ HASH( "menu_font" ) ];
 
 	g_render.render_text( window_x + current_x + centered_x, window_y + 28 + g_render.render_text_size( name.c_str( ), menu_font ).y / 2,
