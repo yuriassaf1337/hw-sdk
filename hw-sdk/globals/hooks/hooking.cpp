@@ -21,6 +21,8 @@
 #include "return_address/return_address.h"
 #include "send_net_msg/send_net_msg.h"
 #include "wndproc/wndproc.h"
+#include "../../dependencies/imgui/imgui_impl_dx9.h"
+#include "../../dependencies/imgui/imgui_impl_win32.h"
 
 bool hooks::impl::init( )
 {
@@ -32,13 +34,12 @@ bool hooks::impl::init( )
 	}
 
 	hooks::wndproc::init( );
-	hooks::end_scene::init( );
 	hooks::create_move::init( );
 	// hooks::cl_move::init( );
 	hooks::item_post_frame::init( );
 	hooks::emit_sound::init( );
 	hooks::glow_effect_spectator::init( );
-	// hooks::paint_traverse::init( );
+	hooks::paint_traverse::init( );
 	hooks::frame_stage_notify::init( );
 	hooks::standard_blending_rules::init( );
 	hooks::do_extra_bone_processing::init( );
@@ -55,6 +56,7 @@ bool hooks::impl::init( )
 	hooks::alloc_key_value_memory::init( );
 	hooks::modify_eye_position::init( );
 	// hooks::calculate_view::init( );
+	hooks::end_scene::init( );
 
 	console::print< console::log_level::SUCCESS >( _( "Initialized all hooks." ) );
 
@@ -68,13 +70,12 @@ void hooks::impl::unload( )
 	MOCKING_TRY
 
 	hooks::wndproc::unload( );
-	hooks::end_scene::unload( );
 	hooks::create_move::unload( );
 	// hooks::cl_move::unload( );
 	hooks::item_post_frame::unload( );
 	hooks::emit_sound::unload( );
 	hooks::glow_effect_spectator::unload( );
-	// hooks::paint_traverse::unload( );
+	hooks::paint_traverse::unload( );
 	hooks::frame_stage_notify::unload( );
 	hooks::do_extra_bone_processing::unload( );
 	hooks::update_client_side_animation::unload( );
@@ -90,10 +91,15 @@ void hooks::impl::unload( )
 	hooks::alloc_key_value_memory::unload( );
 	hooks::modify_eye_position::unload( );
 	// hooks::calculate_view::unload( );
+	hooks::end_scene::unload( );
 
 	// this is so useless lol
 	if ( MH_Uninitialize( ) != MH_OK )
 		console::print< console::log_level::FATAL >( _( "MH_Uninitialize was not MH_OK" ) ); /* chungy */
+
+		ImGui_ImplDX9_Shutdown( );
+	ImGui_ImplWin32_Shutdown( );
+	ImGui::DestroyContext( );
 
 	MOCKING_CATCH( );
 }
