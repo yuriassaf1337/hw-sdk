@@ -16,4 +16,10 @@ namespace utils
 
 	math::vec2< int > world_to_screen( math::vec3 position );
 	math::vec2< int > world_to_screen( math::vec3 position, bool& on_screen );
+
+	namespace str
+	{
+		std::string wide_to_multi_byte( std::wstring_view str );
+		std::wstring multi_byte_to_wide( std::string_view str );
+	}
 } // namespace utils
