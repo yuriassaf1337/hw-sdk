@@ -14,7 +14,7 @@ bool menu::impl::init_input( )
 
 	window = creation_params.hFocusWindow;
 
-	if ( window == nullptr )
+	if ( !window )
 		return false;
 
 	return true;
@@ -32,7 +32,7 @@ void menu::impl::init( IDirect3DDevice9* device )
 
 	/* add fonts here */
 
-	this->menu_initialised = ImGuiFreeType::BuildFontAtlas( io.Fonts, 0x0 );
+	menu_initialised = ImGuiFreeType::BuildFontAtlas( io.Fonts, 0x0 );
 }
 
 void menu::impl::draw( )

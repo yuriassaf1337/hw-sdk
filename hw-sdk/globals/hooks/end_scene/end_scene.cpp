@@ -1,5 +1,7 @@
 #include <string.h>
 
+#include "../../../dependencies/imgui/imgui_impl_dx9.h"
+#include "../../../dependencies/imgui/imgui_impl_win32.h"
 #include "../../../hacks/features/lagcomp/lagcomp.h"
 #include "../../../hacks/features/visuals/visuals.h"
 #include "../../../hacks/logging/logging.h"
@@ -9,8 +11,6 @@
 #include "../../ctx/ctx.h"
 #include "../create_move/create_move.h"
 #include "end_scene.h"
-#include "../../../dependencies/imgui/imgui_impl_dx9.h"
-#include "../../../dependencies/imgui/imgui_impl_win32.h"
 
 LONG __stdcall hooks::end_scene::end_scene_detour( IDirect3DDevice9* device )
 {
@@ -32,15 +32,15 @@ LONG __stdcall hooks::end_scene::end_scene_detour( IDirect3DDevice9* device )
 
 	g_render.setup_state( );
 
-		g_visuals.render( );
+	g_visuals.render( );
 
-				ImGui_ImplDX9_NewFrame( );
+	ImGui_ImplDX9_NewFrame( );
 	ImGui_ImplWin32_NewFrame( );
 	ImGui::NewFrame( );
 
 	g_menu.draw( );
 
-				ImGui::EndFrame( );
+	ImGui::EndFrame( );
 	ImGui::Render( );
 	ImGui_ImplDX9_RenderDrawData( ImGui::GetDrawData( ) );
 

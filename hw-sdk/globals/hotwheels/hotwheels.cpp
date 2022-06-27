@@ -31,7 +31,7 @@ DWORD WINAPI hotwheels::init( void* module_handle )
 
 	ENFORCE_FAILURE( g_interfaces.init( ), "Failed to init interfaces" );
 
-			ENFORCE_FAILURE( g_menu.init_input( ), "Failed to init menu input" );
+	ENFORCE_FAILURE( g_menu.init_input( ), "Failed to init menu input" );
 
 	ENFORCE_FAILURE( g_hooks.init( ), "Failed to init hooks" );
 

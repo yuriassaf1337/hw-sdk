@@ -4,14 +4,26 @@
 
 bool config::impl::init( )
 {
+	g_config.insert( HASH( "menu_color" ), config::option( color( 67, 0, 187 ) ) );
+
+	g_config.insert( HASH( "m_bh" ), config::option( false ) );
+	g_config.insert( HASH( "m_jb" ), config::option( false ) );
+	g_config.insert( HASH( "m_jb_key" ), config::option( 0, 0, 0 ) );
+
+	g_config.insert( HASH( "m_ej" ), config::option( false ) );
+	g_config.insert( HASH( "m_ej_key" ), config::option( 0, 0, 0 ) );
+	g_config.insert( HASH( "m_lj" ), config::option( false ) );
+
+	g_config.insert( HASH( "m_mj" ), config::option( false ) );
+	g_config.insert( HASH( "m_mj_key" ), config::option( 0, 0, 0 ) );
+	g_config.insert( HASH( "m_fastduck" ), config::option( false ) );
+
 	return true;
 }
 
 void config::impl::save( const std::string path )
 {
-	using namespace nlohmann;
-
-	json reader;
+	nlohmann::json reader{ };
 
 	for ( auto& setting : settings ) {
 		switch ( setting.second.type ) {
@@ -48,9 +60,7 @@ void config::impl::save( const std::string path )
 
 void config::impl::load( const std::string path )
 {
-	using namespace nlohmann;
-
-	json reader{ };
+	nlohmann::json reader{ };
 
 	std::ifstream stream( path );
 
@@ -92,9 +102,4 @@ void config::impl::load( const std::string path )
 void config::impl::insert( std::uint32_t hash, option _option )
 {
 	settings.insert( std::make_pair( hash, _option ) );
-}
-
-void config::impl::insert( std::string string, option _option )
-{
-	settings.insert( std::make_pair( HASH( string.c_str( ) ), _option ) );
 }
