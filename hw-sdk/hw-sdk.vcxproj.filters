@@ -168,9 +168,6 @@
     <ClCompile Include="globals\hooks\calculate_view\calculate_view.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="game\sdk\classes\c_cs_player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="game\sdk\structs\c_anim_state.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

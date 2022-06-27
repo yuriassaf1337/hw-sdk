@@ -194,7 +194,6 @@
     <ClCompile Include="game\definitions\classes\c_base_combat_weapon.cpp" />
     <ClCompile Include="game\definitions\classes\c_cs_player.cpp" />
     <ClCompile Include="game\definitions\structs\color.cpp" />
-    <ClCompile Include="game\sdk\classes\c_cs_player.cpp" />
     <ClCompile Include="game\sdk\structs\c_anim_state.cpp" />
     <ClCompile Include="globals\csgo.cpp" />
     <ClCompile Include="globals\ctx\ctx.cpp" />
