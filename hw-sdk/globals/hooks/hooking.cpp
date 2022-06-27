@@ -38,7 +38,7 @@ bool hooks::impl::init( )
 	hooks::item_post_frame::init( );
 	hooks::emit_sound::init( );
 	hooks::glow_effect_spectator::init( );
-	hooks::paint_traverse::init( );
+	// hooks::paint_traverse::init( );
 	hooks::frame_stage_notify::init( );
 	hooks::standard_blending_rules::init( );
 	hooks::do_extra_bone_processing::init( );
@@ -73,9 +73,9 @@ void hooks::impl::unload( )
 	// hooks::cl_move::unload( );
 	hooks::item_post_frame::unload( );
 	hooks::emit_sound::unload( );
-	hooks::paint_traverse::unload( );
+	hooks::glow_effect_spectator::unload( );
+	// hooks::paint_traverse::unload( );
 	hooks::frame_stage_notify::unload( );
-	hooks::standard_blending_rules::unload( );
 	hooks::do_extra_bone_processing::unload( );
 	hooks::update_client_side_animation::unload( );
 	hooks::should_skip_animation_frame::unload( );
@@ -93,7 +93,7 @@ void hooks::impl::unload( )
 
 	// this is so useless lol
 	if ( MH_Uninitialize( ) != MH_OK )
-		console::print< console::log_level::FATAL >( _( "MH_Uninitialize was not MH_OK" ) );
+		console::print< console::log_level::FATAL >( _( "MH_Uninitialize was not MH_OK" ) ); /* chungy */
 
 	MOCKING_CATCH( );
 }

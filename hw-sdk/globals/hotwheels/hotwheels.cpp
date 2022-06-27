@@ -25,8 +25,6 @@ DWORD WINAPI hotwheels::init( void* module_handle )
 
 	ENFORCE_FAILURE( g_config.init( ), "Failed to init configs" );
 
-	ENFORCE_FAILURE( g_menu.init( ), "Failed to init menu" );
-
 	ENFORCE_FAILURE( g_csgo.init( ), "Failed to init csgo" );
 
 	ENFORCE_FAILURE( g_ctx.init( ), "Failed to init context" );

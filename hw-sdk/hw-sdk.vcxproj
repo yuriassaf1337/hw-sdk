@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -77,16 +77,16 @@
     <OutDir>.\debug\</OutDir>
     <TargetName>zipudhe2</TargetName>
     <IntDir>.\debug\intermediate\</IntDir>
-    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath);$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
+    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath);$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)dependencies\freetype\include</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath);$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(SolutionDir)dependencies\freetype\lib</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <TargetName>$(Configuration) - $(Platform)</TargetName>
     <OutDir>.\release\</OutDir>
     <IntDir>.\release\intermediate\</IntDir>
-    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath);$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
+    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath);$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)dependencies\freetype\include</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath);$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(SolutionDir)dependencies\freetype\lib</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -115,6 +115,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -136,6 +137,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -174,6 +176,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dependencies\checksum\checksum.cpp" />
+    <ClCompile Include="dependencies\imgui\imgui.cpp" />
+    <ClCompile Include="dependencies\imgui\imgui_demo.cpp" />
+    <ClCompile Include="dependencies\imgui\imgui_draw.cpp" />
+    <ClCompile Include="dependencies\imgui\imgui_freetype.cpp" />
+    <ClCompile Include="dependencies\imgui\imgui_impl_dx9.cpp" />
+    <ClCompile Include="dependencies\imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="dependencies\imgui\imgui_tables.cpp" />
+    <ClCompile Include="dependencies\imgui\imgui_widgets.cpp" />
     <ClCompile Include="dependencies\minhook\src\buffer.c" />
     <ClCompile Include="dependencies\minhook\src\hde\hde32.c" />
     <ClCompile Include="dependencies\minhook\src\hde\hde64.c" />
@@ -217,12 +227,6 @@
     <ClCompile Include="hacks\logging\logging.cpp" />
     <ClCompile Include="hacks\menu\config\config.cpp" />
     <ClCompile Include="hacks\menu\menu.cpp" />
-    <ClCompile Include="hacks\menu\window\tab\group\group.cpp" />
-    <ClCompile Include="hacks\menu\window\tab\group\objects\checkbox.cpp" />
-    <ClCompile Include="hacks\menu\window\tab\group\objects\slider_float.cpp" />
-    <ClCompile Include="hacks\menu\window\tab\group\objects\slider_int.cpp" />
-    <ClCompile Include="hacks\menu\window\tab\tab.cpp" />
-    <ClCompile Include="hacks\menu\window\window.cpp" />
     <ClCompile Include="hacks\prediction\prediction.cpp" />
     <ClCompile Include="utils\entity_list\entity_list.cpp" />
     <ClCompile Include="utils\keybinds\keybinds.cpp" />
@@ -251,7 +255,115 @@
     <ClInclude Include="dependencies\formatting\fmt\posix.h" />
     <ClInclude Include="dependencies\formatting\fmt\printf.h" />
     <ClInclude Include="dependencies\formatting\fmt\ranges.h" />
+    <ClInclude Include="dependencies\freetype\include\dlg\dlg.h" />
+    <ClInclude Include="dependencies\freetype\include\dlg\output.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\config\ftconfig.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\config\ftheader.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\config\ftmodule.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\config\ftoption.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\config\ftstdlib.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\config\integer-types.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\config\mac-support.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\config\public-macros.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\freetype.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftadvanc.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftbbox.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftbdf.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftbitmap.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftbzip2.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftcache.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftchapters.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftcid.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftcolor.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftdriver.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\fterrdef.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\fterrors.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftfntfmt.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftgasp.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftglyph.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftgxval.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftgzip.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftimage.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftincrem.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftlcdfil.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftlist.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftlogging.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftlzw.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftmac.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftmm.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftmodapi.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftmoderr.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftotval.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftoutln.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftparams.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftpfr.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftrender.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftsizes.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftsnames.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftstroke.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftsynth.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftsystem.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\fttrigon.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\fttypes.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ftwinfnt.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\autohint.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\cffotypes.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\cfftypes.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\compiler-macros.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\ftcalc.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\ftdebug.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\ftdrv.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\ftgloadr.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\fthash.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\ftmemory.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\ftobjs.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\ftpsprop.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\ftrfork.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\ftserv.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\ftstream.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\fttrace.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\ftvalid.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\psaux.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\pshints.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\services\svbdf.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\services\svcfftl.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\services\svcid.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\services\svfntfmt.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\services\svgldict.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\services\svgxval.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\services\svkern.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\services\svmetric.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\services\svmm.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\services\svotval.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\services\svpfr.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\services\svpostnm.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\services\svprop.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\services\svpscmap.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\services\svpsinfo.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\services\svsfnt.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\services\svttcmap.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\services\svtteng.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\services\svttglyf.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\services\svwinfnt.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\sfnt.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\t1types.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\tttypes.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\internal\wofftypes.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\t1tables.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\ttnameid.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\tttables.h" />
+    <ClInclude Include="dependencies\freetype\include\freetype\tttags.h" />
+    <ClInclude Include="dependencies\freetype\include\ft2build.h" />
     <ClInclude Include="dependencies\hash\hash.h" />
+    <ClInclude Include="dependencies\imgui\imconfig.h" />
+    <ClInclude Include="dependencies\imgui\imgui.h" />
+    <ClInclude Include="dependencies\imgui\imgui_freetype.h" />
+    <ClInclude Include="dependencies\imgui\imgui_impl_dx9.h" />
+    <ClInclude Include="dependencies\imgui\imgui_impl_win32.h" />
+    <ClInclude Include="dependencies\imgui\imgui_internal.h" />
+    <ClInclude Include="dependencies\imgui\imstb_rectpack.h" />
+    <ClInclude Include="dependencies\imgui\imstb_textedit.h" />
+    <ClInclude Include="dependencies\imgui\imstb_truetype.h" />
     <ClInclude Include="dependencies\json\json.hpp" />
     <ClInclude Include="dependencies\lazy_importer\lazy_importer.h" />
     <ClInclude Include="dependencies\minhook\include\MinHook.h" />
@@ -381,13 +493,6 @@
     <ClInclude Include="hacks\logging\logging.h" />
     <ClInclude Include="hacks\menu\config\config.h" />
     <ClInclude Include="hacks\menu\menu.h" />
-    <ClInclude Include="hacks\menu\window\tab\group\objects\base_object.h" />
-    <ClInclude Include="hacks\menu\window\tab\group\group.h" />
-    <ClInclude Include="hacks\menu\window\tab\group\objects\checkbox.h" />
-    <ClInclude Include="hacks\menu\window\tab\group\objects\slider_float.h" />
-    <ClInclude Include="hacks\menu\window\tab\group\objects\slider_int.h" />
-    <ClInclude Include="hacks\menu\window\tab\tab.h" />
-    <ClInclude Include="hacks\menu\window\window.h" />
     <ClInclude Include="hacks\prediction\prediction.h" />
     <ClInclude Include="utils\console\log_level\log_level.h" />
     <ClInclude Include="utils\convars\convars.h" />
