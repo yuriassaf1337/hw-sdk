@@ -94,7 +94,7 @@ void aimbot::impl::run( )
 
 	angles_to_head = angles_to_head.normalize( );
 
-	if ( head_hitchance > 70 && g_ctx.weapon->can_shoot_primary( ) ) {
+	if ( g_ctx.weapon->can_shoot_primary( ) ) {
 		if ( g_ctx.record ) {
 			auto out = console::format( _( "hit player {} [ tick: {} | health: {} | chance: {} | fall: {} ]" ), entity->name( ),
 			                            sdk::time_to_ticks( g_ctx.record->simulation_time + g_lagcomp.lerp_time( ) ), entity->health( ),
@@ -102,6 +102,8 @@ void aimbot::impl::run( )
 			g_log.print( out );
 		}
 		g_interfaces.engine->set_view_angles( angles_to_head );
+
+		/* todo - coffin - do sendpacket stuff on shot etc for a more psilent effect */
 		g_ctx.cmd->view_angles = angles_to_head;
 	}
 }

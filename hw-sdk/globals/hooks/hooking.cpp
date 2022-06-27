@@ -50,7 +50,7 @@ bool hooks::impl::init( )
 	hooks::list_leaves_in_box::init( );
 	hooks::is_loose_file_allowed::init( );
 	hooks::send_net_msg::init( );
-	hooks::fire_event_intern::init( );
+	// hooks::fire_event_intern::init( ); /* note - coffin - crashing for now, add event listener as not all events get registered via this hook */
 	hooks::return_address::init( );
 	hooks::alloc_key_value_memory::init( );
 	hooks::modify_eye_position::init( );
@@ -85,7 +85,7 @@ void hooks::impl::unload( )
 	hooks::list_leaves_in_box::unload( );
 	hooks::is_loose_file_allowed::unload( );
 	hooks::send_net_msg::unload( );
-	hooks::fire_event_intern::unload( );
+	// hooks::fire_event_intern::unload( );
 	hooks::return_address::unload( );
 	hooks::alloc_key_value_memory::unload( );
 	hooks::modify_eye_position::unload( );

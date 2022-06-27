@@ -18,10 +18,11 @@ bool sdk::c_cs_player::is_alive( )
 	return ( this->life_state( ) == sdk::life_state::LIFE_ALIVE && this->health( ) > 0 );
 }
 
-const char* sdk::c_cs_player::name( )
+std::string sdk::c_cs_player::name( )
 {
 	if ( sdk::player_info_t info{ }; g_interfaces.engine->get_player_info( this->entity_index( ), &info ) )
-		return info.name;
+		return std::string( info.name );
+
 	return { };
 }
 
