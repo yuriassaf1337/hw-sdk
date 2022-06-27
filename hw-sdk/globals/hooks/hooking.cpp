@@ -26,7 +26,7 @@
 
 bool hooks::impl::init( )
 {
-	MOCKING_TRY
+	MOCKING_TRY;
 
 	if ( MH_Initialize( ) != MH_OK ) {
 		console::print< console::log_level::FATAL >( _( "MH_Initialize was not MH_OK" ) );
@@ -67,7 +67,7 @@ bool hooks::impl::init( )
 
 void hooks::impl::unload( )
 {
-	MOCKING_TRY
+	MOCKING_TRY;
 
 	hooks::wndproc::unload( );
 	hooks::create_move::unload( );

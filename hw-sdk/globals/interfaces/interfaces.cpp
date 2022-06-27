@@ -5,7 +5,7 @@
 
 bool sdk::interfaces::init( )
 {
-	MOCKING_TRY
+	MOCKING_TRY;
 
 	// find interfaces
 	{

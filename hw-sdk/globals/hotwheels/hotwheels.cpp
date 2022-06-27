@@ -49,7 +49,7 @@ DWORD WINAPI hotwheels::init( void* module_handle )
 
 DWORD WINAPI hotwheels::unload( DWORD exit_code )
 {
-	MOCKING_TRY
+	MOCKING_TRY;
 
 	g_hooks.unload( );
 
