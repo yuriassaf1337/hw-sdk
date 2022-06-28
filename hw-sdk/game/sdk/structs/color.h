@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "../../../globals/macros/macros.h"
+#include "../../../dependencies/imgui/imgui.h"
 
 // https://docs.microsoft.com/en-us/cpp/error-messages/compiler-warnings/compiler-warning-levels-3-and-4-c4244?view=msvc-160
 #pragma warning( disable : 4244 )
@@ -29,14 +30,9 @@ struct color {
 
 	constexpr static auto MAX_ALPHA = ( int )255;
 
-	std::uint32_t to_u32( ) const
+	[[nodiscard]] ImU32 get_u32( const float alpha_multiplier = 1.0f ) const
 	{
-		return ( ( r & 0xff ) << 24 ) + ( ( g & 0xff ) << 16 ) + ( ( b & 0xff ) << 8 ) + ( a & 0xff );
-	}
-	color from_u32( unsigned int col )
-	{
-		return color( static_cast< int >( ( col >> 0 ) & 0xFF ), static_cast< int >( ( col >> 8 ) & 0xFF ),
-		              static_cast< int >( ( col >> 16 ) & 0xFF ), static_cast< int >( ( col >> 24 ) & 0xFF ) );
+		return ImGui::GetColorU32( this->to_imvec4( alpha_multiplier ) );
 	}
 	color set_alpha( int new_alpha )
 	{
@@ -45,6 +41,10 @@ struct color {
 	D3DCOLOR to_d3d( ) const
 	{
 		return D3DCOLOR_ARGB( a, r, g, b );
+	}
+	[[nodiscard]] ImVec4 to_imvec4( const float alpha_multiplier = 1.0f ) const
+	{
+		return ImVec4( this->r / 255.f, this->g / 255.f, this->b / 255.f, this->a / 255.f * alpha_multiplier );
 	}
 	hsv to_hsv( )
 	{

@@ -14,6 +14,7 @@
 #include "frame_stage_notify/frame_stage_notify.h"
 #include "glow_effect_spectator/glow_effect_spectator.h"
 #include "is_loose_file_allowed/is_loose_file_allowed.h"
+#include "reset/reset.h"
 #include "item_post_frame/item_post_frame.h"
 #include "list_leaves_in_box/list_leaves_in_box.h"
 #include "modify_eye_position/modify_eye_position.h"
@@ -21,8 +22,8 @@
 #include "return_address/return_address.h"
 #include "send_net_msg/send_net_msg.h"
 #include "wndproc/wndproc.h"
-#include "../../dependencies/imgui/imgui_impl_dx9.h"
-#include "../../dependencies/imgui/imgui_impl_win32.h"
+#include "../../dependencies/imgui/dx9/imgui_impl_dx9.h"
+#include "../../dependencies/imgui/win32/imgui_impl_win32.h"
 
 bool hooks::impl::init( )
 {
@@ -34,6 +35,8 @@ bool hooks::impl::init( )
 	}
 
 	hooks::wndproc::init( );
+	hooks::reset::init( );
+	hooks::end_scene::init( );
 	hooks::create_move::init( );
 	// hooks::cl_move::init( );
 	hooks::item_post_frame::init( );
@@ -56,7 +59,6 @@ bool hooks::impl::init( )
 	hooks::alloc_key_value_memory::init( );
 	hooks::modify_eye_position::init( );
 	// hooks::calculate_view::init( );
-	hooks::end_scene::init( );
 
 	console::print< console::log_level::SUCCESS >( _( "Initialized all hooks." ) );
 
@@ -70,6 +72,8 @@ void hooks::impl::unload( )
 	MOCKING_TRY;
 
 	hooks::wndproc::unload( );
+	hooks::reset::unload( );
+	hooks::end_scene::unload( );
 	hooks::create_move::unload( );
 	// hooks::cl_move::unload( );
 	hooks::item_post_frame::unload( );
@@ -91,7 +95,6 @@ void hooks::impl::unload( )
 	hooks::alloc_key_value_memory::unload( );
 	hooks::modify_eye_position::unload( );
 	// hooks::calculate_view::unload( );
-	hooks::end_scene::unload( );
 
 	// this is so useless lol
 	if ( MH_Uninitialize( ) != MH_OK )
