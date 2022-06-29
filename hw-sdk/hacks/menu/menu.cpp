@@ -2,7 +2,7 @@
 #include "../../dependencies/imgui/dx9/imgui_impl_dx9.h"
 #include "../../dependencies/imgui/imgui.h"
 #include "../../dependencies/imgui/imgui_freetype.h"
-#include "../../dependencies/imgui/win32/imgui_impl_win32.h"
+#include "../../dependencies/imgui/imgui_impl_win32.h"
 #include "../../globals/interfaces/interfaces.h"
 #include "../../utils/keybinds/keybinds.h"
 

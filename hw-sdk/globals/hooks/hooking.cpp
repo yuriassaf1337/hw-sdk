@@ -23,7 +23,7 @@
 #include "send_net_msg/send_net_msg.h"
 #include "wndproc/wndproc.h"
 #include "../../dependencies/imgui/dx9/imgui_impl_dx9.h"
-#include "../../dependencies/imgui/win32/imgui_impl_win32.h"
+#include "../../dependencies/imgui/imgui_impl_win32.h"
 
 bool hooks::impl::init( )
 {

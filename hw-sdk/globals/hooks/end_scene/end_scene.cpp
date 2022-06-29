@@ -2,7 +2,7 @@
 
 #include "../../../dependencies/imgui/imgui.h"
 #include "../../../dependencies/imgui/dx9/imgui_impl_dx9.h"
-#include "../../../dependencies/imgui/win32/imgui_impl_win32.h"
+#include "../../../dependencies/imgui/imgui_impl_win32.h"
 #include "../../../hacks/features/lagcomp/lagcomp.h"
 #include "../../../hacks/features/visuals/visuals.h"
 #include "../../../hacks/logging/logging.h"
