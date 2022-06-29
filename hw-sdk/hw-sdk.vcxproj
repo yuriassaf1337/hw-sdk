@@ -226,6 +226,7 @@
     <ClCompile Include="hacks\features\visuals\visuals.cpp" />
     <ClCompile Include="hacks\logging\logging.cpp" />
     <ClCompile Include="hacks\menu\config\config.cpp" />
+    <ClCompile Include="hacks\menu\imgui\imgui_helper.cpp" />
     <ClCompile Include="hacks\menu\menu.cpp" />
     <ClCompile Include="hacks\prediction\prediction.cpp" />
     <ClCompile Include="utils\entity_list\entity_list.cpp" />
@@ -495,6 +496,7 @@
     <ClInclude Include="hacks\logging\logging.h" />
     <ClInclude Include="hacks\menu\config\config.h" />
     <ClInclude Include="hacks\menu\helpers.h" />
+    <ClInclude Include="hacks\menu\imgui\imgui_helper.h" />
     <ClInclude Include="hacks\menu\menu.h" />
     <ClInclude Include="hacks\prediction\prediction.h" />
     <ClInclude Include="utils\console\log_level\log_level.h" />

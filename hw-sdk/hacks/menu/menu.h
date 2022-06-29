@@ -16,7 +16,6 @@ namespace menu
 		HWND window           = nullptr;
 
 		bool init_input( );
-		void init( IDirect3DDevice9* device );
 		void draw( );
 	};
 }; // namespace menu

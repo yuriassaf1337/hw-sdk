@@ -1,11 +1,9 @@
 #include <string.h>
 
-#include "../../../dependencies/imgui/imgui.h"
-#include "../../../dependencies/imgui/dx9/imgui_impl_dx9.h"
-#include "../../../dependencies/imgui/imgui_impl_win32.h"
 #include "../../../hacks/features/lagcomp/lagcomp.h"
 #include "../../../hacks/features/visuals/visuals.h"
 #include "../../../hacks/logging/logging.h"
+#include "../../../hacks/menu/imgui/imgui_helper.h"
 #include "../../../hacks/menu/menu.h"
 #include "../../../utils/convars/convars.h"
 #include "../../../utils/entity_list/entity_list.h"
@@ -15,9 +13,20 @@
 
 LONG __stdcall hooks::end_scene::end_scene_detour( IDirect3DDevice9* device )
 {
-	static auto static_return = _ReturnAddress( );
+	static void* m_return = nullptr;
 
-	if ( static_return != _ReturnAddress( ) )
+	if ( !m_return ) {
+		MEMORY_BASIC_INFORMATION mem_info;
+		VirtualQuery( _ReturnAddress( ), &mem_info, sizeof( MEMORY_BASIC_INFORMATION ) );
+
+		char mod_name[ MAX_PATH ]{ };
+		GetModuleFileName( static_cast< HMODULE >( mem_info.AllocationBase ), mod_name, MAX_PATH );
+
+		if ( std::strstr( mod_name, GAMEOVERLAYRENDERER_DLL ) != nullptr )
+			m_return = _ReturnAddress( );
+	}
+
+	if ( m_return != _ReturnAddress( ) )
 		return hooks::end_scene_hook.call_original< LONG >( device );
 
 	if ( device ) {
@@ -28,24 +37,20 @@ LONG __stdcall hooks::end_scene::end_scene_detour( IDirect3DDevice9* device )
 		g_ctx.screen_size.y = vp.Height;
 	}
 
-		g_render.setup_state( );
+	g_render.setup_state( );
 
-			g_visuals.render( );
+	g_visuals.render( );
 
-				g_log.think( );
+	g_log.think( );
 
 	if ( !g_menu.menu_initialised )
-		g_menu.init( device );
+		g_imgui.menu_init( device );
 
-	ImGui_ImplDX9_NewFrame( );
-	ImGui_ImplWin32_NewFrame( );
-	ImGui::NewFrame( );
+	g_imgui.new_frame( );
 
 	g_menu.draw( );
 
-	ImGui::EndFrame( );
-	ImGui::Render( );
-	ImGui_ImplDX9_RenderDrawData( ImGui::GetDrawData( ) );
+	g_imgui.end_frame( );
 
 	g_render.finish_state( );
 
