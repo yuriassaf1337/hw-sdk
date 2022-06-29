@@ -180,7 +180,13 @@ void menu::impl::draw( )
 				ImGui::Spacing( );
 				ImGui::Checkbox( _( "auto bhop" ), &g_config.find< bool >( HASH( "m_bh" ) ) );
 				ImGui::Checkbox( _( "auto jumpbug" ), &g_config.find< bool >( HASH( "m_jb" ) ) );
-				ImGui::Keybind( _( "auto jumpbug key" ), &g_config.find< int >( HASH( "m_jb_key" ) ), 14 );
+				ImGui::Keybind( _( "auto jumpbug key" ), &g_config.find< int >( HASH( "m_jb_key" ) ), 15 );		
+				ImGui::Checkbox( _( "edge jump" ), &g_config.find< bool >( HASH( "m_ej" ) ) );
+				ImGui::Keybind( _( "edge jump key" ), &g_config.find< int >( HASH( "m_ej_key" ) ), 15 );
+				ImGui::Checkbox( _( "long jump" ), &g_config.find< bool >( HASH( "m_lj" ) ) );
+				ImGui::Checkbox( _( "mini jump" ), &g_config.find< bool >( HASH( "m_mj" ) ) );
+				ImGui::Keybind( _( "mini jump key" ), &g_config.find< int >( HASH( "m_mj_key" ) ), 1154 );
+				ImGui::Checkbox( _( "fast duck" ), &g_config.find< bool >( HASH( "m_fastduck" ) ) );
 				ImGui::EndChild( );
 			}
 
