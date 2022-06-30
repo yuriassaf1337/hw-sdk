@@ -221,6 +221,7 @@
     <ClCompile Include="globals\hotwheels\hotwheels.cpp" />
     <ClCompile Include="globals\interfaces\interfaces.cpp" />
     <ClCompile Include="hacks\features\aimbot\aimbot.cpp" />
+    <ClCompile Include="hacks\features\indicators\indicators.cpp" />
     <ClCompile Include="hacks\features\lagcomp\lagcomp.cpp" />
     <ClCompile Include="hacks\features\movement\movement.cpp" />
     <ClCompile Include="hacks\features\visuals\visuals.cpp" />
@@ -490,6 +491,7 @@
     <ClInclude Include="globals\interfaces\interfaces.h" />
     <ClInclude Include="globals\macros\macros.h" />
     <ClInclude Include="hacks\features\aimbot\aimbot.h" />
+    <ClInclude Include="hacks\features\indicators\indicators.h" />
     <ClInclude Include="hacks\features\lagcomp\lagcomp.h" />
     <ClInclude Include="hacks\features\movement\movement.h" />
     <ClInclude Include="hacks\features\visuals\visuals.h" />

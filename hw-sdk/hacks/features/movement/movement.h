@@ -8,7 +8,7 @@ namespace movement
 	constexpr float distance_to_stop     = 0.00100f;
 	constexpr float distance_till_adjust = 0.03125f;
 
-	enum edgebug_type : int {
+	enum e_edgebug_type : int {
 		STANDING = 0,
 		DUCKING,
 		ONETICK // prob unused(since its an impossible theory)

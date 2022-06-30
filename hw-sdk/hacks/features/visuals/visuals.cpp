@@ -1,5 +1,6 @@
 ﻿#include "visuals.h"
 #include "../../../globals/ctx/ctx.h"
+#include "../../menu/config/config.h"
 #include <comdef.h>
 
 math::box visuals::esp_box::calculate_box( sdk::c_cs_player* player, bool& on_screen )
@@ -486,5 +487,3 @@ void visuals::esp_bar::render( math::box box, float& offset_x, float& offset_y )
 	                                  color( 32, 32, 32, std::clamp( current_color.a - 50, 0, 255 ) ) );
 	g_render.render_filled_rectangle( start_position, end_position - start_position, current_color );
 }
-
-void visuals::impl::indicators( ) { }

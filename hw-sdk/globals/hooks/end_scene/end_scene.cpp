@@ -2,6 +2,7 @@
 
 #include "../../../hacks/features/lagcomp/lagcomp.h"
 #include "../../../hacks/features/visuals/visuals.h"
+#include "../../../hacks/features/indicators/indicators.h"
 #include "../../../hacks/logging/logging.h"
 #include "../../../hacks/menu/imgui/imgui_helper.h"
 #include "../../../hacks/menu/menu.h"
@@ -43,6 +44,8 @@ LONG __stdcall hooks::end_scene::end_scene_detour( IDirect3DDevice9* device )
 	}
 
 	g_render.setup_state( );
+
+	g_indicators.think( );
 
 	g_visuals.render( );
 
