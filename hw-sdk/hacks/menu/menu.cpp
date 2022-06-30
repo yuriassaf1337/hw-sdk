@@ -94,7 +94,7 @@ void menu::impl::draw( )
 					g_imgui.checkbox( _( "long jump" ), &g_config.find< bool >( HASH( "m_lj" ) ), 15 );
 
 				g_imgui.checkbox( _( "mini jump" ), &g_config.find< bool >( HASH( "m_mj" ) ) );
-				g_imgui.keybind( _( "mini jump key" ), &g_config.find< int >( HASH( "m_mj_key" ) ), 1154 );
+				g_imgui.keybind( _( "mini jump key" ), &g_config.find< int >( HASH( "m_mj_key" ) ), 15 );
 				g_imgui.checkbox( _( "fast duck" ), &g_config.find< bool >( HASH( "m_fastduck" ) ) );
 				g_imgui.checkbox( _( "auto align" ), &g_config.find< bool >( HASH( "m_auto_align" ) ) );
 

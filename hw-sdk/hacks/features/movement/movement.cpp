@@ -43,7 +43,8 @@ void movement::impl::edge_jump( )
 	}
 
 	if ( g_prediction.backup_vars.flags.has( sdk::flags::ONGROUND ) &&
-	     !( g_ctx.local->flags( ).has( sdk::flags::ONGROUND ) && !g_ctx.cmd->buttons.has( sdk::buttons::IN_JUMP ) ) ) {
+	     !g_ctx.local->flags( ).has( sdk::flags::ONGROUND ) ) {
+
 		g_ctx.cmd->buttons.add( sdk::buttons::IN_JUMP );
 
 		g_movement.longjump.start_timer = true;
