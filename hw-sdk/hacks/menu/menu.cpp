@@ -28,7 +28,7 @@ void menu::impl::draw( )
 
 	g_imgui.set_next_window_size( ImVec2( 500, 450 ), ImGuiCond_Always );
 
-	g_imgui.begin( _( "dreamhak-main-window" ), nullptr,
+	g_imgui.begin( _( "hotwheels-main-window" ), nullptr,
 	               ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar );
 	{
 		ImDrawList* window_draw_list = ImGui::GetWindowDrawList( );
@@ -39,22 +39,24 @@ void menu::impl::draw( )
 
 		g_imgui.begin_child( _( "tabs-child" ), ImVec2( -1, 30 ), true, 0 );
 		{
+			g_imgui.set_cursor_pos_x( 10 );
 			g_imgui.render_tab( _( "aimbot" ), 0 );
-			g_imgui.same_line( 0.f, 80.f );
+			g_imgui.same_line( 0.f, 57.f );
 
 			g_imgui.render_tab( _( "anti-aim" ), 1 );
-			g_imgui.same_line( 0.f, 80.f );
+			g_imgui.same_line( 0.f, 57.f );
 
 			g_imgui.render_tab( _( "visuals" ), 2 );
-			g_imgui.same_line( 0.f, 80.f );
+			g_imgui.same_line( 0.f, 57.f );
 
 			g_imgui.render_tab( _( "misc" ), 3 );
-			g_imgui.same_line( 0.f, 80.f );
+			g_imgui.same_line( 0.f, 57.f );
 
 			g_imgui.render_tab( _( "recorder" ), 4 );
-			g_imgui.same_line( 0.f, 80.f );
+			g_imgui.same_line( 0.f, 56.f );
 
 			g_imgui.render_tab( _( "config" ), 5 );
+
 			g_imgui.end_child( );
 		}
 

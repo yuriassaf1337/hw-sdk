@@ -487,7 +487,4 @@ void visuals::esp_bar::render( math::box box, float& offset_x, float& offset_y )
 	g_render.render_filled_rectangle( start_position, end_position - start_position, current_color );
 }
 
-void visuals::impl::indicators( )
-{
-
-}
+void visuals::impl::indicators( ) { }
