@@ -63,27 +63,14 @@ void menu::impl::draw( )
 			break;
 		}
 		case 2: { /* misc tab */
-
-			g_imgui.begin_child( _( "movement-child-header" ), ImVec2( g_imgui.get_content_region_avail( ).x / 2, 13 ) );
-			{
-				g_imgui.set_cursor_pos_x( g_imgui.get_content_region_avail( ).x / 2 - g_imgui.calc_text_size( _( "movement" ) ).x / 2 );
-				g_imgui.text( _( "movement" ) );
-				g_imgui.end_child( );
-			}
-
-			g_imgui.same_line( );
-
-			g_imgui.begin_child( _( "indicators-child-header" ), ImVec2( g_imgui.get_content_region_avail( ).x, 13 ) );
-			{
-				g_imgui.set_cursor_pos_x( g_imgui.get_content_region_avail( ).x / 2 - g_imgui.calc_text_size( _( "indicators" ) ).x / 2 );
-				g_imgui.text( _( "indicators" ) );
-				g_imgui.end_child( );
-			}
-
 			g_imgui.begin_child( _( "movement-child-contents" ),
-			                     ImVec2( g_imgui.get_content_region_avail( ).x / 2, g_imgui.get_content_region_avail( ).y - 200 ) );
+			                     ImVec2( g_imgui.get_content_region_avail( ).x / 2, g_imgui.get_content_region_avail( ).y / 2 ) );
 			{
-				g_imgui.spacing( 2 );
+				g_imgui.separator( window_draw_list,
+				                   ImVec2( ImGui::GetWindowPos( ).x + ImGui::CalcTextSize( _( "movement" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
+				                   ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x,
+				                           ImGui::GetWindowPos( ).y + 5 + 1 ),
+				                   _( "movement" ) );
 
 				g_imgui.checkbox( _( "auto bhop" ), &g_config.find< bool >( HASH( "m_bh" ) ) );
 				g_imgui.checkbox( _( "auto jumpbug" ), &g_config.find< bool >( HASH( "m_jb" ) ) );
@@ -104,21 +91,24 @@ void menu::impl::draw( )
 			g_imgui.same_line( );
 
 			g_imgui.begin_child( _( "indicators-child-contents" ),
-			                     ImVec2( g_imgui.get_content_region_avail( ).x, g_imgui.get_content_region_avail( ).y - 200 ) );
+			                     ImVec2( g_imgui.get_content_region_avail( ).x, g_imgui.get_content_region_avail( ).y / 2 ) );
 			{
-				g_imgui.spacing( );
-				g_imgui.end_child( );
-			}
+				g_imgui.separator( window_draw_list,
+				                   ImVec2( ImGui::GetWindowPos( ).x + ImGui::CalcTextSize( _( "indicators" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
+				                   ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ),
+				                   _( "indicators" ) );
 
-			g_imgui.begin_child( _( "game-child-header" ), ImVec2( g_imgui.get_content_region_avail( ).x, 13 ) );
-			{
-				g_imgui.set_cursor_pos_x( g_imgui.get_content_region_avail( ).x / 2 - g_imgui.calc_text_size( _( "game" ) ).x / 2 );
-				g_imgui.text( _( "game" ) );
+				g_imgui.spacing( );
 				g_imgui.end_child( );
 			}
 
 			g_imgui.begin_child( _( "game-child-contents" ), ImVec2( g_imgui.get_content_region_avail( ).x, g_imgui.get_content_region_avail( ).y ) );
 			{
+				g_imgui.separator(
+					window_draw_list,
+					ImVec2( ImGui::GetWindowPos( ).x + ImGui::CalcTextSize( _( "game" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
+					ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ), _( "game" ) );
+
 				g_imgui.spacing( );
 				g_imgui.end_child( );
 			}

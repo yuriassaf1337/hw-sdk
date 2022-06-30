@@ -42,9 +42,7 @@ void movement::impl::edge_jump( )
 		return;
 	}
 
-	if ( g_prediction.backup_vars.flags.has( sdk::flags::ONGROUND ) &&
-	     !g_ctx.local->flags( ).has( sdk::flags::ONGROUND ) ) {
-
+	if ( g_prediction.backup_vars.flags.has( sdk::flags::ONGROUND ) && !g_ctx.local->flags( ).has( sdk::flags::ONGROUND ) ) {
 		g_ctx.cmd->buttons.add( sdk::buttons::IN_JUMP );
 
 		g_movement.longjump.start_timer = true;
@@ -226,7 +224,7 @@ void movement::impl::auto_align( )
 		float base_yaw = math::normalize_yaw( v_angle_y );
 
 		const float direction =
-			velocity_angle.y == 0.f ? -1 * is_wall_parallel : round( math::normalize_yaw( velocity_angle.y ) / ( 180.f * is_wall_parallel ) );
+			velocity_angle.y == 0.f ? -1 * is_wall_parallel : std::round( math::normalize_yaw( velocity_angle.y ) / ( 180.f * is_wall_parallel ) );
 
 		// best strafe angle to align the player
 		const float angle_diff =

@@ -7771,18 +7771,7 @@ void ImGui::RenderTab( const char* label, int tab_number )
 {
 	auto id = ImGui::GetCurrentWindow( )->GetID( label );
 
-	static std::map< ImGuiID, float > clicked_animation;
-	auto it_filled = clicked_animation.find( id );
-	if ( it_filled == clicked_animation.end( ) ) {
-		clicked_animation.insert( { id, 0.f } );
-		it_filled = clicked_animation.find( id );
-	}
-	it_filled->second =
-		ImClamp( it_filled->second + ( 2.35f * ImGui::GetIO( ).DeltaTime * ( g_menu.menu_tab == tab_number ? 2.f : -2.f ) ), 0.5f, 1.f );
-	it_filled->second *= ( g_config.find< color >( HASH( "menu_color" ) ).a / 255.f );
-
-	ImGui::TextColored( g_menu.menu_tab == tab_number ? g_config.find< color >( HASH( "menu_color" ) ).to_imvec4( it_filled->second )
-	                                                  : ImVec4( 1.f, 1.f, 1.f, 0.5f ),
+	ImGui::TextColored( g_menu.menu_tab == tab_number ? g_config.find< color >( HASH( "menu_color" ) ).to_imvec4() : ImVec4( 1.f, 1.f, 1.f, 1.f ),
 	                    label );
 
 	if ( ImGui::IsItemClicked( ) )

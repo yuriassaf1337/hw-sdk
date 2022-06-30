@@ -43,6 +43,7 @@ namespace imgui
 		bool color_picker( const char* label, color* col, bool alpha, int same_line, bool show_text );
 		void menu_init( IDirect3DDevice9* device );
 		bool keybind( const char* id, int* current_key, int sameline = 5 );
+		void separator( ImDrawList* draw_list, const ImVec2& min, const ImVec2& max, const char* text = nullptr );
 	};
 } // namespace imgui
 

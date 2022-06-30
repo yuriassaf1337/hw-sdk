@@ -116,6 +116,20 @@ bool imgui::impl::keybind( const char* id, int* current_key, int sameline )
 	return ImGui::Keybind( id, current_key, sameline );
 }
 
+void imgui::impl::separator( ImDrawList* draw_list, const ImVec2& min, const ImVec2& max, const char* text )
+{
+	if ( text ) {
+		ImGui::SetCursorPosX( 6 );
+		ImGui::Text( text );
+	}
+
+	ImVec2 text_size = imgui::impl::calc_text_size( text );
+
+	draw_list->AddRectFilledMultiColor(
+		min, max, g_config.find< color >( HASH( "menu_color" ) ).get_u32( 0.f ), g_config.find< color >( HASH( "menu_color" ) ).get_u32( 1.f ),
+		g_config.find< color >( HASH( "menu_color" ) ).get_u32( 1.f ), g_config.find< color >( HASH( "menu_color" ) ).get_u32( 0.f ) );
+}
+
 ImVec2 imgui::impl::calc_text_size( const char* text, const char* text_end, bool hide_text_after_double_hash, float wrap_width )
 {
 	return ImGui::CalcTextSize( text, text_end, hide_text_after_double_hash, wrap_width );
