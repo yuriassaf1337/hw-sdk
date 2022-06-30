@@ -96,7 +96,7 @@ namespace visuals
 	struct impl {
 	private:
 		void update_object( esp_object& object );
-
+		void indicators( );
 	public:
 		std::array< esp_object, 65 > esp_objects{ };
 

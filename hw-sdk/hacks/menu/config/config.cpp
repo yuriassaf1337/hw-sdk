@@ -6,6 +6,7 @@ bool config::impl::init( )
 {
 	g_config.insert( HASH( "menu_color" ), config::option( color( 133, 133, 133 ) ) );
 
+	/* movement */
 	g_config.insert( HASH( "m_bh" ), config::option( false ) );
 	g_config.insert( HASH( "m_auto_align" ), config::option( false ) );
 	g_config.insert( HASH( "m_jb" ), config::option( false ) );
@@ -17,7 +18,11 @@ bool config::impl::init( )
 
 	g_config.insert( HASH( "m_mj" ), config::option( false ) );
 	g_config.insert( HASH( "m_mj_key" ), config::option( 0, 0, 0 ) );
-	g_config.insert( HASH( "m_fastduck" ), config::option( false ) );
+	g_config.insert( HASH( "m_fast_duck" ), config::option( false ) );
+
+	/* indicators */
+	g_config.insert( HASH( "m_velocity_indicator" ), config::option( false ) );
+	g_config.insert( HASH( "m_stamina_indicator" ), config::option( false ) );
 
 	return true;
 }

@@ -174,6 +174,8 @@ void visuals::impl::render( )
 
 		object.m_box.render( player );
 	}
+
+	indicators( );
 }
 
 void visuals::esp_box::render( sdk::c_cs_player* owner )
@@ -483,4 +485,9 @@ void visuals::esp_bar::render( math::box box, float& offset_x, float& offset_y )
 	                                  border_end_position + math::vec2< int >( 2, 2 ) - border_start_position - math::vec2< int >( 1, 1 ),
 	                                  color( 32, 32, 32, std::clamp( current_color.a - 50, 0, 255 ) ) );
 	g_render.render_filled_rectangle( start_position, end_position - start_position, current_color );
+}
+
+void visuals::impl::indicators( )
+{
+
 }

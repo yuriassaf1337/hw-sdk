@@ -68,8 +68,7 @@ void menu::impl::draw( )
 			{
 				g_imgui.separator( window_draw_list,
 				                   ImVec2( ImGui::GetWindowPos( ).x + ImGui::CalcTextSize( _( "movement" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
-				                   ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x,
-				                           ImGui::GetWindowPos( ).y + 5 + 1 ),
+				                   ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ),
 				                   _( "movement" ) );
 
 				g_imgui.checkbox( _( "auto bhop" ), &g_config.find< bool >( HASH( "m_bh" ) ) );
@@ -82,7 +81,7 @@ void menu::impl::draw( )
 
 				g_imgui.checkbox( _( "mini jump" ), &g_config.find< bool >( HASH( "m_mj" ) ) );
 				g_imgui.keybind( _( "mini jump key" ), &g_config.find< int >( HASH( "m_mj_key" ) ), 15 );
-				g_imgui.checkbox( _( "fast duck" ), &g_config.find< bool >( HASH( "m_fastduck" ) ) );
+				g_imgui.checkbox( _( "fast duck" ), &g_config.find< bool >( HASH( "m_fast_duck" ) ) );
 				g_imgui.checkbox( _( "auto align" ), &g_config.find< bool >( HASH( "m_auto_align" ) ) );
 
 				g_imgui.end_child( );
@@ -98,6 +97,9 @@ void menu::impl::draw( )
 				                   ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ),
 				                   _( "indicators" ) );
 
+				g_imgui.checkbox( _( "velocity##indicator" ), &g_config.find< bool >( HASH( "m_velocity_indicator" ) ) );
+				g_imgui.checkbox( _( "stamina##indicator" ), &g_config.find< bool >( HASH( "m_stamina_indicator" ) ) );
+
 				g_imgui.spacing( );
 				g_imgui.end_child( );
 			}
@@ -105,8 +107,7 @@ void menu::impl::draw( )
 			g_imgui.begin_child( _( "game-child-contents" ), ImVec2( g_imgui.get_content_region_avail( ).x, g_imgui.get_content_region_avail( ).y ) );
 			{
 				g_imgui.separator(
-					window_draw_list,
-					ImVec2( ImGui::GetWindowPos( ).x + ImGui::CalcTextSize( _( "game" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
+					window_draw_list, ImVec2( ImGui::GetWindowPos( ).x + ImGui::CalcTextSize( _( "game" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
 					ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ), _( "game" ) );
 
 				g_imgui.spacing( );

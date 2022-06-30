@@ -8,7 +8,7 @@ void movement::impl::pre_prediction::think( )
 	if ( !g_ctx.local->is_alive( ) || !g_interfaces.engine->connected_safe( ) )
 		return;
 
-	if ( !g_ctx.cmd->buttons.has( sdk::IN_BULLRUSH ) && g_config.find< bool >( HASH( "m_fastduck" ) ) )
+	if ( !g_ctx.cmd->buttons.has( sdk::IN_BULLRUSH ) && g_config.find< bool >( HASH( "m_fast_duck" ) ) )
 		g_ctx.cmd->buttons.add( sdk::IN_BULLRUSH );
 
 	g_movement.bhop( );
