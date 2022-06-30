@@ -165,10 +165,10 @@ void imgui::impl::start_decorations( ImDrawList* draw_list )
 		g_config.find< color >( HASH( "menu_color" ) ).get_u32( ), g_config.find< color >( HASH( "menu_color" ) ).get_u32( 0.f ),
 		g_config.find< color >( HASH( "menu_color" ) ).get_u32( 0.f ), g_config.find< color >( HASH( "menu_color" ) ).get_u32( ) );
 
-	ImGui::SetCursorPosX( ImGui::GetContentRegionAvail( ).x / 2 - ImGui::CalcTextSize( _( "smegma.hack" ) ).x / 2 );
-	ImGui::Text( _( "smegma" ) );
+	ImGui::SetCursorPosX( ImGui::GetContentRegionAvail( ).x / 2 - ImGui::CalcTextSize( _( "hotwheels.vip" ) ).x / 2 );
+	ImGui::Text( _( "hotwheels" ) );
 	ImGui::SameLine( 0, 0 );
-	ImGui::TextColored( g_config.find< color >( HASH( "menu_color" ) ).to_imvec4( ), _( ".hack" ) );
+	ImGui::TextColored( g_config.find< color >( HASH( "menu_color" ) ).to_imvec4( ), _( ".vip" ) );
 }
 
 bool imgui::impl::color_picker( const char* label, color* col, bool alpha, int same_line, bool show_text )

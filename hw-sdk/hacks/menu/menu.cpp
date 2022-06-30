@@ -37,21 +37,24 @@ void menu::impl::draw( )
 
 		g_imgui.spacing( 1 );
 
-		g_imgui.begin_child( _( "tabs-child" ), ImVec2( -1, 30 ), true, 0 );
+		g_imgui.begin_child( _( "tabs-child" ), ImVec2( 15, 30 ), true, 0 );
 		{
 			g_imgui.render_tab( _( "aimbot" ), 0 );
+			g_imgui.same_line( 0.f, 80.f );	
+
+			g_imgui.render_tab( _( "anti-aim" ), 1 );
 			g_imgui.same_line( 0.f, 80.f );
 
-			g_imgui.render_tab( _( "visuals" ), 1 );
+			g_imgui.render_tab( _( "visuals" ), 2 );
 			g_imgui.same_line( 0.f, 80.f );
 
-			g_imgui.render_tab( _( "misc" ), 2 );
+			g_imgui.render_tab( _( "misc" ), 3 );
 			g_imgui.same_line( 0.f, 80.f );
 
-			g_imgui.render_tab( _( "recorder" ), 3 );
+			g_imgui.render_tab( _( "recorder" ), 4 );
 			g_imgui.same_line( 0.f, 80.f );
 
-			g_imgui.render_tab( _( "config" ), 4 );
+			g_imgui.render_tab( _( "config" ), 5 );
 			g_imgui.end_child( );
 		}
 
@@ -59,10 +62,13 @@ void menu::impl::draw( )
 		case 0: { /* aimbot tab */
 			break;
 		}
-		case 1: { /* visuals tab */
+		case 1: { /* anti aim tab */
 			break;
 		}
-		case 2: { /* misc tab */
+		case 2: { /* visuals tab */
+			break;
+		}
+		case 3: { /* misc tab */
 			g_imgui.begin_child( _( "movement-child-contents" ),
 			                     ImVec2( g_imgui.get_content_region_avail( ).x / 2, g_imgui.get_content_region_avail( ).y / 2 ) );
 			{
@@ -115,10 +121,10 @@ void menu::impl::draw( )
 			}
 			break;
 		}
-		case 3: { /* recorder tab */
+		case 4: { /* recorder tab */
 			break;
 		}
-		case 4: { /* config tab */
+		case 5: { /* config tab */
 			break;
 		}
 		}
