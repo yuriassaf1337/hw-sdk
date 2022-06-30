@@ -46,10 +46,10 @@ void logging::impl::think( )
 			draw_color.a = 255;
 
 		g_render.render_text( x, y, font_alignment::AL_DEFAULT, font_flags::FLAG_DROPSHADOW, log.m_prefix.c_str( ),
-		                      g_fonts[ HASH( "main_font" ) ], g_config.find< color >( HASH( "menu_color" ) ).set_alpha( draw_color.a ) );
+		                      g_fonts[ HASH( "main_verdana_font" ) ], g_config.find< color >( HASH( "menu_color" ) ).set_alpha( draw_color.a ) );
 
-		g_render.render_text( x + 2 + g_render.render_text_size( log.m_prefix.data( ), g_fonts[ HASH( "main_font" ) ] ).x, y,
-		                      font_alignment::AL_DEFAULT, font_flags::FLAG_DROPSHADOW, log.m_text.c_str( ), g_fonts[ HASH( "main_font" ) ],
+		g_render.render_text( x + 2 + g_render.render_text_size( log.m_prefix.data( ), g_fonts[ HASH( "main_verdana_font" ) ] ).x, y,
+		                      font_alignment::AL_DEFAULT, font_flags::FLAG_DROPSHADOW, log.m_text.c_str( ), g_fonts[ HASH( "main_verdana_font" ) ],
 		                      draw_color );
 		y += size;
 	}

@@ -37,10 +37,10 @@ void menu::impl::draw( )
 
 		g_imgui.spacing( 1 );
 
-		g_imgui.begin_child( _( "tabs-child" ), ImVec2( 15, 30 ), true, 0 );
+		g_imgui.begin_child( _( "tabs-child" ), ImVec2( -1, 30 ), true, 0 );
 		{
 			g_imgui.render_tab( _( "aimbot" ), 0 );
-			g_imgui.same_line( 0.f, 80.f );	
+			g_imgui.same_line( 0.f, 80.f );
 
 			g_imgui.render_tab( _( "anti-aim" ), 1 );
 			g_imgui.same_line( 0.f, 80.f );
