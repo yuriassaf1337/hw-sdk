@@ -66,8 +66,7 @@ namespace math
 	template< typename T, typename... ts_ >
 	constexpr T max( const T& t1, const T& t2, ts_&&... ts );
 
-	template< typename T = float >
-	T& normalize_yaw( T& yaw );
+	float normalize_yaw( float yaw );
 
 	template< typename T >
 	constexpr T random( const T min, const T max );

@@ -7,6 +7,7 @@ bool config::impl::init( )
 	g_config.insert( HASH( "menu_color" ), config::option( color( 67, 0, 187 ) ) );
 
 	g_config.insert( HASH( "m_bh" ), config::option( false ) );
+	g_config.insert( HASH( "m_auto_align" ), config::option( false ) );
 	g_config.insert( HASH( "m_jb" ), config::option( false ) );
 	g_config.insert( HASH( "m_jb_key" ), config::option( 0, 0, 0 ) );
 

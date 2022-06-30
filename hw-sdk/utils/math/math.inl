@@ -1,13 +1,3 @@
-template< typename T >
-T& math::normalize_yaw( T& yaw )
-{
-	if ( yaw > T( 180.f ) )
-		yaw -= static_cast< T >( std::roundf( yaw / 360.f ) * 360.f );
-	else if ( yaw < T( -180.f ) )
-		yaw += static_cast< T >( std::roundf( yaw / 360.f ) * 360.f );
-
-	return T( yaw );
-}
 
 template< typename T >
 T math::get_fov(const math::vec3& view_angles, const math::vec3& start, const math::vec3& end)

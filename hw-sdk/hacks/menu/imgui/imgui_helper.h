@@ -10,6 +10,8 @@ namespace imgui
 		// main
 		void start_decorations( ImDrawList* draw_list );
 
+		void destroy( );
+
 		// utils
 		void spacing( int times = 0 );
 		void set_next_window_size( const ImVec2& size, ImGuiCond cond = 0 );

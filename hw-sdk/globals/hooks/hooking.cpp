@@ -1,7 +1,9 @@
 #include "hooking.h"
 
 #include "../../dependencies/mocking_bird/mocking_bird.h"
+#include "../../hacks/menu/imgui/imgui_helper.h"
 #include "../ctx/ctx.h"
+
 #include "alloc_key_value_memory/alloc_key_value_memory.h"
 #include "anim_fix/anim_fix.h"
 #include "calculate_view/calculate_view.h"
@@ -14,16 +16,14 @@
 #include "frame_stage_notify/frame_stage_notify.h"
 #include "glow_effect_spectator/glow_effect_spectator.h"
 #include "is_loose_file_allowed/is_loose_file_allowed.h"
-#include "reset/reset.h"
 #include "item_post_frame/item_post_frame.h"
 #include "list_leaves_in_box/list_leaves_in_box.h"
 #include "modify_eye_position/modify_eye_position.h"
 #include "paint_traverse/paint_traverse.h"
+#include "reset/reset.h"
 #include "return_address/return_address.h"
 #include "send_net_msg/send_net_msg.h"
 #include "wndproc/wndproc.h"
-#include "../../dependencies/imgui/dx9/imgui_impl_dx9.h"
-#include "../../dependencies/imgui/imgui_impl_win32.h"
 
 bool hooks::impl::init( )
 {
@@ -98,11 +98,9 @@ void hooks::impl::unload( )
 
 	// this is so useless lol
 	if ( MH_Uninitialize( ) != MH_OK )
-		console::print< console::log_level::FATAL >( _( "MH_Uninitialize was not MH_OK" ) ); /* chungy */
+		console::print< console::log_level::FATAL >( _( "MH_Uninitialize was not MH_OK" ) );
 
-		ImGui_ImplDX9_Shutdown( );
-	ImGui_ImplWin32_Shutdown( );
-	ImGui::DestroyContext( );
+	g_imgui.destroy( );
 
 	MOCKING_CATCH( );
 }

@@ -35,7 +35,7 @@ void menu::impl::draw( )
 
 		g_imgui.start_decorations( window_draw_list );
 
-		g_imgui.spacing( 2 );
+		g_imgui.spacing( 1 );
 
 		g_imgui.begin_child( _( "tabs-child" ), ImVec2( -1, 30 ), true, 0 );
 		{
@@ -83,17 +83,20 @@ void menu::impl::draw( )
 			g_imgui.begin_child( _( "movement-child-contents" ),
 			                     ImVec2( g_imgui.get_content_region_avail( ).x / 2, g_imgui.get_content_region_avail( ).y - 200 ) );
 			{
-				g_imgui.spacing( );
+				g_imgui.spacing( 2 );
 
 				g_imgui.checkbox( _( "auto bhop" ), &g_config.find< bool >( HASH( "m_bh" ) ) );
 				g_imgui.checkbox( _( "auto jumpbug" ), &g_config.find< bool >( HASH( "m_jb" ) ) );
 				g_imgui.keybind( _( "auto jumpbug key" ), &g_config.find< int >( HASH( "m_jb_key" ) ), 15 );
 				g_imgui.checkbox( _( "edge jump" ), &g_config.find< bool >( HASH( "m_ej" ) ) );
 				g_imgui.keybind( _( "edge jump key" ), &g_config.find< int >( HASH( "m_ej_key" ) ), 15 );
-				g_imgui.checkbox( _( "long jump" ), &g_config.find< bool >( HASH( "m_lj" ) ) );
+				if ( g_config.find< bool >( HASH( "m_ej" ) ) )
+					g_imgui.checkbox( _( "long jump" ), &g_config.find< bool >( HASH( "m_lj" ) ), 15 );
+
 				g_imgui.checkbox( _( "mini jump" ), &g_config.find< bool >( HASH( "m_mj" ) ) );
 				g_imgui.keybind( _( "mini jump key" ), &g_config.find< int >( HASH( "m_mj_key" ) ), 1154 );
 				g_imgui.checkbox( _( "fast duck" ), &g_config.find< bool >( HASH( "m_fastduck" ) ) );
+				g_imgui.checkbox( _( "auto align" ), &g_config.find< bool >( HASH( "m_auto_align" ) ) );
 
 				g_imgui.end_child( );
 			}

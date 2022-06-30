@@ -15,6 +15,16 @@ math::vec3 math::angle_vector( const math::vec3& angle )
 	return math::vec3( cp * cy, cp * sy, -sp );
 }
 
+float math::normalize_yaw( float yaw )
+{
+	if ( yaw > 180.f )
+		yaw -= std::roundf( yaw / 360.f ) * 360.f;
+	else if ( yaw < -180.f )
+		yaw += std::roundf( yaw / 360.f ) * 360.f;
+
+	return yaw;
+}
+
 void math::angle_vectors( const math::vec3& angles, math::vec3* fw, math::vec3* rg, math::vec3* up )
 {
 	const float cp = std::cos( math::deg2rad( angles.x ) ), sp = std::sin( math::deg2rad( angles.x ) );

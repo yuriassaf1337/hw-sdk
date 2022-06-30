@@ -35,7 +35,7 @@ void __stdcall create_move_function( int sequence_number, float input_sample_fra
 	g_aimbot.run( );
 
 	g_movement.post_prediction.think( );
-	// g_movement.movement_fix( command, g_prediction.backup_vars.view_angles );
+	g_movement.movement_fix( command, g_prediction.backup_vars.view_angles );
 
 	// if ( hooks::shifting_tb )
 	//	send_packet = hooks::send_packet;

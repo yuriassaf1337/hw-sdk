@@ -91,6 +91,13 @@ void imgui::impl::set_next_window_size( const ImVec2& size, ImGuiCond cond )
 	ImGui::SetNextWindowSize( size, cond );
 }
 
+void imgui::impl::destroy( )
+{
+	ImGui_ImplDX9_Shutdown( );
+	ImGui_ImplWin32_Shutdown( );
+	ImGui::DestroyContext( );
+}
+
 void imgui::impl::text( const char* fmt, ... )
 {
 	va_list args;
@@ -126,7 +133,7 @@ void imgui::impl::end( )
 
 void imgui::impl::spacing( int times )
 {
-	for ( int i = 0; i < times; i++ )
+	for ( int i = 0; i <= times; i++ )
 		ImGui::Spacing( );
 }
 

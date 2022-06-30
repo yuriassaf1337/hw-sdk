@@ -5,10 +5,13 @@
 
 namespace movement
 {
+	constexpr float distance_to_stop     = 0.00100f;
+	constexpr float distance_till_adjust = 0.03125f;
+
 	enum edgebug_type : int {
 		STANDING = 0,
 		DUCKING,
-		ONETICK
+		ONETICK // prob unused(since its an impossible theory)
 	};
 
 	struct impl {
@@ -32,7 +35,14 @@ namespace movement
 
 		void edge_jump( );
 
+		void auto_align( );
+
 		void bhop( );
+
+		void rotate_movement( math::vec3& angle );
+
+	private:
+		const bool alignable( const math::vec3 origin );
 	};
 } // namespace movement
 

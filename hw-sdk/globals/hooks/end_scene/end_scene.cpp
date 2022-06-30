@@ -13,20 +13,25 @@
 
 LONG __stdcall hooks::end_scene::end_scene_detour( IDirect3DDevice9* device )
 {
-	static void* m_return = nullptr;
+	// static void* m_return = nullptr;
+	//
+	// if ( !m_return ) {
+	//	MEMORY_BASIC_INFORMATION mem_info;
+	//	VirtualQuery( _ReturnAddress( ), &mem_info, sizeof( MEMORY_BASIC_INFORMATION ) );
+	//
+	//	char mod_name[ MAX_PATH ]{ };
+	//	GetModuleFileName( static_cast< HMODULE >( mem_info.AllocationBase ), mod_name, MAX_PATH );
+	//
+	//	if ( std::strstr( mod_name, GAMEOVERLAYRENDERER_DLL ) != nullptr )
+	//		m_return = _ReturnAddress( );
+	// }
+	//
+	// if ( m_return != _ReturnAddress( ) )
+	//	return hooks::end_scene_hook.call_original< LONG >( device );
 
-	if ( !m_return ) {
-		MEMORY_BASIC_INFORMATION mem_info;
-		VirtualQuery( _ReturnAddress( ), &mem_info, sizeof( MEMORY_BASIC_INFORMATION ) );
+	static auto static_return = _ReturnAddress( );
 
-		char mod_name[ MAX_PATH ]{ };
-		GetModuleFileName( static_cast< HMODULE >( mem_info.AllocationBase ), mod_name, MAX_PATH );
-
-		if ( std::strstr( mod_name, GAMEOVERLAYRENDERER_DLL ) != nullptr )
-			m_return = _ReturnAddress( );
-	}
-
-	if ( m_return != _ReturnAddress( ) )
+	if ( static_return != _ReturnAddress( ) )
 		return hooks::end_scene_hook.call_original< LONG >( device );
 
 	if ( device ) {
