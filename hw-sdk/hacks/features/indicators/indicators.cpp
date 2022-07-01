@@ -2,13 +2,20 @@
 #include "../../../globals/ctx/ctx.h"
 #include "../../menu/config/config.h"
 
+void indicators::impl::reset_data( )
+{
+
+}
+
 void indicators::impl::think( )
 {
-	if ( !g_ctx.local->is_alive( ) || !g_interfaces.engine->connected_safe( ) )
+	if ( !g_ctx.local || !g_ctx.local->is_alive( ) || !g_interfaces.engine->is_fully_connected( ) ) {
+		reset_data( );
 		return;
+	}
 
 	if ( g_config.find< bool >( HASH( "m_velocity_indicator" ) ) )
-		g_indicators.velocity( ); /* brazil brain */
+		g_indicators.velocity( );
 
 	if ( g_config.find< bool >( HASH( "m_stamina_indicator" ) ) )
 		g_indicators.stamina( );

@@ -175,8 +175,6 @@ void visuals::impl::render( )
 
 		object.m_box.render( player );
 	}
-
-	indicators( );
 }
 
 void visuals::esp_box::render( sdk::c_cs_player* owner )

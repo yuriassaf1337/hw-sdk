@@ -1091,7 +1091,7 @@ bool ImGui::Checkbox( const char* label, bool* v, int x_pos )
 
 	RenderFrame( check_bb.Min, check_bb.Max, color( 0 / 255.f, 0 / 255.f, 0 / 255.f ).get_u32( it_filled->second ), true, style.FrameRounding );
 
-	RenderFrame( check_bb.Min, check_bb.Max, g_config.find< color >( HASH( "menu_color" ) ).get_u32( it_filled_frame->second ), true,
+	RenderFrame( check_bb.Min, check_bb.Max, g_config.find< color >( HASH( "m_menu_color" ) ).get_u32( it_filled_frame->second ), true,
 	             style.FrameRounding );
 
 	if ( g.LogEnabled )
@@ -2803,7 +2803,7 @@ bool ImGui::SliderScalar( const char* label, ImGuiDataType data_type, void* p_da
 
 	// Render grab
 	if ( grab_bb.Max.x > grab_bb.Min.x ) {
-		window->DrawList->AddRectFilled( grab_bb.Min, grab_bb.Max, g_config.find< color >( HASH( "menu_color" ) ).get_u32( ), style.FrameRounding );
+		window->DrawList->AddRectFilled( grab_bb.Min, grab_bb.Max, g_config.find< color >( HASH( "m_menu_color" ) ).get_u32( ), style.FrameRounding );
 		window->DrawList->AddRectFilled( grab_bb.Min, grab_bb.Max, GetColorU32( ImVec4( 0.0f, 0.0f, 0.0f, 0.05f ) ), style.FrameRounding );
 	}
 

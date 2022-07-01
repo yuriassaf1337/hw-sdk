@@ -17,31 +17,6 @@
 
 #include <sapi.h>
 
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-/* todo - coffin - add scaleform ui (old cs:go hud) or hotwheels hud pls, also interwebz (og(original gangster)) speclist Ty */
-
 DWORD WINAPI hotwheels::init( void* module_handle )
 {
 	handle = static_cast< HMODULE >( module_handle );
@@ -75,10 +50,6 @@ DWORD WINAPI hotwheels::init( void* module_handle )
 DWORD WINAPI hotwheels::unload( DWORD exit_code )
 {
 	MOCKING_TRY;
-
-	/* m_pp */
-	if ( g_menu.menu_open )
-		g_menu.menu_open = false;
 
 	g_hooks.unload( );
 

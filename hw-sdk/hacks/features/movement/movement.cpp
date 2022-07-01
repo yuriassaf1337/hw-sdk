@@ -5,7 +5,7 @@
 
 void movement::impl::pre_prediction::think( )
 {
-	if ( !g_ctx.local->is_alive( ) || !g_interfaces.engine->connected_safe( ) )
+	if ( !g_ctx.local->is_alive( ) || !g_interfaces.engine->is_fully_connected( ) )
 		return;
 
 	if ( !g_ctx.cmd->buttons.has( sdk::IN_BULLRUSH ) && g_config.find< bool >( HASH( "m_fast_duck" ) ) )
@@ -16,7 +16,7 @@ void movement::impl::pre_prediction::think( )
 
 void movement::impl::post_prediction::think( )
 {
-	if ( !g_ctx.local->is_alive( ) || !g_interfaces.engine->connected_safe( ) )
+	if ( !g_ctx.local->is_alive( ) || !g_interfaces.engine->is_fully_connected( ) )
 		return;
 
 	g_movement.edge_jump( );

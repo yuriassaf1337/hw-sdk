@@ -4,8 +4,8 @@
 #include <d3dx9.h>
 #include <iostream>
 
-#include "../../../globals/macros/macros.h"
 #include "../../../dependencies/imgui/imgui.h"
+#include "../../../globals/macros/macros.h"
 
 // https://docs.microsoft.com/en-us/cpp/error-messages/compiler-warnings/compiler-warning-levels-3-and-4-c4244?view=msvc-160
 #pragma warning( disable : 4244 )
@@ -80,9 +80,7 @@ struct color {
 	}
 	color lerp( const color col, const float t )
 	{
-		constexpr auto lerp = []( const int rom, const int to, const float t ) {
-			return ( int )( ( 1.f - t ) * rom + t * to );
-		};
+		constexpr auto lerp = []( const int rom, const int to, const float t ) { return ( int )( ( 1.f - t ) * rom + t * to ); };
 
 		color lerped = *this;
 
@@ -93,6 +91,14 @@ struct color {
 
 		return lerped;
 	}
+
+	static color blend( const color& a, const color& b, const float alpha_multiplier )
+	{
+		return color( a.r + std::clamp( alpha_multiplier, 0.f, 1.f ) * ( b.r - a.r ), a.g + std::clamp( alpha_multiplier, 0.f, 1.f ) * ( b.g - a.g ),
+		              a.b + std::clamp( alpha_multiplier, 0.f, 1.f ) * ( b.b - a.b ),
+		              a.a + std::clamp( alpha_multiplier, 0.f, 1.f ) * ( b.a - a.a ) );
+	}
+
 	bool operator==( const color& other ) const
 	{
 		return other.r == r && other.g == g && other.b == b && other.a == a;

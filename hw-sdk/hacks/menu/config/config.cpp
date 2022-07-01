@@ -4,7 +4,7 @@
 
 bool config::impl::init( )
 {
-	g_config.insert( HASH( "menu_color" ), config::option( color( 133, 133, 133 ) ) );
+	g_config.insert( HASH( "m_menu_color" ), config::option( color( 133, 133, 133 ) ) );
 
 	/* movement */
 	g_config.insert( HASH( "m_bh" ), config::option( false ) );
@@ -22,6 +22,7 @@ bool config::impl::init( )
 
 	/* indicators */
 	g_config.insert( HASH( "m_velocity_indicator" ), config::option( false ) );
+
 	g_config.insert( HASH( "m_stamina_indicator" ), config::option( false ) );
 
 	return true;

@@ -7771,7 +7771,7 @@ void ImGui::RenderTab( const char* label, int tab_number )
 {
 	auto id = ImGui::GetCurrentWindow( )->GetID( label );
 
-	ImGui::TextColored( g_menu.menu_tab == tab_number ? g_config.find< color >( HASH( "menu_color" ) ).to_imvec4() : ImVec4( 1.f, 1.f, 1.f, 1.f ),
+	ImGui::TextColored( g_menu.menu_tab == tab_number ? g_config.find< color >( HASH( "m_menu_color" ) ).to_imvec4() : ImVec4( 1.f, 1.f, 1.f, 1.f ),
 	                    label );
 
 	if ( ImGui::IsItemClicked( ) )

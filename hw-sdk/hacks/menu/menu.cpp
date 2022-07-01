@@ -106,7 +106,10 @@ void menu::impl::draw( )
 				                   _( "indicators" ) );
 
 				g_imgui.checkbox( _( "velocity##indicator" ), &g_config.find< bool >( HASH( "m_velocity_indicator" ) ) );
+				if ( g_config.find< bool >( HASH( "m_velocity_indicator" ) ) ) { }
+
 				g_imgui.checkbox( _( "stamina##indicator" ), &g_config.find< bool >( HASH( "m_stamina_indicator" ) ) );
+				if ( g_config.find< bool >( HASH( "m_stamina_indicator" ) ) ) { }
 
 				g_imgui.spacing( );
 				g_imgui.end_child( );

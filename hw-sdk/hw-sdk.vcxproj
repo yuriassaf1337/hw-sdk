@@ -528,6 +528,9 @@
     <None Include="utils\modules\modules.inl" />
     <None Include="utils\renderer\renderer.inl" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="todo.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

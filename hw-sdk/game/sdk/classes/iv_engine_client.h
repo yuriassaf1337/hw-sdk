@@ -51,7 +51,7 @@ namespace sdk
 			return virtual_func::call< bool >( this, 27 );
 		}
 		// @ liga i have no clue what to name this
-		const bool connected_safe( )
+		const bool is_fully_connected( )
 		{
 			return is_connected( ) && is_in_game( ) && !is_playing_demo( );
 		}

@@ -126,8 +126,8 @@ void imgui::impl::separator( ImDrawList* draw_list, const ImVec2& min, const ImV
 	ImVec2 text_size = imgui::impl::calc_text_size( text );
 
 	draw_list->AddRectFilledMultiColor(
-		min, max, g_config.find< color >( HASH( "menu_color" ) ).get_u32( 0.f ), g_config.find< color >( HASH( "menu_color" ) ).get_u32( 1.f ),
-		g_config.find< color >( HASH( "menu_color" ) ).get_u32( 1.f ), g_config.find< color >( HASH( "menu_color" ) ).get_u32( 0.f ) );
+		min, max, g_config.find< color >( HASH( "m_menu_color" ) ).get_u32( 0.f ), g_config.find< color >( HASH( "m_menu_color" ) ).get_u32( 1.f ),
+		g_config.find< color >( HASH( "m_menu_color" ) ).get_u32( 1.f ), g_config.find< color >( HASH( "m_menu_color" ) ).get_u32( 0.f ) );
 }
 
 ImVec2 imgui::impl::calc_text_size( const char* text, const char* text_end, bool hide_text_after_double_hash, float wrap_width )
@@ -156,19 +156,19 @@ void imgui::impl::start_decorations( ImDrawList* draw_list )
 	draw_list->AddRectFilledMultiColor(
 		ImVec2( ImGui::GetWindowPos( ).x, ImGui::GetWindowPos( ).y + 25 ),
 		ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetWindowSize( ).x / 2, ImGui::GetWindowPos( ).y + 25 + 1 ),
-		g_config.find< color >( HASH( "menu_color" ) ).get_u32( 0.f ), g_config.find< color >( HASH( "menu_color" ) ).get_u32( ),
-		g_config.find< color >( HASH( "menu_color" ) ).get_u32( ), g_config.find< color >( HASH( "menu_color" ) ).get_u32( 0.f ) );
+		g_config.find< color >( HASH( "m_menu_color" ) ).get_u32( 0.f ), g_config.find< color >( HASH( "m_menu_color" ) ).get_u32( ),
+		g_config.find< color >( HASH( "m_menu_color" ) ).get_u32( ), g_config.find< color >( HASH( "m_menu_color" ) ).get_u32( 0.f ) );
 
 	draw_list->AddRectFilledMultiColor(
 		ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetWindowSize( ).x / 2, ImGui::GetWindowPos( ).y + 25 ),
 		ImVec2( ( ImGui::GetWindowPos( ).x + ImGui::GetWindowSize( ).x / 2 ) + ImGui::GetWindowSize( ).x / 2, ImGui::GetWindowPos( ).y + 25 + 1 ),
-		g_config.find< color >( HASH( "menu_color" ) ).get_u32( ), g_config.find< color >( HASH( "menu_color" ) ).get_u32( 0.f ),
-		g_config.find< color >( HASH( "menu_color" ) ).get_u32( 0.f ), g_config.find< color >( HASH( "menu_color" ) ).get_u32( ) );
+		g_config.find< color >( HASH( "m_menu_color" ) ).get_u32( ), g_config.find< color >( HASH( "m_menu_color" ) ).get_u32( 0.f ),
+		g_config.find< color >( HASH( "m_menu_color" ) ).get_u32( 0.f ), g_config.find< color >( HASH( "m_menu_color" ) ).get_u32( ) );
 
 	ImGui::SetCursorPosX( ImGui::GetContentRegionAvail( ).x / 2 - ImGui::CalcTextSize( _( "hotwheels.vip" ) ).x / 2 );
 	ImGui::Text( _( "hotwheels" ) );
 	ImGui::SameLine( 0, 0 );
-	ImGui::TextColored( g_config.find< color >( HASH( "menu_color" ) ).to_imvec4( ), _( ".vip" ) );
+	ImGui::TextColored( g_config.find< color >( HASH( "m_menu_color" ) ).to_imvec4( ), _( ".vip" ) );
 }
 
 bool imgui::impl::color_picker( const char* label, color* col, bool alpha, int same_line, bool show_text )
@@ -218,7 +218,7 @@ void imgui::impl::menu_init( IDirect3DDevice9* device )
 		style.Colors[ ImGuiCol_PopupBg ]  = ImVec4( 20 / 255.f, 20 / 255.f, 20 / 255.f, 1.00f );
 		style.Colors[ ImGuiCol_ChildBg ]  = ImVec4( 15 / 255.f, 15 / 255.f, 15 / 255.f, 1.0f );
 
-		style.Colors[ ImGuiCol_FrameBg ] = g_config.find< color >( HASH( "menu_color" ) ).to_imvec4( );
+		style.Colors[ ImGuiCol_FrameBg ] = g_config.find< color >( HASH( "m_menu_color" ) ).to_imvec4( );
 	}
 
 	/* style */
