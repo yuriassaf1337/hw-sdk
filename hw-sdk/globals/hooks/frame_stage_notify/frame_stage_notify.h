@@ -19,7 +19,7 @@ namespace hooks
 	CREATE_HOOK_HELPER( frame_stage_notify_hook, void( __fastcall )( void*, void*, sdk::frame_stage ) );
 
 	struct frame_stage_notify {
-		static void __fastcall frame_stage_notify_detour( void* self, void* ecx, sdk::frame_stage stage );
+		static void __fastcall frame_stage_notify_detour( void* ecx, void* edx, sdk::frame_stage stage );
 
 		static void init( )
 		{

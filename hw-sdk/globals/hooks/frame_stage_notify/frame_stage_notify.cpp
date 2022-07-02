@@ -1,8 +1,8 @@
 #include "frame_stage_notify.h"
 
-void __fastcall hooks::frame_stage_notify::frame_stage_notify_detour( void* self, void* ecx, sdk::frame_stage stage )
+void __fastcall hooks::frame_stage_notify::frame_stage_notify_detour( void* ecx, void* edx, sdk::frame_stage stage )
 {
-	hooks::frame_stage_notify_hook.call_original< void >( self, ecx, stage );
+	hooks::frame_stage_notify_hook.call_original< void >( ecx, edx, stage );
 
 	switch ( stage ) {
 		using enum sdk::frame_stage;
