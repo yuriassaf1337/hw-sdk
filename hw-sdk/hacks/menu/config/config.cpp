@@ -10,17 +10,20 @@ bool config::impl::init( )
 	g_config.insert( HASH( "m_bh" ), config::option( false ) );
 	g_config.insert( HASH( "m_auto_align" ), config::option( false ) );
 	g_config.insert( HASH( "m_jb" ), config::option( false ) );
-	g_config.insert( HASH( "m_jb_key" ), config::option( 0, 0, 0 ) );
+	g_config.insert( HASH( "m_jb_key" ), config::option( 0, 0, 256 ) );
 
 	g_config.insert( HASH( "m_ej" ), config::option( false ) );
-	g_config.insert( HASH( "m_ej_key" ), config::option( 0, 0, 0 ) );
+	g_config.insert( HASH( "m_ej_key" ), config::option( 0, 0, 256 ) );
 	g_config.insert( HASH( "m_lj" ), config::option( false ) );
 
 	g_config.insert( HASH( "m_mj" ), config::option( false ) );
-	g_config.insert( HASH( "m_mj_key" ), config::option( 0, 0, 0 ) );
+	g_config.insert( HASH( "m_mj_key" ), config::option( 0, 0, 256 ) );
 	g_config.insert( HASH( "m_fast_duck" ), config::option( false ) );
 
 	/* indicators */
+	g_config.insert( HASH( "m_keybind_indicator" ), config::option( false ) );
+	g_config.insert( HASH( "m_displayed_keybinds" ), config::option( 0, 0, 20 ) );
+
 	g_config.insert( HASH( "m_velocity_indicator" ), config::option( false ) );
 	g_config.insert( HASH( "m_velocity_indicator_show_pre" ), config::option( false ) );
 	g_config.insert( HASH( "m_velocity_indicator_fade" ), config::option( false ) );
