@@ -22,6 +22,8 @@ bool config::impl::init( )
 
 	/* indicators */
 	g_config.insert( HASH( "m_velocity_indicator" ), config::option( false ) );
+	g_config.insert( HASH( "m_velocity_indicator_show_pre" ), config::option( false ) );
+	g_config.insert( HASH( "m_velocity_indicator_fade" ), config::option( false ) );
 
 	g_config.insert( HASH( "m_stamina_indicator" ), config::option( false ) );
 

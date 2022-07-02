@@ -11,6 +11,8 @@
 #include "../../logging/logging.h"
 #include "../lagcomp/lagcomp.h"
 
+/* todo - coffin - add autowall (look at qo0, or reverse it since it isnt perfect)*/
+
 sdk::c_cs_player* aimbot::impl::find_closest( )
 {
 	float closest_fov                = 180.f;

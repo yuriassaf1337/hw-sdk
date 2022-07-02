@@ -15,7 +15,7 @@ const bool sdk::c_cs_player::is_enemy( sdk::c_cs_player* player )
 
 bool sdk::c_cs_player::is_alive( )
 {
-	return ( this->life_state( ) == sdk::life_state::LIFE_ALIVE && this->health( ) > 0 );
+	return ( this->life_state( ) == sdk::life_state::LIFE_ALIVE &&  this->health( ) > 0 );
 }
 
 std::string sdk::c_cs_player::name( )

@@ -184,8 +184,12 @@ void menu::impl::draw( )
 					ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "indicators" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
 					ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ), _( "indicators" ) );
 
+				/* todo - coffin - check if custom clr is on, then render 1 clr picker, else do 3 negative, positive, neutral */
 				g_imgui.checkbox( _( "velocity##indicator" ), &g_config.find< bool >( HASH( "m_velocity_indicator" ) ) );
-				if ( g_config.find< bool >( HASH( "m_velocity_indicator" ) ) ) { }
+				if ( g_config.find< bool >( HASH( "m_velocity_indicator" ) ) ) {
+					g_imgui.checkbox( _( "show pre##velocity" ), &g_config.find< bool >( HASH( "m_velocity_indicator_show_pre" ) ), 15 );
+					g_imgui.checkbox( _( "fade##velocity" ), &g_config.find< bool >( HASH( "m_velocity_indicator_fade" ) ), 15 );
+				}
 
 				g_imgui.checkbox( _( "stamina##indicator" ), &g_config.find< bool >( HASH( "m_stamina_indicator" ) ) );
 				if ( g_config.find< bool >( HASH( "m_stamina_indicator" ) ) ) { }
