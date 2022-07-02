@@ -52,7 +52,7 @@ void menu::impl::draw( )
 			g_imgui.render_tab( _( "misc" ), 3 );
 			g_imgui.same_line( 0.f, 57.f );
 
-			g_imgui.render_tab( _( "recorder" ), 4 );
+			g_imgui.render_tab( _( "skins" ), 4 );
 			g_imgui.same_line( 0.f, 56.f );
 
 			g_imgui.render_tab( _( "config" ), 5 );
@@ -62,17 +62,58 @@ void menu::impl::draw( )
 
 		switch ( g_menu.menu_tab ) {
 		case 0: { /* aimbot tab */
+			g_imgui.begin_child( _( "aimbot-main-child-contents" ),
+			                     ImVec2( g_imgui.get_content_region_avail( ).x / 2, g_imgui.get_content_region_avail( ).y ) );
+			{
+				g_imgui.separator( window_draw_list,
+				                   ImVec2( ImGui::GetWindowPos( ).x + ImGui::CalcTextSize( _( "general" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
+				                   ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ),
+				                   _( "general" ) );
+
+				g_imgui.end_child( );
+			}
+
 			break;
 		}
 		case 1: { /* anti aim tab */
+			g_imgui.begin_child( _( "anti-aim-child-contents" ),
+			                     ImVec2( g_imgui.get_content_region_avail( ).x / 2, g_imgui.get_content_region_avail( ).y ) );
+			{
+				g_imgui.separator(
+					window_draw_list, ImVec2( ImGui::GetWindowPos( ).x + ImGui::CalcTextSize( _( "general" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
+					ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ), _( "general" ) );
+
+				g_imgui.end_child( );
+			}
+
+			g_imgui.begin_child( _( "exploits-child-contents" ),
+			                     ImVec2( g_imgui.get_content_region_avail( ).x, g_imgui.get_content_region_avail( ).y / 2 ) );
+			{
+				g_imgui.separator( window_draw_list,
+				                   ImVec2( ImGui::GetWindowPos( ).x + ImGui::CalcTextSize( _( "exploits" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
+				                   ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ),
+				                   _( "exploits" ) );
+
+				g_imgui.spacing( );
+				g_imgui.end_child( );
+			}
 			break;
 		}
 		case 2: { /* visuals tab */
+			g_imgui.begin_child( _( "esp-main-child-contents" ),
+			                     ImVec2( g_imgui.get_content_region_avail( ).x / 2, g_imgui.get_content_region_avail( ).y ) );
+			{
+				g_imgui.separator(
+					window_draw_list, ImVec2( ImGui::GetWindowPos( ).x + ImGui::CalcTextSize( _( "esp" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
+					ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ), _( "esp" ) );
+
+				g_imgui.end_child( );
+			}
 			break;
 		}
 		case 3: { /* misc tab */
 			g_imgui.begin_child( _( "movement-child-contents" ),
-			                     ImVec2( g_imgui.get_content_region_avail( ).x / 2, g_imgui.get_content_region_avail( ).y / 2 ) );
+			                     ImVec2( g_imgui.get_content_region_avail( ).x / 2, g_imgui.get_content_region_avail( ).y ) );
 			{
 				g_imgui.separator( window_draw_list,
 				                   ImVec2( ImGui::GetWindowPos( ).x + ImGui::CalcTextSize( _( "movement" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
@@ -115,7 +156,9 @@ void menu::impl::draw( )
 				g_imgui.end_child( );
 			}
 
-			g_imgui.begin_child( _( "game-child-contents" ), ImVec2( g_imgui.get_content_region_avail( ).x, g_imgui.get_content_region_avail( ).y ) );
+			g_imgui.same_line( );
+
+			g_imgui.begin_child( _( "game-child-contents" ), ImVec2( g_imgui.get_content_region_avail( ).x, g_imgui.get_content_region_avail( ).y / 2) );
 			{
 				g_imgui.separator(
 					window_draw_list, ImVec2( ImGui::GetWindowPos( ).x + ImGui::CalcTextSize( _( "game" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
@@ -126,10 +169,19 @@ void menu::impl::draw( )
 			}
 			break;
 		}
-		case 4: { /* recorder tab */
+		case 4: { /* skins tab */
 			break;
 		}
 		case 5: { /* config tab */
+			g_imgui.begin_child( _( "configuration-child-contents" ),
+			                     ImVec2( g_imgui.get_content_region_avail( ).x / 2, g_imgui.get_content_region_avail( ).y ) );
+			{
+				g_imgui.separator(
+					window_draw_list, ImVec2( ImGui::GetWindowPos( ).x + ImGui::CalcTextSize( _( "config" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
+					ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ), _( "config" ) );
+
+				g_imgui.end_child( );
+			}
 			break;
 		}
 		}
