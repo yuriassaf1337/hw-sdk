@@ -45,7 +45,7 @@ LONG __stdcall hooks::end_scene::end_scene_detour( IDirect3DDevice9* device )
 
 	g_render.setup_state( );
 
-	g_indicators.think( );
+	g_indicators.render( );
 
 	g_visuals.render( );
 

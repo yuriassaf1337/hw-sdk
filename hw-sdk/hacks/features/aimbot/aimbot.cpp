@@ -13,7 +13,7 @@
 
 sdk::c_cs_player* aimbot::impl::find_closest( )
 {
-	float closest_fov                = FLT_MAX;
+	float closest_fov                = 180.f;
 	sdk::c_cs_player* closest_player = nullptr;
 
 	for ( auto& player_info : g_entity_list.players ) {
@@ -22,9 +22,8 @@ sdk::c_cs_player* aimbot::impl::find_closest( )
 		if ( !player_info.m_valid || !player )
 			continue;
 
-		auto player_fov = math::get_fov( g_ctx.cmd->view_angles, g_ctx.local->eye_position( ), player->eye_position( ) );
-
-		if ( player_fov < closest_fov ) {
+		if ( auto player_fov = math::get_fov( g_ctx.cmd->view_angles, g_ctx.local->eye_position( ), player->eye_position( ) );
+		     player_fov < closest_fov ) {
 			closest_fov    = player_fov;
 			closest_player = player;
 		}

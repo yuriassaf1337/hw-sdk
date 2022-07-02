@@ -4,7 +4,7 @@ namespace indicators
 {
 	struct impl {
 		void reset_data( );
-		void think( );
+		void render( );
 		void velocity( );
 		void stamina( );
 	};

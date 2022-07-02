@@ -7,7 +7,7 @@ void indicators::impl::reset_data( )
 
 }
 
-void indicators::impl::think( )
+void indicators::impl::render( )
 {
 	if ( !g_ctx.local || !g_ctx.local->is_alive( ) || !g_interfaces.engine->is_fully_connected( ) ) {
 		reset_data( );
