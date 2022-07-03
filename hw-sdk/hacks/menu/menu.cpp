@@ -7,6 +7,8 @@
 #include "../../utils/keybinds/keybinds.h"
 #include "imgui/imgui_helper.h"
 
+/* todo - coffin - add my custom imgui helpers */
+
 bool menu::impl::init_input( )
 {
 	D3DDEVICE_CREATION_PARAMETERS creation_params = { };
@@ -66,7 +68,7 @@ void menu::impl::draw( )
 			                     ImVec2( g_imgui.get_content_region_avail( ).x / 2, g_imgui.get_content_region_avail( ).y ) );
 			{
 				g_imgui.separator( window_draw_list,
-				                   ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "general" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
+				                   ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "general" ) ).x + 5, ImGui::GetWindowPos( ).y + 5 ),
 				                   ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ),
 				                   _( "general" ) );
 
@@ -80,7 +82,7 @@ void menu::impl::draw( )
 			                     ImVec2( g_imgui.get_content_region_avail( ).x / 2, g_imgui.get_content_region_avail( ).y ) );
 			{
 				g_imgui.separator( window_draw_list,
-				                   ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "general" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
+				                   ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "general" ) ).x + 5, ImGui::GetWindowPos( ).y + 5 ),
 				                   ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ),
 				                   _( "general" ) );
 
@@ -92,10 +94,10 @@ void menu::impl::draw( )
 			g_imgui.begin_child( _( "exploits-child-contents" ),
 			                     ImVec2( g_imgui.get_content_region_avail( ).x, g_imgui.get_content_region_avail( ).y ) );
 			{
-				g_imgui.separator(
-					window_draw_list,
-					ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "exploits" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
-					ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ), _( "exploits" ) );
+				g_imgui.separator( window_draw_list,
+				                   ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "exploits" ) ).x + 5, ImGui::GetWindowPos( ).y + 5 ),
+				                   ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ),
+				                   _( "exploits" ) );
 
 				g_imgui.spacing( );
 				g_imgui.end_child( );
@@ -107,7 +109,7 @@ void menu::impl::draw( )
 			                     ImVec2( g_imgui.get_content_region_avail( ).x / 2, g_imgui.get_content_region_avail( ).y ) );
 			{
 				g_imgui.separator(
-					window_draw_list, ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "esp" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
+					window_draw_list, ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "esp" ) ).x + 5, ImGui::GetWindowPos( ).y + 5 ),
 					ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ), _( "esp" ) );
 
 				g_imgui.end_child( );
@@ -119,22 +121,23 @@ void menu::impl::draw( )
 			                     ImVec2( g_imgui.get_content_region_avail( ).x, g_imgui.get_content_region_avail( ).y / 2 ) );
 			{
 				g_imgui.separator(
-					window_draw_list,
-					ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "chams" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
+					window_draw_list, ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "chams" ) ).x + 5, ImGui::GetWindowPos( ).y + 5 ),
 					ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ), _( "chams" ) );
 
+				g_imgui.spacing( );
 				g_imgui.end_child( );
 			}
 
-			g_imgui.same_line( );
+			g_imgui.set_cursor_pos( ImVec2( g_imgui.get_content_region_avail( ).x / 2 + 15, 258 ) );
 
 			g_imgui.begin_child( _( "world-child-contents" ),
 			                     ImVec2( g_imgui.get_content_region_avail( ).x, g_imgui.get_content_region_avail( ).y ) );
 			{
 				g_imgui.separator(
-					window_draw_list, ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "glow" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
+					window_draw_list, ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "world" ) ).x + 5, ImGui::GetWindowPos( ).y + 5 ),
 					ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ), _( "world" ) );
 
+				g_imgui.spacing( );
 				g_imgui.end_child( );
 			}
 			break;
@@ -143,10 +146,10 @@ void menu::impl::draw( )
 			g_imgui.begin_child( _( "movement-child-contents" ),
 			                     ImVec2( g_imgui.get_content_region_avail( ).x / 2, g_imgui.get_content_region_avail( ).y ) );
 			{
-				g_imgui.separator(
-					window_draw_list,
-					ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "movement" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
-					ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ), _( "movement" ) );
+				g_imgui.separator( window_draw_list,
+				                   ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "movement" ) ).x + 5, ImGui::GetWindowPos( ).y + 5 ),
+				                   ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ),
+				                   _( "movement" ) );
 
 				g_imgui.checkbox( _( "auto bhop" ), &g_config.find< bool >( HASH( "m_bh" ) ) );
 				g_imgui.checkbox( _( "auto jumpbug" ), &g_config.find< bool >( HASH( "m_jb" ) ) );
@@ -171,7 +174,7 @@ void menu::impl::draw( )
 			{
 				g_imgui.separator(
 					window_draw_list,
-					ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "indicators" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
+					ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "indicators" ) ).x + 5, ImGui::GetWindowPos( ).y + 5 ),
 					ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ), _( "indicators" ) );
 
 				/* todo - coffin - check if custom clr is on, then render 1 clr picker, else do 3 negative, positive, neutral */
@@ -185,7 +188,6 @@ void menu::impl::draw( )
 				if ( g_config.find< bool >( HASH( "m_stamina_indicator" ) ) ) { }
 
 				g_imgui.checkbox( _( "keybinds" ), &g_config.find< bool >( HASH( "m_keybind_indicator" ) ) );
-				//has to be multibox. ik
 				ImGui::Combo( _( "displayed keybinds" ), &g_config.find< int >( HASH( "m_displayed_keybinds" ) ), _( "jb\0ej\0ej\0mj" ) );
 
 				g_imgui.spacing( );
@@ -197,7 +199,7 @@ void menu::impl::draw( )
 			g_imgui.begin_child( _( "game-child-contents" ), ImVec2( g_imgui.get_content_region_avail( ).x, g_imgui.get_content_region_avail( ).y ) );
 			{
 				g_imgui.separator(
-					window_draw_list, ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "game" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
+					window_draw_list, ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "game" ) ).x + 5, ImGui::GetWindowPos( ).y + 5 ),
 					ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ), _( "game" ) );
 
 				g_imgui.spacing( );
@@ -213,7 +215,7 @@ void menu::impl::draw( )
 			                     ImVec2( g_imgui.get_content_region_avail( ).x, g_imgui.get_content_region_avail( ).y ) );
 			{
 				g_imgui.separator( window_draw_list,
-				                   ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "config" ) ).x + 10, ImGui::GetWindowPos( ).y + 5 ),
+				                   ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "config" ) ).x + 5, ImGui::GetWindowPos( ).y + 5 ),
 				                   ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ),
 				                   _( "config" ) );
 

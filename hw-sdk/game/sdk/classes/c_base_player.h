@@ -29,7 +29,7 @@ namespace sdk
 		NETVAR( last_place_name, char, "CBasePlayer", "m_szLastPlaceName" );
 		NETVAR( fall_velocity, float, "CBasePlayer", "m_flFallVelocity" );
 
-		// TODO @ liga, im not sure but i think these 3 can be grabbed by prediction datamap
+		// todo - liga, im not sure but i think these 3 can be grabbed by prediction datamap /* yes, yes you can */
 		// so in future we can add datamap shit for netvars
 		OFFSET( c_user_cmd*&, current_command, 0xCD2 );
 		OFFSET( int_flag&, button_forced, 0xCD1 );
