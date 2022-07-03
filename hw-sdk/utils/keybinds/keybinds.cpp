@@ -4,7 +4,7 @@
 
 void input::impl::think( UINT msg, WPARAM wparam, LPARAM lparam )
 {
-	std::uint8_t key_id   = 0;
+	int key_id            = 0;
 	key_state_t key_state = key_state_t::KEY_UP;
 
 	mouse.scroll_amt = 0;

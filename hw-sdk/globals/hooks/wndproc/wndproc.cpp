@@ -8,7 +8,7 @@ HRESULT WINAPI hooks::wndproc::wndproc_detour( HWND window, UINT message, WPARAM
 {
 	g_input.think( message, parameter, long_parameter );
 
-	if ( g_input.key_state< input::KEY_RELEASED >( VK_INSERT ) )
+	if ( g_input.key_state( input::key_state_t::KEY_RELEASED, VK_INSERT ) )
 		g_menu.menu_open = !g_menu.menu_open;
 
 	static auto lazy_callwndproc = LI_FN( CallWindowProcA ).get( );

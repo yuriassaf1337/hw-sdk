@@ -8,7 +8,7 @@
 
 namespace input
 {
-	enum key_state_t {
+	enum key_state_t : int {
 		KEY_NONE,
 		KEY_UP,
 		KEY_DOWN,
@@ -37,7 +37,7 @@ namespace input
 		};
 
 	public:
-		std::array< key_info_t, 255U > key_states = { };
+		std::array< key_info_t, 256U > key_states = { };
 		std::deque< keybind > key_binds           = { };
 
 		struct {
@@ -56,8 +56,7 @@ namespace input
 
 		void think( UINT msg, WPARAM wparam, LPARAM lparam );
 
-		template< auto state >
-		bool key_state( int key_id )
+		bool key_state( input::key_state_t state, int key_id )
 		{
 			auto& key = key_states[ key_id ];
 

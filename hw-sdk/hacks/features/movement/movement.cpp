@@ -35,7 +35,8 @@ void movement::impl::movement_fix( sdk::c_user_cmd* cmd, math::vec3 old_view_ang
 
 void movement::impl::edge_jump( )
 {
-	if ( !g_config.find< bool >( HASH( "m_ej" ) ) || !g_input.key_state< input::KEY_DOWN >( g_config.find< int >( HASH( "m_ej_key" ) ) ) ) {
+	if ( !g_config.find< bool >( HASH( "m_ej" ) ) ||
+	     !g_input.key_state( input::key_state_t::KEY_DOWN, g_config.find< int >( HASH( "m_ej_key" ) ) ) ) {
 		g_movement.longjump.start_timer = false;
 		g_movement.longjump.time_stamp  = 0;
 
@@ -74,7 +75,7 @@ void movement::impl::jump_bug( )
 	if ( !g_config.find< bool >( HASH( "m_jb" ) ) )
 		return;
 
-	if ( !g_input.key_state< input::KEY_DOWN >( g_config.find< int >( HASH( "m_jb_key" ) ) ) )
+	if ( !g_input.key_state( input::key_state_t::KEY_DOWN, g_config.find< int >( HASH( "m_jb_key" ) ) ) )
 		return;
 
 	[[unlikely]] if ( g_ctx.local->move_type( ).has_any_of(
@@ -116,7 +117,7 @@ void movement::impl::mini_jump( )
 	if ( !g_config.find< bool >( HASH( "m_mj" ) ) )
 		return;
 
-	if ( !g_input.key_state< input::KEY_DOWN >( g_config.find< int >( HASH( "m_mj_key" ) ) ) )
+	if ( !g_input.key_state( input::key_state_t::KEY_DOWN, g_config.find< int >( HASH( "m_mj_key" ) ) ) )
 		return;
 
 	[[unlikely]] if ( g_ctx.local->move_type( ).has_any_of(
@@ -132,7 +133,7 @@ void movement::impl::bhop( )
 	if ( !g_config.find< bool >( HASH( "m_bh" ) ) )
 		return;
 
-	if ( g_config.find< bool >( HASH( "m_jb" ) ) && g_input.key_state< input::KEY_DOWN >( g_config.find< int >( HASH( "m_jb_key" ) ) ) )
+	if ( g_config.find< bool >( HASH( "m_jb" ) ) && g_input.key_state( input::key_state_t::KEY_DOWN, g_config.find< int >( HASH( "m_jb_key" ) ) ) )
 		return;
 
 	// will return if player is noclip/ladder/fly mode
