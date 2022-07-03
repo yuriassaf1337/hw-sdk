@@ -130,8 +130,8 @@ void movement::impl::mini_jump( )
 
 void movement::impl::bhop( )
 {
-	if ( !g_config.find< bool >( HASH( "m_bh" ) ) )
-		return;
+	// its a bhop hack
+	[[unlikely]] if ( !g_config.find< bool >( HASH( "m_bh" ) ) ) return;
 
 	if ( g_config.find< bool >( HASH( "m_jb" ) ) && g_input.key_state( input::key_state_t::KEY_DOWN, g_config.find< int >( HASH( "m_jb_key" ) ) ) )
 		return;
