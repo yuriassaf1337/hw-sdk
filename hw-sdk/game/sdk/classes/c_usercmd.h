@@ -45,7 +45,7 @@ namespace sdk
 		float forward_move;
 		float side_move;
 		float up_move;
-		int_flag buttons;
+		sdk::int_flag_t buttons;
 		char impulse;
 		int weapon_select;
 		int weapon_subtype;

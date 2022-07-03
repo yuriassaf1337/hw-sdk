@@ -25,8 +25,8 @@ namespace prediction
 			math::vec3 velocity;
 			math::vec3 view_angles;
 			float fall_velocity;
-			int_flag flags;
-			int_flag move_type;
+			sdk::int_flag_t flags;
+			sdk::int_flag_t move_type;
 		} backup_vars;
 
 		// gets players tickbase correctly

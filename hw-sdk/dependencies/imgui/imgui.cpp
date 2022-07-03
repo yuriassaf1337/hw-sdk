@@ -7755,12 +7755,12 @@ bool ImGui::Keybind( const char* str_id, int* current_key, int sameline )
 			*current_key = nKey;
 	}
 
-	char buf_display[ 64 ] = "[...]";
+	char buf_display[ 64 ] = _("[...]");
 
 	if ( *current_key != 0 && g.ActiveId != id )
 		strcpy_s( buf_display, keys[ *current_key ] );
 	else if ( g.ActiveId == id )
-		strcpy_s( buf_display, "[...]" );
+		strcpy_s( buf_display, _("[...]") );
 
 	window->DrawList->AddText( frame_bb.Min, ImColor( 1.f, 1.f, 1.f, it_filled->second ), buf_display );
 

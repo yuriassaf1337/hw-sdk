@@ -8,8 +8,7 @@
 
 namespace input
 {
-	enum key_state_t
-	{
+	enum key_state_t {
 		KEY_NONE,
 		KEY_UP,
 		KEY_DOWN,
@@ -58,7 +57,7 @@ namespace input
 		void think( UINT msg, WPARAM wparam, LPARAM lparam );
 
 		template< auto state >
-		bool key_state( std::uint8_t key_id )
+		bool key_state( int key_id )
 		{
 			auto& key = key_states[ key_id ];
 

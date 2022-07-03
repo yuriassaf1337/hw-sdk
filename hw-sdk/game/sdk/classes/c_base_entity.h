@@ -23,7 +23,7 @@ namespace sdk
 		NETVAR( owner_entity, std::uintptr_t, "CBaseEntity", "m_hOwnerEntity" );
 		NETVAR( spotted, bool, "CBaseEntity", "m_bSpotted" );
 		NETVAR( simulation_time, float, "CBaseEntity", "m_flSimulationTime" );
-		NETVAR( effects, bit_flag_t< std::int32_t >, "CBaseEntity", "m_fEffects" );
+		NETVAR( effects, sdk::bit_flag_t< std::int32_t >, "CBaseEntity", "m_fEffects" );
 
 		// NETVAR( surface_friction, float, this->prediction_description_map( ), "m_surfaceFriction");
 

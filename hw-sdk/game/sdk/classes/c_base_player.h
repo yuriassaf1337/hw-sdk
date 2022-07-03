@@ -20,7 +20,7 @@ namespace sdk
 		NETVAR( view_punch_angle, math::vec3, "CBasePlayer", "m_viewPunchAngle" );
 		NETVAR( aim_punch_angle, math::vec3, "CBasePlayer", "m_aimPunchAngle" );
 		NETVAR( view_model, std::uintptr_t, "CBasePlayer", "m_hViewModel[0]" );
-		NETVAR( flags, bit_flag_t< std::int32_t >, "CBasePlayer", "m_fFlags" );
+		NETVAR( flags, sdk::bit_flag_t< std::int32_t >, "CBasePlayer", "m_fFlags" );
 		NETVAR( velocity, math::vec3, "CBasePlayer", "m_vecVelocity[0]" );
 		NETVAR( max_speed, float, "CBasePlayer", "m_flMaxspeed" );
 		NETVAR( observer_target, std::uintptr_t, "CBasePlayer", "m_hObserverTarget" );
@@ -32,13 +32,13 @@ namespace sdk
 		// todo - liga, im not sure but i think these 3 can be grabbed by prediction datamap /* yes, yes you can */
 		// so in future we can add datamap shit for netvars
 		OFFSET( c_user_cmd*&, current_command, 0xCD2 );
-		OFFSET( int_flag&, button_forced, 0xCD1 );
-		OFFSET( int_flag&, button_disabled, 0xCD0 );
+		OFFSET( sdk::int_flag_t&, button_forced, 0xCD1 );
+		OFFSET( sdk::int_flag_t&, button_disabled, 0xCD0 );
 
-		[[nodiscard]] int_flag& move_type( )
+		[[nodiscard]] sdk::int_flag_t& move_type( )
 		{
 			static std::uintptr_t offset = netvar::get_table( _( "CBaseEntity" ), _( "m_nRenderMode" ) ) + 0x1;
-			return *reinterpret_cast< int_flag* >( reinterpret_cast< std::uintptr_t >( this ) + offset );
+			return *reinterpret_cast< sdk::int_flag_t* >( reinterpret_cast< std::uintptr_t >( this ) + offset );
 		}
 
 		void pre_think( )
