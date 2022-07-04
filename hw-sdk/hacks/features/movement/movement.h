@@ -40,9 +40,6 @@ namespace movement
 		void bhop( );
 
 		void rotate_movement( math::vec3& angle );
-
-	private:
-		const bool alignable( const math::vec3 origin );
 	};
 } // namespace movement
 

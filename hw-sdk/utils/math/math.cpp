@@ -17,10 +17,10 @@ math::vec3 math::angle_vector( const math::vec3& angle )
 
 float math::normalize_yaw( float yaw )
 {
-	if ( yaw > 180.f )
-		yaw -= std::roundf( yaw / 360.f ) * 360.f;
-	else if ( yaw < -180.f )
-		yaw += std::roundf( yaw / 360.f ) * 360.f;
+	while ( yaw < -180.0f )
+		yaw += 360.0f;
+	while ( yaw > 180.0f )
+		yaw -= 360.0f;
 
 	return yaw;
 }

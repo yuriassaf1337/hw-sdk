@@ -163,17 +163,6 @@ void movement::impl::rotate_movement( math::vec3& angle )
 	g_ctx.cmd->side_move    = std::sinf( rotation ) * speed;
 }
 
-const bool movement::impl::alignable( const math::vec3 origin )
-{
-	const math::vec2 remainder1( 1.f - ( origin.x - std::floor( origin.x ) ), 1.f - ( origin.y - std::floor( origin.y ) ) );
-	const math::vec2 remainder2( ( origin.x - std::floor( origin.x ) ), ( origin.y - std::floor( origin.y ) ) );
-
-	return ( ( remainder1.x >= movement::distance_to_stop && remainder1.x <= movement::distance_till_adjust ) ||
-	         ( remainder1.y >= movement::distance_to_stop && remainder1.y <= movement::distance_till_adjust ) ) ||
-	       ( ( remainder2.x >= movement::distance_to_stop && remainder2.x <= movement::distance_till_adjust ) ||
-	         ( remainder2.y >= movement::distance_to_stop && remainder2.y <= movement::distance_till_adjust ) );
-}
-
 void movement::impl::auto_align( )
 {
 	// credits patoke
@@ -184,61 +173,70 @@ void movement::impl::auto_align( )
 	[[unlikely]] if ( g_ctx.local->move_type( ).has_any_of(
 						  { sdk::move_type::MOVE_NOCLIP, sdk::move_type::MOVE_LADDER, sdk::move_type::MOVE_FLY } ) ) return;
 
-	// user not moving
-	if ( static_cast< int >( g_ctx.cmd->side_move ) == 0 && static_cast< int >( g_ctx.cmd->forward_move ) == 0 )
+	if ( g_prediction.backup_vars.flags.has( sdk::flags::ONGROUND ) || g_prediction.backup_vars.velocity.length_2d( ) < 10.f )
 		return;
 
-	if ( g_ctx.local->flags( ).has( sdk::flags::ONGROUND ) )
+	const math::vec3 origin   = g_ctx.local->get_abs_origin( );
+	const math::vec3 velocity = g_ctx.local->velocity( );
+
+	auto is_colliding = []( ) -> int {
+		constexpr float trace_additive = movement::distance_till_adjust + ( 32.f / 2.f );
+
+		const math::vec2< float > ray_differences[ 4 ] = { math::vec2( trace_additive, 0.f ), math::vec2( 0.f, trace_additive ),
+			                                               math::vec2( -trace_additive, 0.f ), math::vec2( 0.f, -trace_additive ) };
+
+		int wall_hit = 0;
+
+		for ( int i = 1; i <= 4; i++ ) {
+			sdk::c_game_trace trace;
+			sdk::c_trace_filter filter;
+			filter.skip = g_ctx.local;
+
+			math::vec3 to = g_ctx.local->get_abs_origin( ) + math::vec3( ray_differences[ i - 1 ].x, ray_differences[ i - 1 ].y, 0 );
+			sdk::ray_t ray{ };
+			ray.init( g_ctx.local->get_abs_origin( ), to );
+			g_interfaces.engine_trace->trace_ray( ray, sdk::masks::MASK_ALL, &filter, &trace );
+
+			if ( trace.did_hit( ) && !trace.entity->is_player( ) )
+				wall_hit = i;
+		}
+
+		return wall_hit;
+	};
+
+	const auto has_to_align = []( ) -> bool {
+		const auto origin = g_ctx.local->get_abs_origin( );
+
+		const math::vec2 remainder1 = math::vec2( 1.f - ( origin.x - floor( origin.x ) ), 1.f - ( origin.y - floor( origin.y ) ) );
+		const math::vec2 remainder2 = math::vec2( ( origin.x - floor( origin.x ) ), ( origin.y - floor( origin.y ) ) );
+
+		return ( ( remainder1.x >= movement::distance_to_stop && remainder1.x <= movement::distance_till_adjust ) ||
+		         ( remainder1.y >= movement::distance_to_stop && remainder1.y <= movement::distance_till_adjust ) ) ||
+		       ( ( remainder2.x >= movement::distance_to_stop && remainder2.x <= movement::distance_till_adjust ) ||
+		         ( remainder2.y >= movement::distance_to_stop && remainder2.y <= movement::distance_till_adjust ) );
+	};
+
+	if ( !has_to_align( ) )
 		return;
 
-	struct {
-		const math::vec3 origin    = g_ctx.local->get_abs_origin( );
-		const math::vec3 velocity  = g_ctx.local->velocity( );
-		const float trace_additive = movement::distance_till_adjust + ( 32.f / 2.f );
-		int wall_hit               = 0;
-	} m_info;
+	int wall_collided = is_colliding( );
+	if ( wall_collided != 0 ) {
+		int is_wall_parallel = wall_collided == 1 || wall_collided == 2 ? 1 : -1;
 
-	if ( !g_movement.alignable( m_info.origin ) )
-		return;
+		math::vec3 velocity_angle = math::calculate_angle( origin, origin + velocity );
 
-	const math::vec2< float > ray_differences[ 4 ] = { math::vec2( m_info.trace_additive, 0.f ), math::vec2( 0.f, m_info.trace_additive ),
-		                                               math::vec2( -m_info.trace_additive, 0.f ), math::vec2( 0.f, -m_info.trace_additive ) };
-	for ( int i = 1; i <= 4; i++ ) {
-		sdk::c_game_trace trace{ };
-		sdk::c_trace_filter filter;
-		filter.skip = g_ctx.local;
+		float base_yaw = math::normalize_yaw( velocity_angle.y );
 
-		// we don't to rotate this using our viewangles, it's just gonna make our life harder (ref: https://imgur.com/a/rNSMv9j)
-		math::vec3 to = m_info.origin + math::vec3( ray_differences[ i - 1 ].x, ray_differences[ i - 1 ].y, 0 );
-		sdk::ray_t ray{ };
+		int direction =
+			velocity_angle.y == 0.f ? -1 * is_wall_parallel : round( math::normalize_yaw( velocity_angle.y ) / ( 180.f * is_wall_parallel ) );
 
-		ray.init( m_info.origin, to );
-		g_interfaces.engine_trace->trace_ray( ray, sdk::masks::MASK_ALL, &filter, &trace );
+		float angle_diff = math::rad2deg( atan( ( g_ctx.cmd->buttons.has( sdk::buttons::IN_DUCK ) ? 4.6775f : 4.5500f ) / velocity.length_2d( ) ) ) *
+		                   ( 2.f * math::util::pi_f );
 
-		// did we hit something and it wasn't a player?
-		if ( trace.did_hit( ) && !trace.entity->is_player( ) )
-			m_info.wall_hit = i;
-	}
+		{ // align the player
+			math::vec3 angle = { g_ctx.cmd->view_angles.x, math::normalize_yaw( base_yaw + direction * angle_diff ), g_ctx.cmd->view_angles.z };
 
-	if ( const int is_wall_parallel = m_info.wall_hit == 1 || m_info.wall_hit == 2 ? 1 : -1; m_info.wall_hit != 0 ) {
-		math::vec3 velocity_angle = math::calculate_angle( m_info.origin, m_info.origin + m_info.velocity );
-
-		float v_angle_y = velocity_angle.y;
-
-		float base_yaw = math::normalize_yaw( v_angle_y );
-
-		const float direction =
-			velocity_angle.y == 0.f ? -1 * is_wall_parallel : std::round( math::normalize_yaw( velocity_angle.y ) / ( 180.f * is_wall_parallel ) );
-
-		// best strafe angle to align the player
-		const float angle_diff =
-			math::rad2deg( atan( ( g_ctx.cmd->buttons.has( sdk::buttons::IN_DUCK ) ? 4.6775f : 4.5500f ) / m_info.velocity.length_2d( ) ) ) *
-			( 2.f * M_PI );
-
-		float final_yaw = base_yaw + direction * angle_diff;
-
-		math::vec3 angle = { g_ctx.cmd->view_angles.x, math::normalize_yaw( final_yaw ), 0.0f };
-
-		g_movement.rotate_movement( angle );
+			g_movement.rotate_movement( angle );
+		}
 	}
 }

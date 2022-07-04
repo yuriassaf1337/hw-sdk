@@ -35,21 +35,21 @@ void indicators::impl::velocity( )
 	}
 
 	float text_alpha = g_config.find< bool >( HASH( "m_velocity_indicator_fade" ) )
-	                  ? g_ctx.local->velocity( ).length_2d( ) >= 310.f ? 310.f : g_ctx.local->velocity( ).length_2d( ) / 310.f
-	                  : 1.f;
+	                       ? g_ctx.local->velocity( ).length_2d( ) >= 310.f ? 310.f : g_ctx.local->velocity( ).length_2d( ) / 310.f
+	                       : 1.f;
 
-	color _color = corrected_velocity == m_velocity_info.last_vel  ? color( 255, 199, 89, text_alpha * 255 )
-	               : corrected_velocity < m_velocity_info.last_vel ? color( 255, 119, 119, text_alpha * 255 )
-	                                                               : color( 30, 255, 109, text_alpha * 255 );
-	bool should_draw_pre =
+	color velocity_color = corrected_velocity == m_velocity_info.last_vel  ? color( 255, 199, 89, text_alpha * 255 )
+	                       : corrected_velocity < m_velocity_info.last_vel ? color( 255, 119, 119, text_alpha * 255 )
+	                                                                       : color( 30, 255, 109, text_alpha * 255 );
+	const bool should_draw_pre =
 		( !g_ctx.local->flags( ).has( sdk::flags::ONGROUND ) || ( m_velocity_info.take_off_time > g_interfaces.globals->current_time ) );
 
-	char buf[ 512 ];
-	snprintf( buf, sizeof( buf ), g_config.find< bool >( HASH( "m_velocity_indicator_show_pre" ) ) && should_draw_pre ? "%i (%i)" : "%i",
-	          corrected_velocity, m_velocity_info.take_off );
+	const std::string str_pre = std::format( _( "{} ({})" ), corrected_velocity, m_velocity_info.take_off ),
+					  str     = std::format( _( "{}" ), corrected_velocity );
 
-	g_render.render_text( g_ctx.screen_size.x / 2, g_ctx.screen_size.y / 2, font_alignment::AL_HORIZONTAL_CENTER, font_flags::FLAG_DROPSHADOW, buf,
-	                      g_fonts[ HASH( "indicator_verdana_font" ) ], _color );
+	g_render.render_text( g_ctx.screen_size.x / 2, g_ctx.screen_size.y / 2, font_alignment::AL_HORIZONTAL_CENTER, font_flags::FLAG_DROPSHADOW,
+	                      g_config.find< bool >( HASH( "m_velocity_indicator_show_pre" ) ) && should_draw_pre ? str_pre.c_str( ) : str.c_str( ),
+	                      g_fonts[ HASH( "indicator_verdana_font" ) ], velocity_color );
 
 	if ( m_velocity_info.tick_prev + 5 < g_interfaces.globals->tick_count ) {
 		m_velocity_info.last_vel  = corrected_velocity;
