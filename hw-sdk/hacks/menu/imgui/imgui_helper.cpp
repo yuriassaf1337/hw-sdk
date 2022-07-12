@@ -172,8 +172,8 @@ void imgui::impl::separator( ImDrawList* draw_list, const ImVec2& min, const ImV
 	ImVec2 text_size = imgui::impl::calc_text_size( text );
 
 	draw_list->AddRectFilledMultiColor(
-		min, max, g_config.find< color >( HASH( "m_menu_color" ) ).get_u32( 0.f ), g_config.find< color >( HASH( "m_menu_color" ) ).get_u32( 1.f ),
-		g_config.find< color >( HASH( "m_menu_color" ) ).get_u32( 1.f ), g_config.find< color >( HASH( "m_menu_color" ) ).get_u32( 0.f ) );
+		min, max, g_config.find< color >( HASH( "m_menu_color" ) ).get_u32( 1.f ), g_config.find< color >( HASH( "m_menu_color" ) ).get_u32( 0.f ),
+		g_config.find< color >( HASH( "m_menu_color" ) ).get_u32( 0.f ), g_config.find< color >( HASH( "m_menu_color" ) ).get_u32( 1.f ) );
 }
 
 ImVec2 imgui::impl::calc_text_size( const char* text, const char* text_end, bool hide_text_after_double_hash, float wrap_width )
