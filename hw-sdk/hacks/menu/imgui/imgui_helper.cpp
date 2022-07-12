@@ -3,7 +3,9 @@
 #include "../../../dependencies/imgui/imgui.h"
 #include "../../../dependencies/imgui/imgui_freetype.h"
 #include "../../../dependencies/imgui/imgui_impl_win32.h"
+#include "../../../dependencies/imgui/imgui_internal.h"
 #include "../../../dependencies/mocking_bird/mocking_bird.h"
+#include <map>
 
 bool imgui::impl::new_frame( )
 {
@@ -111,6 +113,50 @@ bool imgui::impl::checkbox( const char* label, bool* v, int x_pos )
 	return ImGui::Checkbox( label, v, x_pos );
 }
 
+void imgui::impl::combo( const char* label, int* current_item, const char* items, int same_line )
+{
+	auto id = ImGui::GetCurrentWindow( )->GetID( label );
+
+	static std::map< ImGuiID, float > opening_alpha;
+
+	auto opened_frame = opening_alpha.find( id );
+
+	if ( opened_frame == opening_alpha.end( ) ) {
+		opening_alpha.insert( { id, 0.f } );
+		opened_frame = opening_alpha.find( id );
+	}
+
+	opened_frame->second =
+		ImClamp( opened_frame->second + ( 2.35f * ImGui::GetIO( ).DeltaTime * ( ImGui::IsPopupOpen( label ) ? 2.f : -2.f ) ), 0.0f, 1.f );
+	opened_frame->second *= ImGui::GetStyle( ).Alpha;
+
+	ImGui::PushStyleColor( ImGuiCol_PopupBg, ImVec4( 20 / 255.f, 20 / 255.f, 20 / 255.f, opened_frame->second ) );
+	ImGui::PushStyleColor( ImGuiCol_WindowBg, ImVec4( 20 / 255.f, 20 / 255.f, 20 / 255.f, opened_frame->second ) );
+	ImGui::PushStyleVar( ImGuiStyleVar_FramePadding, ImVec2( ImGui::GetStyle( ).FramePadding.x, 1 ) );
+	ImGui::SetCursorPosX( same_line );
+	ImGui::PushItemWidth( -1 );
+	ImGui::Combo( label, current_item, items );
+	ImGui::PopItemWidth( );
+	ImGui::PopStyleVar( );
+	ImGui::PopStyleColor( );
+	ImGui::PopStyleColor( );
+}
+
+void imgui::impl::listbox( const char* label, int* current_item, std::function< const char*( int ) > function, int item_count, int height_in_items )
+{
+	auto render = [ & ]( ) {
+		return ImGui::ListBox(
+			label, current_item,
+			[]( void* data, int index, const char** out ) {
+				*out = ( *static_cast< std::function< const char*( int ) >* >( data ) )( index );
+				return true;
+			},
+			&function, item_count, height_in_items );
+	};
+
+	render( );
+}
+
 bool imgui::impl::keybind( const char* id, int* current_key, int sameline )
 {
 	return ImGui::Keybind( id, current_key, sameline );
@@ -133,6 +179,16 @@ void imgui::impl::separator( ImDrawList* draw_list, const ImVec2& min, const ImV
 ImVec2 imgui::impl::calc_text_size( const char* text, const char* text_end, bool hide_text_after_double_hash, float wrap_width )
 {
 	return ImGui::CalcTextSize( text, text_end, hide_text_after_double_hash, wrap_width );
+}
+
+void imgui::impl::push_item_width( float item_width )
+{
+	ImGui::PushItemWidth( item_width );
+}
+
+void imgui::impl::push_style_var( ImGuiStyleVar idx, const ImVec2& val )
+{
+	ImGui::PushStyleVar( idx, val );
 }
 
 ImVec2 imgui::impl::get_content_region_avail( )

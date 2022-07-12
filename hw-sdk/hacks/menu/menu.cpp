@@ -188,7 +188,7 @@ void menu::impl::draw( )
 				if ( g_config.find< bool >( HASH( "m_stamina_indicator" ) ) ) { }
 
 				g_imgui.checkbox( _( "keybinds" ), &g_config.find< bool >( HASH( "m_keybind_indicator" ) ) );
-				ImGui::Combo( _( "displayed keybinds" ), &g_config.find< int >( HASH( "m_displayed_keybinds" ) ), _( "jb\0ej\0ej\0mj" ) );
+				g_imgui.combo( _( "displayed keybinds" ), &g_config.find< int >( HASH( "m_displayed_keybinds" ) ), _( "jb\0ej\0ej\0mj" ), 2 );
 
 				g_imgui.spacing( );
 				g_imgui.end_child( );
@@ -213,6 +213,19 @@ void menu::impl::draw( )
 		case 5: { /* config tab */
 			g_imgui.begin_child( _( "configuration-child-contents" ),
 			                     ImVec2( g_imgui.get_content_region_avail( ).x, g_imgui.get_content_region_avail( ).y ) );
+			{
+				g_imgui.separator( window_draw_list,
+				                   ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "config" ) ).x + 5, ImGui::GetWindowPos( ).y + 5 ),
+				                   ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ),
+				                   _( "config" ) );
+
+				g_imgui.end_child( );
+			}
+
+			g_imgui.same_line( );
+
+			g_imgui.begin_child(_("scripting-child_contents"),
+				ImVec2(g_imgui.get_content_region_avail().x, g_imgui.get_content_region_avail().y))
 			{
 				g_imgui.separator( window_draw_list,
 				                   ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "config" ) ).x + 5, ImGui::GetWindowPos( ).y + 5 ),
