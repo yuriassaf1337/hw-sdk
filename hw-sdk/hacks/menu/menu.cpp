@@ -6,8 +6,7 @@
 #include "../../globals/interfaces/interfaces.h"
 #include "../../utils/keybinds/keybinds.h"
 #include "imgui/imgui_helper.h"
-
-/* todo - coffin - add my custom imgui helpers */
+#include "../../utils/files/files.h"
 
 bool menu::impl::init_input( )
 {
@@ -223,10 +222,43 @@ void menu::impl::draw( )
 				g_imgui.push_item_width( g_imgui.get_content_region_avail( ).x );
 				g_imgui.push_style_var( ImGuiStyleVar_FramePadding, ImVec2( ImGui::GetStyle( ).FramePadding.x, 2 ) );
 
-				g_imgui
-					.listbox( _( "##configuration-list" ), g_menu.selected_cfg )
+				g_imgui.listbox(
+					_( "##configuration-list" ), &g_menu.selected_cfg, []( int index ) { return g_files.info.file_names[ index ].c_str( ); },
+					g_files.info.file_names.size( ), 5 );
 
-						g_imgui.end_child( );
+
+				g_imgui.input_text_with_hint( _( "##configuration-file-name" ), _( "enter file name..." ), g_menu.cfg_name.data( ),
+				                              sizeof( g_menu.cfg_name.data( ) ) );
+
+				ImGui::PopStyleVar( );
+				ImGui::PopItemWidth( );
+				
+				if ( ImGui::Button( _( "create" ), ImVec2( ImGui::GetContentRegionAvail( ).x, 15 ) ) ) {
+
+				}
+
+				if ( ImGui::Button( _( "save" ), ImVec2( ImGui::GetContentRegionAvail( ).x / 2, 15 ) ) )
+					ImGui::OpenPopup( _( "confirmation##config.save" ) );
+
+				g_imgui.same_line( );
+
+				if ( ImGui::Button( _( "load" ), ImVec2( ImGui::GetContentRegionAvail( ).x, 15 ) ) ) { 
+				
+				}
+
+				if ( ImGui::Button( _( "remove" ), ImVec2( ImGui::GetContentRegionAvail( ).x, 15 ) ) )
+					ImGui::OpenPopup( _( "confirmation##config.remove" ) );
+
+				if (ImGui::Button(_("refresh"), ImVec2(ImGui::GetContentRegionAvail().x, 15))) {
+
+				}
+				// temporary
+				int key{ };
+				g_imgui.color_picker( _( "menu accent" ), &g_config.find< color >( HASH( "m_menu_color" ) ), true, 17, true );
+				g_imgui.keybind( _( "menu key" ), &key, 16);
+		
+
+				g_imgui.end_child( );
 			}
 
 			g_imgui.same_line( );
