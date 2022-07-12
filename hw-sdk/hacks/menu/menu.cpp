@@ -246,7 +246,7 @@ void menu::impl::draw( )
 
 				if ( ImGui::Button( _( "refresh" ), ImVec2( ImGui::GetContentRegionAvail( ).x, 15 ) ) ) { }
 
-				g_imgui.color_picker( _( "menu accent" ), g_config.find< color >( HASH( "m_menu_color" ) ), true, 17, true );
+				g_imgui.color_picker( _( "menu accent" ), g_config.find< color >( HASH( "m_menu_color" ) ), false, 17, true );
 
 				g_imgui.end_child( );
 			}
