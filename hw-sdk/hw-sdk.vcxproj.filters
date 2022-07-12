@@ -207,6 +207,12 @@
     <ClCompile Include="utils\files\files.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="hooks\hooks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\detour\detour.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals\includes\includes.h">
@@ -1052,6 +1058,12 @@
     <ClInclude Include="utils\files\files.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="hooks\hooks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\detour\detour.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="utils\math\math.inl">
@@ -1064,6 +1076,9 @@
       <Filter>Header Files</Filter>
     </None>
     <None Include="utils\modules\modules.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="hooks\hooks.inl">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>
