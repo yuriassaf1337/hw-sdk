@@ -191,6 +191,12 @@ void imgui::impl::push_style_var( ImGuiStyleVar idx, const ImVec2& val )
 	ImGui::PushStyleVar( idx, val );
 }
 
+bool imgui::impl::input_text_with_hint( const char* label, const char* hint, char* buf, size_t buf_size, ImGuiInputTextFlags flags,
+                                        ImGuiInputTextCallback callback, void* user_data )
+{
+	return ImGui::InputTextWithHint( label, hint, buf, buf_size, flags, callback, user_data );
+}
+
 ImVec2 imgui::impl::get_content_region_avail( )
 {
 	return ImGui::GetContentRegionAvail( );

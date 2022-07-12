@@ -203,6 +203,7 @@ void menu::impl::draw( )
 					ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ), _( "game" ) );
 
 				g_imgui.spacing( );
+
 				g_imgui.end_child( );
 			}
 			break;
@@ -219,13 +220,19 @@ void menu::impl::draw( )
 				                   ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ),
 				                   _( "config" ) );
 
-				g_imgui.end_child( );
+				g_imgui.push_item_width( g_imgui.get_content_region_avail( ).x );
+				g_imgui.push_style_var( ImGuiStyleVar_FramePadding, ImVec2( ImGui::GetStyle( ).FramePadding.x, 2 ) );
+
+				g_imgui
+					.listbox( _( "##configuration-list" ), g_menu.selected_cfg )
+
+						g_imgui.end_child( );
 			}
 
 			g_imgui.same_line( );
 
-			g_imgui.begin_child(_("scripting-child_contents"),
-				ImVec2(g_imgui.get_content_region_avail().x, g_imgui.get_content_region_avail().y))
+			g_imgui.begin_child( _( "scripting-child_contents" ),
+			                     ImVec2( g_imgui.get_content_region_avail( ).x, g_imgui.get_content_region_avail( ).y ) );
 			{
 				g_imgui.separator( window_draw_list,
 				                   ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "config" ) ).x + 5, ImGui::GetWindowPos( ).y + 5 ),
@@ -234,6 +241,7 @@ void menu::impl::draw( )
 
 				g_imgui.end_child( );
 			}
+
 			break;
 		}
 		}

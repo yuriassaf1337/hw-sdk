@@ -234,6 +234,7 @@
     <ClCompile Include="hacks\menu\menu.cpp" />
     <ClCompile Include="hacks\prediction\prediction.cpp" />
     <ClCompile Include="utils\entity_list\entity_list.cpp" />
+    <ClCompile Include="utils\files\files.cpp" />
     <ClCompile Include="utils\keybinds\keybinds.cpp" />
     <ClCompile Include="utils\math\math.cpp" />
     <ClCompile Include="utils\modules\modules.cpp" />
@@ -507,6 +508,7 @@
     <ClInclude Include="utils\console\log_level\log_level.h" />
     <ClInclude Include="utils\convars\convars.h" />
     <ClInclude Include="utils\entity_list\entity_list.h" />
+    <ClInclude Include="utils\files\files.h" />
     <ClInclude Include="utils\helpers\function_enforce\function_enforce.h" />
     <ClInclude Include="globals\hooks\hooking.h" />
     <ClInclude Include="utils\keybinds\keybinds.h" />

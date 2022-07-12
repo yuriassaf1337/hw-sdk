@@ -30,6 +30,8 @@ namespace imgui
 		void set_cursor_pos_x( float local_x );
 		void set_cursor_pos_y( float local_y );
 
+		void push_item_width( float item_width );
+		void push_style_var( ImGuiStyleVar idx, const ImVec2& val );
 		// elements
 		bool begin( const char* name, bool* p_open, ImGuiWindowFlags flags = 0 );
 		void end( );
@@ -37,6 +39,8 @@ namespace imgui
 		bool begin_child( const char* str_id, const ImVec2& size_arg, bool border = false, ImGuiWindowFlags extra_flags = 0 );
 		void end_child( bool do_shadow = false );
 
+		bool input_text_with_hint( const char* label, const char* hint, char* buf, size_t buf_size, ImGuiInputTextFlags flags = 0,
+		                           ImGuiInputTextCallback callback = NULL, void* user_data = NULL );
 		void render_tab( const char* label, int tab_number );
 		void text( const char* fmt, ... );
 		bool checkbox( const char* label, bool* v, int x_pos = 5 );
