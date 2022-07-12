@@ -4,9 +4,9 @@
 #include "../../dependencies/imgui/imgui_freetype.h"
 #include "../../dependencies/imgui/imgui_impl_win32.h"
 #include "../../globals/interfaces/interfaces.h"
+#include "../../utils/files/files.h"
 #include "../../utils/keybinds/keybinds.h"
 #include "imgui/imgui_helper.h"
-#include "../../utils/files/files.h"
 
 bool menu::impl::init_input( )
 {
@@ -211,8 +211,8 @@ void menu::impl::draw( )
 			break;
 		}
 		case 5: { /* config tab */
-			g_imgui.begin_child( _( "configuration-child-contents" ),
-			                     ImVec2( g_imgui.get_content_region_avail( ).x, g_imgui.get_content_region_avail( ).y ) );
+			g_imgui.begin_child( _( "config-child-contents" ),
+			                     ImVec2( g_imgui.get_content_region_avail( ).x / 2, g_imgui.get_content_region_avail( ).y ) );
 			{
 				g_imgui.separator( window_draw_list,
 				                   ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "config" ) ).x + 5, ImGui::GetWindowPos( ).y + 5 ),
@@ -226,37 +226,27 @@ void menu::impl::draw( )
 					_( "##configuration-list" ), &g_menu.selected_cfg, []( int index ) { return g_files.info.file_names[ index ].c_str( ); },
 					g_files.info.file_names.size( ), 5 );
 
-
 				g_imgui.input_text_with_hint( _( "##configuration-file-name" ), _( "enter file name..." ), g_menu.cfg_name.data( ),
 				                              sizeof( g_menu.cfg_name.data( ) ) );
 
 				ImGui::PopStyleVar( );
 				ImGui::PopItemWidth( );
-				
-				if ( ImGui::Button( _( "create" ), ImVec2( ImGui::GetContentRegionAvail( ).x, 15 ) ) ) {
 
-				}
+				if ( ImGui::Button( _( "create" ), ImVec2( ImGui::GetContentRegionAvail( ).x, 15 ) ) ) { }
 
 				if ( ImGui::Button( _( "save" ), ImVec2( ImGui::GetContentRegionAvail( ).x / 2, 15 ) ) )
 					ImGui::OpenPopup( _( "confirmation##config.save" ) );
 
 				g_imgui.same_line( );
 
-				if ( ImGui::Button( _( "load" ), ImVec2( ImGui::GetContentRegionAvail( ).x, 15 ) ) ) { 
-				
-				}
+				if ( ImGui::Button( _( "load" ), ImVec2( ImGui::GetContentRegionAvail( ).x, 15 ) ) ) { }
 
 				if ( ImGui::Button( _( "remove" ), ImVec2( ImGui::GetContentRegionAvail( ).x, 15 ) ) )
 					ImGui::OpenPopup( _( "confirmation##config.remove" ) );
 
-				if (ImGui::Button(_("refresh"), ImVec2(ImGui::GetContentRegionAvail().x, 15))) {
+				if ( ImGui::Button( _( "refresh" ), ImVec2( ImGui::GetContentRegionAvail( ).x, 15 ) ) ) { }
 
-				}
-				// temporary
-				int key{ };
-				g_imgui.color_picker( _( "menu accent" ), &g_config.find< color >( HASH( "m_menu_color" ) ), true, 17, true );
-				g_imgui.keybind( _( "menu key" ), &key, 16);
-		
+				g_imgui.color_picker( _( "menu accent" ), g_config.find< color >( HASH( "m_menu_color" ) ), true, 17, true );
 
 				g_imgui.end_child( );
 			}
@@ -269,7 +259,7 @@ void menu::impl::draw( )
 				g_imgui.separator( window_draw_list,
 				                   ImVec2( ImGui::GetWindowPos( ).x + g_imgui.calc_text_size( _( "config" ) ).x + 5, ImGui::GetWindowPos( ).y + 5 ),
 				                   ImVec2( ImGui::GetWindowPos( ).x + ImGui::GetContentRegionAvail( ).x, ImGui::GetWindowPos( ).y + 5 + 1 ),
-				                   _( "config" ) );
+				                   _( "scripts" ) );
 
 				g_imgui.end_child( );
 			}

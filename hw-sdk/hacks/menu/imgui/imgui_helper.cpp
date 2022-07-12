@@ -233,28 +233,22 @@ void imgui::impl::start_decorations( ImDrawList* draw_list )
 	ImGui::TextColored( g_config.find< color >( HASH( "m_menu_color" ) ).to_imvec4( ), _( ".vip" ) );
 }
 
-bool imgui::impl::color_picker( const char* label, color* col, bool alpha, int same_line, bool show_text )
+bool imgui::impl::color_picker( const char* label, color& col, bool alpha, int same_line, bool show_text )
 {
-	MOCKING_TRY;
-
 	if ( show_text )
 		ImGui::Text( label );
 
-	ImVec4 output_color = col->to_imvec4( );
-
-	auto alpha_slider_flag = alpha ? ImGuiColorEditFlags_AlphaBar : ImGuiColorEditFlags_NoAlpha;
-
+	auto slider_flag = alpha ? ImGuiColorEditFlags_AlphaBar : ImGuiColorEditFlags_NoAlpha;
 	ImGui::SameLine( ImGui::GetWindowWidth( ) - same_line );
 
-	if ( ImGui::ColorEdit4( std::string( _( "##" ) ).append( label ).c_str( ), &output_color.x,
-	                        alpha_slider_flag | ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoTooltip ) ) {
-		*col = color( output_color.x, output_color.y, output_color.z, output_color.w );
-		return true;
-	}
+	float f[ 4 ] = { col.r / 255.f, col.g / 255.f, col.b / 255.f, col.a / 255.f };
 
-	MOCKING_CATCH( return false );
+	ImGui::ColorEdit4( std::string( _( "##" ) ).append( label ).c_str( ), f,
+	                   slider_flag | ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoTooltip );
 
-	return false;
+	col = color( f[ 0 ] * 255.f, f[ 1 ] * 255.f, f[ 2 ] * 255.f, f[ 3 ] * 255.f );
+
+	return true;
 }
 
 void imgui::impl::menu_init( IDirect3DDevice9* device )

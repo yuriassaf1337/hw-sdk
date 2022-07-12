@@ -44,7 +44,7 @@ namespace imgui
 		void render_tab( const char* label, int tab_number );
 		void text( const char* fmt, ... );
 		bool checkbox( const char* label, bool* v, int x_pos = 5 );
-		bool color_picker( const char* label, color* col, bool alpha, int same_line, bool show_text );
+		bool color_picker( const char* label, color& col, bool alpha, int same_line, bool show_text );
 		void combo( const char* label, int* current_item, const char* items, int same_line );
 		void menu_init( IDirect3DDevice9* device );
 		bool keybind( const char* id, int* current_key, int sameline = 5 );
