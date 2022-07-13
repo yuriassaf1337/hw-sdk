@@ -46,5 +46,4 @@ namespace hooks
 			return true;
 		};
 	}
-}
 } // namespace hooks
