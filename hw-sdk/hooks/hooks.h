@@ -1,5 +1,6 @@
 #pragma once
 
+#include <d3dx9.h>
 #include <iostream>
 
 // dependencies
@@ -9,10 +10,13 @@
 // game
 #include "../game/sdk/classes/c_cs_player.h"
 #include "../game/sdk/include.h"
+#include "../game/sdk/structs/i_net_msg.h"
 
 // utils
 #include "../utils/console/console.h"
 #include "../utils/detour/detour.h"
+#include "../utils/keybinds/keybinds.h"
+#include "../utils/vfunc/vfunc.h"
 
 // globals
 #include "../globals/ctx/ctx.h"

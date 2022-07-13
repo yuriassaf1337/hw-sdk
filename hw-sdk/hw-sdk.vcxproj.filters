@@ -63,9 +63,6 @@
     <ClCompile Include="utils\keybinds\keybinds.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="globals\hooks\wndproc\wndproc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="globals\hooks\create_move\create_move.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -154,9 +151,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="globals\hooks\list_leaves_in_box\list_leaves_in_box.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="globals\hooks\return_address\return_address.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="globals\hooks\send_net_msg\send_net_msg.cpp">
@@ -428,9 +422,6 @@
     <ClInclude Include="utils\keybinds\keybinds.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="globals\hooks\wndproc\wndproc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="game\sdk\classes\i_client_dll.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -693,9 +684,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="globals\hooks\list_leaves_in_box\list_leaves_in_box.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="globals\hooks\return_address\return_address.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="globals\hooks\send_net_msg\send_net_msg.h">

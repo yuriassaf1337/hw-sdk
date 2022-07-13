@@ -32,6 +32,11 @@ bool detour::hook::create( void* func, void* detour )
 	if ( !replace( ) )
 		return false;
 
+	// maybe remove this
+	console::print< console::log_level::NORMAL >( _( "Hooked function -> [ base: {:#08X} | replace: {:#08X} | original: {:#08X} ]" ),
+	                                              reinterpret_cast< std::uintptr_t >( m_base_fn ), reinterpret_cast< std::uintptr_t >( m_replace_fn ),
+	                                              reinterpret_cast< std::uintptr_t >( m_original_fn ) );
+
 	return true;
 }
 

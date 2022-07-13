@@ -1,4 +1,5 @@
 #include "hooks.h"
+#include "../dependencies/imgui/imgui_impl_win32.h"
 
 bool hooks::impl::init( )
 {
@@ -9,7 +10,19 @@ bool hooks::impl::init( )
 		return false;
 	}
 
+	if ( hooks::wnd_proc = reinterpret_cast< WNDPROC >( LI_FN( SetWindowLongA )( FindWindowA( _( "Valve001" ), nullptr ), GWL_WNDPROC,
+	                                                                             reinterpret_cast< LONG_PTR >( hooks::detours::wnd_proc ) ) );
+	     !hooks::wnd_proc ) {
+		console::print< console::log_level::SUCCESS >( _( "Failed find game window" ) );
+		return false;
+	}
+
+	MOCK hooks::ret_add::init( );
+
 	HOOK( hooks::create_move.create( virtual_func::get( g_interfaces.client, 24 ), hooks::detours::create_move ) );
+
+	HOOK( hooks::send_net_msg.create( g_engine_dll.pattern_scan( _( "55 8B EC 83 EC 08 56 8B F1 8B 4D 04 E8s" ) ).as< void* >( ),
+	                                  &hooks::detours::send_net_msg ) );
 
 	MOCKING_CATCH( return false );
 
@@ -25,6 +38,8 @@ void hooks::impl::unload( )
 	MH_RemoveHook( MH_ALL_HOOKS );
 
 	MH_Uninitialize( );
+
+	LI_FN( SetWindowLongA )( hotwheels::window, GWL_WNDPROC, reinterpret_cast< LONG_PTR >( hooks::wnd_proc ) );
 
 	g_imgui.destroy( );
 
@@ -60,4 +75,25 @@ bool __fastcall hooks::detours::create_move( sdk::c_cs_player* ecx, void*, float
 	g_movement.post_prediction.think( );
 
 	return false;
+}
+
+extern LRESULT ImGui_ImplWin32_WndProcHandler( HWND window, UINT message, WPARAM wideParam, LPARAM longParam );
+HRESULT WINAPI hooks::detours::wnd_proc( HWND window, UINT message, WPARAM parameter, LPARAM long_parameter )
+{
+	g_input.think( message, parameter, long_parameter );
+
+	if ( g_input.key_state( input::key_state_t::KEY_RELEASED, VK_INSERT ) )
+		g_menu.menu_open = !g_menu.menu_open;
+
+	static auto lazy_callwndproc = LI_FN( CallWindowProcA ).get( );
+
+	if ( g_menu.menu_initialised && g_menu.menu_open && ImGui_ImplWin32_WndProcHandler( window, message, parameter, long_parameter ) )
+		return 1L;
+
+	return lazy_callwndproc( hooks::wnd_proc, window, message, parameter, long_parameter );
+}
+
+bool __stdcall hooks::detours::ret_add( LPCSTR )
+{
+	return true;
 }

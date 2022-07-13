@@ -218,9 +218,7 @@
     <ClCompile Include="globals\hooks\modify_eye_position\modify_eye_position.cpp" />
     <ClCompile Include="globals\hooks\paint_traverse\paint_traverse.cpp" />
     <ClCompile Include="globals\hooks\reset\reset.cpp" />
-    <ClCompile Include="globals\hooks\return_address\return_address.cpp" />
     <ClCompile Include="globals\hooks\send_net_msg\send_net_msg.cpp" />
-    <ClCompile Include="globals\hooks\wndproc\wndproc.cpp" />
     <ClCompile Include="globals\hotwheels\hotwheels.cpp" />
     <ClCompile Include="globals\interfaces\interfaces.cpp" />
     <ClCompile Include="hacks\features\aimbot\aimbot.cpp" />
@@ -489,9 +487,7 @@
     <ClInclude Include="globals\hooks\modify_eye_position\modify_eye_position.h" />
     <ClInclude Include="globals\hooks\paint_traverse\paint_traverse.h" />
     <ClInclude Include="globals\hooks\reset\reset.h" />
-    <ClInclude Include="globals\hooks\return_address\return_address.h" />
     <ClInclude Include="globals\hooks\send_net_msg\send_net_msg.h" />
-    <ClInclude Include="globals\hooks\wndproc\wndproc.h" />
     <ClInclude Include="globals\hotwheels\hotwheels.h" />
     <ClInclude Include="globals\includes\includes.h" />
     <ClInclude Include="globals\interfaces\interfaces.h" />
