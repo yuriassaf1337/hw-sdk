@@ -27,8 +27,9 @@
  */
 
 #include <limits.h>
-#include <tlhelp32.h>
 #include <windows.h>
+
+#include <tlhelp32.h>
 
 #include "../include/MinHook.h"
 #include "buffer.h"

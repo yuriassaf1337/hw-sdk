@@ -21,8 +21,8 @@ bool hooks::impl::init( )
 
 	HOOK( hooks::create_move.create( virtual_func::get( g_interfaces.client, 24 ), hooks::detours::create_move ) );
 
-	HOOK( hooks::send_net_msg.create( g_engine_dll.pattern_scan( _( "55 8B EC 83 EC 08 56 8B F1 8B 4D 04 E8s" ) ).as< void* >( ),
-	                                  &hooks::detours::send_net_msg ) );
+	// HOOK( hooks::send_net_msg.create( g_engine_dll.pattern_scan( _( "55 8B EC 83 EC 08 56 8B F1 8B 4D 04 E8s" ) ).as< void* >( ),
+	//                                   &hooks::detours::send_net_msg ) );
 
 	MOCKING_CATCH( return false );
 
