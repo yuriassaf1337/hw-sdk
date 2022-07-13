@@ -233,10 +233,8 @@ void movement::impl::auto_align( )
 		float angle_diff = math::rad2deg( atan( ( g_ctx.cmd->buttons.has( sdk::buttons::IN_DUCK ) ? 4.6775f : 4.5500f ) / velocity.length_2d( ) ) ) *
 		                   ( 2.f * math::util::pi_f );
 
-		{ // align the player
-			math::vec3 angle = { g_ctx.cmd->view_angles.x, math::normalize_yaw( base_yaw + direction * angle_diff ), g_ctx.cmd->view_angles.z };
+		math::vec3 angle = { g_ctx.cmd->view_angles.x, math::normalize_yaw( base_yaw + direction * angle_diff ), g_ctx.cmd->view_angles.z };
 
-			g_movement.rotate_movement( angle );
-		}
+		g_movement.rotate_movement( angle );
 	}
 }
