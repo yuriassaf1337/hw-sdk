@@ -1,5 +1,6 @@
 #include "keybinds.h"
-#include "../../globals/hooks/wndproc/wndproc.h"
+
+#include "../../globals/macros/macros.h"
 #include <windowsx.h>
 
 void input::impl::think( UINT msg, WPARAM wparam, LPARAM lparam )
