@@ -1,24 +1,27 @@
 #include "hotwheels.h"
-// liga's autism
-#include "../../dependencies/audio/kyu/loaded.h"
-#include "../../dependencies/audio/peter_griffin/loaded.h"
-#include "../../dependencies/audio/soilder/loaded.h"
-
-#include "../../globals/ctx/ctx.h"
-#include "../../hacks/menu/config/config.h"
-#include "../../utils/helpers/function_enforce/function_enforce.h"
-#include "../../utils/keybinds/keybinds.h"
-#include "../../utils/particle_system/particle_system.h"
-#include "../csgo.h"
-#include "../hooks/hooking.h"
-#include "../interfaces/interfaces.h"
-
-#include "../../hacks/menu/menu.h"
 
 #include <sapi.h>
 
+#include "../../globals/ctx/ctx.h"
+
+#include "../../hacks/menu/config/config.h"
+#include "../../hacks/menu/menu.h"
+
+#include "../../hooks/hooks.h"
+
+#include "../../utils/helpers/function_enforce/function_enforce.h"
+#include "../../utils/keybinds/keybinds.h"
+#include "../../utils/particle_system/particle_system.h"
+
+#include "../csgo.h"
+
+#include "../interfaces/interfaces.h"
+
 DWORD WINAPI hotwheels::init( void* module_handle )
 {
+	while ( !LI_FN( GetModuleHandleA )( SERVERBROWSER_DLL ) )
+		utils::sleep( 200 );
+
 	handle = static_cast< HMODULE >( module_handle );
 	while ( !( window = LI_FN( FindWindowA )( _( "Valve001" ), nullptr ) ) )
 		utils::sleep( 100 );
@@ -57,7 +60,7 @@ DWORD WINAPI hotwheels::unload( DWORD exit_code )
 
 	LI_FN( FreeLibraryAndExitThread )( handle, exit_code );
 
-	MOCKING_CATCH( return 1 );
+	MOCKING_CATCH( return EXIT_FAILURE );
 
 	return exit_code;
 }

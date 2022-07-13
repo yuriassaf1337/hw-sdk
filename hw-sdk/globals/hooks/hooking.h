@@ -48,13 +48,3 @@ public:
 		return reinterpret_cast< T* >( original );
 	};
 };
-
-namespace hooks
-{
-	struct impl {
-		bool init( );
-		void unload( );
-	};
-} // namespace hooks
-
-inline hooks::impl g_hooks;

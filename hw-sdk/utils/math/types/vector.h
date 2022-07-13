@@ -1,4 +1,5 @@
 #pragma once
+#include <algorithm>
 #include <array>
 #include <cmath>
 #include <corecrt_math.h>
@@ -49,7 +50,7 @@ namespace math
 		}
 		[[nodiscard]] constexpr float dot_product( const vec2& dot ) const
 		{
-			return ( this->x * dot.x + this->y * dot.y );
+			return ( x * dot.x + y * dot.y );
 		}
 
 		[[nodiscard]] constexpr float length_sqr( ) const
@@ -59,7 +60,7 @@ namespace math
 
 		[[nodiscard]] float length( ) const
 		{
-			return std::sqrtf( this->length_sqr( ) );
+			return std::sqrtf( length_sqr( ) );
 		}
 	};
 
@@ -74,12 +75,12 @@ namespace math
 
 		bool valid( ) const
 		{
-			return std::isfinite( this->x ) && std::isfinite( this->y ) && std::isfinite( this->z );
+			return std::isfinite( x ) && std::isfinite( y ) && std::isfinite( z );
 		}
 
 		constexpr void invalidate( )
 		{
-			this->x = this->y = this->z = std::numeric_limits< float >::infinity( );
+			x = y = z = std::numeric_limits< float >::infinity( );
 		};
 
 		[[nodiscard]] float* data( )
@@ -89,18 +90,18 @@ namespace math
 
 		bool is_equal( const vec3& to_this, const float error_margin = std::numeric_limits< float >::epsilon( ) ) const
 		{
-			return ( std::fabsf( this->x - to_this.x ) < error_margin && std::fabsf( this->y - to_this.y ) < error_margin &&
-			         std::fabsf( this->z - to_this.z ) < error_margin );
+			return ( std::fabsf( x - to_this.x ) < error_margin && std::fabsf( y - to_this.y ) < error_margin &&
+			         std::fabsf( z - to_this.z ) < error_margin );
 		}
 
 		bool is_zero( ) const
 		{
-			return ( std::fpclassify( this->x ) == FP_ZERO && std::fpclassify( this->y ) == FP_ZERO && std::fpclassify( this->z ) == FP_ZERO );
+			return ( std::fpclassify( x ) == FP_ZERO && std::fpclassify( y ) == FP_ZERO && std::fpclassify( z ) == FP_ZERO );
 		}
 
 		[[nodiscard]] constexpr float dot_product( const vec3& dot ) const
 		{
-			return ( this->x * dot.x + this->y * dot.y + this->z * dot.z );
+			return ( x * dot.x + y * dot.y + z * dot.z );
 		}
 
 		[[nodiscard]] constexpr float length_sqr( ) const
@@ -110,17 +111,17 @@ namespace math
 
 		[[nodiscard]] float length( ) const
 		{
-			return std::sqrtf( this->length_sqr( ) );
+			return std::sqrtf( length_sqr( ) );
 		}
 
 		[[nodiscard]] constexpr float length_2d_sqr( ) const
 		{
-			return ( this->x * this->x + this->y * this->y );
+			return ( x * x + y * y );
 		}
 
 		[[nodiscard]] float length_2d( ) const
 		{
-			return std::sqrtf( this->length_2d_sqr( ) );
+			return std::sqrtf( length_2d_sqr( ) );
 		}
 
 		[[nodiscard]] float dist_to( const vec3& end ) const
@@ -135,164 +136,180 @@ namespace math
 
 		float normalize_in_place( )
 		{
-			const float length = this->length( ), radius = 1.0f / ( length + std::numeric_limits< float >::epsilon( ) );
+			const float m_length = length( ), radius = 1.0f / ( m_length + std::numeric_limits< float >::epsilon( ) );
 
-			this->x *= radius;
-			this->y *= radius;
-			this->z *= radius;
+			x *= radius;
+			y *= radius;
+			z *= radius;
 
-			return length;
+			return m_length;
 		}
 
-		[[nodiscard]] vec3 normalized( ) const
+		constexpr vec3& normalize( )
 		{
-			vec3 out = *this;
-			out.normalize_in_place( );
-			return out;
+			x = std::isfinite( x ) ? std::remainderf( x, 360.f ) : 0.f;
+			y = std::isfinite( y ) ? std::remainderf( y, 360.f ) : 0.f;
+			z = std::clamp( z, -50.f, 50.f );
+
+			return *this;
 		}
 
-		vec3 normalize( )
+		constexpr vec3 normalized( )
 		{
-			vec3 buffer{ };
+			vec3 ret = *this;
+			ret.normalize( );
 
-			buffer.x = std::isfinite( x ) ? std::remainder( x, 360.f ) : 0.f;
-			buffer.y = std::isfinite( y ) ? std::remainder( y, 360.f ) : 0.f;
-			buffer.z = 0.f;
+			return ret;
+		}
 
-			return buffer;
+		constexpr vec3 clamp( )
+		{
+			x = std::clamp( x, -89.f, 89.f );
+			y = std::clamp( y, -180.f, 180.f );
+			z = std::clamp( z, -50.f, 50.f );
+
+			return *this;
+		}
+
+		constexpr vec3& sanitize( )
+		{
+			normalize( );
+			clamp( );
+
+			return *this;
 		}
 
 		constexpr vec3 cross_product( const vec3& cross ) const
 		{
-			return vec3( this->y * cross.z - this->z * cross.y, this->z * cross.x - this->x * cross.z, this->x * cross.y - this->y * cross.x );
+			return vec3( y * cross.z - z * cross.y, z * cross.x - x * cross.z, x * cross.y - y * cross.x );
 		}
 
 		//	operators:
 		float& operator[]( const std::size_t i )
 		{
-			return this->data( )[ i ];
+			return data( )[ i ];
 		}
 
 		bool operator==( const vec3& base ) const
 		{
-			return this->is_equal( base );
+			return is_equal( base );
 		}
 
 		bool operator!=( const vec3& base ) const
 		{
-			return !this->is_equal( base );
+			return !is_equal( base );
 		}
 
 		constexpr vec3& operator=( const vec3& base )
 		{
-			this->x = base.x;
-			this->y = base.y;
-			this->z = base.z;
+			x = base.x;
+			y = base.y;
+			z = base.z;
 			return *this;
 		}
 
 		constexpr vec3& operator+=( const vec3& base )
 		{
-			this->x += base.x;
-			this->y += base.y;
-			this->z += base.z;
+			x += base.x;
+			y += base.y;
+			z += base.z;
 			return *this;
 		}
 
 		constexpr vec3& operator-=( const vec3& base )
 		{
-			this->x -= base.x;
-			this->y -= base.y;
-			this->z -= base.z;
+			x -= base.x;
+			y -= base.y;
+			z -= base.z;
 			return *this;
 		}
 
 		constexpr vec3& operator*=( const vec3& base )
 		{
-			this->x *= base.x;
-			this->y *= base.y;
-			this->z *= base.z;
+			x *= base.x;
+			y *= base.y;
+			z *= base.z;
 			return *this;
 		}
 
 		constexpr vec3& operator/=( const vec3& base )
 		{
-			this->x /= base.x;
-			this->y /= base.y;
-			this->z /= base.z;
+			x /= base.x;
+			y /= base.y;
+			z /= base.z;
 			return *this;
 		}
 
 		constexpr vec3& operator+=( const float add )
 		{
-			this->x += add;
-			this->y += add;
-			this->z += add;
+			x += add;
+			y += add;
+			z += add;
 			return *this;
 		}
 
 		constexpr vec3& operator-=( const float sub )
 		{
-			this->x -= sub;
-			this->y -= sub;
-			this->z -= sub;
+			x -= sub;
+			y -= sub;
+			z -= sub;
 			return *this;
 		}
 
 		constexpr vec3& operator*=( const float mult )
 		{
-			this->x *= mult;
-			this->y *= mult;
-			this->z *= mult;
+			x *= mult;
+			y *= mult;
+			z *= mult;
 			return *this;
 		}
 
 		constexpr vec3& operator/=( const float div )
 		{
-			this->x /= div;
-			this->y /= div;
-			this->z /= div;
+			x /= div;
+			y /= div;
+			z /= div;
 			return *this;
 		}
 
 		vec3 operator+( const vec3& add ) const
 		{
-			return vec3( this->x + add.x, this->y + add.y, this->z + add.z );
+			return vec3( x + add.x, y + add.y, z + add.z );
 		}
 
 		vec3 operator-( const vec3& sub ) const
 		{
-			return vec3( this->x - sub.x, this->y - sub.y, this->z - sub.z );
+			return vec3( x - sub.x, y - sub.y, z - sub.z );
 		}
 
 		vec3 operator*( const vec3& mult ) const
 		{
-			return vec3( this->x * mult.x, this->y * mult.y, this->z * mult.z );
+			return vec3( x * mult.x, y * mult.y, z * mult.z );
 		}
 
 		vec3 operator/( const vec3& div ) const
 		{
-			return vec3( this->x / div.x, this->y / div.y, this->z / div.z );
+			return vec3( x / div.x, y / div.y, z / div.z );
 		}
 
 		vec3 operator+( const float add ) const
 		{
-			return vec3( this->x + add, this->y + add, this->z + add );
+			return vec3( x + add, y + add, z + add );
 		}
 
 		vec3 operator-( const float sub ) const
 		{
-			return vec3( this->x - sub, this->y - sub, this->z - sub );
+			return vec3( x - sub, y - sub, z - sub );
 		}
 
 		vec3 operator*( const float mult ) const
 		{
-			return vec3( this->x * mult, this->y * mult, this->z * mult );
+			return vec3( x * mult, y * mult, z * mult );
 		}
 
 		vec3 operator/( const float div ) const
 		{
-			return vec3( this->x / div, this->y / div, this->z / div );
+			return vec3( x / div, y / div, z / div );
 		}
 	};
 

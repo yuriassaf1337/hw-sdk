@@ -44,5 +44,7 @@ namespace sdk
 		std::string name( );
 
 		void update_client_side_animation( );
+
+		void set_local_view_angles( const math::vec3& view_angles );
 	};
 } // namespace sdk

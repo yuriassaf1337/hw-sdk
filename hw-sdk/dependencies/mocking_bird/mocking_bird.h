@@ -86,7 +86,7 @@ namespace mocking_bird
 	}                                                                                                                                                \
 	catch ( const mocking_bird::exception& err )                                                                                                     \
 	{                                                                                                                                                \
-		console::print< console::log_level::WARNING >( "MOCK failed [ line: {} | file: {} | fn: {} ]", err.what( ).line( ),                          \
+		console::print< console::log_level::WARNING >( _( "MOCK failed [ line: {} | file: {} | fn: {} ]" ), err.what( ).line( ),                     \
 		                                               err.what( ).file_name( ), err.what( ).function_name( ) );                                     \
 		__VA_ARGS__;                                                                                                                                 \
 	}

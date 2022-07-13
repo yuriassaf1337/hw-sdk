@@ -56,6 +56,10 @@
 
 // [#] utils
 
+#define HOOK( func )                                                                                                                                 \
+	if ( !func )                                                                                                                                     \
+		return false;
+
 #define COMBINE( lhs, rhs ) lhs##rhs
 #define CONCAT( lhs, rhs )  COMBINE( lhs, rhs )
 #define PAD( size )                                                                                                                                  \

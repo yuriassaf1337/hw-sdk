@@ -15,7 +15,7 @@ const bool sdk::c_cs_player::is_enemy( sdk::c_cs_player* player )
 
 bool sdk::c_cs_player::is_alive( )
 {
-	return ( this->life_state( ) == sdk::life_state::LIFE_ALIVE &&  this->health( ) > 0 );
+	return ( this->life_state( ) == sdk::life_state::LIFE_ALIVE && this->health( ) > 0 );
 }
 
 std::string sdk::c_cs_player::name( )
@@ -40,4 +40,9 @@ void sdk::c_cs_player::update_client_side_animation( )
 		return;
 
 	reinterpret_cast< update_client_side_animation_type >( update_client_side_animation_address )( this );
+}
+
+void sdk::c_cs_player::set_local_view_angles( const math::vec3& view_angles )
+{
+	return virtual_func::call< void, const math::vec3& >( this, 373, view_angles );
 }

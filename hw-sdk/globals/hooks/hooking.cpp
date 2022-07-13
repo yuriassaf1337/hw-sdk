@@ -25,7 +25,7 @@
 #include "send_net_msg/send_net_msg.h"
 #include "wndproc/wndproc.h"
 
-bool hooks::impl::init( )
+bool h_init( )
 {
 	MOCKING_TRY;
 
@@ -67,7 +67,7 @@ bool hooks::impl::init( )
 	return true;
 }
 
-void hooks::impl::unload( )
+void h_unload( )
 {
 	MOCKING_TRY;
 
