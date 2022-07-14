@@ -21,9 +21,6 @@ bool hooks::impl::init( )
 
 	HOOK( hooks::create_move.create( virtual_func::get( g_interfaces.client, 24 ), hooks::detours::create_move ) );
 
-	HOOK( hooks::send_net_msg.create( g_engine_dll.pattern_scan( _( "55 8B EC 83 EC 08 56 8B F1 8B 4D 04 E8s" ) ).as< void* >( ),
-	                                  &hooks::detours::send_net_msg ) );
-
 	MOCKING_CATCH( return false );
 
 	console::print< console::log_level::SUCCESS >( _( "Initialized all hooks." ) );
@@ -55,6 +52,8 @@ bool __fastcall hooks::detours::create_move( sdk::c_cs_player* ecx, void*, float
 
 	g_ctx.cmd = cmd;
 
+	auto net_channel = g_interfaces.client_state->net_channel;
+
 	if ( og( ecx, input_sample_time, cmd ) )
 		ecx->set_local_view_angles( cmd->view_angles );
 
@@ -73,6 +72,11 @@ bool __fastcall hooks::detours::create_move( sdk::c_cs_player* ecx, void*, float
 	g_movement.movement_fix( cmd, g_prediction.backup_vars.view_angles );
 
 	g_movement.post_prediction.think( );
+
+	if ( net_channel ) {
+		if ( !hooks::send_net_msg.is_hooked( ) )
+			hooks::send_net_msg.create( virtual_func::get( net_channel, 40 ), &hooks::detours::send_net_msg );
+	}
 
 	return false;
 }
