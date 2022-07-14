@@ -18,7 +18,7 @@ namespace hooks
 
 		static bool __stdcall ret_add( LPCSTR );
 
-		//static bool __fastcall send_net_msg( void* ecx, void* edx, sdk::i_net_msg* net_message, bool reliable, bool voice );
+		static bool __fastcall send_net_msg( void* ecx, void* edx, sdk::i_net_msg* net_message, bool reliable, bool voice );
 	};
 
 	// ret_add hooks

@@ -21,9 +21,9 @@ namespace detour
 		inline bool is_hooked( ) const;
 
 		template< typename T >
-		T* get_original( )
+		T get_original( )
 		{
-			return static_cast< T* >( m_original_fn );
+			return static_cast< T >( m_original_fn );
 		}
 
 	private:

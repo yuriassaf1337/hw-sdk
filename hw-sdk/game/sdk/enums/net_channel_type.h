@@ -2,8 +2,7 @@
 
 namespace sdk
 {
-	enum class net_channel_type
-	{
+	enum net_channel_type : int {
 		GENERIC = 0,
 		LOCALPLAYER,
 		OTHERPLAYERS,

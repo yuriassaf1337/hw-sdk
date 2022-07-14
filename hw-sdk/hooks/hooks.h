@@ -9,6 +9,7 @@
 
 // game
 #include "../game/sdk/classes/c_cs_player.h"
+#include "../game/sdk/enums/net_channel_type.h"
 #include "../game/sdk/include.h"
 #include "../game/sdk/structs/i_net_msg.h"
 

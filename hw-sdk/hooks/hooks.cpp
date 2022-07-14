@@ -21,8 +21,8 @@ bool hooks::impl::init( )
 
 	HOOK( hooks::create_move.create( virtual_func::get( g_interfaces.client, 24 ), hooks::detours::create_move ) );
 
-	// HOOK( hooks::send_net_msg.create( g_engine_dll.pattern_scan( _( "55 8B EC 83 EC 08 56 8B F1 8B 4D 04 E8s" ) ).as< void* >( ),
-	//                                   &hooks::detours::send_net_msg ) );
+	HOOK( hooks::send_net_msg.create( g_engine_dll.pattern_scan( _( "55 8B EC 83 EC 08 56 8B F1 8B 4D 04 E8s" ) ).as< void* >( ),
+	                                  &hooks::detours::send_net_msg ) );
 
 	MOCKING_CATCH( return false );
 
@@ -48,7 +48,7 @@ void hooks::impl::unload( )
 
 bool __fastcall hooks::detours::create_move( sdk::c_cs_player* ecx, void*, float input_sample_time, sdk::c_user_cmd* cmd )
 {
-	static auto og = *hooks::create_move.get_original< hooks::create_move_fn >( );
+	static auto og = hooks::create_move.get_original< hooks::create_move_fn >( );
 
 	if ( !cmd || !cmd->command_number )
 		return og( ecx, input_sample_time, cmd );
@@ -96,4 +96,19 @@ HRESULT WINAPI hooks::detours::wnd_proc( HWND window, UINT message, WPARAM param
 bool __stdcall hooks::detours::ret_add( LPCSTR )
 {
 	return true;
+}
+
+bool __fastcall hooks::detours::send_net_msg( void* ecx, void* edx, sdk::i_net_msg* net_message, bool reliable, bool voice )
+{
+	static auto og = hooks::send_net_msg.get_original< decltype( &hooks::detours::send_net_msg ) >( );
+
+	// CRC check bypass
+	if ( net_message->get_type( ) == 14 )
+		return false;
+
+	// fix for fakelag voice lag
+	if ( net_message->get_group( ) == sdk::net_channel_type::VOICE )
+		voice = true;
+
+	return og( ecx, edx, net_message, reliable, voice );
 }
