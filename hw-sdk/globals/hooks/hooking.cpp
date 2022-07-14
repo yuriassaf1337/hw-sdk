@@ -21,9 +21,9 @@
 #include "modify_eye_position/modify_eye_position.h"
 #include "paint_traverse/paint_traverse.h"
 #include "reset/reset.h"
-#include "return_address/return_address.h"
+//#include "return_address/return_address.h"
 #include "send_net_msg/send_net_msg.h"
-#include "wndproc/wndproc.h"
+//#include "wndproc/wndproc.h"
 
 bool h_init( )
 {
@@ -34,7 +34,7 @@ bool h_init( )
 		return false;
 	}
 
-	hooks::wndproc::init( );
+	//hooks::wndproc::init( );
 	hooks::reset::init( );
 	hooks::end_scene::init( );
 	hooks::create_move::init( );
@@ -55,7 +55,7 @@ bool h_init( )
 	hooks::is_loose_file_allowed::init( );
 	hooks::send_net_msg::init( );
 	// hooks::fire_event_intern::init( ); /* note - coffin - crashing for now, add event listener as not all events get registered via this hook */
-	hooks::return_address::init( );
+	//hooks::return_address::init( );
 	hooks::alloc_key_value_memory::init( );
 	hooks::modify_eye_position::init( );
 	// hooks::calculate_view::init( );
@@ -71,7 +71,7 @@ void h_unload( )
 {
 	MOCKING_TRY;
 
-	hooks::wndproc::unload( );
+	//hooks::wndproc::unload( );
 	hooks::reset::unload( );
 	hooks::end_scene::unload( );
 	hooks::create_move::unload( );
@@ -91,7 +91,7 @@ void h_unload( )
 	hooks::is_loose_file_allowed::unload( );
 	hooks::send_net_msg::unload( );
 	// hooks::fire_event_intern::unload( );
-	hooks::return_address::unload( );
+	//hooks::return_address::unload( );
 	hooks::alloc_key_value_memory::unload( );
 	hooks::modify_eye_position::unload( );
 	// hooks::calculate_view::unload( );
